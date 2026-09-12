@@ -1,0 +1,9 @@
+{
+  "name": "Bolo AI",
+  "short_name": "Bolo AI",
+  "start_url": "index.html",
+  "display": "standalone",
+  "theme_color": "#7c3aed",
+  "background_color": "#070914",
+  "icons": []
+}
