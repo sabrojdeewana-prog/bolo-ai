@@ -15,6 +15,8 @@ function addChatMessage(text, type) {
       margin: 20px auto;
       padding: 10px;
       box-sizing: border-box;
+      max-height: 500px;
+      overflow-y: auto;
     `;
 
     const inputSection = document.querySelector(".input-section");
@@ -22,7 +24,7 @@ function addChatMessage(text, type) {
     if (inputSection) {
       inputSection.parentNode.insertBefore(
         chatBox,
-        inputSection.nextSibling
+        inputSection
       );
     }
   }
@@ -39,16 +41,18 @@ function addChatMessage(text, type) {
     color: #222;
   `;
 
-  message.innerHTML =
-    `<strong>${type === "user" ? "आप" : "Bolo AI"}:</strong><br>` +
-    document.createTextNode(text).textContent;
+  const label = document.createElement("strong");
+  label.textContent = type === "user" ? "आप:" : "Bolo AI:";
+
+  const content = document.createElement("div");
+  content.textContent = text;
+
+  message.appendChild(label);
+  message.appendChild(content);
 
   chatBox.appendChild(message);
 
-  message.scrollIntoView({
-    behavior: "smooth",
-    block: "nearest"
-  });
+  chatBox.scrollTop = chatBox.scrollHeight;
 }
 
 async function send() {
@@ -67,11 +71,9 @@ async function send() {
   try {
     const response = await fetch(`${API_BASE_URL}/api/chat`, {
       method: "POST",
-
       headers: {
         "Content-Type": "application/json"
       },
-
       body: JSON.stringify({
         message
       })
