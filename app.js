@@ -5,11 +5,41 @@ const $ = id => document.getElementById(id);
 
 
 /* ==============================
+   PAGE START / HOME POSITION
+============================== */
+
+window.history.scrollRestoration = "manual";
+
+window.addEventListener("load", () => {
+
+  // Remove #premium from the URL if it is causing
+  // the website to open directly on Premium.
+  if (window.location.hash === "#premium") {
+    window.history.replaceState(
+      null,
+      "",
+      window.location.pathname + window.location.search
+    );
+  }
+
+  // Always start the website from Home.
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "instant"
+  });
+
+});
+
+
+/* ==============================
    LOGIN CHECK
 ============================== */
 
 function isLoggedIn() {
+
   return localStorage.getItem("boloLoggedIn") === "true";
+
 }
 
 
@@ -24,11 +54,18 @@ function requireLogin() {
   const loginModal = $("loginModal");
 
   if (loginModal) {
+
     loginModal.classList.add("show");
-    loginModal.setAttribute("aria-hidden", "false");
+
+    loginModal.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
   }
 
   return false;
+
 }
 
 
@@ -43,6 +80,7 @@ function addChatMessage(text, type) {
   if (!chatBox) {
 
     chatBox = document.createElement("div");
+
     chatBox.id = "chatBox";
 
     chatBox.style.cssText = `
@@ -64,8 +102,11 @@ function addChatMessage(text, type) {
         chatBox,
         inputSection.nextSibling
       );
+
     }
+
   }
+
 
   const message =
     document.createElement("div");
@@ -80,24 +121,31 @@ function addChatMessage(text, type) {
     color: #222;
   `;
 
+
   const label =
     document.createElement("strong");
 
   label.textContent =
-    type === "user" ? "You:" : "Bolo AI:";
+    type === "user"
+      ? "You:"
+      : "Bolo AI:";
+
 
   const content =
     document.createElement("div");
 
   content.textContent = text;
 
+
   message.appendChild(label);
+
   message.appendChild(content);
 
   chatBox.appendChild(message);
 
   chatBox.scrollTop =
     chatBox.scrollHeight;
+
 }
 
 
@@ -107,28 +155,36 @@ function addChatMessage(text, type) {
 
 async function send() {
 
-  /* LOGIN REQUIRED */
-
+  // Login required
   if (!requireLogin()) {
     return;
   }
 
+
   const input =
     $("inputText");
 
-  if (!input) return;
+  if (!input) {
+    return;
+  }
+
 
   const message =
     input.value.trim();
 
-  if (!message) return;
+  if (!message) {
+    return;
+  }
+
 
   input.value = "";
+
 
   addChatMessage(
     message,
     "user"
   );
+
 
   try {
 
@@ -143,13 +199,15 @@ async function send() {
           },
 
           body: JSON.stringify({
-            message
+            message: message
           })
         }
       );
 
+
     const data =
       await response.json();
+
 
     if (data.reply) {
 
@@ -169,17 +227,24 @@ async function send() {
         "No response received.",
         "ai"
       );
+
     }
+
 
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      "Bolo AI Backend Error:",
+      error
+    );
 
     addChatMessage(
       "Could not connect to the Bolo AI backend.",
       "ai"
     );
+
   }
+
 }
 
 
@@ -188,6 +253,7 @@ async function send() {
 ============================== */
 
 let recognition = null;
+
 let isListening = false;
 
 
@@ -197,6 +263,7 @@ function setupVoiceRecognition() {
     window.SpeechRecognition ||
     window.webkitSpeechRecognition;
 
+
   if (!SpeechRecognition) {
 
     alert(
@@ -204,40 +271,54 @@ function setupVoiceRecognition() {
     );
 
     return null;
+
   }
+
 
   const recognizer =
     new SpeechRecognition();
 
-  recognizer.lang = "hi-IN";
 
-  recognizer.continuous = false;
+  recognizer.lang =
+    "hi-IN";
 
-  recognizer.interimResults = false;
+  recognizer.continuous =
+    false;
 
-  recognizer.maxAlternatives = 1;
+  recognizer.interimResults =
+    false;
+
+  recognizer.maxAlternatives =
+    1;
 
 
   recognizer.onstart =
     function () {
 
-      isListening = true;
+      isListening =
+        true;
+
 
       const micBtn =
         $("micBtn");
 
+
       if (micBtn) {
 
-        micBtn.innerHTML = "🔴";
+        micBtn.innerHTML =
+          "🔴";
 
         micBtn.title =
           "Listening...";
+
       }
+
 
       addChatMessage(
         "🎙️ Bolo AI is listening... Please speak.",
         "ai"
       );
+
     };
 
 
@@ -249,19 +330,25 @@ function setupVoiceRecognition() {
           .transcript
           .trim();
 
+
       const input =
         $("inputText");
+
 
       if (input) {
 
         input.value =
           spokenText;
+
       }
+
 
       if (spokenText) {
 
         send();
+
       }
+
     };
 
 
@@ -273,7 +360,11 @@ function setupVoiceRecognition() {
         event.error
       );
 
-      if (event.error === "not-allowed") {
+
+      if (
+        event.error ===
+        "not-allowed"
+      ) {
 
         addChatMessage(
           "🎙️ Please allow microphone permission.",
@@ -286,17 +377,22 @@ function setupVoiceRecognition() {
           "🎙️ I could not understand your voice. Please try again.",
           "ai"
         );
+
       }
+
     };
 
 
   recognizer.onend =
     function () {
 
-      isListening = false;
+      isListening =
+        false;
+
 
       const micBtn =
         $("micBtn");
+
 
       if (micBtn) {
 
@@ -306,11 +402,14 @@ function setupVoiceRecognition() {
 
         micBtn.title =
           "Microphone";
+
       }
+
     };
 
 
   return recognizer;
+
 }
 
 
@@ -320,19 +419,23 @@ function setupVoiceRecognition() {
 
 function activateMicrophone() {
 
-  /* LOGIN REQUIRED */
-
+  // Login required
   if (!requireLogin()) {
     return;
   }
+
 
   if (!recognition) {
 
     recognition =
       setupVoiceRecognition();
+
   }
 
-  if (!recognition) return;
+
+  if (!recognition) {
+    return;
+  }
 
 
   if (isListening) {
@@ -340,6 +443,7 @@ function activateMicrophone() {
     recognition.stop();
 
     return;
+
   }
 
 
@@ -349,8 +453,13 @@ function activateMicrophone() {
 
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      "Microphone error:",
+      error
+    );
+
   }
+
 }
 
 
@@ -360,24 +469,38 @@ function activateMicrophone() {
 
 function speakText(text) {
 
-  if (!("speechSynthesis" in window)) {
+  if (
+    !("speechSynthesis" in window)
+  ) {
+
     return;
+
   }
+
 
   window.speechSynthesis.cancel();
 
+
   const speech =
-    new SpeechSynthesisUtterance(text);
+    new SpeechSynthesisUtterance(
+      text
+    );
 
-  speech.lang = "hi-IN";
 
-  speech.rate = 1;
+  speech.lang =
+    "hi-IN";
 
-  speech.pitch = 1;
+  speech.rate =
+    1;
+
+  speech.pitch =
+    1;
+
 
   window.speechSynthesis.speak(
     speech
   );
+
 }
 
 
@@ -390,16 +513,24 @@ function scrollToInput(text) {
   const input =
     $("inputText");
 
-  if (!input) return;
 
-  input.value = text;
+  if (!input) {
+    return;
+  }
+
+
+  input.value =
+    text;
+
 
   input.focus();
+
 
   input.scrollIntoView({
     behavior: "smooth",
     block: "center"
   });
+
 }
 
 
@@ -411,27 +542,37 @@ function handleContactForm(event) {
 
   event.preventDefault();
 
+
   const name =
-    $("contactName")?.value.trim() || "";
+    $("contactName")?.value.trim() ||
+    "";
+
 
   const email =
-    $("contactEmail")?.value.trim() || "";
+    $("contactEmail")?.value.trim() ||
+    "";
+
 
   const message =
-    $("contactMessage")?.value.trim() || "";
+    $("contactMessage")?.value.trim() ||
+    "";
+
 
   const subject =
     encodeURIComponent(
       "Bolo AI Contact - " + name
     );
 
+
   const body =
     encodeURIComponent(
       `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
     );
 
+
   window.location.href =
     `mailto:Sabrojalam8454@gmail.com?subject=${subject}&body=${body}`;
+
 }
 
 
@@ -444,11 +585,14 @@ function openThumbnailGenerator() {
   const modal =
     $("thumbnailModal");
 
+
   if (modal) {
 
     modal.style.display =
       "flex";
+
   }
+
 }
 
 
@@ -457,11 +601,14 @@ function closeThumbnailGenerator() {
   const modal =
     $("thumbnailModal");
 
+
   if (modal) {
 
     modal.style.display =
       "none";
+
   }
+
 }
 
 
@@ -471,52 +618,68 @@ function generateThumbnail() {
     $("videoTitle")?.value.trim() ||
     "Video Title";
 
+
   const channel =
     $("channelName")?.value.trim() ||
     "Channel Name";
+
 
   const text =
     $("thumbnailText")?.value.trim() ||
     title;
 
+
   const background =
     $("backgroundColor")?.value ||
     "#333333";
 
+
   const canvas =
     $("thumbnailCanvas");
 
-  if (!canvas) return;
+
+  if (!canvas) {
+    return;
+  }
+
 
   canvas.style.background =
     background;
+
 
   const mainText =
     canvas.querySelector(
       ".thumbnail-main-text"
     );
 
+
   const subText =
     canvas.querySelector(
       ".thumbnail-sub-text"
     );
 
+
   if (mainText) {
 
     mainText.textContent =
       text;
+
   }
+
 
   if (subText) {
 
     subText.textContent =
       channel;
+
   }
+
 
   addChatMessage(
     "🎨 Thumbnail preview is ready.",
     "ai"
   );
+
 }
 
 
@@ -525,11 +688,39 @@ function downloadThumbnail() {
   const canvas =
     $("thumbnailCanvas");
 
-  if (!canvas) return;
+
+  if (!canvas) {
+    return;
+  }
+
 
   alert(
     "Thumbnail download feature is coming in the next upgrade."
   );
+
+}
+
+
+/* ==============================
+   PREMIUM BUTTON
+============================== */
+
+function handlePremiumClick() {
+
+  // Login required before Premium
+  if (!requireLogin()) {
+    return;
+  }
+
+
+  alert(
+    "🌟 Bolo AI Premium\n\n" +
+    "Plan: ₹149/month\n" +
+    "🔥 50% OFF\n\n" +
+    "Premium payment system is being prepared.\n" +
+    "You will be able to purchase Premium soon."
+  );
+
 }
 
 
@@ -541,10 +732,14 @@ document.addEventListener(
   "DOMContentLoaded",
   () => {
 
-    /* Send Button */
+
+    /* ==========================
+       SEND BUTTON
+    ========================== */
 
     const sendBtn =
       $("sendBtn");
+
 
     if (sendBtn) {
 
@@ -552,13 +747,17 @@ document.addEventListener(
         "click",
         send
       );
+
     }
 
 
-    /* Enter Key */
+    /* ==========================
+       ENTER KEY
+    ========================== */
 
     const input =
       $("inputText");
+
 
     if (input) {
 
@@ -574,17 +773,22 @@ document.addEventListener(
             event.preventDefault();
 
             send();
+
           }
 
         }
       );
+
     }
 
 
-    /* Microphone Button */
+    /* ==========================
+       MICROPHONE BUTTON
+    ========================== */
 
     const micBtn =
       $("micBtn");
+
 
     if (micBtn) {
 
@@ -592,15 +796,19 @@ document.addEventListener(
         "click",
         activateMicrophone
       );
+
     }
 
 
-    /* Quick Action Buttons */
+    /* ==========================
+       QUICK ACTION BUTTONS
+    ========================== */
 
     const quickButtons =
       document.querySelectorAll(
         ".quick-btn"
       );
+
 
     quickButtons.forEach(
       button => {
@@ -612,9 +820,13 @@ document.addEventListener(
             const action =
               button.dataset.action;
 
-            let prompt = "";
+
+            let prompt =
+              "";
+
 
             switch (action) {
+
 
               case "application":
 
@@ -623,12 +835,14 @@ document.addEventListener(
 
                 break;
 
+
               case "whatsapp":
 
                 prompt =
                   "Write a good WhatsApp message for me";
 
                 break;
+
 
               case "translate":
 
@@ -637,12 +851,14 @@ document.addEventListener(
 
                 break;
 
+
               case "resume":
 
                 prompt =
                   "Help me create a professional resume";
 
                 break;
+
 
               case "youtube":
 
@@ -651,6 +867,7 @@ document.addEventListener(
 
                 break;
 
+
               case "social":
 
                 prompt =
@@ -658,25 +875,34 @@ document.addEventListener(
 
                 break;
 
+
               case "thumbnail":
 
                 openThumbnailGenerator();
 
                 return;
+
             }
+
 
             scrollToInput(
               prompt
             );
+
           }
         );
-      });
+
+      }
+    );
 
 
-    /* Voice Tool Button */
+    /* ==========================
+       VOICE TOOL BUTTON
+    ========================== */
 
     const voiceToolBtn =
       $("voiceToolBtn");
+
 
     if (voiceToolBtn) {
 
@@ -686,8 +912,10 @@ document.addEventListener(
 
           activateMicrophone();
 
+
           const input =
             $("inputText");
+
 
           if (input) {
 
@@ -695,31 +923,13 @@ document.addEventListener(
               behavior: "smooth",
               block: "center"
             });
+
           }
 
         }
       );
+
     }
 
   }
 );
-/* ==============================
-   PREMIUM BUTTON
-============================== */
-
-function handlePremiumClick() {
-
-  // Login required before Premium
-  if (!requireLogin()) {
-    return;
-  }
-
-  // Premium purchase information
-  alert(
-    "🌟 Bolo AI Premium\n\n" +
-    "Plan: ₹149/month\n" +
-    "🔥 50% OFF\n\n" +
-    "Premium payment system is being prepared.\n" +
-    "You will be able to purchase Premium soon."
-  );
-}
