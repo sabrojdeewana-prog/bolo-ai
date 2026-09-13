@@ -1,3 +1,4 @@
+
 /* ==========================================
    BOLO AI - GLOBAL STYLES
    ========================================== */
@@ -61,10 +62,11 @@ body {
     margin: 0 auto;
     padding: 0 1rem;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
 
+/* LOGO - LEFT */
 .nav-logo {
     display: flex;
     align-items: center;
@@ -73,6 +75,7 @@ body {
     font-weight: 700;
     cursor: pointer;
     transition: var(--transition);
+    flex-shrink: 0;
 }
 
 .nav-logo:hover {
@@ -87,10 +90,12 @@ body {
     font-size: 1.5rem;
 }
 
+/* NAVIGATION LINKS - CENTER */
 .nav-menu {
     display: flex;
     gap: 2rem;
     align-items: center;
+    margin-left: auto;
 }
 
 .nav-link {
@@ -107,10 +112,40 @@ body {
     transform: translateY(-2px);
 }
 
+/* THREE DOT MENU - RIGHT */
+#moreBtn {
+    margin-left: 1rem;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1100;
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.more-btn {
+    margin-left: 1rem;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1100;
+}
+
+/* THREE DOT DROPDOWN */
+#moreDropdown {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    z-index: 2000;
+}
+
+/* HAMBURGER */
 .hamburger {
     display: none;
     flex-direction: column;
     cursor: pointer;
+    margin-left: 0.75rem;
+    flex-shrink: 0;
 }
 
 .hamburger span {
@@ -1151,6 +1186,11 @@ body {
    ========================================== */
 
 @media (max-width: 768px) {
+
+    .nav-container {
+        padding: 0 0.75rem;
+    }
+
     .nav-menu {
         position: absolute;
         top: 70px;
@@ -1171,10 +1211,20 @@ body {
     .nav-link {
         padding: 1rem;
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        width: 100%;
     }
 
+    /* THREE DOT RIGHT */
+    #moreBtn,
+    .more-btn {
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    /* HAMBURGER RIGHT OF THREE DOT */
     .hamburger {
         display: flex;
+        margin-left: 0.5rem;
     }
 
     .hero-headline {
@@ -1245,6 +1295,19 @@ body {
 }
 
 @media (max-width: 480px) {
+
+    .nav-container {
+        padding: 0 0.5rem;
+    }
+
+    .logo-text {
+        font-size: 1.2rem;
+    }
+
+    .logo-icon {
+        font-size: 1.6rem;
+    }
+
     .hero {
         padding: 2rem 1rem;
         min-height: auto;
@@ -1321,9 +1384,7 @@ body {
     .generator-input h3,
     .generator-preview h3 {
         font-size: 1.1rem;
-    }
-
-    .thumbnail-main-text {
+-main-text {
         font-size: 1.2rem;
     }
 
@@ -1340,6 +1401,7 @@ body {
 }
 
 @media (max-width: 360px) {
+
     .logo-text {
         display: none;
     }
@@ -1352,4 +1414,4 @@ body {
         font-size: 0.65rem;
         padding: 0.5rem 0.3rem;
     }
-}
+       }
