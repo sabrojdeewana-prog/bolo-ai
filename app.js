@@ -12,8 +12,6 @@ window.history.scrollRestoration = "manual";
 
 window.addEventListener("load", () => {
 
-  // Remove #premium from the URL if it is causing
-  // the website to open directly on Premium.
   if (window.location.hash === "#premium") {
     window.history.replaceState(
       null,
@@ -22,7 +20,6 @@ window.addEventListener("load", () => {
     );
   }
 
-  // Always start the website from Home.
   window.scrollTo({
     top: 0,
     left: 0,
@@ -37,9 +34,7 @@ window.addEventListener("load", () => {
 ============================== */
 
 function isLoggedIn() {
-
   return localStorage.getItem("boloLoggedIn") === "true";
-
 }
 
 
@@ -54,14 +49,8 @@ function requireLogin() {
   const loginModal = $("loginModal");
 
   if (loginModal) {
-
     loginModal.classList.add("show");
-
-    loginModal.setAttribute(
-      "aria-hidden",
-      "false"
-    );
-
+    loginModal.setAttribute("aria-hidden", "false");
   }
 
   return false;
@@ -138,8 +127,154 @@ function addChatMessage(text, type) {
 
 
   message.appendChild(label);
-
   message.appendChild(content);
+
+  chatBox.appendChild(message);
+
+  chatBox.scrollTop =
+    chatBox.scrollHeight;
+
+}
+
+
+/* ==============================
+   IMAGE MESSAGE
+============================== */
+
+function addImageMessage(imageData, prompt) {
+
+  let chatBox = $("chatBox");
+
+  if (!chatBox) {
+
+    chatBox = document.createElement("div");
+
+    chatBox.id = "chatBox";
+
+    chatBox.style.cssText = `
+      width: 100%;
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 10px;
+      box-sizing: border-box;
+      max-height: 700px;
+      overflow-y: auto;
+    `;
+
+    const inputSection =
+      document.querySelector(".input-section");
+
+    if (inputSection) {
+
+      inputSection.parentNode.insertBefore(
+        chatBox,
+        inputSection.nextSibling
+      );
+
+    }
+
+  }
+
+
+  const message =
+    document.createElement("div");
+
+  message.style.cssText = `
+    padding: 14px;
+    margin: 12px 0;
+    border-radius: 16px;
+    background: #f5f5f5;
+    color: #222;
+    box-sizing: border-box;
+  `;
+
+
+  const title =
+    document.createElement("strong");
+
+  title.textContent =
+    "🎨 Bolo AI Image:";
+
+
+  const description =
+    document.createElement("div");
+
+  description.textContent =
+    prompt;
+
+  description.style.cssText = `
+    margin: 8px 0 12px;
+    line-height: 1.5;
+  `;
+
+
+  const image =
+    document.createElement("img");
+
+  image.src =
+    imageData;
+
+  image.alt =
+    prompt || "Generated image";
+
+  image.style.cssText = `
+    display: block;
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 14px;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+  `;
+
+
+  const downloadBtn =
+    document.createElement("button");
+
+  downloadBtn.type =
+    "button";
+
+  downloadBtn.textContent =
+    "⬇️ Download Image";
+
+  downloadBtn.style.cssText = `
+    display: block;
+    margin: 14px auto 0;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+  `;
+
+
+  downloadBtn.addEventListener(
+    "click",
+    () => {
+
+      const link =
+        document.createElement("a");
+
+      link.href =
+        imageData;
+
+      link.download =
+        "bolo-ai-image.png";
+
+      document.body.appendChild(link);
+
+      link.click();
+
+      link.remove();
+
+    }
+  );
+
+
+  message.appendChild(title);
+  message.appendChild(description);
+  message.appendChild(image);
+  message.appendChild(downloadBtn);
 
   chatBox.appendChild(message);
 
@@ -155,7 +290,6 @@ function addChatMessage(text, type) {
 
 async function send() {
 
-  // Login required
   if (!requireLogin()) {
     return;
   }
@@ -244,6 +378,299 @@ async function send() {
     );
 
   }
+
+}
+
+
+/* ==============================
+   IMAGE GENERATION
+============================== */
+
+async function generateImage(prompt) {
+
+  if (!requireLogin()) {
+    return;
+  }
+
+
+  prompt =
+    String(prompt || "").trim();
+
+
+  if (!prompt) {
+
+    addChatMessage(
+      "🎨 Please enter a description for the image you want.",
+      "ai"
+    );
+
+    return;
+
+  }
+
+
+  addChatMessage(
+    "🎨 Image request: " + prompt,
+    "user"
+  );
+
+
+  addChatMessage(
+    "⏳ Bolo AI image बना रहा है... थोड़ा इंतज़ार करें.",
+    "ai"
+  );
+
+
+  try {
+
+    const response =
+      await fetch(
+        `${API_BASE_URL}/api/generate-image`,
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json"
+          },
+
+          body: JSON.stringify({
+            prompt: prompt
+          })
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if (!response.ok || !data.ok) {
+
+      console.error(
+        "Image generation error:",
+        data
+      );
+
+      addChatMessage(
+        data.error ||
+        "Image generate नहीं हो पाई.",
+        "ai"
+      );
+
+      return;
+
+    }
+
+
+    if (!data.image) {
+
+      addChatMessage(
+        "Image server से image नहीं मिली.",
+        "ai"
+      );
+
+      return;
+
+    }
+
+
+    addImageMessage(
+      data.image,
+      prompt
+    );
+
+
+  } catch (error) {
+
+    console.error(
+      "Image Generation Error:",
+      error
+    );
+
+    addChatMessage(
+      "🎨 Image AI से connection नहीं हो पाया.",
+      "ai"
+    );
+
+  }
+
+}
+
+
+/* ==============================
+   IMAGE GENERATOR UI
+============================== */
+
+function createImageGeneratorUI() {
+
+  if ($("boloImageGenerator")) {
+    return;
+  }
+
+
+  const inputSection =
+    document.querySelector(".input-section");
+
+
+  if (!inputSection) {
+    return;
+  }
+
+
+  const wrapper =
+    document.createElement("div");
+
+  wrapper.id =
+    "boloImageGenerator";
+
+
+  wrapper.style.cssText = `
+    width: 100%;
+    max-width: 900px;
+    margin: 18px auto;
+    padding: 16px;
+    box-sizing: border-box;
+    border-radius: 16px;
+    background: #f7f7f7;
+    border: 1px solid #e5e5e5;
+  `;
+
+
+  const title =
+    document.createElement("div");
+
+  title.textContent =
+    "🎨 Bolo AI Image Generator";
+
+  title.style.cssText = `
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  `;
+
+
+  const description =
+    document.createElement("div");
+
+  description.textContent =
+    "अपनी image का description लिखें और Bolo AI से image बनवाएँ।";
+
+  description.style.cssText = `
+    font-size: 14px;
+    margin-bottom: 12px;
+    opacity: 0.8;
+  `;
+
+
+  const textarea =
+    document.createElement("textarea");
+
+  textarea.id =
+    "boloImagePrompt";
+
+  textarea.placeholder =
+    "Example: A cinematic romantic Hindi song poster, young Indian singer in rain, beautiful woman in background, realistic photography...";
+
+  textarea.rows =
+    4;
+
+  textarea.style.cssText = `
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    resize: vertical;
+    font-family: inherit;
+    font-size: 14px;
+    margin-bottom: 10px;
+  `;
+
+
+  const button =
+    document.createElement("button");
+
+  button.type =
+    "button";
+
+  button.id =
+    "boloGenerateImageBtn";
+
+  button.textContent =
+    "🎨 Generate Image";
+
+  button.style.cssText = `
+    width: 100%;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 700;
+  `;
+
+
+  button.addEventListener(
+    "click",
+    () => {
+
+      const prompt =
+        textarea.value.trim();
+
+
+      if (!prompt) {
+
+        alert(
+          "पहले image का description लिखें."
+        );
+
+        textarea.focus();
+
+        return;
+
+      }
+
+
+      generateImage(prompt);
+
+    }
+  );
+
+
+  textarea.addEventListener(
+    "keydown",
+    event => {
+
+      if (
+        event.key === "Enter" &&
+        (event.ctrlKey || event.metaKey)
+      ) {
+
+        event.preventDefault();
+
+        const prompt =
+          textarea.value.trim();
+
+        if (prompt) {
+          generateImage(prompt);
+        }
+
+      }
+
+    }
+  );
+
+
+  wrapper.appendChild(title);
+  wrapper.appendChild(description);
+  wrapper.appendChild(textarea);
+  wrapper.appendChild(button);
+
+
+  inputSection.parentNode.insertBefore(
+    wrapper,
+    inputSection.nextSibling
+  );
 
 }
 
@@ -419,7 +846,6 @@ function setupVoiceRecognition() {
 
 function activateMicrophone() {
 
-  // Login required
   if (!requireLogin()) {
     return;
   }
@@ -707,7 +1133,6 @@ function downloadThumbnail() {
 
 function handlePremiumClick() {
 
-  // Login required before Premium
   if (!requireLogin()) {
     return;
   }
@@ -882,6 +1307,27 @@ document.addEventListener(
 
                 return;
 
+
+              case "image":
+
+                createImageGeneratorUI();
+
+                const imagePrompt =
+                  $("boloImagePrompt");
+
+                if (imagePrompt) {
+
+                  imagePrompt.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                  });
+
+                  imagePrompt.focus();
+
+                }
+
+                return;
+
             }
 
 
@@ -930,6 +1376,14 @@ document.addEventListener(
       );
 
     }
+
+
+    /* ==========================
+       CREATE IMAGE GENERATOR
+       AUTOMATICALLY
+    ========================== */
+
+    createImageGeneratorUI();
 
   }
 );
