@@ -2,11 +2,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>Bolo AI - Smart AI Assistant</title>
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -235,6 +238,7 @@ button{
   border-radius:14px;
   margin:9px 0;
   white-space:pre-wrap;
+  word-break:break-word;
 }
 
 .chat-message.user{
@@ -247,10 +251,15 @@ button{
   background:#f0f1f5;
 }
 
+/* =========================
+   CHAT INPUT
+========================= */
+
 .input-section{
   display:flex;
   gap:8px;
   margin-top:14px;
+  align-items:stretch;
 }
 
 .input-section textarea{
@@ -261,6 +270,10 @@ button{
   padding:13px;
   min-height:52px;
   outline:none;
+}
+
+.input-section textarea:focus{
+  border-color:#6c4df6;
 }
 
 .icon-btn,
@@ -278,18 +291,89 @@ button{
   color:#222;
 }
 
+.icon-btn:hover{
+  background:#ddd;
+}
+
 .send-btn{
   background:#6c4df6;
   color:#fff;
   min-width:85px;
 }
 
-.icon-btn:hover{
-  background:#ddd;
-}
-
 .send-btn:hover{
   background:#5738d7;
+}
+
+/* PHOTO BUTTON */
+
+.photo-btn{
+  min-width:52px;
+  width:52px;
+  padding:0;
+  font-size:22px;
+}
+
+/* PHOTO PREVIEW */
+
+.photo-preview-box{
+  display:none;
+  margin-top:10px;
+  background:#fff;
+  border:1px solid #e5e5e5;
+  border-radius:14px;
+  padding:10px;
+  width:max-content;
+  max-width:100%;
+}
+
+.photo-preview-wrap{
+  position:relative;
+  display:inline-block;
+}
+
+.photo-preview{
+  width:150px;
+  height:150px;
+  object-fit:cover;
+  border-radius:12px;
+  display:block;
+}
+
+.remove-photo-btn{
+  position:absolute;
+  right:6px;
+  top:6px;
+  width:30px;
+  height:30px;
+  border:0;
+  border-radius:50%;
+  background:#111c;
+  color:#fff;
+  font-size:20px;
+  line-height:30px;
+  padding:0;
+}
+
+.photo-name{
+  margin-top:7px;
+  font-size:12px;
+  color:#666;
+  max-width:150px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+/* CHAT IMAGE */
+
+.chat-user-image{
+  max-width:280px;
+  max-height:280px;
+  object-fit:contain;
+  display:block;
+  margin:8px 0 8px auto;
+  border-radius:14px;
 }
 
 /* =========================
@@ -380,7 +464,7 @@ button{
   min-height:20px;
 }
 
-/* Generated image message */
+/* GENERATED IMAGE */
 
 .generated-image-message{
   max-width:100%;
@@ -618,6 +702,11 @@ section:not(.hero){
   color:#555;
 }
 
+.contact-email{
+  color:#6c4df6;
+  font-weight:700;
+}
+
 .contact-form{
   display:grid;
   gap:12px;
@@ -795,6 +884,7 @@ footer{
   .hero h1{
     font-size:38px;
   }
+
 }
 
 @media(max-width:550px){
@@ -829,18 +919,35 @@ footer{
 
   .input-section{
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:52px 1fr 78px;
+    gap:7px;
   }
 
   .input-section textarea{
     grid-column:1/-1;
+    grid-row:1;
     width:100%;
   }
 
-  .icon-btn,
-  .send-btn{
+  .photo-btn{
+    grid-column:1;
+    grid-row:2;
     width:100%;
-    height:48px;
+    min-width:0;
+  }
+
+  #micBtn{
+    grid-column:2;
+    grid-row:2;
+    width:100%;
+  }
+
+  #sendBtn{
+    grid-column:3;
+    grid-row:2;
+    width:100%;
+    min-width:0;
+    padding:0 8px;
   }
 
   .pricing-card{
@@ -855,8 +962,36 @@ footer{
   .clear-image-btn{
     width:100%;
   }
+
 }
+
+/* =========================
+   SMALL PHONES
+========================= */
+
+@media(max-width:380px){
+
+  .input-section{
+    grid-template-columns:48px 1fr 68px;
+  }
+
+  .photo-btn{
+    font-size:19px;
+  }
+
+}
+
+/* =========================
+   DISABLED BUTTON
+========================= */
+
+button:disabled{
+  opacity:.65;
+  cursor:not-allowed;
+}
+
 </style>
+
 </head>
 
 <body>
@@ -874,24 +1009,35 @@ footer{
     </a>
 
     <div class="nav-links">
+
       <a href="#home">Home</a>
       <a href="#tools">AI Tools</a>
       <a href="#premium">Premium</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
+
     </div>
 
     <div class="nav-actions">
 
-      <button class="nav-btn" onclick="openLogin()">
+      <button
+        class="nav-btn"
+        onclick="openLogin()"
+      >
         Login
       </button>
 
-      <button class="nav-btn primary" onclick="openSignup()">
+      <button
+        class="nav-btn primary"
+        onclick="openSignup()"
+      >
         Sign Up
       </button>
 
-      <button class="menu-btn" onclick="openMenu()">
+      <button
+        class="menu-btn"
+        onclick="openMenu()"
+      >
         ⋮
       </button>
 
@@ -903,23 +1049,64 @@ footer{
 
 <!-- SIDE MENU -->
 
-<div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+<div
+  class="menu-overlay"
+  id="menuOverlay"
+  onclick="closeMenu()"
+></div>
 
-<aside class="side-menu" id="sideMenu">
+<aside
+  class="side-menu"
+  id="sideMenu"
+>
 
   <div class="side-menu-header">
+
     <b>Bolo AI</b>
 
-    <button class="close-menu" onclick="closeMenu()">
+    <button
+      class="close-menu"
+      onclick="closeMenu()"
+    >
       ×
     </button>
+
   </div>
 
-  <a href="#home" onclick="closeMenu()">Home</a>
-  <a href="#tools" onclick="closeMenu()">AI Tools</a>
-  <a href="#premium" onclick="closeMenu()">Premium</a>
-  <a href="#about" onclick="closeMenu()">About</a>
-  <a href="#contact" onclick="closeMenu()">Contact</a>
+  <a
+    href="#home"
+    onclick="closeMenu()"
+  >
+    Home
+  </a>
+
+  <a
+    href="#tools"
+    onclick="closeMenu()"
+  >
+    AI Tools
+  </a>
+
+  <a
+    href="#premium"
+    onclick="closeMenu()"
+  >
+    Premium
+  </a>
+
+  <a
+    href="#about"
+    onclick="closeMenu()"
+  >
+    About
+  </a>
+
+  <a
+    href="#contact"
+    onclick="closeMenu()"
+  >
+    Contact
+  </a>
 
   <button
     class="nav-btn side-login"
@@ -934,7 +1121,10 @@ footer{
      HERO
 ========================= -->
 
-<section class="hero" id="home">
+<section
+  class="hero"
+  id="home"
+>
 
   <div class="hero-content">
 
@@ -964,7 +1154,10 @@ footer{
 
 <div class="chat-area">
 
-  <div class="chat-box" id="chatBox">
+  <div
+    class="chat-box"
+    id="chatBox"
+  >
 
     <div class="chat-message ai">
       👋 Hello! I'm Bolo AI. Login करके मुझसे Chat शुरू करें.
@@ -972,9 +1165,68 @@ footer{
 
   </div>
 
-  <!-- NORMAL CHAT INPUT -->
+  <!-- =========================
+       PHOTO PREVIEW
+  ========================= -->
+
+  <div
+    class="photo-preview-box"
+    id="photoPreviewBox"
+  >
+
+    <div class="photo-preview-wrap">
+
+      <img
+        id="photoPreview"
+        class="photo-preview"
+        src=""
+        alt="Selected photo"
+      >
+
+      <button
+        type="button"
+        class="remove-photo-btn"
+        id="removePhotoBtn"
+        title="Remove Photo"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div
+      class="photo-name"
+      id="photoName"
+    ></div>
+
+  </div>
+
+  <!-- =========================
+       CHAT INPUT
+  ========================= -->
 
   <div class="input-section">
+
+    <!-- PHOTO BUTTON -->
+
+    <button
+      type="button"
+      class="icon-btn photo-btn"
+      id="photoBtn"
+      title="Add Photo"
+    >
+      🖼️
+    </button>
+
+    <!-- HIDDEN FILE INPUT -->
+
+    <input
+      type="file"
+      id="photoInput"
+      accept="image/*"
+      capture="environment"
+      hidden
+    >
 
     <textarea
       id="inputText"
@@ -1003,7 +1255,10 @@ footer{
        IMAGE GENERATOR
   ========================= -->
 
-  <div class="image-generator" id="imageGenerator">
+  <div
+    class="image-generator"
+    id="imageGenerator"
+  >
 
     <div class="image-generator-header">
 
@@ -1012,10 +1267,15 @@ footer{
       </div>
 
       <div>
-        <h3>Bolo AI Image Generator</h3>
+
+        <h3>
+          Bolo AI Image Generator
+        </h3>
+
         <p>
           अपनी image का description लिखें और image generate करें.
         </p>
+
       </div>
 
     </div>
@@ -1126,7 +1386,9 @@ footer{
 
   <div class="section-header">
 
-    <h2>AI Tools</h2>
+    <h2>
+      AI Tools
+    </h2>
 
     <p>
       Powerful AI tools to make your everyday work easier.
@@ -1142,7 +1404,9 @@ footer{
         ✍️
       </div>
 
-      <h3>AI Writing</h3>
+      <h3>
+        AI Writing
+      </h3>
 
       <p>
         Write applications, messages, captions and professional content.
@@ -1163,7 +1427,9 @@ footer{
         🌐
       </div>
 
-      <h3>Translation</h3>
+      <h3>
+        Translation
+      </h3>
 
       <p>
         Translate your text quickly between languages.
@@ -1184,7 +1450,9 @@ footer{
         ▶️
       </div>
 
-      <h3>YouTube Assistant</h3>
+      <h3>
+        YouTube Assistant
+      </h3>
 
       <p>
         Get help with titles, descriptions, scripts and ideas.
@@ -1205,7 +1473,9 @@ footer{
         📄
       </div>
 
-      <h3>Resume Maker</h3>
+      <h3>
+        Resume Maker
+      </h3>
 
       <p>
         Create professional resume content easily.
@@ -1226,7 +1496,9 @@ footer{
         🎙️
       </div>
 
-      <h3>Voice AI</h3>
+      <h3>
+        Voice AI
+      </h3>
 
       <p>
         Speak naturally and let Bolo AI understand you.
@@ -1241,15 +1513,15 @@ footer{
 
     </div>
 
-    <!-- IMAGE TOOL -->
-
     <div class="tool-card">
 
       <div class="tool-icon">
         🎨
       </div>
 
-      <h3>AI Image Generator</h3>
+      <h3>
+        AI Image Generator
+      </h3>
 
       <p>
         Create AI images from your own text description.
@@ -1264,15 +1536,15 @@ footer{
 
     </div>
 
-    <!-- THUMBNAIL TOOL -->
-
     <div class="tool-card">
 
       <div class="tool-icon">
         🖼️
       </div>
 
-      <h3>Thumbnail Generator</h3>
+      <h3>
+        Thumbnail Generator
+      </h3>
 
       <p>
         Create a quick thumbnail preview for your video.
@@ -1295,13 +1567,18 @@ footer{
      PREMIUM
 ========================= -->
 
-<section class="premium-section" id="premium">
+<section
+  class="premium-section"
+  id="premium"
+>
 
   <div class="premium-container">
 
     <div class="section-header">
 
-      <h2>Premium</h2>
+      <h2>
+        Premium
+      </h2>
 
       <p>
         Unlock more powerful Bolo AI features.
@@ -1332,10 +1609,23 @@ footer{
         </div>
 
         <ul class="plan-features">
-          <li>✓ Basic AI requests</li>
-          <li>✓ Basic AI writing</li>
-          <li>✓ Basic translation</li>
-          <li>✓ Basic tools</li>
+
+          <li>
+            ✓ Basic AI requests
+          </li>
+
+          <li>
+            ✓ Basic AI writing
+          </li>
+
+          <li>
+            ✓ Basic translation
+          </li>
+
+          <li>
+            ✓ Basic tools
+          </li>
+
         </ul>
 
         <button
@@ -1358,22 +1648,61 @@ footer{
         </div>
 
         <div class="plan-price">
+
           <del>₹299</del>
-          <strong>₹149</strong>/month
+
+          <strong>
+            ₹149
+          </strong>/month
+
         </div>
 
         <ul class="plan-features">
-          <li>✓ More AI requests</li>
-          <li>✓ Advanced AI writing</li>
-          <li>✓ Advanced translation</li>
-          <li>✓ Voice AI</li>
-          <li>✓ Advanced Resume Maker</li>
-          <li>✓ Advanced YouTube tools</li>
-          <li>✓ More thumbnail generation</li>
-          <li>✓ AI Image Generation</li>
-          <li>✓ PDF tools</li>
-          <li>✓ Ad-free experience</li>
-          <li>✓ Premium-only features</li>
+
+          <li>
+            ✓ More AI requests
+          </li>
+
+          <li>
+            ✓ Advanced AI writing
+          </li>
+
+          <li>
+            ✓ Advanced translation
+          </li>
+
+          <li>
+            ✓ Voice AI
+          </li>
+
+          <li>
+            ✓ Advanced Resume Maker
+          </li>
+
+          <li>
+            ✓ Advanced YouTube tools
+          </li>
+
+          <li>
+            ✓ More thumbnail generation
+          </li>
+
+          <li>
+            ✓ AI Image Generation
+          </li>
+
+          <li>
+            ✓ PDF tools
+          </li>
+
+          <li>
+            ✓ Ad-free experience
+          </li>
+
+          <li>
+            ✓ Premium-only features
+          </li>
+
         </ul>
 
         <button
@@ -1399,7 +1728,9 @@ footer{
 
   <div class="section-header">
 
-    <h2>About Bolo AI</h2>
+    <h2>
+      About Bolo AI
+    </h2>
 
     <p>
       Your simple AI assistant.
@@ -1419,6 +1750,16 @@ footer{
       Our goal is to make AI easy to use for everyone.
     </p>
 
+    <p>
+      📧 Contact Email:
+      <a
+        class="contact-email"
+        href="mailto:Sabrojalam8454@gmail.com"
+      >
+        Sabrojalam8454@gmail.com
+      </a>
+    </p>
+
   </div>
 
 </section>
@@ -1431,7 +1772,9 @@ footer{
 
   <div class="section-header">
 
-    <h2>Contact</h2>
+    <h2>
+      Contact
+    </h2>
 
     <p>
       Have a question? Send us a message.
@@ -1483,22 +1826,36 @@ footer{
 
   <div class="footer-links">
 
-    <a href="#home">Home</a>
-    <a href="#tools">AI Tools</a>
-    <a href="#premium">Premium</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
+    <a href="#home">
+      Home
+    </a>
+
+    <a href="#tools">
+      AI Tools
+    </a>
+
+    <a href="#premium">
+      Premium
+    </a>
+
+    <a href="#about">
+      About
+    </a>
+
+    <a href="#contact">
+      Contact
+    </a>
 
     <a
       href="#"
-      onclick="alert('Privacy Policy coming soon.')"
+      onclick="alert('Privacy Policy coming soon.');return false;"
     >
       Privacy
     </a>
 
     <a
       href="#"
-      onclick="alert('Terms & Conditions coming soon.')"
+      onclick="alert('Terms & Conditions coming soon.');return false;"
     >
       Terms
     </a>
@@ -1564,7 +1921,7 @@ footer{
 
       <a
         href="#"
-        onclick="closeLogin();openSignup()"
+        onclick="closeLogin();openSignup();return false;"
         style="color:#6c4df6"
       >
         Sign Up
@@ -1635,7 +1992,7 @@ footer{
 
       <a
         href="#"
-        onclick="closeSignup();openLogin()"
+        onclick="closeSignup();openLogin();return false;"
         style="color:#6c4df6"
       >
         Login
@@ -1724,11 +2081,15 @@ footer{
 
     <div class="thumb-buttons">
 
-      <button onclick="downloadThumbnail()">
+      <button
+        onclick="downloadThumbnail()"
+      >
         Download
       </button>
 
-      <button onclick="closeThumbnailGenerator()">
+      <button
+        onclick="closeThumbnailGenerator()"
+      >
         Close
       </button>
 
@@ -1747,34 +2108,50 @@ footer{
 const API_BASE_URL =
   "https://bolo-ai-backend-cfft.onrender.com";
 
-const $ = id =>
-  document.getElementById(id);
+const $ =
+  id => document.getElementById(id);
 
-window.history.scrollRestoration = "manual";
+window.history.scrollRestoration =
+  "manual";
 
 /* =========================
    PAGE LOAD
 ========================= */
 
-window.addEventListener("load", function(){
+window.addEventListener(
+  "load",
+  function(){
 
-  if(location.hash){
+    if(location.hash){
 
-    history.replaceState(
-      null,
-      "",
-      location.pathname + location.search
+      history.replaceState(
+        null,
+        "",
+        location.pathname +
+        location.search
+      );
+
+    }
+
+    window.scrollTo(
+      0,
+      0
+    );
+
+    setTimeout(
+      function(){
+
+        window.scrollTo(
+          0,
+          0
+        );
+
+      },
+      100
     );
 
   }
-
-  window.scrollTo(0,0);
-
-  setTimeout(function(){
-    window.scrollTo(0,0);
-  },100);
-
-});
+);
 
 /* =========================
    MENU
@@ -1782,15 +2159,25 @@ window.addEventListener("load", function(){
 
 function openMenu(){
 
-  $("sideMenu").classList.add("show");
-  $("menuOverlay").classList.add("show");
+  $("sideMenu")
+    .classList
+    .add("show");
+
+  $("menuOverlay")
+    .classList
+    .add("show");
 
 }
 
 function closeMenu(){
 
-  $("sideMenu").classList.remove("show");
-  $("menuOverlay").classList.remove("show");
+  $("sideMenu")
+    .classList
+    .remove("show");
+
+  $("menuOverlay")
+    .classList
+    .remove("show");
 
 }
 
@@ -1800,31 +2187,43 @@ function closeMenu(){
 
 function openLogin(){
 
-  $("loginModal").classList.add("show");
+  $("loginModal")
+    .classList
+    .add("show");
 
 }
 
 function closeLogin(){
 
-  $("loginModal").classList.remove("show");
+  $("loginModal")
+    .classList
+    .remove("show");
 
 }
 
 function openSignup(){
 
-  $("signupModal").classList.add("show");
+  $("signupModal")
+    .classList
+    .add("show");
 
 }
 
 function closeSignup(){
 
-  $("signupModal").classList.remove("show");
+  $("signupModal")
+    .classList
+    .remove("show");
 
 }
 
 function isLoggedIn(){
 
-  return localStorage.getItem("boloLoggedIn") === "true";
+  return (
+    localStorage.getItem(
+      "boloLoggedIn"
+    ) === "true"
+  );
 
 }
 
@@ -1846,20 +2245,26 @@ function requireLogin(){
    SIGNUP
 ========================= */
 
-$("signupForm").addEventListener(
+$("signupForm")
+.addEventListener(
   "submit",
   function(e){
 
     e.preventDefault();
 
     const name =
-      $("signupName").value.trim();
+      $("signupName")
+      .value
+      .trim();
 
     const email =
-      $("signupEmail").value.trim();
+      $("signupEmail")
+      .value
+      .trim();
 
     const password =
-      $("signupPassword").value;
+      $("signupPassword")
+      .value;
 
     localStorage.setItem(
       "boloUserName",
@@ -1894,21 +2299,31 @@ $("signupForm").addEventListener(
    LOGIN
 ========================= */
 
-$("loginForm").addEventListener(
+$("loginForm")
+.addEventListener(
   "submit",
   function(e){
 
     e.preventDefault();
 
     const email =
-      $("loginEmail").value.trim();
+      $("loginEmail")
+      .value
+      .trim();
 
     const password =
-      $("loginPassword").value;
+      $("loginPassword")
+      .value;
 
     if(
-      email === localStorage.getItem("boloUserEmail") &&
-      password === localStorage.getItem("boloUserPassword")
+      email ===
+      localStorage.getItem(
+        "boloUserEmail"
+      ) &&
+      password ===
+      localStorage.getItem(
+        "boloUserPassword"
+      )
     ){
 
       localStorage.setItem(
@@ -1943,22 +2358,265 @@ function addChatMessage(
 ){
 
   const d =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
   d.className =
-    "chat-message " + type;
+    "chat-message " +
+    type;
 
-  d.textContent = text;
+  d.textContent =
+    text;
 
-  $("chatBox").appendChild(d);
+  $("chatBox")
+    .appendChild(d);
 
-  $("chatBox").scrollTop =
-    $("chatBox").scrollHeight;
+  $("chatBox")
+    .scrollTop =
+    $("chatBox")
+    .scrollHeight;
 
 }
 
 /* =========================
-   NORMAL AI CHAT
+   PHOTO SYSTEM
+========================= */
+
+let selectedPhoto =
+  null;
+
+/* OPEN PHOTO SELECTOR */
+
+$("photoBtn")
+.addEventListener(
+  "click",
+  function(){
+
+    if(!requireLogin()){
+      return;
+    }
+
+    $("photoInput").click();
+
+  }
+);
+
+/* PHOTO SELECT */
+
+$("photoInput")
+.addEventListener(
+  "change",
+  function(){
+
+    const file =
+      this.files[0];
+
+    if(!file){
+      return;
+    }
+
+    if(
+      !file.type
+      .startsWith("image/")
+    ){
+
+      alert(
+        "कृपया सिर्फ image/photo चुनें।"
+      );
+
+      this.value = "";
+
+      return;
+
+    }
+
+    /*
+      Maximum 10 MB
+    */
+
+    if(
+      file.size >
+      10 * 1024 * 1024
+    ){
+
+      alert(
+        "Photo 10 MB से छोटी होनी चाहिए।"
+      );
+
+      this.value = "";
+
+      return;
+
+    }
+
+    selectedPhoto =
+      file;
+
+    const reader =
+      new FileReader();
+
+    reader.onload =
+      function(e){
+
+        $("photoPreview")
+          .src =
+          e.target.result;
+
+        $("photoName")
+          .textContent =
+          file.name;
+
+        $("photoPreviewBox")
+          .style
+          .display =
+          "block";
+
+      };
+
+    reader.readAsDataURL(
+      file
+    );
+
+  }
+);
+
+/* REMOVE PHOTO */
+
+$("removePhotoBtn")
+.addEventListener(
+  "click",
+  function(){
+
+    selectedPhoto =
+      null;
+
+    $("photoInput")
+      .value =
+      "";
+
+    $("photoPreview")
+      .src =
+      "";
+
+    $("photoName")
+      .textContent =
+      "";
+
+    $("photoPreviewBox")
+      .style
+      .display =
+      "none";
+
+  }
+);
+
+/* =========================
+   FILE TO BASE64
+========================= */
+
+function fileToBase64(
+  file
+){
+
+  return new Promise(
+    function(
+      resolve,
+      reject
+    ){
+
+      const reader =
+        new FileReader();
+
+      reader.onload =
+        function(){
+
+          resolve(
+            reader.result
+          );
+
+        };
+
+      reader.onerror =
+        function(){
+
+          reject(
+            new Error(
+              "Image read failed"
+            )
+          );
+
+        };
+
+      reader.readAsDataURL(
+        file
+      );
+
+    }
+  );
+
+}
+
+/* =========================
+   SHOW USER PHOTO
+========================= */
+
+async function showUserPhoto(
+  file
+){
+
+  const reader =
+    new FileReader();
+
+  return new Promise(
+    function(
+      resolve,
+      reject
+    ){
+
+      reader.onload =
+        function(e){
+
+          const img =
+            document.createElement(
+              "img"
+            );
+
+          img.className =
+            "chat-user-image";
+
+          img.src =
+            e.target.result;
+
+          img.alt =
+            "Uploaded photo";
+
+          $("chatBox")
+            .appendChild(img);
+
+          $("chatBox")
+            .scrollTop =
+            $("chatBox")
+            .scrollHeight;
+
+          resolve();
+
+        };
+
+      reader.onerror =
+        reject;
+
+      reader.readAsDataURL(
+        file
+      );
+
+    }
+  );
+
+}
+
+/* =========================
+   NORMAL + PHOTO AI CHAT
 ========================= */
 
 async function send(){
@@ -1973,41 +2631,113 @@ async function send(){
   const text =
     input.value.trim();
 
-  if(!text){
+  if(
+    !text &&
+    !selectedPhoto
+  ){
+
     return;
+
   }
 
-  addChatMessage(
-    text,
-    "user"
-  );
+  const photoToSend =
+    selectedPhoto;
+
+  /*
+    Show text
+  */
+
+  if(text){
+
+    addChatMessage(
+      text,
+      "user"
+    );
+
+  }
+
+  /*
+    Show photo
+  */
+
+  if(photoToSend){
+
+    await showUserPhoto(
+      photoToSend
+    );
+
+  }
+
+  /*
+    Clear text box
+  */
 
   input.value = "";
 
+  /*
+    Loading
+  */
+
   addChatMessage(
-    "⏳ Bolo AI सोच रहा है...",
+    photoToSend
+      ? "⏳ Bolo AI फोटो देख रहा है..."
+      : "⏳ Bolo AI सोच रहा है...",
     "ai"
   );
 
   const loadingMessage =
-    $("chatBox").lastElementChild;
+    $("chatBox")
+    .lastElementChild;
 
   try{
 
+    /*
+      Convert selected photo
+      to Base64.
+    */
+
+    let imageBase64 =
+      null;
+
+    if(photoToSend){
+
+      imageBase64 =
+        await fileToBase64(
+          photoToSend
+        );
+
+    }
+
+    /*
+      Send message + image
+      to backend.
+    */
+
     const response =
       await fetch(
-        API_BASE_URL + "/api/chat",
+        API_BASE_URL +
+        "/api/chat",
         {
-          method:"POST",
+
+          method:
+            "POST",
 
           headers:{
             "Content-Type":
               "application/json"
           },
 
-          body:JSON.stringify({
-            message:text
-          })
+          body:
+            JSON.stringify({
+
+              message:
+                text,
+
+              image:
+                imageBase64
+
+            })
+
         }
       );
 
@@ -2016,7 +2746,10 @@ async function send(){
 
     loadingMessage.remove();
 
-    if(!response.ok || !data.ok){
+    if(
+      !response.ok ||
+      !data.ok
+    ){
 
       addChatMessage(
         data.error ||
@@ -2025,6 +2758,7 @@ async function send(){
       );
 
       return;
+
     }
 
     const reply =
@@ -2036,7 +2770,9 @@ async function send(){
       "ai"
     );
 
-    speakText(reply);
+    speakText(
+      reply
+    );
 
   }catch(error){
 
@@ -2054,20 +2790,49 @@ async function send(){
 
   }
 
+  /*
+    Clear selected photo
+    after sending.
+  */
+
+  selectedPhoto =
+    null;
+
+  $("photoInput")
+    .value =
+    "";
+
+  $("photoPreview")
+    .src =
+    "";
+
+  $("photoName")
+    .textContent =
+    "";
+
+  $("photoPreviewBox")
+    .style
+    .display =
+    "none";
+
 }
 
 /* SEND BUTTON */
 
-$("sendBtn").addEventListener(
+$("sendBtn")
+.addEventListener(
   "click",
   function(){
+
     send();
+
   }
 );
 
 /* ENTER TO SEND */
 
-$("inputText").addEventListener(
+$("inputText")
+.addEventListener(
   "keydown",
   function(e){
 
@@ -2115,9 +2880,11 @@ async function generateImage(){
     promptInput.focus();
 
     return;
+
   }
 
-  button.disabled = true;
+  button.disabled =
+    true;
 
   button.textContent =
     "⏳ Generating...";
@@ -2126,7 +2893,8 @@ async function generateImage(){
     "🎨 Bolo AI image बना रहा है... थोड़ा इंतज़ार करें।";
 
   addChatMessage(
-    "🎨 Image request: " + prompt,
+    "🎨 Image request: " +
+    prompt,
     "user"
   );
 
@@ -2137,16 +2905,21 @@ async function generateImage(){
         API_BASE_URL +
         "/api/generate-image",
         {
-          method:"POST",
+
+          method:
+            "POST",
 
           headers:{
             "Content-Type":
               "application/json"
           },
 
-          body:JSON.stringify({
-            prompt:prompt
-          })
+          body:
+            JSON.stringify({
+              prompt:
+                prompt
+            })
+
         }
       );
 
@@ -2157,11 +2930,6 @@ async function generateImage(){
       !response.ok ||
       !data.ok
     ){
-
-      console.error(
-        "Image API Error:",
-        data
-      );
 
       status.textContent =
         "❌ " +
@@ -2177,6 +2945,7 @@ async function generateImage(){
       );
 
       return;
+
     }
 
     if(!data.image){
@@ -2190,6 +2959,7 @@ async function generateImage(){
       );
 
       return;
+
     }
 
     status.textContent =
@@ -2217,7 +2987,8 @@ async function generateImage(){
 
   }finally{
 
-    button.disabled = false;
+    button.disabled =
+      false;
 
     button.textContent =
       "🎨 Generate Image";
@@ -2236,13 +3007,17 @@ function addGeneratedImage(
 ){
 
   const wrapper =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
   wrapper.className =
     "generated-image-message";
 
   const image =
-    document.createElement("img");
+    document.createElement(
+      "img"
+    );
 
   image.src =
     imageData;
@@ -2251,16 +3026,21 @@ function addGeneratedImage(
     prompt;
 
   const caption =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
   caption.className =
     "generated-image-caption";
 
   caption.textContent =
-    "🎨 " + prompt;
+    "🎨 " +
+    prompt;
 
   const downloadButton =
-    document.createElement("button");
+    document.createElement(
+      "button"
+    );
 
   downloadButton.className =
     "image-download-btn";
@@ -2273,7 +3053,9 @@ function addGeneratedImage(
     function(){
 
       const link =
-        document.createElement("a");
+        document.createElement(
+          "a"
+        );
 
       link.href =
         imageData;
@@ -2281,7 +3063,9 @@ function addGeneratedImage(
       link.download =
         "bolo-ai-image.png";
 
-      document.body.appendChild(link);
+      document.body.appendChild(
+        link
+      );
 
       link.click();
 
@@ -2290,16 +3074,27 @@ function addGeneratedImage(
     }
   );
 
-  wrapper.appendChild(image);
+  wrapper.appendChild(
+    image
+  );
 
-  wrapper.appendChild(caption);
+  wrapper.appendChild(
+    caption
+  );
 
-  wrapper.appendChild(downloadButton);
+  wrapper.appendChild(
+    downloadButton
+  );
 
-  $("chatBox").appendChild(wrapper);
+  $("chatBox")
+    .appendChild(
+      wrapper
+    );
 
-  $("chatBox").scrollTop =
-    $("chatBox").scrollHeight;
+  $("chatBox")
+    .scrollTop =
+    $("chatBox")
+    .scrollHeight;
 
 }
 
@@ -2320,13 +3115,17 @@ function focusImageGenerator(){
     $("boloImagePrompt");
 
   generator.scrollIntoView({
-    behavior:"smooth",
-    block:"center"
+    behavior:
+      "smooth",
+    block:
+      "center"
   });
 
   setTimeout(
     function(){
+
       prompt.focus();
+
     },
     500
   );
@@ -2335,16 +3134,20 @@ function focusImageGenerator(){
 
 /* IMAGE BUTTON */
 
-$("boloGenerateImageBtn").addEventListener(
+$("boloGenerateImageBtn")
+.addEventListener(
   "click",
   function(){
+
     generateImage();
+
   }
 );
 
 /* CTRL + ENTER IMAGE */
 
-$("boloImagePrompt").addEventListener(
+$("boloImagePrompt")
+.addEventListener(
   "keydown",
   function(e){
 
@@ -2364,15 +3167,21 @@ $("boloImagePrompt").addEventListener(
 
 /* CLEAR IMAGE */
 
-$("boloClearImageBtn").addEventListener(
+$("boloClearImageBtn")
+.addEventListener(
   "click",
   function(){
 
-    $("boloImagePrompt").value = "";
+    $("boloImagePrompt")
+      .value =
+      "";
 
-    $("boloImageStatus").textContent = "";
+    $("boloImageStatus")
+      .textContent =
+      "";
 
-    $("boloImagePrompt").focus();
+    $("boloImagePrompt")
+      .focus();
 
   }
 );
@@ -2381,9 +3190,11 @@ $("boloClearImageBtn").addEventListener(
    VOICE AI
 ========================= */
 
-let recognition = null;
+let recognition =
+  null;
 
-let isListening = false;
+let isListening =
+  false;
 
 function setupVoice(){
 
@@ -2400,76 +3211,95 @@ function setupVoice(){
   const r =
     new SpeechRecognition();
 
-  r.lang = "hi-IN";
+  r.lang =
+    "hi-IN";
 
-  r.interimResults = false;
+  r.interimResults =
+    false;
 
-  r.continuous = false;
+  r.continuous =
+    false;
 
-  r.onstart = function(){
+  r.onstart =
+    function(){
 
-    isListening = true;
+      isListening =
+        true;
 
-    $("micBtn").textContent =
-      "🔴 Listening...";
+      $("micBtn")
+        .textContent =
+        "🔴 Listening...";
 
-  };
+    };
 
-  r.onresult = function(event){
+  r.onresult =
+    function(event){
 
-    const transcript =
-      event.results[0][0].transcript;
+      const transcript =
+        event
+        .results[0][0]
+        .transcript;
 
-    $("inputText").value =
-      transcript;
+      $("inputText")
+        .value =
+        transcript;
 
-    $("micBtn").textContent =
-      "🎙️ Mic";
+      $("micBtn")
+        .textContent =
+        "🎙️ Mic";
 
-    isListening = false;
+      isListening =
+        false;
 
-    send();
+      send();
 
-  };
+    };
 
-  r.onerror = function(event){
+  r.onerror =
+    function(event){
 
-    console.error(
-      "Speech recognition error:",
-      event.error
-    );
-
-    isListening = false;
-
-    $("micBtn").textContent =
-      "🎙️ Mic";
-
-    if(
-      event.error === "not-allowed"
-    ){
-
-      alert(
-        "Microphone permission Allow करें और फिर Mic दबाएँ।"
+      console.error(
+        "Speech recognition error:",
+        event.error
       );
 
-    }else{
+      isListening =
+        false;
 
-      alert(
-        "Microphone से आवाज़ समझने में समस्या हुई।"
-      );
+      $("micBtn")
+        .textContent =
+        "🎙️ Mic";
 
-    }
+      if(
+        event.error ===
+        "not-allowed"
+      ){
 
-  };
+        alert(
+          "Microphone permission Allow करें और फिर Mic दबाएँ।"
+        );
 
-  r.onend = function(){
+      }else{
 
-    isListening = false;
+        alert(
+          "Microphone से आवाज़ समझने में समस्या हुई।"
+        );
 
-    $("micBtn").textContent =
-      "🎙️ Mic";
+      }
 
-  };
+    };
+
+  r.onend =
+    function(){
+
+      isListening =
+        false;
+
+      $("micBtn")
+        .textContent =
+        "🎙️ Mic";
+
+    };
 
   return r;
 
@@ -2499,7 +3329,9 @@ function activateMicrophone(){
   }
 
   if(isListening){
+
     return;
+
   }
 
   try{
@@ -2508,13 +3340,16 @@ function activateMicrophone(){
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      error
+    );
 
   }
 
 }
 
-$("micBtn").addEventListener(
+$("micBtn")
+.addEventListener(
   "click",
   function(){
 
@@ -2527,10 +3362,15 @@ $("micBtn").addEventListener(
    TEXT TO SPEECH
 ========================= */
 
-function speakText(text){
+function speakText(
+  text
+){
 
   if(
-    !("speechSynthesis" in window)
+    !(
+      "speechSynthesis"
+      in window
+    )
   ){
 
     return;
@@ -2540,7 +3380,9 @@ function speakText(text){
   speechSynthesis.cancel();
 
   const utterance =
-    new SpeechSynthesisUtterance(text);
+    new SpeechSynthesisUtterance(
+      text
+    );
 
   utterance.lang =
     "hi-IN";
@@ -2558,25 +3400,32 @@ function speakText(text){
    TOOLS
 ========================= */
 
-function useTool(text){
+function useTool(
+  text
+){
 
   if(!requireLogin()){
     return;
   }
 
-  $("inputText").value =
+  $("inputText")
+    .value =
     text;
 
-  $("inputText").focus();
+  $("inputText")
+    .focus();
 
   window.scrollTo({
 
     top:
-      $("chatBox").getBoundingClientRect().top +
+      $("chatBox")
+      .getBoundingClientRect()
+      .top +
       window.scrollY -
       120,
 
-    behavior:"smooth"
+    behavior:
+      "smooth"
 
   });
 
@@ -2585,26 +3434,32 @@ function useTool(text){
 /* QUICK BUTTONS */
 
 document
-  .querySelectorAll(".quick-btn")
-  .forEach(function(button){
+  .querySelectorAll(
+    ".quick-btn"
+  )
+  .forEach(
+    function(button){
 
-    button.addEventListener(
-      "click",
-      function(){
+      button.addEventListener(
+        "click",
+        function(){
 
-        const action =
-          button.dataset.action;
+          const action =
+            button.dataset.action;
 
-        if(action){
+          if(action){
 
-          useTool(action);
+            useTool(
+              action
+            );
+
+          }
 
         }
+      );
 
-      }
-    );
-
-  });
+    }
+  );
 
 /* =========================
    PREMIUM
@@ -2633,33 +3488,43 @@ function openThumbnailGenerator(){
   }
 
   $("thumbnailModal")
-    .classList.add("show");
+    .classList
+    .add("show");
 
 }
 
 function closeThumbnailGenerator(){
 
   $("thumbnailModal")
-    .classList.remove("show");
+    .classList
+    .remove("show");
 
 }
 
 function generateThumbnail(){
 
   const title =
-    $("thumbTitle").value.trim();
+    $("thumbTitle")
+    .value
+    .trim();
 
   const channel =
-    $("thumbChannel").value.trim();
+    $("thumbChannel")
+    .value
+    .trim();
 
   const text =
-    $("thumbText").value.trim();
+    $("thumbText")
+    .value
+    .trim();
 
   const color =
-    $("thumbColor").value;
+    $("thumbColor")
+    .value;
 
   $("thumbnailCanvas")
-    .style.background =
+    .style
+    .background =
     color;
 
   $("thumbnailMainText")
@@ -2692,34 +3557,46 @@ function downloadThumbnail(){
    CONTACT
 ========================= */
 
-$("contactForm").addEventListener(
+$("contactForm")
+.addEventListener(
   "submit",
   function(e){
 
     e.preventDefault();
 
     const name =
-      $("contactName").value.trim();
+      $("contactName")
+      .value
+      .trim();
 
     const email =
-      $("contactEmail").value.trim();
+      $("contactEmail")
+      .value
+      .trim();
 
     const message =
-      $("contactMessage").value.trim();
+      $("contactMessage")
+      .value
+      .trim();
 
     const subject =
       encodeURIComponent(
-        "Bolo AI Contact - " + name
+        "Bolo AI Contact - " +
+        name
       );
 
     const body =
       encodeURIComponent(
+
         "Name: " +
         name +
+
         "\nEmail: " +
         email +
+
         "\n\n" +
         message
+
       );
 
     location.href =
@@ -2736,25 +3613,34 @@ $("contactForm").addEventListener(
 ========================= */
 
 document
-  .querySelectorAll(".modal")
-  .forEach(function(modal){
+  .querySelectorAll(
+    ".modal"
+  )
+  .forEach(
+    function(modal){
 
-    modal.addEventListener(
-      "click",
-      function(e){
+      modal.addEventListener(
+        "click",
+        function(e){
 
-        if(e.target === modal){
+          if(
+            e.target ===
+            modal
+          ){
 
-          modal.classList.remove(
-            "show"
-          );
+            modal
+              .classList
+              .remove(
+                "show"
+              );
+
+          }
 
         }
+      );
 
-      }
-    );
-
-  });
+    }
+  );
 
 /* =========================
    ESCAPE KEY
@@ -2764,7 +3650,10 @@ document.addEventListener(
   "keydown",
   function(e){
 
-    if(e.key === "Escape"){
+    if(
+      e.key ===
+      "Escape"
+    ){
 
       closeMenu();
 
