@@ -24,7 +24,7 @@ function addChatMessage(text, type) {
     if (inputSection) {
       inputSection.parentNode.insertBefore(
         chatBox,
-        inputSection
+        inputSection.nextSibling
       );
     }
   }
