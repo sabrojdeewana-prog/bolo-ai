@@ -2,26 +2,32 @@ const API_BASE_URL = "https://bolo-ai-backend-cfft.onrender.com";
 
 const $ = id => document.getElementById(id);
 
-function esc(s) {
-  return String(s).replace(/[&<>"']/g, c => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#039;"
-  }[c]));
-}
-
 async function send() {
-  const q = $("inputText");
-  if (!q) return;
+  const input = $("inputText");
+  if (!input) return;
 
-  const t = q.value.trim();
-  if (!t) return;
+  const message = input.value.trim();
+  if (!message) return;
 
+  input.value = "";
 
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/chat`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ message })
+    });
 
-  q.value = "";
+    const data = await response.json();
+
+    alert(data.reply || data.error || "कोई जवाब नहीं मिला।");
+
+  } catch (error) {
+    alert("Bolo AI Backend से connection नहीं हो पाया।");
+    console.error(error);
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
