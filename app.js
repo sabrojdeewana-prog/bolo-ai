@@ -19,7 +19,7 @@ async function send() {
   const t = q.value.trim();
   if (!t) return;
 
-  alert("Message received: " + t);
+
 
   q.value = "";
 }
