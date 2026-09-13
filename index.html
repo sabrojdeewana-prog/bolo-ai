@@ -1,11 +1,11 @@
 
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="Bolo AI - भारतीय उपयोगकर्ताओं के लिए AI असिस्टेंट प्लेटफॉर्म।">
-<title>Bolo AI - बस बोलो, Bolo AI कर देगा!</title>
+<meta name="description" content="Bolo AI - Your smart AI assistant platform.">
+<title>Bolo AI - Just Say It, Bolo AI Will Do It!</title>
 <link rel="stylesheet" href="style.css">
 
 <style>
@@ -39,10 +39,10 @@
 .auth-switch button{border:0;background:none;font-weight:700;cursor:pointer}
 
 @media(max-width:768px){
- .auth-buttons{gap:4px}
- .auth-button{padding:7px 9px;font-size:12px}
- .more-button{font-size:27px}
- .more-dropdown{width:190px}
+  .auth-buttons{gap:4px}
+  .auth-button{padding:7px 9px;font-size:12px}
+  .more-button{font-size:27px}
+  .more-dropdown{width:190px}
 }
 </style>
 </head>
@@ -76,7 +76,8 @@
 </div>
 
 <div class="more-menu-wrapper">
-<button type="button" id="moreBtn" class="more-button">⋮</button>
+<button type="button" id="moreBtn" class="more-button" aria-label="More options">⋮</button>
+
 <div id="moreDropdown" class="more-dropdown">
 <a href="#home">🏠 Home</a>
 <a href="#tools">🛠️ AI Tools</a>
@@ -85,7 +86,10 @@
 <a href="#contact">📧 Contact</a>
 <a href="#privacy">🔒 Privacy Policy</a>
 <a href="#terms">📄 Terms & Conditions</a>
-<button type="button" id="menuLoginBtn" style="width:100%;padding:11px;border:0;border-radius:9px;background:#111;color:#fff;cursor:pointer">🔐 Login</button>
+
+<button type="button" id="menuLoginBtn" style="width:100%;padding:11px;border:0;border-radius:9px;background:#111;color:#fff;cursor:pointer">
+🔐 Login
+</button>
 </div>
 </div>
 
@@ -95,66 +99,82 @@
 <!-- ===== LOGIN ===== -->
 <div id="loginModal" class="auth-modal" aria-hidden="true">
 <div class="auth-modal-content">
+
 <button class="auth-close" id="closeLoginBtn">&times;</button>
+
 <div class="auth-header">
 <div class="auth-icon">🔐</div>
 <h2>Welcome Back</h2>
-<p>अपने Bolo AI account में Login करें</p>
+<p>Log in to your Bolo AI account</p>
 </div>
 
 <form id="loginForm">
+
 <div class="auth-form-group">
 <label>Email</label>
-<input type="email" id="loginEmail" required placeholder="आपका email">
+<input type="email" id="loginEmail" required placeholder="Your email">
 </div>
+
 <div class="auth-form-group">
 <label>Password</label>
-<input type="password" id="loginPassword" required placeholder="आपका password">
+<input type="password" id="loginPassword" required placeholder="Your password">
 </div>
+
 <button type="submit" class="auth-submit-button">Login</button>
+
 </form>
 
 <div class="auth-switch">
-Account नहीं है?
-<button type="button" id="switchToSignup">Sign Up करें</button>
+Don't have an account?
+<button type="button" id="switchToSignup">Sign Up</button>
 </div>
+
 </div>
 </div>
 
 <!-- ===== SIGN UP ===== -->
 <div id="signupModal" class="auth-modal" aria-hidden="true">
 <div class="auth-modal-content">
+
 <button class="auth-close" id="closeSignupBtn">&times;</button>
+
 <div class="auth-header">
 <div class="auth-icon">👤</div>
 <h2>Create Account</h2>
-<p>Bolo AI पर अपना account बनाएं</p>
+<p>Create your Bolo AI account</p>
 </div>
 
 <form id="signupForm">
+
 <div class="auth-form-group">
-<label>नाम</label>
-<input type="text" id="signupName" required placeholder="आपका नाम">
+<label>Name</label>
+<input type="text" id="signupName" required placeholder="Your name">
 </div>
+
 <div class="auth-form-group">
 <label>Email</label>
-<input type="email" id="signupEmail" required placeholder="आपका email">
+<input type="email" id="signupEmail" required placeholder="Your email">
 </div>
+
 <div class="auth-form-group">
 <label>Password</label>
-<input type="password" id="signupPassword" minlength="6" required placeholder="कम से कम 6 characters">
+<input type="password" id="signupPassword" minlength="6" required placeholder="At least 6 characters">
 </div>
+
 <div class="auth-form-group">
 <label>Confirm Password</label>
-<input type="password" id="signupConfirmPassword" minlength="6" required placeholder="Password दोबारा लिखें">
+<input type="password" id="signupConfirmPassword" minlength="6" required placeholder="Enter your password again">
 </div>
+
 <button type="submit" class="auth-submit-button">Sign Up</button>
+
 </form>
 
 <div class="auth-switch">
-पहले से account है?
-<button type="button" id="switchToLogin">Login करें</button>
+Already have an account?
+<button type="button" id="switchToLogin">Login</button>
 </div>
+
 </div>
 </div>
 
@@ -163,30 +183,37 @@ Account नहीं है?
 <div class="hero-content">
 
 <div class="hero-text">
-<h1 class="hero-headline">बस बोलो, Bolo AI कर देगा!</h1>
-<p class="hero-description">अपना काम लिखें या बोलें और AI की मदद से तुरंत तैयार करें।</p>
+<h1 class="hero-headline">Just Say It, Bolo AI Will Do It!</h1>
+<p class="hero-description">Write or speak your task and get it done instantly with the help of AI.</p>
 </div>
 
 <div id="chatBox" style="width:100%;max-width:900px;height:420px;margin:20px auto;padding:15px;box-sizing:border-box;overflow-y:auto;border-radius:18px"></div>
 
 <div class="input-section">
 <div class="input-wrapper">
-<textarea id="inputText" class="ai-input" placeholder="अपना काम यहाँ लिखें या बोलें..."></textarea>
+
+<textarea id="inputText" class="ai-input" placeholder="Write or speak your task here..."></textarea>
+
 <div class="input-actions">
-<button id="micBtn" class="mic-button" title="माइक्रोफोन">🎙️</button>
-<button id="sendBtn" class="send-button"><span>भेजें</span><span>→</span></button>
+<button id="micBtn" class="mic-button" title="Microphone">🎙️</button>
+<button id="sendBtn" class="send-button">
+<span>Send</span><span>→</span>
+</button>
 </div>
+
 </div>
 </div>
 
 <div class="quick-actions">
-<button class="quick-btn" data-action="application">📝 Application लिखें</button>
+
+<button class="quick-btn" data-action="application">📝 Write Application</button>
 <button class="quick-btn" data-action="whatsapp">💬 WhatsApp Message</button>
 <button class="quick-btn" data-action="translate">🌐 Translate</button>
-<button class="quick-btn" data-action="resume">📄 Resume बनाएं</button>
+<button class="quick-btn" data-action="resume">📄 Create Resume</button>
 <button class="quick-btn" data-action="youtube">📺 YouTube Title</button>
 <button class="quick-btn" data-action="social">📱 Social Media</button>
 <button class="quick-btn" data-action="thumbnail">🎨 YouTube Thumbnail</button>
+
 </div>
 
 </div>
@@ -194,9 +221,10 @@ Account नहीं है?
 
 <!-- ===== AI TOOLS ===== -->
 <section id="tools" class="tools-section">
+
 <div class="section-header">
-<h2>हमारे AI Tools</h2>
-<p>अपनी जरूरत के हिसाब से सही टूल चुनें</p>
+<h2>Our AI Tools</h2>
+<p>Choose the right tool for your needs</p>
 </div>
 
 <div class="tools-grid">
@@ -204,57 +232,57 @@ Account नहीं है?
 <div class="tool-card">
 <div class="tool-icon">✍️</div>
 <h3>AI Writer</h3>
-<p>Applications, Letters, Messages और Captions लिखवाएं</p>
-<button class="tool-button" onclick="scrollToInput('AI Writer से मदद चाहिए')">शुरू करें</button>
+<p>Write applications, letters, messages and captions with AI</p>
+<button class="tool-button" onclick="scrollToInput('I need help with AI writing')">Get Started</button>
 </div>
 
 <div class="tool-card">
 <div class="tool-icon">🌐</div>
 <h3>AI Translator</h3>
-<p>Hindi, English और अन्य भाषाओं में अनुवाद करें</p>
-<button class="tool-button" onclick="scrollToInput('अनुवाद करें')">शुरू करें</button>
+<p>Translate between Hindi, English and other languages</p>
+<button class="tool-button" onclick="scrollToInput('Translate this for me')">Get Started</button>
 </div>
 
 <div class="tool-card">
 <div class="tool-icon">📄</div>
 <h3>AI Resume Maker</h3>
-<p>पेशेवर CV/Resume बनाएं AI की मदद से</p>
-<button class="tool-button" onclick="scrollToInput('Resume बनाएं')">शुरू करें</button>
+<p>Create a professional CV or resume with AI</p>
+<button class="tool-button" onclick="scrollToInput('Create a resume for me')">Get Started</button>
 </div>
 
 <div class="tool-card">
 <div class="tool-icon">📺</div>
 <h3>YouTube Tools</h3>
-<p>Title, Description, Tags और Thumbnails बनाएं</p>
-<button class="tool-button" onclick="scrollToInput('YouTube मदद चाहिए')">शुरू करें</button>
+<p>Create titles, descriptions, tags and thumbnails</p>
+<button class="tool-button" onclick="scrollToInput('I need help with YouTube')">Get Started</button>
 </div>
 
 <div class="tool-card">
 <div class="tool-icon">📱</div>
 <h3>Social Media Tools</h3>
-<p>Facebook, Instagram और Reels के लिए Captions बनाएं</p>
-<button class="tool-button" onclick="scrollToInput('Social media कंटेंट चाहिए')">शुरू करें</button>
+<p>Create captions for Facebook, Instagram and Reels</p>
+<button class="tool-button" onclick="scrollToInput('I need social media content')">Get Started</button>
 </div>
 
 <div class="tool-card">
 <div class="tool-icon">💼</div>
 <h3>Business Helper</h3>
-<p>व्यापार के लिए नाम, विज्ञापन और विवरण बनाएं</p>
-<button class="tool-button" onclick="scrollToInput('Business मदद चाहिए')">शुरू करें</button>
+<p>Create business names, advertisements and descriptions</p>
+<button class="tool-button" onclick="scrollToInput('I need business help')">Get Started</button>
 </div>
 
 <div class="tool-card">
 <div class="tool-icon">🎤</div>
 <h3>Voice Assistant</h3>
-<p>माइक्रोफोन से बोलें और तुरंत उत्तर पाएं</p>
-<button class="tool-button" onclick="activateMicrophone()">माइक खोलें</button>
+<p>Speak through your microphone and get instant answers</p>
+<button class="tool-button" onclick="activateMicrophone()">Open Mic</button>
 </div>
 
 <div class="tool-card featured">
 <div class="tool-icon">🎨</div>
 <h3>YouTube Thumbnail Generator</h3>
-<p>पेशेवर YouTube Thumbnails AI से बनवाएं</p>
-<button class="tool-button" onclick="openThumbnailGenerator()">Generator खोलें</button>
+<p>Create professional YouTube thumbnails with AI</p>
+<button class="tool-button" onclick="openThumbnailGenerator()">Open Generator</button>
 </div>
 
 </div>
@@ -262,26 +290,30 @@ Account नहीं है?
 
 <!-- ===== THUMBNAIL MODAL ===== -->
 <div id="thumbnailModal" class="modal">
+
 <div class="modal-content">
+
 <div class="modal-header">
 <h2>YouTube Thumbnail Generator</h2>
 <button class="modal-close" onclick="closeThumbnailGenerator()">&times;</button>
 </div>
 
 <div class="modal-body">
+
 <div class="generator-grid">
 
 <div class="generator-input">
-<h3>Thumbnail विवरण</h3>
+
+<h3>Thumbnail Details</h3>
 
 <div class="form-group">
 <label>Video Title</label>
-<input type="text" id="videoTitle" placeholder="आपका video का शीर्षक">
+<input type="text" id="videoTitle" placeholder="Your video title">
 </div>
 
 <div class="form-group">
 <label>Channel Name</label>
-<input type="text" id="channelName" placeholder="आपके चैनल का नाम">
+<input type="text" id="channelName" placeholder="Your channel name">
 </div>
 
 <div class="form-group">
@@ -300,7 +332,7 @@ Account नहीं है?
 
 <div class="form-group">
 <label>Thumbnail Text</label>
-<input type="text" id="thumbnailText" placeholder="Thumbnail पर दिखने वाला टेक्स्ट">
+<input type="text" id="thumbnailText" placeholder="Text shown on the thumbnail">
 </div>
 
 <div class="form-group">
@@ -331,20 +363,29 @@ Account नहीं है?
 </div>
 
 <button class="generate-btn" onclick="generateThumbnail()">🎨 Generate Thumbnail</button>
+
 </div>
 
 <div class="generator-preview">
+
 <h3>Preview</h3>
+
 <div id="thumbnailPreview" class="thumbnail-preview">
+
 <div id="thumbnailCanvas" class="thumbnail-canvas">
+
 <div class="thumbnail-content">
 <p class="thumbnail-main-text">Video Title</p>
 <p class="thumbnail-sub-text">Channel Name</p>
 </div>
+
 </div>
 </div>
+
 <p class="preview-info">📐 16:9 YouTube Format</p>
+
 <button class="download-btn" onclick="downloadThumbnail()">📥 Download Thumbnail</button>
+
 </div>
 
 </div>
@@ -354,22 +395,27 @@ Account नहीं है?
 
 <!-- ===== PREMIUM ===== -->
 <section id="premium" class="premium-section">
+
 <div class="section-header">
 <h2>Bolo AI Premium</h2>
-<p>अनलिमिटेड AI पावर के साथ बेहतर परिणाम पाएं</p>
+<p>Get better results with unlimited AI power</p>
 </div>
 
 <div class="premium-container">
+
 <div class="premium-notice">
-<span class="notice-badge">⏰ आने वाला है</span>
-<h3>Premium जल्द आ रहा है</h3>
-<p>Bolo AI Premium की सभी शक्तिशाली सुविधाओं के लिए तैयार रहें!</p>
+<span class="notice-badge">⏰ Coming Soon</span>
+<h3>Premium Is Coming Soon</h3>
+<p>Get ready for all the powerful features of Bolo AI Premium!</p>
 </div>
 
 <div class="pricing-cards">
+
 <div class="pricing-card free">
+
 <div class="plan-name">🆓 FREE PLAN</div>
 <div class="plan-price">₹0 / Month</div>
+
 <div class="plan-features">
 <div>✓ Limited AI requests</div>
 <div>✓ Basic AI writing</div>
@@ -380,16 +426,20 @@ Account नहीं है?
 <div>✗ Advanced tools</div>
 <div>✗ PDF tools</div>
 </div>
-<button class="plan-button">अभी उपयोग करें</button>
+
+<button class="plan-button">Use Now</button>
+
 </div>
 
 <div class="pricing-card premium featured-plan">
+
 <div class="plan-badge">⭐ RECOMMENDED</div>
 <div class="plan-name">🌟 BOLO AI PREMIUM</div>
 <div class="plan-price">₹49 / Month</div>
 <div class="plan-price-yearly">₹399 / Year</div>
+
 <div class="plan-features">
-<div>✓ अनलिमिटेड AI requests</div>
+<div>✓ Unlimited AI requests</div>
 <div>✓ Advanced AI writing</div>
 <div>✓ Advanced translation</div>
 <div>✓ Voice AI</div>
@@ -399,102 +449,194 @@ Account नहीं है?
 <div>✓ PDF tools</div>
 <div>✓ Ad-free experience</div>
 </div>
-<button class="plan-button premium-button">जल्द आ रहा है</button>
+
+<button class="plan-button premium-button">Coming Soon</button>
+
 </div>
+
 </div>
 </div>
 </section>
 
 <!-- ===== ABOUT ===== -->
 <section id="about" class="about-section">
-<div class="section-header"><h2>Bolo AI के बारे में</h2></div>
-<div class="about-content">
-<div class="about-text">
-<h3>आपका स्मार्ट AI साथी</h3>
-<p>Bolo AI एक आसान AI platform है जिसे रोज़मर्रा के कामों को आसान बनाने के लिए बनाया गया है। आप अपना काम लिखकर या बोलकर AI की मदद ले सकते हैं।</p>
-<p>हमारा लक्ष्य हर भारतीय को AI की शक्ति देना है, चाहे वह अंग्रेजी बोलता हो या हिंदी।</p>
-<p>छात्र हो, व्यापारी हो, या कोई और - Bolo AI आपके हर काम को तेजी से पूरा कर सकता है।</p>
+
+<div class="section-header">
+<h2>About Bolo AI</h2>
 </div>
+
+<div class="about-content">
+
+<div class="about-text">
+
+<h3>Your Smart AI Companion</h3>
+
+<p>Bolo AI is an easy-to-use AI platform designed to make everyday tasks easier. Write or speak your task and get help from AI.</p>
+
+<p>Our goal is to make the power of AI accessible to everyone, whether they speak English, Hindi or another language.</p>
+
+<p>Whether you are a student, business owner or anyone else, Bolo AI can help you complete your tasks faster.</p>
+
+</div>
+
 <div class="about-features">
-<div class="about-feature">🌍<h4>हिंदी और अंग्रेजी</h4><p>आपकी पसंद की भाषा में काम करें</p></div>
-<div class="about-feature">⚡<h4>तेज़ और आसान</h4><p>सेकंड में परिणाम पाएं</p></div>
-<div class="about-feature">🔒<h4>सुरक्षित और निजी</h4><p>आपकी गोपनीयता हमारी प्राथमिकता</p></div>
-<div class="about-feature">📱<h4>सभी डिवाइस पर</h4><p>फोन, टैबलेट या कंप्यूटर पर काम करें</p></div>
+
+<div class="about-feature">
+🌍
+<h4>Hindi & English</h4>
+<p>Work in the language you prefer</p>
+</div>
+
+<div class="about-feature">
+⚡
+<h4>Fast & Easy</h4>
+<p>Get results in seconds</p>
+</div>
+
+<div class="about-feature">
+🔒
+<h4>Safe & Private</h4>
+<p>Your privacy is our priority</p>
+</div>
+
+<div class="about-feature">
+📱
+<h4>All Devices</h4>
+<p>Use it on phone, tablet or computer</p>
+</div>
+
 </div>
 </div>
 </section>
 
 <!-- ===== CONTACT ===== -->
 <section id="contact" class="contact-section">
+
 <div class="section-header">
-<h2>संपर्क करें</h2>
-<p>समस्या, सुझाव या business enquiry के लिए email करें।</p>
+<h2>Contact Us</h2>
+<p>Email us for problems, suggestions or business enquiries.</p>
 </div>
 
 <div class="contact-container">
+
 <div class="contact-info">
-<h3>हमसे संपर्क करें</h3>
+
+<h3>Get in Touch</h3>
+
 <p>📧 <a href="mailto:Sabrojalam8454@gmail.com">Sabrojalam8454@gmail.com</a></p>
-<p>💬 समस्या या सुझाव के लिए email करें।</p>
+
+<p>💬 Email us for any problem or suggestion.</p>
+
 </div>
 
 <form class="contact-form" onsubmit="handleContactForm(event)">
-<div class="form-group"><label>नाम</label><input type="text" id="contactName" required></div>
-<div class="form-group"><label>Email</label><input type="email" id="contactEmail" required></div>
-<div class="form-group"><label>संदेश</label><textarea id="contactMessage" rows="5" required></textarea></div>
-<button type="submit" class="submit-button">📧 संदेश भेजें</button>
+
+<div class="form-group">
+<label>Name</label>
+<input type="text" id="contactName" required>
+</div>
+
+<div class="form-group">
+<label>Email</label>
+<input type="email" id="contactEmail" required>
+</div>
+
+<div class="form-group">
+<label>Message</label>
+<textarea id="contactMessage" rows="5" required></textarea>
+</div>
+
+<button type="submit" class="submit-button">📧 Send Message</button>
+
 </form>
+
 </div>
 </section>
 
 <!-- ===== PRIVACY ===== -->
 <section id="privacy" class="policy-section">
-<div class="section-header"><h2>गोपनीयता नीति</h2></div>
+
+<div class="section-header">
+<h2>Privacy Policy</h2>
+</div>
+
 <div class="policy-content">
-<h3>आपकी गोपनीयता हमारी जिम्मेदारी</h3>
-<p>Bolo AI केवल आवश्यक जानकारी एकत्र करता है। आपके input, email और उपयोग डेटा को सुरक्षित रखा जाता है।</p>
-<p>कृपया संवेदनशील जानकारी जैसे password, bank details या Aadhaar number Bolo AI में न डालें।</p>
-<p>गोपनीयता से संबंधित सवाल के लिए <a href="mailto:Sabrojalam8454@gmail.com">Sabrojalam8454@gmail.com</a> पर email करें।</p>
+
+<h3>Your Privacy Is Our Responsibility</h3>
+
+<p>Bolo AI collects only the information necessary to provide its services. Your input, email and usage data are kept secure.</p>
+
+<p>Please do not enter sensitive information such as passwords, bank details or Aadhaar numbers into Bolo AI.</p>
+
+<p>For privacy-related questions, email <a href="mailto:Sabrojalam8454@gmail.com">Sabrojalam8454@gmail.com</a>.</p>
+
 </div>
 </section>
 
 <!-- ===== TERMS ===== -->
 <section id="terms" class="policy-section">
-<div class="section-header"><h2>Terms & Conditions</h2></div>
+
+<div class="section-header">
+<h2>Terms & Conditions</h2>
+</div>
+
 <div class="policy-content">
-<h3>Bolo AI का उपयोग करके आप इन शर्तों से सहमत हैं</h3>
-<p>Bolo AI एक AI-based assistant है। उत्पन्न सामग्री की जांच करना आपकी जिम्मेदारी है।</p>
-<p>अवैध content, धमकी, privacy violation या system damage के लिए सेवा का उपयोग न करें।</p>
-<p>किसी भी प्रश्न के लिए <a href="mailto:Sabrojalam8454@gmail.com">Sabrojalam8454@gmail.com</a> पर email करें।</p>
+
+<h3>By using Bolo AI, you agree to these terms</h3>
+
+<p>Bolo AI is an AI-based assistant. You are responsible for reviewing and verifying generated content.</p>
+
+<p>Do not use the service for illegal content, threats, privacy violations or system damage.</p>
+
+<p>For any questions, email <a href="mailto:Sabrojalam8454@gmail.com">Sabrojalam8454@gmail.com</a>.</p>
+
 </div>
 </section>
 
 <!-- ===== FOOTER ===== -->
 <footer class="footer">
+
 <div class="footer-container">
+
 <div class="footer-content">
+
 <div class="footer-section">
+
 <h4>Bolo AI</h4>
-<p>आपका स्मार्ट AI साथी</p>
-<p>बस बोलो, Bolo AI कर देगा!</p>
+
+<p>Your Smart AI Companion</p>
+<p>Just Say It, Bolo AI Will Do It!</p>
+
 </div>
+
 <div class="footer-section">
+
 <h4>Links</h4>
+
 <a href="#home">Home</a>
 <a href="#tools">AI Tools</a>
 <a href="#premium">Premium</a>
 <a href="#about">About</a>
 <a href="#contact">Contact</a>
+
 </div>
+
 <div class="footer-section">
-<h4>नीतियां</h4>
+
+<h4>Policies</h4>
+
 <a href="#privacy">Privacy Policy</a>
 <a href="#terms">Terms & Conditions</a>
+
 </div>
+
 </div>
+
 <div class="footer-bottom">
-<p>&copy; 2026 Bolo AI. सर्वाधिकार सुरक्षित।</p>
+
+<p>&copy; 2026 Bolo AI. All Rights Reserved.</p>
 <p>Made with ❤️ for India | Bolo AI</p>
+
 </div>
 </div>
 </footer>
@@ -509,88 +651,194 @@ document.addEventListener("DOMContentLoaded",function(){
 
 const $=id=>document.getElementById(id);
 
-const moreBtn=$("moreBtn"),dropdown=$("moreDropdown");
-const loginBtn=$("loginBtn"),signupBtn=$("signupBtn"),menuLogin=$("menuLoginBtn");
-const loginModal=$("loginModal"),signupModal=$("signupModal");
-const closeLogin=$("closeLoginBtn"),closeSignup=$("closeSignupBtn");
-const switchSignup=$("switchToSignup"),switchLogin=$("switchToLogin");
+const moreBtn=$("moreBtn"),
+dropdown=$("moreDropdown");
+
+const loginBtn=$("loginBtn"),
+signupBtn=$("signupBtn"),
+menuLogin=$("menuLoginBtn");
+
+const loginModal=$("loginModal"),
+signupModal=$("signupModal");
+
+const closeLogin=$("closeLoginBtn"),
+closeSignup=$("closeSignupBtn");
+
+const switchSignup=$("switchToSignup"),
+switchLogin=$("switchToLogin");
 
 function closeAll(){
- if(loginModal){loginModal.classList.remove("show");loginModal.setAttribute("aria-hidden","true")}
- if(signupModal){signupModal.classList.remove("show");signupModal.setAttribute("aria-hidden","true")}
+
+if(loginModal){
+loginModal.classList.remove("show");
+loginModal.setAttribute("aria-hidden","true");
+}
+
+if(signupModal){
+signupModal.classList.remove("show");
+signupModal.setAttribute("aria-hidden","true");
+}
+
 }
 
 function openLogin(){
- closeAll();
- if(loginModal){loginModal.classList.add("show");loginModal.setAttribute("aria-hidden","false")}
- if(dropdown)dropdown.classList.remove("show");
+
+closeAll();
+
+if(loginModal){
+loginModal.classList.add("show");
+loginModal.setAttribute("aria-hidden","false");
+}
+
+if(dropdown){
+dropdown.classList.remove("show");
+}
+
 }
 
 function openSignup(){
- closeAll();
- if(signupModal){signupModal.classList.add("show");signupModal.setAttribute("aria-hidden","false")}
- if(dropdown)dropdown.classList.remove("show");
+
+closeAll();
+
+if(signupModal){
+signupModal.classList.add("show");
+signupModal.setAttribute("aria-hidden","false");
 }
 
-if(moreBtn)moreBtn.addEventListener("click",function(e){
- e.stopPropagation();
- dropdown.classList.toggle("show");
-});
+if(dropdown){
+dropdown.classList.remove("show");
+}
 
-if(dropdown)dropdown.addEventListener("click",e=>e.stopPropagation());
-document.addEventListener("click",()=>dropdown&&dropdown.classList.remove("show"));
+}
+
+if(moreBtn){
+moreBtn.addEventListener("click",function(e){
+e.stopPropagation();
+dropdown.classList.toggle("show");
+});
+}
+
+if(dropdown){
+dropdown.addEventListener("click",e=>e.stopPropagation());
+}
+
+document.addEventListener("click",()=>{
+if(dropdown){
+dropdown.classList.remove("show");
+}
+});
 
 if(loginBtn)loginBtn.addEventListener("click",openLogin);
 if(signupBtn)signupBtn.addEventListener("click",openSignup);
 if(menuLogin)menuLogin.addEventListener("click",openLogin);
+
 if(closeLogin)closeLogin.addEventListener("click",closeAll);
 if(closeSignup)closeSignup.addEventListener("click",closeAll);
+
 if(switchSignup)switchSignup.addEventListener("click",openSignup);
 if(switchLogin)switchLogin.addEventListener("click",openLogin);
 
-if(loginModal)loginModal.addEventListener("click",e=>{if(e.target===loginModal)closeAll()});
-if(signupModal)signupModal.addEventListener("click",e=>{if(e.target===signupModal)closeAll()});
-
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeAll()});
-
-const hamburger=$("hamburger"),navMenu=$("navMenu");
-if(hamburger&&navMenu){
- hamburger.addEventListener("click",()=>navMenu.classList.toggle("active"));
- navMenu.querySelectorAll(".nav-link").forEach(a=>a.addEventListener("click",()=>navMenu.classList.remove("active")));
+if(loginModal){
+loginModal.addEventListener("click",e=>{
+if(e.target===loginModal)closeAll();
+});
 }
 
-/* Temporary frontend login/signup handling */
-const signupForm=$("signupForm"),loginForm=$("loginForm");
+if(signupModal){
+signupModal.addEventListener("click",e=>{
+if(e.target===signupModal)closeAll();
+});
+}
 
-if(signupForm)signupForm.addEventListener("submit",function(e){
- e.preventDefault();
- const p=$("signupPassword").value;
- const cp=$("signupConfirmPassword").value;
- if(p!==cp){alert("Password match नहीं कर रहा है।");return}
- localStorage.setItem("boloUser",JSON.stringify({
-   name:$("signupName").value,
-   email:$("signupEmail").value,
-   password:p
- }));
- alert("Account बन गया! अब Login करें।");
- openLogin();
+document.addEventListener("keydown",e=>{
+if(e.key==="Escape")closeAll();
 });
 
-if(loginForm)loginForm.addEventListener("submit",function(e){
- e.preventDefault();
- const user=JSON.parse(localStorage.getItem("boloUser")||"null");
- if(!user){alert("पहले Sign Up करें।");return}
- if($("loginEmail").value===user.email&&$("loginPassword").value===user.password){
-   localStorage.setItem("boloLoggedIn","true");
-   closeAll();
-   alert("Login successful! स्वागत है "+user.name);
- }else{
-   alert("Email या Password गलत है।");
- }
+const hamburger=$("hamburger"),
+navMenu=$("navMenu");
+
+if(hamburger&&navMenu){
+
+hamburger.addEventListener("click",()=>{
+navMenu.classList.toggle("active");
 });
+
+navMenu.querySelectorAll(".nav-link").forEach(a=>{
+a.addEventListener("click",()=>{
+navMenu.classList.remove("active");
+});
+});
+
+}
+
+/* ===== TEMPORARY FRONTEND LOGIN/SIGNUP ===== */
+
+const signupForm=$("signupForm"),
+loginForm=$("loginForm");
+
+if(signupForm){
+
+signupForm.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+const p=$("signupPassword").value;
+const cp=$("signupConfirmPassword").value;
+
+if(p!==cp){
+alert("Passwords do not match.");
+return;
+}
+
+localStorage.setItem("boloUser",JSON.stringify({
+name:$("signupName").value,
+email:$("signupEmail").value,
+password:p
+}));
+
+alert("Account created! Please log in.");
+openLogin();
+
+});
+
+}
+
+if(loginForm){
+
+loginForm.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+const user=JSON.parse(localStorage.getItem("boloUser")||"null");
+
+if(!user){
+alert("Please sign up first.");
+return;
+}
+
+if(
+$("loginEmail").value===user.email &&
+$("loginPassword").value===user.password
+){
+
+localStorage.setItem("boloLoggedIn","true");
+
+closeAll();
+
+alert("Login successful! Welcome, "+user.name);
+
+}else{
+
+alert("Incorrect email or password.");
+
+}
+
+});
+
+}
 
 });
 </script>
 
 </body>
-    </html>
+</html>
