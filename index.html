@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,31 +12,130 @@ a{text-decoration:none;color:inherit}
 button,input,textarea{font:inherit}
 .navbar{position:sticky;top:0;z-index:1000;background:#fff;border-bottom:1px solid #eee}
 .nav-inner{max-width:1200px;margin:auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.logo{font-size:25px;font-weight:800;color:#111}.logo span{color:#6c4df6}
-.nav-links{display:flex;gap:22px;align-items:center}.nav-links a:hover,.footer-links a:hover{color:#6c4df6}
-.nav-actions{display:flex;gap:8px;align-items:center}.nav-btn,.menu-btn{border:1px solid #ddd;background:#fff;padding:9px 15px;border-radius:10px;cursor:pointer;font-weight:600}.nav-btn.primary{background:#6c4df6;color:#fff;border-color:#6c4df6}.menu-btn{font-size:20px;padding:7px 11px}
-.side-menu{position:fixed;top:0;right:-310px;width:290px;height:100vh;background:#fff;z-index:2000;padding:22px;box-shadow:-5px 0 20px #0002;transition:.3s}.side-menu.show{right:0}.side-menu-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}.close-menu,.modal-close{border:0;background:none;font-size:28px;cursor:pointer}.side-menu a{display:block;padding:13px 5px;border-bottom:1px solid #eee}.side-login{margin-top:20px;width:100%}.menu-overlay{display:none;position:fixed;inset:0;background:#0007;z-index:1500}.menu-overlay.show{display:block}
-.hero{padding:75px 20px 55px;background:linear-gradient(135deg,#f2efff,#fff);text-align:center}.hero-content{max-width:900px;margin:auto}.hero-badge{display:inline-block;background:#e9e3ff;color:#5c40d9;padding:8px 14px;border-radius:30px;font-weight:700;margin-bottom:18px}.hero h1{font-size:48px;line-height:1.12;margin-bottom:18px}.hero h1 span{color:#6c4df6}.hero p{max-width:700px;margin:auto;color:#666;font-size:18px}
-.chat-area{max-width:900px;margin:-10px auto 60px;padding:0 20px}.chat-box{background:#fff;border:1px solid #e5e5e5;border-radius:18px;min-height:270px;padding:18px;box-shadow:0 10px 35px #0000000b}.chat-message{max-width:80%;padding:12px 15px;border-radius:14px;margin:9px 0;white-space:pre-wrap}.chat-message.user{margin-left:auto;background:#6c4df6;color:#fff}.chat-message.ai{background:#f0f1f5}.input-section{display:flex;gap:8px;margin-top:14px}.input-section textarea{flex:1;resize:none;border:1px solid #ddd;border-radius:13px;padding:13px;min-height:52px;outline:none}.icon-btn,.send-btn{width:52px;border:0;border-radius:13px;cursor:pointer}.icon-btn{background:#eee}.send-btn{background:#6c4df6;color:#fff;font-size:20px}
-.quick-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}.quick-btn{border:1px solid #ddd;background:#fff;border-radius:10px;padding:9px 13px;cursor:pointer}.quick-btn:hover{border-color:#6c4df6;color:#6c4df6}
-section:not(.hero){padding:65px 20px}.section-header{text-align:center;max-width:700px;margin:0 auto 35px}.section-header h2{font-size:34px;margin-bottom:8px}.section-header p{color:#666}
-.tools-grid{max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.tool-card{background:#fff;border:1px solid #eee;border-radius:16px;padding:23px;box-shadow:0 5px 20px #00000008}.tool-icon{font-size:32px;margin-bottom:12px}.tool-card h3{margin-bottom:7px}.tool-card p{color:#666;margin-bottom:15px}.tool-btn{border:0;background:#6c4df6;color:#fff;padding:9px 14px;border-radius:9px;cursor:pointer}
-.premium-section{background:#f0edff}.premium-container{max-width:1050px;margin:auto}.premium-notice{background:#fff4d8;border-radius:12px;padding:12px 16px;text-align:center;margin-bottom:25px}.notice-badge{font-weight:700}.pricing-cards{display:flex;justify-content:center;gap:22px;flex-wrap:wrap}.pricing-card{background:#fff;border:1px solid #ddd;border-radius:18px;padding:28px;width:340px;position:relative}.featured-plan{border:2px solid #6c4df6}.plan-badge{position:absolute;right:15px;top:15px;background:#6c4df6;color:#fff;padding:5px 9px;border-radius:20px;font-size:12px}.plan-name{font-size:22px;font-weight:700}.plan-price{margin:15px 0;font-size:20px}.plan-price strong{font-size:38px}.discount{display:inline-block;background:#e4f8e8;color:#218838;padding:4px 8px;border-radius:7px;font-size:12px}.plan-features{list-style:none;margin:20px 0}.plan-features li{padding:7px 0;border-bottom:1px solid #eee}.plan-button{width:100%;padding:12px;border:0;border-radius:10px;background:#6c4df6;color:#fff;cursor:pointer}
-.about-box,.contact-box{max-width:850px;margin:auto;background:#fff;padding:28px;border:1px solid #eee;border-radius:16px}.about-box p{margin-bottom:12px;color:#555}.contact-form{display:grid;gap:12px}.contact-form input,.contact-form textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;outline:none}.contact-form textarea{min-height:130px}.contact-form button{padding:12px;border:0;border-radius:10px;background:#6c4df6;color:#fff;cursor:pointer}
-footer{background:#111;color:#ddd;text-align:center;padding:35px 20px}.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:18px;margin-bottom:15px}
-.modal{display:none;position:fixed;inset:0;background:#0008;z-index:3000;align-items:center;justify-content:center;padding:20px}.modal.show{display:flex}.modal-box{background:#fff;width:min(430px,100%);padding:27px;border-radius:18px;position:relative}.modal-close{position:absolute;right:15px;top:10px}.modal-box h2{margin-bottom:18px}.auth-form{display:grid;gap:12px}.auth-form input{padding:12px;border:1px solid #ddd;border-radius:10px}.auth-form button{padding:12px;border:0;border-radius:10px;background:#6c4df6;color:#fff;cursor:pointer}
-.thumbnail-form{display:grid;gap:10px}.thumbnail-form input{padding:11px;border:1px solid #ddd;border-radius:9px}.thumbnail-canvas{height:230px;border-radius:12px;margin-top:15px;background:#222;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;color:#fff}.thumbnail-main-text{font-size:29px;font-weight:800}.thumbnail-sub-text{font-size:15px;margin-top:8px}.thumb-buttons{display:flex;gap:8px;margin-top:12px}.thumb-buttons button{flex:1;padding:11px;border:0;border-radius:9px;background:#6c4df6;color:#fff;cursor:pointer}
-@media(max-width:850px){.nav-links{display:none}.tools-grid{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:38px}}
-@media(max-width:550px){.nav-inner{padding:12px}.nav-actions .nav-btn{display:none}.hero{padding:55px 15px}.hero h1{font-size:32px}.hero p{font-size:16px}.tools-grid{grid-template-columns:1fr}.chat-message{max-width:92%}.input-section{flex-wrap:wrap}.input-section textarea{width:100%;flex-basis:100%}.icon-btn,.send-btn{height:48px}.pricing-card{width:100%}}
+.logo{font-size:25px;font-weight:800}.logo span{color:#6c4df6}
+.nav-links{display:flex;gap:22px;align-items:center}
+.nav-links a:hover,.footer-links a:hover{color:#6c4df6}
+.nav-actions{display:flex;gap:8px;align-items:center}
+.nav-btn,.menu-btn{border:1px solid #ddd;background:#fff;padding:9px 15px;border-radius:10px;cursor:pointer;font-weight:600}
+.nav-btn.primary{background:#6c4df6;color:#fff;border-color:#6c4df6}
+.menu-btn{font-size:20px;padding:7px 11px}
+.side-menu{position:fixed;top:0;right:-310px;width:290px;height:100vh;background:#fff;z-index:2000;padding:22px;box-shadow:-5px 0 20px #0002;transition:.3s}
+.side-menu.show{right:0}
+.side-menu-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}
+.close-menu,.modal-close{border:0;background:none;font-size:28px;cursor:pointer}
+.side-menu a{display:block;padding:13px 5px;border-bottom:1px solid #eee}
+.side-login{margin-top:20px;width:100%}
+.menu-overlay{display:none;position:fixed;inset:0;background:#0007;z-index:1500}
+.menu-overlay.show{display:block}
+
+.hero{padding:75px 20px 55px;background:linear-gradient(135deg,#f2efff,#fff);text-align:center}
+.hero-content{max-width:900px;margin:auto}
+.hero-badge{display:inline-block;background:#e9e3ff;color:#5c40d9;padding:8px 14px;border-radius:30px;font-weight:700;margin-bottom:18px}
+.hero h1{font-size:48px;line-height:1.12;margin-bottom:18px}
+.hero h1 span{color:#6c4df6}
+.hero p{max-width:700px;margin:auto;color:#666;font-size:18px}
+
+.chat-area{max-width:900px;margin:-10px auto 60px;padding:0 20px}
+.chat-box{background:#fff;border:1px solid #e5e5e5;border-radius:18px;min-height:270px;padding:18px;box-shadow:0 10px 35px #0000000b;overflow-y:auto}
+.chat-message{max-width:80%;padding:12px 15px;border-radius:14px;margin:9px 0;white-space:pre-wrap}
+.chat-message.user{margin-left:auto;background:#6c4df6;color:#fff}
+.chat-message.ai{background:#f0f1f5}
+.input-section{display:flex;gap:8px;margin-top:14px}
+.input-section textarea{flex:1;resize:none;border:1px solid #ddd;border-radius:13px;padding:13px;min-height:52px;outline:none}
+.icon-btn,.send-btn{height:52px;border:0;border-radius:13px;cursor:pointer;font-weight:700;padding:0 18px}
+.icon-btn{background:#eee;color:#222}
+.send-btn{background:#6c4df6;color:#fff;min-width:85px}
+.icon-btn:hover{background:#ddd}
+.send-btn:hover{background:#5738d7}
+.quick-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.quick-btn{border:1px solid #ddd;background:#fff;border-radius:10px;padding:9px 13px;cursor:pointer}
+.quick-btn:hover{border-color:#6c4df6;color:#6c4df6}
+
+section:not(.hero){padding:65px 20px}
+.section-header{text-align:center;max-width:700px;margin:0 auto 35px}
+.section-header h2{font-size:34px;margin-bottom:8px}
+.section-header p{color:#666}
+.tools-grid{max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.tool-card{background:#fff;border:1px solid #eee;border-radius:16px;padding:23px;box-shadow:0 5px 20px #00000008}
+.tool-icon{font-size:32px;margin-bottom:12px}
+.tool-card h3{margin-bottom:7px}
+.tool-card p{color:#666;margin-bottom:15px}
+.tool-btn{border:0;background:#6c4df6;color:#fff;padding:9px 14px;border-radius:9px;cursor:pointer}
+
+.premium-section{background:#f0edff}
+.premium-container{max-width:1050px;margin:auto}
+.premium-notice{background:#fff4d8;border-radius:12px;padding:12px 16px;text-align:center;margin-bottom:25px}
+.notice-badge{font-weight:700}
+.pricing-cards{display:flex;justify-content:center;gap:22px;flex-wrap:wrap}
+.pricing-card{background:#fff;border:1px solid #ddd;border-radius:18px;padding:28px;width:340px;position:relative}
+.featured-plan{border:2px solid #6c4df6}
+.plan-badge{position:absolute;right:15px;top:15px;background:#6c4df6;color:#fff;padding:5px 9px;border-radius:20px;font-size:12px}
+.plan-name{font-size:22px;font-weight:700}
+.plan-price{margin:15px 0;font-size:20px}
+.plan-price strong{font-size:38px}
+.plan-features{list-style:none;margin:20px 0}
+.plan-features li{padding:7px 0;border-bottom:1px solid #eee}
+.plan-button{width:100%;padding:12px;border:0;border-radius:10px;background:#6c4df6;color:#fff;cursor:pointer}
+
+.about-box,.contact-box{max-width:850px;margin:auto;background:#fff;padding:28px;border:1px solid #eee;border-radius:16px}
+.about-box p{margin-bottom:12px;color:#555}
+.contact-form{display:grid;gap:12px}
+.contact-form input,.contact-form textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;outline:none}
+.contact-form textarea{min-height:130px}
+.contact-form button{padding:12px;border:0;border-radius:10px;background:#6c4df6;color:#fff;cursor:pointer}
+
+footer{background:#111;color:#ddd;text-align:center;padding:35px 20px}
+.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:18px;margin-bottom:15px}
+
+.modal{display:none;position:fixed;inset:0;background:#0008;z-index:3000;align-items:center;justify-content:center;padding:20px}
+.modal.show{display:flex}
+.modal-box{background:#fff;width:min(430px,100%);padding:27px;border-radius:18px;position:relative}
+.modal-close{position:absolute;right:15px;top:10px}
+.modal-box h2{margin-bottom:18px}
+.auth-form{display:grid;gap:12px}
+.auth-form input{padding:12px;border:1px solid #ddd;border-radius:10px}
+.auth-form button{padding:12px;border:0;border-radius:10px;background:#6c4df6;color:#fff;cursor:pointer}
+
+.thumbnail-form{display:grid;gap:10px}
+.thumbnail-form input{padding:11px;border:1px solid #ddd;border-radius:9px}
+.thumbnail-canvas{height:230px;border-radius:12px;margin-top:15px;background:#222;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;color:#fff}
+.thumbnail-main-text{font-size:29px;font-weight:800}
+.thumbnail-sub-text{font-size:15px;margin-top:8px}
+.thumb-buttons{display:flex;gap:8px;margin-top:12px}
+.thumb-buttons button{flex:1;padding:11px;border:0;border-radius:9px;background:#6c4df6;color:#fff;cursor:pointer}
+
+@media(max-width:850px){
+.nav-links{display:none}
+.tools-grid{grid-template-columns:repeat(2,1fr)}
+.hero h1{font-size:38px}
+}
+@media(max-width:550px){
+.nav-inner{padding:12px}
+.nav-actions .nav-btn{display:none}
+.hero{padding:55px 15px}
+.hero h1{font-size:32px}
+.hero p{font-size:16px}
+.tools-grid{grid-template-columns:1fr}
+.chat-message{max-width:92%}
+.input-section{display:grid;grid-template-columns:1fr 1fr}
+.input-section textarea{grid-column:1/-1;width:100%}
+.icon-btn,.send-btn{width:100%;height:48px}
+.pricing-card{width:100%}
+}
 </style>
 </head>
+
 <body>
 
 <nav class="navbar">
 <div class="nav-inner">
 <a href="#home" class="logo">Bolo <span>AI</span></a>
 <div class="nav-links">
-<a href="#home">Home</a><a href="#tools">AI Tools</a><a href="#premium">Premium</a><a href="#about">About</a><a href="#contact">Contact</a>
+<a href="#home">Home</a>
+<a href="#tools">AI Tools</a>
+<a href="#premium">Premium</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
 </div>
 <div class="nav-actions">
 <button class="nav-btn" onclick="openLogin()">Login</button>
@@ -48,9 +146,17 @@ footer{background:#111;color:#ddd;text-align:center;padding:35px 20px}.footer-li
 </nav>
 
 <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+
 <aside class="side-menu" id="sideMenu">
-<div class="side-menu-header"><b>Bolo AI</b><button class="close-menu" onclick="closeMenu()">×</button></div>
-<a href="#home" onclick="closeMenu()">Home</a><a href="#tools" onclick="closeMenu()">AI Tools</a><a href="#premium" onclick="closeMenu()">Premium</a><a href="#about" onclick="closeMenu()">About</a><a href="#contact" onclick="closeMenu()">Contact</a>
+<div class="side-menu-header">
+<b>Bolo AI</b>
+<button class="close-menu" onclick="closeMenu()">×</button>
+</div>
+<a href="#home" onclick="closeMenu()">Home</a>
+<a href="#tools" onclick="closeMenu()">AI Tools</a>
+<a href="#premium" onclick="closeMenu()">Premium</a>
+<a href="#about" onclick="closeMenu()">About</a>
+<a href="#contact" onclick="closeMenu()">Contact</a>
 <button class="nav-btn side-login" onclick="closeMenu();openLogin()">Login</button>
 </aside>
 
@@ -63,14 +169,17 @@ footer{background:#111;color:#ddd;text-align:center;padding:35px 20px}.footer-li
 </section>
 
 <div class="chat-area">
+
 <div class="chat-box" id="chatBox">
 <div class="chat-message ai">👋 Hello! I'm Bolo AI. Login करके मुझसे Chat शुरू करें.</div>
 </div>
+
 <div class="input-section">
 <textarea id="inputText" placeholder="Login करके अपना message लिखें..."></textarea>
-<button class="icon-btn" id="micBtn" title="Voice">🎙️</button>
-<button class="send-btn" id="sendBtn" title="Send">➤</button>
+<button type="button" class="icon-btn" id="micBtn">🎙️ Mic</button>
+<button type="button" class="send-btn" id="sendBtn">Send</button>
 </div>
+
 <div class="quick-actions">
 <button class="quick-btn" data-action="Write an application">📝 Application</button>
 <button class="quick-btn" data-action="Write a WhatsApp message">💬 WhatsApp</button>
@@ -80,38 +189,129 @@ footer{background:#111;color:#ddd;text-align:center;padding:35px 20px}.footer-li
 <button class="quick-btn" data-action="Create social media content">📱 Social Media</button>
 <button class="quick-btn" data-action="Help me create a thumbnail">🖼️ Thumbnail</button>
 </div>
+
 </div>
 
 <section id="tools">
-<div class="section-header"><h2>AI Tools</h2><p>Powerful AI tools to make your everyday work easier.</p></div>
+<div class="section-header">
+<h2>AI Tools</h2>
+<p>Powerful AI tools to make your everyday work easier.</p>
+</div>
+
 <div class="tools-grid">
-<div class="tool-card"><div class="tool-icon">✍️</div><h3>AI Writing</h3><p>Write applications, messages, captions and professional content.</p><button class="tool-btn" onclick="useTool('Help me write something professionally')">Use Tool</button></div>
-<div class="tool-card"><div class="tool-icon">🌐</div><h3>Translation</h3><p>Translate your text quickly between languages.</p><button class="tool-btn" onclick="useTool('Translate this text')">Use Tool</button></div>
-<div class="tool-card"><div class="tool-icon">▶️</div><h3>YouTube Assistant</h3><p>Get help with titles, descriptions, scripts and ideas.</p><button class="tool-btn" onclick="useTool('Help me with my YouTube video')">Use Tool</button></div>
-<div class="tool-card"><div class="tool-icon">📄</div><h3>Resume Maker</h3><p>Create professional resume content easily.</p><button class="tool-btn" onclick="useTool('Help me create a professional resume')">Use Tool</button></div>
-<div class="tool-card"><div class="tool-icon">🎙️</div><h3>Voice AI</h3><p>Speak naturally and let Bolo AI understand you.</p><button class="tool-btn" onclick="activateMicrophone()">Start Voice</button></div>
-<div class="tool-card"><div class="tool-icon">🖼️</div><h3>Thumbnail Generator</h3><p>Create a quick thumbnail preview for your video.</p><button class="tool-btn" onclick="openThumbnailGenerator()">Create</button></div>
+
+<div class="tool-card">
+<div class="tool-icon">✍️</div>
+<h3>AI Writing</h3>
+<p>Write applications, messages, captions and professional content.</p>
+<button class="tool-btn" onclick="useTool('Help me write something professionally')">Use Tool</button>
+</div>
+
+<div class="tool-card">
+<div class="tool-icon">🌐</div>
+<h3>Translation</h3>
+<p>Translate your text quickly between languages.</p>
+<button class="tool-btn" onclick="useTool('Translate this text')">Use Tool</button>
+</div>
+
+<div class="tool-card">
+<div class="tool-icon">▶️</div>
+<h3>YouTube Assistant</h3>
+<p>Get help with titles, descriptions, scripts and ideas.</p>
+<button class="tool-btn" onclick="useTool('Help me with my YouTube video')">Use Tool</button>
+</div>
+
+<div class="tool-card">
+<div class="tool-icon">📄</div>
+<h3>Resume Maker</h3>
+<p>Create professional resume content easily.</p>
+<button class="tool-btn" onclick="useTool('Help me create a professional resume')">Use Tool</button>
+</div>
+
+<div class="tool-card">
+<div class="tool-icon">🎙️</div>
+<h3>Voice AI</h3>
+<p>Speak naturally and let Bolo AI understand you.</p>
+<button class="tool-btn" onclick="activateMicrophone()">Start Voice</button>
+</div>
+
+<div class="tool-card">
+<div class="tool-icon">🖼️</div>
+<h3>Thumbnail Generator</h3>
+<p>Create a quick thumbnail preview for your video.</p>
+<button class="tool-btn" onclick="openThumbnailGenerator()">Create</button>
+</div>
+
 </div>
 </section>
 
 <section class="premium-section" id="premium">
 <div class="premium-container">
-<div class="section-header"><h2>Premium</h2><p>Unlock more powerful Bolo AI features.</p></div>
-<div class="premium-notice"><span class="notice-badge">🔥 50% OFF</span> Premium currently ₹149/month.</div>
+
+<div class="section-header">
+<h2>Premium</h2>
+<p>Unlock more powerful Bolo AI features.</p>
+</div>
+
+<div class="premium-notice">
+<span class="notice-badge">🔥 50% OFF</span>
+Premium currently ₹149/month.
+</div>
+
 <div class="pricing-cards">
-<div class="pricing-card"><div class="plan-name">Free</div><div class="plan-price"><strong>₹0</strong>/month</div><ul class="plan-features"><li>✓ Basic AI requests</li><li>✓ Basic AI writing</li><li>✓ Basic translation</li><li>✓ Basic tools</li></ul><button class="plan-button" onclick="requireLogin()">Current Plan</button></div>
-<div class="pricing-card featured-plan"><div class="plan-badge">50% OFF</div><div class="plan-name">Premium</div><div class="plan-price"><del>₹299</del> <strong>₹149</strong>/month</div><ul class="plan-features"><li>✓ More AI requests</li><li>✓ Advanced AI writing</li><li>✓ Advanced translation</li><li>✓ Voice AI</li><li>✓ Advanced Resume Maker</li><li>✓ Advanced YouTube tools</li><li>✓ More thumbnail generation</li><li>✓ PDF tools</li><li>✓ Ad-free experience</li><li>✓ Premium-only features</li></ul><button class="plan-button" onclick="handlePremiumClick()">Get Premium — ₹149/month</button></div>
+
+<div class="pricing-card">
+<div class="plan-name">Free</div>
+<div class="plan-price"><strong>₹0</strong>/month</div>
+<ul class="plan-features">
+<li>✓ Basic AI requests</li>
+<li>✓ Basic AI writing</li>
+<li>✓ Basic translation</li>
+<li>✓ Basic tools</li>
+</ul>
+<button class="plan-button" onclick="requireLogin()">Current Plan</button>
+</div>
+
+<div class="pricing-card featured-plan">
+<div class="plan-badge">50% OFF</div>
+<div class="plan-name">Premium</div>
+<div class="plan-price"><del>₹299</del> <strong>₹149</strong>/month</div>
+<ul class="plan-features">
+<li>✓ More AI requests</li>
+<li>✓ Advanced AI writing</li>
+<li>✓ Advanced translation</li>
+<li>✓ Voice AI</li>
+<li>✓ Advanced Resume Maker</li>
+<li>✓ Advanced YouTube tools</li>
+<li>✓ More thumbnail generation</li>
+<li>✓ PDF tools</li>
+<li>✓ Ad-free experience</li>
+<li>✓ Premium-only features</li>
+</ul>
+<button class="plan-button" onclick="handlePremiumClick()">Get Premium — ₹149/month</button>
+</div>
+
 </div>
 </div>
 </section>
 
 <section id="about">
-<div class="section-header"><h2>About Bolo AI</h2><p>Your simple AI assistant.</p></div>
-<div class="about-box"><p>Bolo AI is designed to help you write, translate, create content and use AI tools from one simple website.</p><p>Our goal is to make AI easy to use for everyone.</p></div>
+<div class="section-header">
+<h2>About Bolo AI</h2>
+<p>Your simple AI assistant.</p>
+</div>
+<div class="about-box">
+<p>Bolo AI is designed to help you write, translate, create content and use AI tools from one simple website.</p>
+<p>Our goal is to make AI easy to use for everyone.</p>
+</div>
 </section>
 
 <section id="contact">
-<div class="section-header"><h2>Contact</h2><p>Have a question? Send us a message.</p></div>
+<div class="section-header">
+<h2>Contact</h2>
+<p>Have a question? Send us a message.</p>
+</div>
+
 <div class="contact-box">
 <form class="contact-form" id="contactForm">
 <input id="contactName" placeholder="Your Name" required>
@@ -123,24 +323,56 @@ footer{background:#111;color:#ddd;text-align:center;padding:35px 20px}.footer-li
 </section>
 
 <footer>
-<div class="footer-links"><a href="#home">Home</a><a href="#tools">AI Tools</a><a href="#premium">Premium</a><a href="#about">About</a><a href="#contact">Contact</a><a href="#" onclick="alert('Privacy Policy coming soon.')">Privacy</a><a href="#" onclick="alert('Terms & Conditions coming soon.')">Terms</a></div>
+<div class="footer-links">
+<a href="#home">Home</a>
+<a href="#tools">AI Tools</a>
+<a href="#premium">Premium</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
+<a href="#" onclick="alert('Privacy Policy coming soon.')">Privacy</a>
+<a href="#" onclick="alert('Terms & Conditions coming soon.')">Terms</a>
+</div>
 <p>© 2026 Bolo AI. All rights reserved.</p>
 </footer>
 
 <div class="modal" id="loginModal">
-<div class="modal-box"><button class="modal-close" onclick="closeLogin()">×</button><h2>Login to Bolo AI</h2>
-<form class="auth-form" id="loginForm"><input id="loginEmail" type="email" placeholder="Email" required><input id="loginPassword" type="password" placeholder="Password" required><button type="submit">Login</button></form>
-<p style="margin-top:14px;text-align:center">Don't have an account? <a href="#" onclick="closeLogin();openSignup()" style="color:#6c4df6">Sign Up</a></p></div>
+<div class="modal-box">
+<button class="modal-close" onclick="closeLogin()">×</button>
+<h2>Login to Bolo AI</h2>
+<form class="auth-form" id="loginForm">
+<input id="loginEmail" type="email" placeholder="Email" required>
+<input id="loginPassword" type="password" placeholder="Password" required>
+<button type="submit">Login</button>
+</form>
+<p style="margin-top:14px;text-align:center">
+Don't have an account?
+<a href="#" onclick="closeLogin();openSignup()" style="color:#6c4df6">Sign Up</a>
+</p>
+</div>
 </div>
 
 <div class="modal" id="signupModal">
-<div class="modal-box"><button class="modal-close" onclick="closeSignup()">×</button><h2>Create Account</h2>
-<form class="auth-form" id="signupForm"><input id="signupName" placeholder="Name" required><input id="signupEmail" type="email" placeholder="Email" required><input id="signupPassword" type="password" placeholder="Password" required><button type="submit">Sign Up</button></form>
-<p style="margin-top:14px;text-align:center">Already have an account? <a href="#" onclick="closeSignup();openLogin()" style="color:#6c4df6">Login</a></p></div>
+<div class="modal-box">
+<button class="modal-close" onclick="closeSignup()">×</button>
+<h2>Create Account</h2>
+<form class="auth-form" id="signupForm">
+<input id="signupName" placeholder="Name" required>
+<input id="signupEmail" type="email" placeholder="Email" required>
+<input id="signupPassword" type="password" placeholder="Password" required>
+<button type="submit">Sign Up</button>
+</form>
+<p style="margin-top:14px;text-align:center">
+Already have an account?
+<a href="#" onclick="closeSignup();openLogin()" style="color:#6c4df6">Login</a>
+</p>
+</div>
 </div>
 
 <div class="modal" id="thumbnailModal">
-<div class="modal-box"><button class="modal-close" onclick="closeThumbnailGenerator()">×</button><h2>🖼️ Thumbnail Generator</h2>
+<div class="modal-box">
+<button class="modal-close" onclick="closeThumbnailGenerator()">×</button>
+<h2>🖼️ Thumbnail Generator</h2>
+
 <div class="thumbnail-form">
 <input id="thumbTitle" placeholder="Video Title">
 <input id="thumbChannel" placeholder="Channel Name">
@@ -148,8 +380,16 @@ footer{background:#111;color:#ddd;text-align:center;padding:35px 20px}.footer-li
 <input id="thumbColor" type="color" value="#6c4df6">
 <button class="tool-btn" onclick="generateThumbnail()">Generate Preview</button>
 </div>
-<div class="thumbnail-canvas" id="thumbnailCanvas"><div class="thumbnail-main-text" id="thumbnailMainText">YOUR TITLE</div><div class="thumbnail-sub-text" id="thumbnailSubText">Your Channel</div></div>
-<div class="thumb-buttons"><button onclick="downloadThumbnail()">Download</button><button onclick="closeThumbnailGenerator()">Close</button></div>
+
+<div class="thumbnail-canvas" id="thumbnailCanvas">
+<div class="thumbnail-main-text" id="thumbnailMainText">YOUR TITLE</div>
+<div class="thumbnail-sub-text" id="thumbnailSubText">Your Channel</div>
+</div>
+
+<div class="thumb-buttons">
+<button onclick="downloadThumbnail()">Download</button>
+<button onclick="closeThumbnailGenerator()">Close</button>
+</div>
 </div>
 </div>
 
@@ -158,6 +398,441 @@ const API_BASE_URL="https://bolo-ai-backend-cfft.onrender.com";
 const $=id=>document.getElementById(id);
 
 window.history.scrollRestoration="manual";
-window.addEventListener("load",()=>{if(location.hash)history.replaceState(null,"",location.pathname+location.search);window.scrollTo(0,0);setTimeout(()=>window.scrollTo(0,0),100)});
 
-function openMenu(){$("sideMenu").classList.add("show");$("menuOverlay").classList.add("show")}
+window.addEventListener("load",()=>{
+if(location.hash){
+history.replaceState(null,"",location.pathname+location.search);
+}
+window.scrollTo(0,0);
+setTimeout(()=>window.scrollTo(0,0),100);
+});
+
+function openMenu(){
+$("sideMenu").classList.add("show");
+$("menuOverlay").classList.add("show");
+}
+
+function closeMenu(){
+$("sideMenu").classList.remove("show");
+$("menuOverlay").classList.remove("show");
+}
+
+function openLogin(){
+$("loginModal").classList.add("show");
+}
+
+function closeLogin(){
+$("loginModal").classList.remove("show");
+}
+
+function openSignup(){
+$("signupModal").classList.add("show");
+}
+
+function closeSignup(){
+$("signupModal").classList.remove("show");
+}
+
+function isLoggedIn(){
+return localStorage.getItem("boloLoggedIn")==="true";
+}
+
+function requireLogin(){
+if(!isLoggedIn()){
+openLogin();
+return false;
+}
+return true;
+}
+
+$("signupForm").addEventListener("submit",function(e){
+e.preventDefault();
+
+const name=$("signupName").value.trim();
+const email=$("signupEmail").value.trim();
+const password=$("signupPassword").value;
+
+localStorage.setItem("boloUserName",name);
+localStorage.setItem("boloUserEmail",email);
+localStorage.setItem("boloUserPassword",password);
+localStorage.setItem("boloLoggedIn","true");
+
+closeSignup();
+
+alert("Account created successfully! You are now logged in.");
+});
+
+$("loginForm").addEventListener("submit",function(e){
+e.preventDefault();
+
+const email=$("loginEmail").value.trim();
+const password=$("loginPassword").value;
+
+if(
+email===localStorage.getItem("boloUserEmail") &&
+password===localStorage.getItem("boloUserPassword")
+){
+localStorage.setItem("boloLoggedIn","true");
+closeLogin();
+alert("Login successful! You can now use Bolo AI.");
+}else{
+alert("Email या password गलत है।");
+}
+});
+
+function addChatMessage(text,type){
+const d=document.createElement("div");
+d.className="chat-message "+type;
+d.textContent=text;
+$("chatBox").appendChild(d);
+$("chatBox").scrollTop=$("chatBox").scrollHeight;
+}
+
+async function send(){
+
+if(!requireLogin()){
+return;
+}
+
+const input=$("inputText");
+const text=input.value.trim();
+
+if(!text){
+return;
+}
+
+addChatMessage(text,"user");
+input.value="";
+
+try{
+
+const response=await fetch(API_BASE_URL+"/api/chat",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+message:text
+})
+});
+
+if(!response.ok){
+throw new Error("Server error");
+}
+
+const data=await response.json();
+
+const reply=data.reply||"मुझे कोई जवाब नहीं मिला।";
+
+addChatMessage(reply,"ai");
+
+speakText(reply);
+
+}catch(error){
+
+console.error(error);
+
+addChatMessage(
+"Server से connection नहीं हो पाया। थोड़ी देर बाद फिर कोशिश करें।",
+"ai"
+);
+
+}
+}
+
+$("sendBtn").addEventListener("click",function(){
+send();
+});
+
+$("inputText").addEventListener("keydown",function(e){
+
+if(e.key==="Enter"&&!e.shiftKey){
+
+e.preventDefault();
+
+send();
+
+}
+
+});
+
+let recognition=null;
+let isListening=false;
+
+function setupVoice(){
+
+const SpeechRecognition=
+window.SpeechRecognition||
+window.webkitSpeechRecognition;
+
+if(!SpeechRecognition){
+return null;
+}
+
+const r=new SpeechRecognition();
+
+r.lang="hi-IN";
+r.interimResults=false;
+r.continuous=false;
+
+r.onstart=function(){
+
+isListening=true;
+
+$("micBtn").textContent="🔴 Listening...";
+
+};
+
+r.onresult=function(event){
+
+const transcript=
+event.results[0][0].transcript;
+
+$("inputText").value=transcript;
+
+$("micBtn").textContent="🎙️ Mic";
+
+isListening=false;
+
+send();
+
+};
+
+r.onerror=function(event){
+
+console.error("Speech recognition error:",event.error);
+
+isListening=false;
+
+$("micBtn").textContent="🎙️ Mic";
+
+if(event.error==="not-allowed"){
+
+alert(
+"Microphone permission Allow करें और फिर Mic दबाएँ।"
+);
+
+}else{
+
+alert(
+"Microphone से आवाज़ समझने में समस्या हुई।"
+);
+
+}
+
+};
+
+r.onend=function(){
+
+isListening=false;
+
+$("micBtn").textContent="🎙️ Mic";
+
+};
+
+return r;
+}
+
+function activateMicrophone(){
+
+if(!requireLogin()){
+return;
+}
+
+if(!recognition){
+
+recognition=setupVoice();
+
+}
+
+if(!recognition){
+
+alert(
+"आपके browser में Voice AI supported नहीं है। Chrome browser में try करें।"
+);
+
+return;
+}
+
+if(isListening){
+return;
+}
+
+try{
+
+recognition.start();
+
+}catch(error){
+
+console.error(error);
+
+}
+
+}
+
+$("micBtn").addEventListener("click",function(){
+
+activateMicrophone();
+
+});
+
+function speakText(text){
+
+if(!("speechSynthesis" in window)){
+return;
+}
+
+speechSynthesis.cancel();
+
+const utterance=
+new SpeechSynthesisUtterance(text);
+
+utterance.lang="hi-IN";
+utterance.rate=.95;
+
+speechSynthesis.speak(utterance);
+
+}
+
+function useTool(text){
+
+if(!requireLogin()){
+return;
+}
+
+$("inputText").value=text;
+
+$("inputText").focus();
+
+window.scrollTo({
+top:$("chatBox").getBoundingClientRect().top+
+window.scrollY-120,
+behavior:"smooth"
+});
+
+}
+
+document.querySelectorAll(".quick-btn").forEach(function(button){
+
+button.addEventListener("click",function(){
+
+useTool(button.dataset.action);
+
+});
+
+});
+
+function handlePremiumClick(){
+
+if(!requireLogin()){
+return;
+}
+
+alert(
+"Premium payment system is being prepared. You will be able to purchase Premium soon."
+);
+
+}
+
+function openThumbnailGenerator(){
+
+if(!requireLogin()){
+return;
+}
+
+$("thumbnailModal").classList.add("show");
+
+}
+
+function closeThumbnailGenerator(){
+
+$("thumbnailModal").classList.remove("show");
+
+}
+
+function generateThumbnail(){
+
+const title=$("thumbTitle").value.trim();
+const channel=$("thumbChannel").value.trim();
+const text=$("thumbText").value.trim();
+const color=$("thumbColor").value;
+
+$("thumbnailCanvas").style.background=color;
+
+$("thumbnailMainText").textContent=
+text||title||"YOUR TITLE";
+
+$("thumbnailSubText").textContent=
+channel||"Your Channel";
+
+addChatMessage(
+"🖼️ Thumbnail preview तैयार है।",
+"ai"
+);
+
+}
+
+function downloadThumbnail(){
+
+alert(
+"Thumbnail download feature is coming in the next upgrade."
+);
+
+}
+
+$("contactForm").addEventListener("submit",function(e){
+
+e.preventDefault();
+
+const name=$("contactName").value.trim();
+const email=$("contactEmail").value.trim();
+const message=$("contactMessage").value.trim();
+
+const subject=encodeURIComponent(
+"Bolo AI Contact - "+name
+);
+
+const body=encodeURIComponent(
+"Name: "+name+
+"\nEmail: "+email+
+"\n\n"+message
+);
+
+location.href=
+"mailto:Sabrojalam8454@gmail.com?subject="+
+subject+
+"&body="+
+body;
+
+});
+
+document.querySelectorAll(".modal").forEach(function(modal){
+
+modal.addEventListener("click",function(e){
+
+if(e.target===modal){
+
+modal.classList.remove("show");
+
+}
+
+});
+
+});
+
+document.addEventListener("keydown",function(e){
+
+if(e.key==="Escape"){
+
+closeMenu();
+closeLogin();
+closeSignup();
+closeThumbnailGenerator();
+
+}
+
+});
+</script>
+
+</body>
+</html>
