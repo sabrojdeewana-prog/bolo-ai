@@ -1,68 +1,254 @@
 
 <!DOCTYPE html>
 <html lang="hi">
+
 <head>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Bolo AI - भारतीय उपयोगकर्ताओं के लिए AI असिस्टेंट प्लेटफॉर्म। बस बोलो, Bolo AI कर देगा!">
+
+    <meta
+        name="description"
+        content="Bolo AI - भारतीय उपयोगकर्ताओं के लिए AI असिस्टेंट प्लेटफॉर्म। बस बोलो, Bolo AI कर देगा!"
+    >
+
     <title>Bolo AI - बस बोलो, Bolo AI कर देगा!</title>
+
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* ==============================
+           THREE DOT MENU
+        ============================== */
+
+        .more-menu-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .more-button {
+            border: none;
+            background: transparent;
+            font-size: 30px;
+            line-height: 1;
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 10px;
+            color: inherit;
+        }
+
+        .more-button:hover {
+            background: rgba(0, 0, 0, 0.08);
+        }
+
+        .more-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 48px;
+            width: 210px;
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+            z-index: 9999;
+        }
+
+        .more-dropdown.show {
+            display: block;
+        }
+
+        .more-dropdown a {
+            display: block;
+            padding: 12px 14px;
+            color: #222;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+
+        .more-dropdown a:hover {
+            background: #f1f1f1;
+        }
+
+        /* Mobile menu */
+        @media (max-width: 768px) {
+
+            .more-menu-wrapper {
+                margin-left: 5px;
+            }
+
+            .more-button {
+                font-size: 28px;
+            }
+
+            .more-dropdown {
+                right: 0;
+                width: 190px;
+            }
+        }
+    </style>
 </head>
+
 
 <body>
 
-    <!-- Navigation -->
+    <!-- ==========================================
+         NAVIGATION
+    =========================================== -->
+
     <nav class="navbar">
+
         <div class="nav-container">
+
             <div class="nav-logo">
+
                 <span class="logo-icon">🎤</span>
-                <span class="logo-text">Bolo AI</span>
+
+                <span class="logo-text">
+                    Bolo AI
+                </span>
+
             </div>
+
 
             <div class="nav-menu" id="navMenu">
-                <a href="#home" class="nav-link">Home</a>
-                <a href="#tools" class="nav-link">AI Tools</a>
-                <a href="#premium" class="nav-link">Premium</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#contact" class="nav-link">Contact</a>
+
+                <a href="#home" class="nav-link">
+                    Home
+                </a>
+
+                <a href="#tools" class="nav-link">
+                    AI Tools
+                </a>
+
+                <a href="#premium" class="nav-link">
+                    Premium
+                </a>
+
+                <a href="#about" class="nav-link">
+                    About
+                </a>
+
+                <a href="#contact" class="nav-link">
+                    Contact
+                </a>
+
             </div>
 
-            <div class="hamburger" id="hamburger">
+
+            <!-- Hamburger -->
+
+            <div
+                class="hamburger"
+                id="hamburger"
+                aria-label="Menu"
+            >
+
                 <span></span>
                 <span></span>
                 <span></span>
+
             </div>
+
+
+            <!-- Three Dot Menu -->
+
+            <div class="more-menu-wrapper">
+
+                <button
+                    id="moreBtn"
+                    class="more-button"
+                    title="More"
+                    aria-label="More options"
+                >
+                    ⋮
+                </button>
+
+
+                <div
+                    id="moreDropdown"
+                    class="more-dropdown"
+                >
+
+                    <a href="#home">
+                        🏠 Home
+                    </a>
+
+                    <a href="#tools">
+                        🛠️ AI Tools
+                    </a>
+
+                    <a href="#premium">
+                        ⭐ Premium
+                    </a>
+
+                    <a href="#about">
+                        ℹ️ About
+                    </a>
+
+                    <a href="#contact">
+                        📧 Contact
+                    </a>
+
+                    <a href="#privacy">
+                        🔒 Privacy Policy
+                    </a>
+
+                    <a href="#terms">
+                        📄 Terms & Conditions
+                    </a>
+
+                </div>
+
+            </div>
+
         </div>
+
     </nav>
 
 
-    <!-- Hero Section -->
+    <!-- ==========================================
+         HERO SECTION
+    =========================================== -->
+
     <section id="home" class="hero">
 
         <div class="hero-content">
 
             <div class="hero-text">
-                <h1 class="hero-headline">बस बोलो, Bolo AI कर देगा!</h1>
+
+                <h1 class="hero-headline">
+                    बस बोलो, Bolo AI कर देगा!
+                </h1>
+
                 <p class="hero-description">
                     अपना काम लिखें या बोलें और AI की मदद से तुरंत तैयार करें।
                 </p>
+
             </div>
 
 
             <!-- Chat Area -->
-            <div id="chatBox" style="
-                width: 100%;
-                max-width: 900px;
-                height: 420px;
-                margin: 20px auto;
-                padding: 15px;
-                box-sizing: border-box;
-                overflow-y: auto;
-                border-radius: 18px;
-            "></div>
+
+            <div
+                id="chatBox"
+                style="
+                    width: 100%;
+                    max-width: 900px;
+                    height: 420px;
+                    margin: 20px auto;
+                    padding: 15px;
+                    box-sizing: border-box;
+                    overflow-y: auto;
+                    border-radius: 18px;
+                "
+            ></div>
 
 
             <!-- Input Section -->
+
             <div class="input-section">
 
                 <div class="input-wrapper">
@@ -73,6 +259,7 @@
                         placeholder="अपना काम यहाँ लिखें या बोलें..."
                     ></textarea>
 
+
                     <div class="input-actions">
 
                         <button
@@ -80,51 +267,89 @@
                             class="mic-button"
                             title="माइक्रोफोन"
                         >
-                            <span class="mic-icon">🎙️</span>
+                            <span class="mic-icon">
+                                🎙️
+                            </span>
                         </button>
+
 
                         <button
                             id="sendBtn"
                             class="send-button"
                         >
-                            <span>भेजें</span>
-                            <span class="send-icon">→</span>
+                            <span>
+                                भेजें
+                            </span>
+
+                            <span class="send-icon">
+                                →
+                            </span>
+
                         </button>
 
                     </div>
+
                 </div>
 
             </div>
 
 
             <!-- Quick Action Buttons -->
+
             <div class="quick-actions">
 
-                <button class="quick-btn" data-action="application">
+                <button
+                    class="quick-btn"
+                    data-action="application"
+                >
                     📝 Application लिखें
                 </button>
 
-                <button class="quick-btn" data-action="whatsapp">
+
+                <button
+                    class="quick-btn"
+                    data-action="whatsapp"
+                >
                     💬 WhatsApp Message
                 </button>
 
-                <button class="quick-btn" data-action="translate">
+
+                <button
+                    class="quick-btn"
+                    data-action="translate"
+                >
                     🌐 Translate
                 </button>
 
-                <button class="quick-btn" data-action="resume">
+
+                <button
+                    class="quick-btn"
+                    data-action="resume"
+                >
                     📄 Resume बनाएं
                 </button>
 
-                <button class="quick-btn" data-action="youtube">
+
+                <button
+                    class="quick-btn"
+                    data-action="youtube"
+                >
                     📺 YouTube Title
                 </button>
 
-                <button class="quick-btn" data-action="social">
+
+                <button
+                    class="quick-btn"
+                    data-action="social"
+                >
                     📱 Social Media
                 </button>
 
-                <button class="quick-btn" data-action="thumbnail">
+
+                <button
+                    class="quick-btn"
+                    data-action="thumbnail"
+                >
                     🎨 YouTube Thumbnail
                 </button>
 
@@ -135,34 +360,65 @@
     </section>
 
 
-    <!-- AI Tools Section -->
+    <!-- ==========================================
+         AI TOOLS SECTION
+    =========================================== -->
+
     <section id="tools" class="tools-section">
 
         <div class="section-header">
-            <h2>हमारे AI Tools</h2>
-            <p>अपनी जरूरत के हिसाब से सही टूल चुनें</p>
+
+            <h2>
+                हमारे AI Tools
+            </h2>
+
+            <p>
+                अपनी जरूरत के हिसाब से सही टूल चुनें
+            </p>
+
         </div>
 
 
         <div class="tools-grid">
 
+
             <!-- AI Writer -->
+
             <div class="tool-card">
 
-                <div class="tool-icon">✍️</div>
+                <div class="tool-icon">
+                    ✍️
+                </div>
 
-                <h3>AI Writer</h3>
+                <h3>
+                    AI Writer
+                </h3>
 
                 <p>
                     Applications, Letters, Messages और Captions लिखवाएं
                 </p>
 
+
                 <div class="tool-features">
-                    <span class="feature">📋 Applications</span>
-                    <span class="feature">💌 Letters</span>
-                    <span class="feature">💬 Messages</span>
-                    <span class="feature">✨ Captions</span>
+
+                    <span class="feature">
+                        📋 Applications
+                    </span>
+
+                    <span class="feature">
+                        💌 Letters
+                    </span>
+
+                    <span class="feature">
+                        💬 Messages
+                    </span>
+
+                    <span class="feature">
+                        ✨ Captions
+                    </span>
+
                 </div>
+
 
                 <button
                     class="tool-button"
@@ -175,21 +431,38 @@
 
 
             <!-- AI Translator -->
+
             <div class="tool-card">
 
-                <div class="tool-icon">🌐</div>
+                <div class="tool-icon">
+                    🌐
+                </div>
 
-                <h3>AI Translator</h3>
+                <h3>
+                    AI Translator
+                </h3>
 
                 <p>
                     Hindi, English और अन्य भाषाओं में अनुवाद करें
                 </p>
 
+
                 <div class="tool-features">
-                    <span class="feature">🇮🇳 Hindi to English</span>
-                    <span class="feature">🇬🇧 English to Hindi</span>
-                    <span class="feature">🗣️ 10+ Languages</span>
+
+                    <span class="feature">
+                        🇮🇳 Hindi to English
+                    </span>
+
+                    <span class="feature">
+                        🇬🇧 English to Hindi
+                    </span>
+
+                    <span class="feature">
+                        🗣️ 10+ Languages
+                    </span>
+
                 </div>
+
 
                 <button
                     class="tool-button"
@@ -202,21 +475,38 @@
 
 
             <!-- Resume Maker -->
+
             <div class="tool-card">
 
-                <div class="tool-icon">📄</div>
+                <div class="tool-icon">
+                    📄
+                </div>
 
-                <h3>AI Resume Maker</h3>
+                <h3>
+                    AI Resume Maker
+                </h3>
 
                 <p>
                     पेशेवर CV/Resume बनाएं AI की मदद से
                 </p>
 
+
                 <div class="tool-features">
-                    <span class="feature">🎯 Professional Templates</span>
-                    <span class="feature">⚡ Quick Generation</span>
-                    <span class="feature">📥 Download Ready</span>
+
+                    <span class="feature">
+                        🎯 Professional Templates
+                    </span>
+
+                    <span class="feature">
+                        ⚡ Quick Generation
+                    </span>
+
+                    <span class="feature">
+                        📥 Download Ready
+                    </span>
+
                 </div>
+
 
                 <button
                     class="tool-button"
@@ -229,22 +519,42 @@
 
 
             <!-- YouTube Tools -->
+
             <div class="tool-card">
 
-                <div class="tool-icon">📺</div>
+                <div class="tool-icon">
+                    📺
+                </div>
 
-                <h3>YouTube Tools</h3>
+                <h3>
+                    YouTube Tools
+                </h3>
 
                 <p>
                     Title, Description, Tags और Thumbnails बनाएं
                 </p>
 
+
                 <div class="tool-features">
-                    <span class="feature">🎬 Title Generator</span>
-                    <span class="feature">📝 Description</span>
-                    <span class="feature">🏷️ Tags & Hashtags</span>
-                    <span class="feature">🎨 Thumbnail</span>
+
+                    <span class="feature">
+                        🎬 Title Generator
+                    </span>
+
+                    <span class="feature">
+                        📝 Description
+                    </span>
+
+                    <span class="feature">
+                        🏷️ Tags & Hashtags
+                    </span>
+
+                    <span class="feature">
+                        🎨 Thumbnail
+                    </span>
+
                 </div>
+
 
                 <button
                     class="tool-button"
@@ -257,22 +567,42 @@
 
 
             <!-- Social Media -->
+
             <div class="tool-card">
 
-                <div class="tool-icon">📱</div>
+                <div class="tool-icon">
+                    📱
+                </div>
 
-                <h3>Social Media Tools</h3>
+                <h3>
+                    Social Media Tools
+                </h3>
 
                 <p>
                     Facebook, Instagram और Reels के लिए Captions बनाएं
                 </p>
 
+
                 <div class="tool-features">
-                    <span class="feature">📘 Facebook</span>
-                    <span class="feature">📷 Instagram</span>
-                    <span class="feature">🎥 Reels</span>
-                    <span class="feature">💡 Post Ideas</span>
+
+                    <span class="feature">
+                        📘 Facebook
+                    </span>
+
+                    <span class="feature">
+                        📷 Instagram
+                    </span>
+
+                    <span class="feature">
+                        🎥 Reels
+                    </span>
+
+                    <span class="feature">
+                        💡 Post Ideas
+                    </span>
+
                 </div>
+
 
                 <button
                     class="tool-button"
@@ -285,22 +615,42 @@
 
 
             <!-- Business Helper -->
+
             <div class="tool-card">
 
-                <div class="tool-icon">💼</div>
+                <div class="tool-icon">
+                    💼
+                </div>
 
-                <h3>Business Helper</h3>
+                <h3>
+                    Business Helper
+                </h3>
 
                 <p>
                     व्यापार के लिए नाम, विज्ञापन और विवरण बनाएं
                 </p>
 
+
                 <div class="tool-features">
-                    <span class="feature">🏢 Business Names</span>
-                    <span class="feature">🎯 Advertisements</span>
-                    <span class="feature">📦 Product Descriptions</span>
-                    <span class="feature">🔖 Promotions</span>
+
+                    <span class="feature">
+                        🏢 Business Names
+                    </span>
+
+                    <span class="feature">
+                        🎯 Advertisements
+                    </span>
+
+                    <span class="feature">
+                        📦 Product Descriptions
+                    </span>
+
+                    <span class="feature">
+                        🔖 Promotions
+                    </span>
+
                 </div>
+
 
                 <button
                     class="tool-button"
@@ -313,21 +663,38 @@
 
 
             <!-- Voice Assistant -->
+
             <div class="tool-card">
 
-                <div class="tool-icon">🎤</div>
+                <div class="tool-icon">
+                    🎤
+                </div>
 
-                <h3>Voice Assistant</h3>
+                <h3>
+                    Voice Assistant
+                </h3>
 
                 <p>
                     माइक्रोफोन से बोलें और तुरंत उत्तर पाएं
                 </p>
 
+
                 <div class="tool-features">
-                    <span class="feature">🎙️ Voice Input</span>
-                    <span class="feature">⚡ Instant Response</span>
-                    <span class="feature">🌍 Multi-language</span>
+
+                    <span class="feature">
+                        🎙️ Voice Input
+                    </span>
+
+                    <span class="feature">
+                        ⚡ Instant Response
+                    </span>
+
+                    <span class="feature">
+                        🌍 Multi-language
+                    </span>
+
                 </div>
+
 
                 <button
                     class="tool-button"
@@ -341,22 +708,42 @@
 
 
             <!-- Thumbnail Generator -->
+
             <div class="tool-card featured">
 
-                <div class="tool-icon">🎨</div>
+                <div class="tool-icon">
+                    🎨
+                </div>
 
-                <h3>YouTube Thumbnail Generator</h3>
+                <h3>
+                    YouTube Thumbnail Generator
+                </h3>
 
                 <p>
                     पेशेवर YouTube Thumbnails AI से बनवाएं
                 </p>
 
+
                 <div class="tool-features">
-                    <span class="feature">🖼️ 16:9 Format</span>
-                    <span class="feature">🎨 Templates</span>
-                    <span class="feature">⚙️ Customizable</span>
-                    <span class="feature">💾 Download</span>
+
+                    <span class="feature">
+                        🖼️ 16:9 Format
+                    </span>
+
+                    <span class="feature">
+                        🎨 Templates
+                    </span>
+
+                    <span class="feature">
+                        ⚙️ Customizable
+                    </span>
+
+                    <span class="feature">
+                        💾 Download
+                    </span>
+
                 </div>
+
 
                 <button
                     class="tool-button"
@@ -372,14 +759,24 @@
     </section>
 
 
-    <!-- YouTube Thumbnail Generator Modal -->
-    <div id="thumbnailModal" class="modal">
+    <!-- ==========================================
+         THUMBNAIL GENERATOR MODAL
+    =========================================== -->
+
+    <div
+        id="thumbnailModal"
+        class="modal"
+    >
 
         <div class="modal-content">
 
+
             <div class="modal-header">
 
-                <h2>YouTube Thumbnail Generator</h2>
+                <h2>
+                    YouTube Thumbnail Generator
+                </h2>
+
 
                 <button
                     class="modal-close"
@@ -395,12 +792,18 @@
 
                 <div class="generator-grid">
 
+
+                    <!-- Generator Input -->
+
                     <div class="generator-input">
 
-                        <h3>Thumbnail विवरण</h3>
+                        <h3>
+                            Thumbnail विवरण
+                        </h3>
 
 
                         <div class="form-group">
+
                             <label for="videoTitle">
                                 Video Title (शीर्षक)
                             </label>
@@ -411,6 +814,7 @@
                                 placeholder="आपका video का शीर्षक"
                                 maxlength="100"
                             >
+
                         </div>
 
 
@@ -518,14 +922,37 @@
 
                             <select id="backgroundColor">
 
-                                <option value="#FF4444">🔴 Red (लाल)</option>
-                                <option value="#4444FF">🔵 Blue (नीला)</option>
-                                <option value="#44FF44">🟢 Green (हरा)</option>
-                                <option value="#FFAA00">🟠 Orange (नारंगी)</option>
-                                <option value="#AA00FF">🟣 Purple (बैंगनी)</option>
-                                <option value="#FF00AA">🩷 Pink (गुलाबी)</option>
-                                <option value="#FFFF00">🟡 Yellow (पीला)</option>
-                                <option value="#333333">⚫ Dark (काला)</option>
+                                <option value="#FF4444">
+                                    🔴 Red (लाल)
+                                </option>
+
+                                <option value="#4444FF">
+                                    🔵 Blue (नीला)
+                                </option>
+
+                                <option value="#44FF44">
+                                    🟢 Green (हरा)
+                                </option>
+
+                                <option value="#FFAA00">
+                                    🟠 Orange (नारंगी)
+                                </option>
+
+                                <option value="#AA00FF">
+                                    🟣 Purple (बैंगनी)
+                                </option>
+
+                                <option value="#FF00AA">
+                                    🩷 Pink (गुलाबी)
+                                </option>
+
+                                <option value="#FFFF00">
+                                    🟡 Yellow (पीला)
+                                </option>
+
+                                <option value="#333333">
+                                    ⚫ Dark (काला)
+                                </option>
 
                             </select>
 
@@ -540,10 +967,21 @@
 
                             <select id="style">
 
-                                <option value="bold">🔥 Bold (गहरा)</option>
-                                <option value="modern">✨ Modern (आधुनिक)</option>
-                                <option value="minimal">⚪ Minimal (सरल)</option>
-                                <option value="vibrant">🌈 Vibrant (जीवंत)</option>
+                                <option value="bold">
+                                    🔥 Bold (गहरा)
+                                </option>
+
+                                <option value="modern">
+                                    ✨ Modern (आधुनिक)
+                                </option>
+
+                                <option value="minimal">
+                                    ⚪ Minimal (सरल)
+                                </option>
+
+                                <option value="vibrant">
+                                    🌈 Vibrant (जीवंत)
+                                </option>
 
                             </select>
 
@@ -561,9 +999,13 @@
 
 
                     <!-- Preview -->
+
                     <div class="generator-preview">
 
-                        <h3>Preview</h3>
+                        <h3>
+                            Preview
+                        </h3>
+
 
                         <div
                             id="thumbnailPreview"
@@ -573,7 +1015,14 @@
                             <div
                                 class="thumbnail-canvas"
                                 id="thumbnailCanvas"
-                                style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"
+                                style="
+                                    background:
+                                    linear-gradient(
+                                        135deg,
+                                        #667eea 0%,
+                                        #764ba2 100%
+                                    );
+                                "
                             >
 
                                 <div class="thumbnail-content">
@@ -592,9 +1041,11 @@
 
                         </div>
 
+
                         <p class="preview-info">
                             📐 16:9 YouTube Format
                         </p>
+
 
                         <button
                             class="download-btn"
@@ -614,12 +1065,20 @@
     </div>
 
 
-    <!-- Premium Section -->
-    <section id="premium" class="premium-section">
+    <!-- ==========================================
+         PREMIUM SECTION
+    =========================================== -->
+
+    <section
+        id="premium"
+        class="premium-section"
+    >
 
         <div class="section-header">
 
-            <h2>Bolo AI Premium</h2>
+            <h2>
+                Bolo AI Premium
+            </h2>
 
             <p>
                 अनलिमिटेड AI पावर के साथ बेहतर परिणाम पाएं
@@ -630,13 +1089,16 @@
 
         <div class="premium-container">
 
+
             <div class="premium-notice">
 
                 <span class="notice-badge">
                     ⏰ आने वाला है
                 </span>
 
-                <h3>Premium जल्द आ रहा है</h3>
+                <h3>
+                    Premium जल्द आ रहा है
+                </h3>
 
                 <p>
                     Bolo AI Premium की सभी शक्तिशाली सुविधाओं के लिए तैयार रहें!
@@ -647,7 +1109,9 @@
 
             <div class="pricing-cards">
 
+
                 <!-- Free Plan -->
+
                 <div class="pricing-card free">
 
                     <div class="plan-name">
@@ -658,18 +1122,43 @@
                         ₹0 / Month
                     </div>
 
+
                     <div class="plan-features">
 
-                        <div class="feature-item">✓ Limited AI requests</div>
-                        <div class="feature-item">✓ Basic AI writing</div>
-                        <div class="feature-item">✓ Basic translation</div>
-                        <div class="feature-item">✓ Basic YouTube tools</div>
-                        <div class="feature-item">✓ Limited thumbnail generation</div>
-                        <div class="feature-item">✗ Voice AI</div>
-                        <div class="feature-item">✗ Advanced tools</div>
-                        <div class="feature-item">✗ PDF tools</div>
+                        <div class="feature-item">
+                            ✓ Limited AI requests
+                        </div>
+
+                        <div class="feature-item">
+                            ✓ Basic AI writing
+                        </div>
+
+                        <div class="feature-item">
+                            ✓ Basic translation
+                        </div>
+
+                        <div class="feature-item">
+                            ✓ Basic YouTube tools
+                        </div>
+
+                        <div class="feature-item">
+                            ✓ Limited thumbnail generation
+                        </div>
+
+                        <div class="feature-item">
+                            ✗ Voice AI
+                        </div>
+
+                        <div class="feature-item">
+                            ✗ Advanced tools
+                        </div>
+
+                        <div class="feature-item">
+                            ✗ PDF tools
+                        </div>
 
                     </div>
+
 
                     <button class="plan-button">
                         अभी उपयोग करें
@@ -679,7 +1168,10 @@
 
 
                 <!-- Premium Plan -->
-                <div class="pricing-card premium featured-plan">
+
+                <div
+                    class="pricing-card premium featured-plan"
+                >
 
                     <div class="plan-badge">
                         ⭐ RECOMMENDED
@@ -688,6 +1180,7 @@
                     <div class="plan-name">
                         🌟 BOLO AI PREMIUM
                     </div>
+
 
                     <div class="plan-price">
 
@@ -717,16 +1210,45 @@
 
                     <div class="plan-features">
 
-                        <div class="feature-item">✓ अनलिमिटेड AI requests</div>
-                        <div class="feature-item">✓ Advanced AI writing</div>
-                        <div class="feature-item">✓ Advanced translation</div>
-                        <div class="feature-item">✓ Voice AI</div>
-                        <div class="feature-item">✓ Advanced Resume Maker</div>
-                        <div class="feature-item">✓ Advanced YouTube tools</div>
-                        <div class="feature-item">✓ Unlimited thumbnails</div>
-                        <div class="feature-item">✓ PDF tools</div>
-                        <div class="feature-item">✓ Ad-free experience</div>
-                        <div class="feature-item">✓ Priority processing</div>
+                        <div class="feature-item">
+                            ✓ अनलिमिटेड AI requests
+                        </div>
+
+                        <div class="feature-item">
+                            ✓ Advanced AI writing
+                        </div>
+
+                        <div class="feature-item">
+                            ✓ Advanced translation
+                        </div>
+
+                        <div class="feature-item">
+                            ✓ Voice AI
+                        </div>
+
+                        <div class="feature-item">
+                            ✓ Advanced Resume Maker
+                        </div>
+
+                        <div class="feature-item">
+                            ✓ Advanced YouTube tools
+                        </div>
+
+                        <div class="feature-item">
+                            ✓ Unlimited thumbnails
+                        </div>
+
+                        <div class="feature-item">
+                            ✓ PDF tools
+                        </div>
+
+                        <div class="feature-item">
+                            ✓ Ad-free experience
+                        </div>
+
+                        <div class="feature-item">
+                            ✓ Priority processing
+                        </div>
 
                     </div>
 
@@ -744,11 +1266,21 @@
     </section>
 
 
-    <!-- About Section -->
-    <section id="about" class="about-section">
+    <!-- ==========================================
+         ABOUT SECTION
+    =========================================== -->
+
+    <section
+        id="about"
+        class="about-section"
+    >
 
         <div class="section-header">
-            <h2>Bolo AI के बारे में</h2>
+
+            <h2>
+                Bolo AI के बारे में
+            </h2>
+
         </div>
 
 
@@ -756,7 +1288,9 @@
 
             <div class="about-text">
 
-                <h3>आपका स्मार्ट AI साथी</h3>
+                <h3>
+                    आपका स्मार्ट AI साथी
+                </h3>
 
                 <p>
                     Bolo AI एक आसान AI platform है जिसे रोज़मर्रा के कामों को आसान बनाने के लिए बनाया गया है।
@@ -777,28 +1311,72 @@
 
             <div class="about-features">
 
-                <div class="about-feature">
-                    <span class="about-icon">🌍</span>
-                    <h4>हिंदी और अंग्रेजी</h4>
-                    <p>आपकी पसंद की भाषा में काम करें</p>
-                </div>
 
                 <div class="about-feature">
-                    <span class="about-icon">⚡</span>
-                    <h4>तेज़ और आसान</h4>
-                    <p>सेकंड में परिणाम पाएं</p>
+
+                    <span class="about-icon">
+                        🌍
+                    </span>
+
+                    <h4>
+                        हिंदी और अंग्रेजी
+                    </h4>
+
+                    <p>
+                        आपकी पसंद की भाषा में काम करें
+                    </p>
+
                 </div>
 
-                <div class="about-feature">
-                    <span class="about-icon">🔒</span>
-                    <h4>सुरक्षित और निजी</h4>
-                    <p>आपकी गोपनीयता हमारी प्राथमिकता</p>
-                </div>
 
                 <div class="about-feature">
-                    <span class="about-icon">📱</span>
-                    <h4>सभी डिवाइस पर</h4>
-                    <p>फोन, टैबलेट या कंप्यूटर पर काम करें</p>
+
+                    <span class="about-icon">
+                        ⚡
+                    </span>
+
+                    <h4>
+                        तेज़ और आसान
+                    </h4>
+
+                    <p>
+                        सेकंड में परिणाम पाएं
+                    </p>
+
+                </div>
+
+
+                <div class="about-feature">
+
+                    <span class="about-icon">
+                        🔒
+                    </span>
+
+                    <h4>
+                        सुरक्षित और निजी
+                    </h4>
+
+                    <p>
+                        आपकी गोपनीयता हमारी प्राथमिकता
+                    </p>
+
+                </div>
+
+
+                <div class="about-feature">
+
+                    <span class="about-icon">
+                        📱
+                    </span>
+
+                    <h4>
+                        सभी डिवाइस पर
+                    </h4>
+
+                    <p>
+                        फोन, टैबलेट या कंप्यूटर पर काम करें
+                    </p>
+
                 </div>
 
             </div>
@@ -808,12 +1386,20 @@
     </section>
 
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
+    <!-- ==========================================
+         CONTACT SECTION
+    =========================================== -->
+
+    <section
+        id="contact"
+        class="contact-section"
+    >
 
         <div class="section-header">
 
-            <h2>संपर्क करें</h2>
+            <h2>
+                संपर्क करें
+            </h2>
 
             <p>
                 अगर आपको कोई समस्या, सुझाव या business enquiry है, तो हमें email करें।
@@ -824,14 +1410,19 @@
 
         <div class="contact-container">
 
+
             <div class="contact-info">
 
-                <h3>हमसे संपर्क करें</h3>
+                <h3>
+                    हमसे संपर्क करें
+                </h3>
 
 
                 <div class="contact-item">
 
-                    <span class="contact-icon">📧</span>
+                    <span class="contact-icon">
+                        📧
+                    </span>
 
                     <div>
 
@@ -853,7 +1444,9 @@
 
                 <div class="contact-item">
 
-                    <span class="contact-icon">💬</span>
+                    <span class="contact-icon">
+                        💬
+                    </span>
 
                     <div>
 
@@ -935,6 +1528,7 @@
                     📧 संदेश भेजें
                 </button>
 
+
                 <p class="form-note">
                     * यह आपके email client को खोलेगा। आप सीधे email कर सकते हैं।
                 </p>
@@ -946,8 +1540,14 @@
     </section>
 
 
-    <!-- Privacy Policy -->
-    <section id="privacy" class="policy-section">
+    <!-- ==========================================
+         PRIVACY POLICY
+    =========================================== -->
+
+    <section
+        id="privacy"
+        class="policy-section"
+    >
 
         <div class="section-header">
 
@@ -960,12 +1560,16 @@
 
         <div class="policy-content">
 
-            <h3>आपकी गोपनीयता हमारी जिम्मेदारी</h3>
+            <h3>
+                आपकी गोपनीयता हमारी जिम्मेदारी
+            </h3>
 
 
             <div class="policy-section-item">
 
-                <h4>📋 हम क्या एकत्र करते हैं</h4>
+                <h4>
+                    📋 हम क्या एकत्र करते हैं
+                </h4>
 
                 <p>
                     Bolo AI केवल वही जानकारी एकत्र करता है जो आवश्यक है।
@@ -977,7 +1581,9 @@
 
             <div class="policy-section-item">
 
-                <h4>🔒 डेटा सुरक्षा</h4>
+                <h4>
+                    🔒 डेटा सुरक्षा
+                </h4>
 
                 <p>
                     हम आपके डेटा को एन्क्रिप्ट करते हैं और सुरक्षित सर्वर पर रखते हैं।
@@ -989,15 +1595,19 @@
 
             <div class="policy-section-item">
 
-                <h4>⚠️ महत्वपूर्ण सावधानी</h4>
+                <h4>
+                    ⚠️ महत्वपूर्ण सावधानी
+                </h4>
 
                 <p>
+
                     <strong>
                         कृपया संवेदनशील जानकारी (जैसे पासवर्ड, बैंक विवरण, आधार नंबर)
                         Bolo AI में न डालें।
                     </strong>
 
                     यह केवल सार्वजनिक या कार्य-संबंधित टेक्स्ट के लिए डिज़ाइन किया गया है।
+
                 </p>
 
             </div>
@@ -1005,7 +1615,9 @@
 
             <div class="policy-section-item">
 
-                <h4>🍪 Cookies और Tracking</h4>
+                <h4>
+                    🍪 Cookies और Tracking
+                </h4>
 
                 <p>
                     Bolo AI आपके अनुभव को बेहतर बनाने के लिए cookies का उपयोग कर सकता है।
@@ -1017,7 +1629,9 @@
 
             <div class="policy-section-item">
 
-                <h4>📝 नीति में परिवर्तन</h4>
+                <h4>
+                    📝 नीति में परिवर्तन
+                </h4>
 
                 <p>
                     हम अपनी गोपनीयता नीति में समय-समय पर अपडेट कर सकते हैं।
@@ -1029,14 +1643,20 @@
 
             <div class="policy-section-item">
 
-                <h4>📧 संपर्क करें</h4>
+                <h4>
+                    📧 संपर्क करें
+                </h4>
 
                 <p>
+
                     गोपनीयता से संबंधित किसी भी सवाल के लिए
+
                     <a href="mailto:Sabrojalam8454@gmail.com">
                         Sabrojalam8454@gmail.com
                     </a>
+
                     पर email करें।
+
                 </p>
 
             </div>
@@ -1046,8 +1666,14 @@
     </section>
 
 
-    <!-- Terms & Conditions -->
-    <section id="terms" class="policy-section">
+    <!-- ==========================================
+         TERMS & CONDITIONS
+    =========================================== -->
+
+    <section
+        id="terms"
+        class="policy-section"
+    >
 
         <div class="section-header">
 
@@ -1067,7 +1693,9 @@
 
             <div class="policy-section-item">
 
-                <h4>✅ सेवा का उपयोग</h4>
+                <h4>
+                    ✅ सेवा का उपयोग
+                </h4>
 
                 <p>
                     Bolo AI एक AI-आधारित सहायक सेवा है।
@@ -1080,19 +1708,36 @@
 
             <div class="policy-section-item">
 
-                <h4>🚫 निषिद्ध गतिविधियां</h4>
+                <h4>
+                    🚫 निषिद्ध गतिविधियां
+                </h4>
 
                 <p>
                     आप Bolo AI का उपयोग नहीं कर सकते:
                 </p>
 
+
                 <ul style="margin-left: 20px;">
 
-                    <li>अवैध कंटेंट बनाने के लिए</li>
-                    <li>किसी की नकल करने के लिए</li>
-                    <li>धमकी देने या दुर्व्यवहार करने के लिए</li>
-                    <li>किसी की गोपनीयता का उल्लंघन करने के लिए</li>
-                    <li>सिस्टम को हैक या damage करने के लिए</li>
+                    <li>
+                        अवैध कंटेंट बनाने के लिए
+                    </li>
+
+                    <li>
+                        किसी की नकल करने के लिए
+                    </li>
+
+                    <li>
+                        धमकी देने या दुर्व्यवहार करने के लिए
+                    </li>
+
+                    <li>
+                        किसी की गोपनीयता का उल्लंघन करने के लिए
+                    </li>
+
+                    <li>
+                        सिस्टम को हैक या damage करने के लिए
+                    </li>
 
                 </ul>
 
@@ -1101,7 +1746,9 @@
 
             <div class="policy-section-item">
 
-                <h4>📄 बौद्धिक संपत्ति</h4>
+                <h4>
+                    📄 बौद्धिक संपत्ति
+                </h4>
 
                 <p>
                     आप बनाई गई सामग्री के लिए जिम्मेदार हैं।
@@ -1114,7 +1761,9 @@
 
             <div class="policy-section-item">
 
-                <h4>⚖️ देयता की सीमा</h4>
+                <h4>
+                    ⚖️ देयता की सीमा
+                </h4>
 
                 <p>
                     Bolo AI "जैसा है" प्रदान किया जाता है।
@@ -1126,7 +1775,9 @@
 
             <div class="policy-section-item">
 
-                <h4>🔄 सेवा में बदलाव</h4>
+                <h4>
+                    🔄 सेवा में बदलाव
+                </h4>
 
                 <p>
                     हम किसी भी समय सेवा में बदलाव, निलंबन, या समाप्त कर सकते हैं।
@@ -1138,14 +1789,20 @@
 
             <div class="policy-section-item">
 
-                <h4>📧 संपर्क करें</h4>
+                <h4>
+                    📧 संपर्क करें
+                </h4>
 
                 <p>
+
                     किसी भी प्रश्न के लिए
+
                     <a href="mailto:Sabrojalam8454@gmail.com">
                         Sabrojalam8454@gmail.com
                     </a>
+
                     पर email करें।
+
                 </p>
 
             </div>
@@ -1155,16 +1812,22 @@
     </section>
 
 
-    <!-- Footer -->
+    <!-- ==========================================
+         FOOTER
+    =========================================== -->
+
     <footer class="footer">
 
         <div class="footer-container">
 
             <div class="footer-content">
 
+
                 <div class="footer-section">
 
-                    <h4>Bolo AI</h4>
+                    <h4>
+                        Bolo AI
+                    </h4>
 
                     <p>
                         आपका स्मार्ट AI साथी
@@ -1179,36 +1842,67 @@
 
                 <div class="footer-section">
 
-                    <h4>Links</h4>
+                    <h4>
+                        Links
+                    </h4>
 
-                    <a href="#home">Home</a>
-                    <a href="#tools">AI Tools</a>
-                    <a href="#premium">Premium</a>
-                    <a href="#about">About</a>
-                    <a href="#contact">Contact</a>
+                    <a href="#home">
+                        Home
+                    </a>
+
+                    <a href="#tools">
+                        AI Tools
+                    </a>
+
+                    <a href="#premium">
+                        Premium
+                    </a>
+
+                    <a href="#about">
+                        About
+                    </a>
+
+                    <a href="#contact">
+                        Contact
+                    </a>
 
                 </div>
 
 
                 <div class="footer-section">
 
-                    <h4>नीतियां</h4>
+                    <h4>
+                        नीतियां
+                    </h4>
 
-                    <a href="#privacy">Privacy Policy</a>
-                    <a href="#terms">Terms & Conditions</a>
-                    <a href="#contact">Contact Us</a>
+                    <a href="#privacy">
+                        Privacy Policy
+                    </a>
 
-                </div
+                    <a href="#terms">
+                        Terms & Conditions
+                    </a>
+
+                    <a href="#contact">
+                        Contact Us
+                    </a>
+
+                </div>
+
             </div>
+
 
             <div class="footer-bottom">
 
                 <p>
-                    &copy; 2026 Bolo AI. सर्वाधिकार सुरक्षित। All rights reserved.
+                    &copy; 2026 Bolo AI.
+                    सर्वाधिकार सुरक्षित।
+                    All rights reserved.
                 </p>
 
                 <p>
-                    Made with ❤️ for India | Bolo AI - आपका स्मार्ट AI साथी
+                    Made with ❤️ for India |
+                    Bolo AI - आपका स्मार्ट AI साथी
                 </p>
 
             </div>
@@ -1218,23 +1912,117 @@
     </footer>
 
 
-    <!-- Toast Notification -->
-    <div id="toast" class="toast"></div>
+    <!-- Toast -->
+
+    <div
+        id="toast"
+        class="toast"
+    ></div>
 
 
-    <!-- JavaScript -->
-    
+    <!-- ==========================================
+         APP JAVASCRIPT
+    =========================================== -->
 
-
-    <!-- Toast Notification -->
-    <div id="toast" class="toast"></div>
-
-
-    <!-- JavaScript -->
     <script src="app.js"></script>
 
-</body>
-                        </htm
+
+    <!-- ==========================================
+         THREE DOT MENU JAVASCRIPT
+    =========================================== -->
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const moreBtn =
+                document.getElementById("moreBtn");
+
+            const moreDropdown =
+                document.getElementById("moreDropdown");
+
+
+            if (moreBtn && moreDropdown) {
+
+                moreBtn.addEventListener("click", function (event) {
+
+                    event.stopPropagation();
+
+                    moreDropdown.classList.toggle("show");
+
+                });
+
+
+                document.addEventListener("click", function (event) {
+
+                    if (
+                        !moreDropdown.contains(event.target) &&
+                        !moreBtn.contains(event.target)
+                    ) {
+
+                        moreDropdown.classList.remove("show");
+
+                    }
+
+                });
+
+
+                const menuLinks =
+                    moreDropdown.querySelectorAll("a");
+
+
+                menuLinks.forEach(function (link) {
+
+                    link.addEventListener("click", function () {
+
+                        moreDropdown.classList.remove("show");
+
+                    });
+
+                });
+
+            }
+
+
+            /* Hamburger menu */
+
+            const hamburger =
+                document.getElementById("hamburger");
+
+            const navMenu =
+                document.getElementById("navMenu");
+
+
+            if (hamburger && navMenu) {
+
+                hamburger.addEventListener("click", function () {
+
+                    navMenu.classList.toggle("active");
+
+                });
+
+
+                const navLinks =
+                    navMenu.querySelectorAll(".nav-link");
+
+
+                navLinks.forEach(function (link) {
+
+                    link.addEventListener("click", function () {
+
+                        navMenu.classList.remove("active");
+
+                    });
+
+                });
+
+            }
+
+        });
+
+    </script>
+
 
 </body>
-                        </htm
+
+</html>
