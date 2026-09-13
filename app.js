@@ -703,3 +703,23 @@ document.addEventListener(
 
   }
 );
+/* ==============================
+   PREMIUM BUTTON
+============================== */
+
+function handlePremiumClick() {
+
+  // Login required before Premium
+  if (!requireLogin()) {
+    return;
+  }
+
+  // Premium purchase information
+  alert(
+    "🌟 Bolo AI Premium\n\n" +
+    "Plan: ₹149/month\n" +
+    "🔥 50% OFF\n\n" +
+    "Premium payment system is being prepared.\n" +
+    "You will be able to purchase Premium soon."
+  );
+}
