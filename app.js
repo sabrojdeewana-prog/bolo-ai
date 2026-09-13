@@ -1,15 +1,47 @@
+
 const API_BASE_URL = "https://bolo-ai-backend-cfft.onrender.com";
 
 const $ = id => document.getElementById(id);
+
+
+/* ==============================
+   LOGIN CHECK
+============================== */
+
+function isLoggedIn() {
+  return localStorage.getItem("boloLoggedIn") === "true";
+}
+
+
+function requireLogin() {
+
+  if (isLoggedIn()) {
+    return true;
+  }
+
+  alert("Please log in to use Bolo AI.");
+
+  const loginModal = $("loginModal");
+
+  if (loginModal) {
+    loginModal.classList.add("show");
+    loginModal.setAttribute("aria-hidden", "false");
+  }
+
+  return false;
+}
+
 
 /* ==============================
    CHAT MESSAGE
 ============================== */
 
 function addChatMessage(text, type) {
+
   let chatBox = $("chatBox");
 
   if (!chatBox) {
+
     chatBox = document.createElement("div");
     chatBox.id = "chatBox";
 
@@ -23,9 +55,11 @@ function addChatMessage(text, type) {
       overflow-y: auto;
     `;
 
-    const inputSection = document.querySelector(".input-section");
+    const inputSection =
+      document.querySelector(".input-section");
 
     if (inputSection) {
+
       inputSection.parentNode.insertBefore(
         chatBox,
         inputSection.nextSibling
@@ -33,7 +67,8 @@ function addChatMessage(text, type) {
     }
   }
 
-  const message = document.createElement("div");
+  const message =
+    document.createElement("div");
 
   message.style.cssText = `
     padding: 12px 16px;
@@ -45,10 +80,15 @@ function addChatMessage(text, type) {
     color: #222;
   `;
 
-  const label = document.createElement("strong");
-  label.textContent = type === "user" ? "आप:" : "Bolo AI:";
+  const label =
+    document.createElement("strong");
 
-  const content = document.createElement("div");
+  label.textContent =
+    type === "user" ? "You:" : "Bolo AI:";
+
+  const content =
+    document.createElement("div");
+
   content.textContent = text;
 
   message.appendChild(label);
@@ -56,7 +96,8 @@ function addChatMessage(text, type) {
 
   chatBox.appendChild(message);
 
-  chatBox.scrollTop = chatBox.scrollHeight;
+  chatBox.scrollTop =
+    chatBox.scrollHeight;
 }
 
 
@@ -65,44 +106,67 @@ function addChatMessage(text, type) {
 ============================== */
 
 async function send() {
-  const input = $("inputText");
+
+  /* LOGIN REQUIRED */
+
+  if (!requireLogin()) {
+    return;
+  }
+
+  const input =
+    $("inputText");
 
   if (!input) return;
 
-  const message = input.value.trim();
+  const message =
+    input.value.trim();
 
   if (!message) return;
 
   input.value = "";
 
-  addChatMessage(message, "user");
+  addChatMessage(
+    message,
+    "user"
+  );
 
   try {
-    const response = await fetch(`${API_BASE_URL}/api/chat`, {
-      method: "POST",
 
-      headers: {
-        "Content-Type": "application/json"
-      },
+    const response =
+      await fetch(
+        `${API_BASE_URL}/api/chat`,
+        {
+          method: "POST",
 
-      body: JSON.stringify({
-        message
-      })
-    });
+          headers: {
+            "Content-Type": "application/json"
+          },
 
-    const data = await response.json();
+          body: JSON.stringify({
+            message
+          })
+        }
+      );
+
+    const data =
+      await response.json();
 
     if (data.reply) {
 
-      addChatMessage(data.reply, "ai");
+      addChatMessage(
+        data.reply,
+        "ai"
+      );
 
-      /* AI का जवाब आवाज़ में भी बोले */
-      speakText(data.reply);
+      speakText(
+        data.reply
+      );
 
     } else {
 
       addChatMessage(
-        data.error || "कोई जवाब नहीं मिला।",
+        data.error ||
+        "No response received.",
         "ai"
       );
     }
@@ -112,7 +176,7 @@ async function send() {
     console.error(error);
 
     addChatMessage(
-      "Bolo AI Backend से connection नहीं हो पाया।",
+      "Could not connect to the Bolo AI backend.",
       "ai"
     );
   }
@@ -126,6 +190,7 @@ async function send() {
 let recognition = null;
 let isListening = false;
 
+
 function setupVoiceRecognition() {
 
   const SpeechRecognition =
@@ -135,13 +200,14 @@ function setupVoiceRecognition() {
   if (!SpeechRecognition) {
 
     alert(
-      "आपके browser में Voice Command support नहीं है। Chrome browser इस्तेमाल करें।"
+      "Voice Command is not supported in your browser. Please use Chrome."
     );
 
     return null;
   }
 
-  const recognizer = new SpeechRecognition();
+  const recognizer =
+    new SpeechRecognition();
 
   recognizer.lang = "hi-IN";
 
@@ -152,84 +218,96 @@ function setupVoiceRecognition() {
   recognizer.maxAlternatives = 1;
 
 
-  recognizer.onstart = function () {
+  recognizer.onstart =
+    function () {
 
-    isListening = true;
+      isListening = true;
 
-    const micBtn = $("micBtn");
+      const micBtn =
+        $("micBtn");
 
-    if (micBtn) {
+      if (micBtn) {
 
-      micBtn.innerHTML = "🔴";
+        micBtn.innerHTML = "🔴";
 
-      micBtn.title = "सुन रहा हूँ...";
-    }
-
-    addChatMessage(
-      "🎙️ Bolo AI सुन रहा है... बोलिए।",
-      "ai"
-    );
-  };
-
-
-  recognizer.onresult = function (event) {
-
-    const spokenText =
-      event.results[0][0].transcript.trim();
-
-    const input = $("inputText");
-
-    if (input) {
-
-      input.value = spokenText;
-    }
-
-    if (spokenText) {
-
-      send();
-    }
-  };
-
-
-  recognizer.onerror = function (event) {
-
-    console.error(
-      "Voice recognition error:",
-      event.error
-    );
-
-    if (event.error === "not-allowed") {
+        micBtn.title =
+          "Listening...";
+      }
 
       addChatMessage(
-        "🎙️ Microphone permission allow करें।",
+        "🎙️ Bolo AI is listening... Please speak.",
         "ai"
       );
+    };
 
-    } else {
 
-      addChatMessage(
-        "🎙️ आवाज़ समझ नहीं आई। फिर से बोलिए।",
-        "ai"
+  recognizer.onresult =
+    function (event) {
+
+      const spokenText =
+        event.results[0][0]
+          .transcript
+          .trim();
+
+      const input =
+        $("inputText");
+
+      if (input) {
+
+        input.value =
+          spokenText;
+      }
+
+      if (spokenText) {
+
+        send();
+      }
+    };
+
+
+  recognizer.onerror =
+    function (event) {
+
+      console.error(
+        "Voice recognition error:",
+        event.error
       );
-    }
-  };
+
+      if (event.error === "not-allowed") {
+
+        addChatMessage(
+          "🎙️ Please allow microphone permission.",
+          "ai"
+        );
+
+      } else {
+
+        addChatMessage(
+          "🎙️ I could not understand your voice. Please try again.",
+          "ai"
+        );
+      }
+    };
 
 
-  recognizer.onend = function () {
+  recognizer.onend =
+    function () {
 
-    isListening = false;
+      isListening = false;
 
-    const micBtn = $("micBtn");
+      const micBtn =
+        $("micBtn");
 
-    if (micBtn) {
+      if (micBtn) {
 
-      micBtn.innerHTML = `
-        <span class="mic-icon">🎙️</span>
-      `;
+        micBtn.innerHTML = `
+          <span class="mic-icon">🎙️</span>
+        `;
 
-      micBtn.title = "माइक्रोफोन";
-    }
-  };
+        micBtn.title =
+          "Microphone";
+      }
+    };
 
 
   return recognizer;
@@ -242,9 +320,16 @@ function setupVoiceRecognition() {
 
 function activateMicrophone() {
 
+  /* LOGIN REQUIRED */
+
+  if (!requireLogin()) {
+    return;
+  }
+
   if (!recognition) {
 
-    recognition = setupVoiceRecognition();
+    recognition =
+      setupVoiceRecognition();
   }
 
   if (!recognition) return;
@@ -281,7 +366,8 @@ function speakText(text) {
 
   window.speechSynthesis.cancel();
 
-  const speech = new SpeechSynthesisUtterance(text);
+  const speech =
+    new SpeechSynthesisUtterance(text);
 
   speech.lang = "hi-IN";
 
@@ -289,7 +375,9 @@ function speakText(text) {
 
   speech.pitch = 1;
 
-  window.speechSynthesis.speak(speech);
+  window.speechSynthesis.speak(
+    speech
+  );
 }
 
 
@@ -299,7 +387,8 @@ function speakText(text) {
 
 function scrollToInput(text) {
 
-  const input = $("inputText");
+  const input =
+    $("inputText");
 
   if (!input) return;
 
@@ -352,22 +441,26 @@ function handleContactForm(event) {
 
 function openThumbnailGenerator() {
 
-  const modal = $("thumbnailModal");
+  const modal =
+    $("thumbnailModal");
 
   if (modal) {
 
-    modal.style.display = "flex";
+    modal.style.display =
+      "flex";
   }
 }
 
 
 function closeThumbnailGenerator() {
 
-  const modal = $("thumbnailModal");
+  const modal =
+    $("thumbnailModal");
 
   if (modal) {
 
-    modal.style.display = "none";
+    modal.style.display =
+      "none";
   }
 }
 
@@ -421,7 +514,7 @@ function generateThumbnail() {
   }
 
   addChatMessage(
-    "🎨 Thumbnail preview तैयार है।",
+    "🎨 Thumbnail preview is ready.",
     "ai"
   );
 }
@@ -435,7 +528,7 @@ function downloadThumbnail() {
   if (!canvas) return;
 
   alert(
-    "Thumbnail download feature अगला upgrade है।"
+    "Thumbnail download feature is coming in the next upgrade."
   );
 }
 
@@ -524,41 +617,57 @@ document.addEventListener(
             switch (action) {
 
               case "application":
+
                 prompt =
-                  "मेरे लिए एक professional application लिखो";
+                  "Write a professional application for me";
+
                 break;
 
               case "whatsapp":
+
                 prompt =
-                  "मेरे लिए एक अच्छा WhatsApp message लिखो";
+                  "Write a good WhatsApp message for me";
+
                 break;
 
               case "translate":
+
                 prompt =
-                  "इस text को translate करो: ";
+                  "Translate this text: ";
+
                 break;
 
               case "resume":
+
                 prompt =
-                  "मेरे लिए एक professional resume बनाने में मदद करो";
+                  "Help me create a professional resume";
+
                 break;
 
               case "youtube":
+
                 prompt =
-                  "मेरे YouTube video के लिए एक अच्छा title बनाओ";
+                  "Create a good title for my YouTube video";
+
                 break;
 
               case "social":
+
                 prompt =
-                  "मेरे लिए Instagram और Facebook के लिए अच्छा social media content बनाओ";
+                  "Create good social media content for Instagram and Facebook";
+
                 break;
 
               case "thumbnail":
+
                 openThumbnailGenerator();
+
                 return;
             }
 
-            scrollToInput(prompt);
+            scrollToInput(
+              prompt
+            );
           }
         );
       });
