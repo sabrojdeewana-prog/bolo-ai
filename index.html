@@ -2,35 +2,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Bolo AI — Your Own AI Assistant</title>
 
 <meta name="theme-color" content="#111827">
-<meta name="description" content="Bolo AI — a smart AI assistant for chat, images, writing, study, translation, coding and everyday tasks.">
+<meta name="description" content="Bolo AI — Your own smart AI assistant.">
 
 <link rel="manifest" href="/manifest.json">
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
-}
-
-:root{
-  --bg:#f7f8fa;
-  --card:#ffffff;
-  --text:#111827;
-  --muted:#6b7280;
-  --border:#e5e7eb;
-  --soft:#f3f4f6;
-  --primary:#111827;
-  --primaryText:#ffffff;
-  --accent:#2563eb;
-  --danger:#dc2626;
-  --shadow:0 10px 35px rgba(0,0,0,.08);
 }
 
 html{
@@ -38,10 +26,15 @@ html{
 }
 
 body{
-  font-family:Inter,Arial,Helvetica,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  min-height:100vh;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f7f8fc;
+  color:#111827;
+  line-height:1.5;
+}
+
+body.dark{
+  background:#0b1020;
+  color:#f3f4f6;
 }
 
 button,
@@ -60,26 +53,33 @@ a{
   text-decoration:none;
 }
 
+.container{
+  width:min(1120px,calc(100% - 28px));
+  margin:auto;
+}
+
 /* NAVBAR */
 
 .navbar{
   position:sticky;
   top:0;
-  z-index:100;
-  background:rgba(255,255,255,.9);
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--border);
+  z-index:1000;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid #e5e7eb;
+}
+
+.dark .navbar{
+  background:rgba(11,16,32,.94);
+  border-color:#1f2937;
 }
 
 .nav-inner{
-  max-width:1200px;
-  margin:auto;
-  height:68px;
-  padding:0 18px;
+  min-height:68px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:16px;
+  gap:15px;
 }
 
 .brand{
@@ -87,18 +87,27 @@ a{
   align-items:center;
   gap:10px;
   font-weight:800;
-  font-size:20px;
+  font-size:19px;
 }
 
 .brand-logo{
-  width:38px;
-  height:38px;
-  border-radius:12px;
+  width:40px;
+  height:40px;
+  border-radius:13px;
+  overflow:hidden;
   display:grid;
   place-items:center;
-  color:#fff;
-  background:#111827;
-  font-size:20px;
+  background:#fff;
+  border:1px solid #e5e7eb;
+  box-shadow:0 5px 16px rgba(0,0,0,.1);
+  flex:none;
+}
+
+.brand-logo img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
 }
 
 .nav-actions{
@@ -108,282 +117,314 @@ a{
 }
 
 .nav-btn{
-  border:1px solid var(--border);
+  border:1px solid #e5e7eb;
   background:#fff;
-  border-radius:10px;
+  color:#111827;
+  border-radius:11px;
   padding:9px 12px;
-  color:var(--text);
+  font-weight:700;
 }
 
-.nav-btn:hover{
-  background:var(--soft);
+.dark .nav-btn{
+  background:#111827;
+  border-color:#263244;
+  color:#f3f4f6;
+}
+
+.nav-btn.primary{
+  background:#111827;
+  color:#fff;
+  border-color:#111827;
+}
+
+.dark .nav-btn.primary{
+  background:#fff;
+  color:#111827;
 }
 
 /* HERO */
 
 .hero{
-  max-width:900px;
-  margin:0 auto;
-  padding:54px 18px 22px;
+  padding:58px 0 35px;
   text-align:center;
+}
+
+.hero-badge{
+  display:inline-flex;
+  padding:7px 12px;
+  border-radius:999px;
+  background:#eef2ff;
+  color:#3730a3;
+  font-size:13px;
+  font-weight:800;
+  margin-bottom:15px;
+}
+
+.dark .hero-badge{
+  background:#172554;
+  color:#bfdbfe;
 }
 
 .hero h1{
   font-size:clamp(34px,7vw,62px);
-  line-height:1.02;
+  line-height:1.04;
   letter-spacing:-2px;
-  margin-bottom:16px;
-}
-
-.hero h1 span{
-  color:var(--accent);
+  margin-bottom:15px;
 }
 
 .hero p{
-  max-width:650px;
+  max-width:700px;
   margin:auto;
-  color:var(--muted);
+  color:#6b7280;
   font-size:17px;
-  line-height:1.6;
 }
 
-/* MAIN */
-
-.container{
-  max-width:1000px;
-  margin:auto;
-  padding:20px 16px 70px;
+.dark .hero p{
+  color:#9ca3af;
 }
 
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:24px;
-  box-shadow:var(--shadow);
+/* SECTIONS */
+
+section{
+  padding:32px 0;
+}
+
+.section-title{
+  text-align:center;
+  font-size:30px;
+  margin-bottom:9px;
+}
+
+.section-subtitle{
+  text-align:center;
+  color:#6b7280;
+  margin-bottom:24px;
+}
+
+.dark .section-subtitle{
+  color:#9ca3af;
 }
 
 /* CHAT */
 
 .chat-card{
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:25px;
+  box-shadow:0 15px 45px rgba(17,24,39,.08);
   overflow:hidden;
 }
 
+.dark .chat-card{
+  background:#111827;
+  border-color:#263244;
+  box-shadow:0 15px 45px rgba(0,0,0,.25);
+}
+
 .chat-header{
-  padding:18px 20px;
-  border-bottom:1px solid var(--border);
+  padding:17px 19px;
+  border-bottom:1px solid #e5e7eb;
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:10px;
+  gap:12px;
 }
 
-.chat-title{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-weight:800;
+.dark .chat-header{
+  border-color:#263244;
 }
 
-.online-dot{
-  width:9px;
-  height:9px;
-  border-radius:50%;
-  background:#22c55e;
-}
-
-.chat-actions{
-  display:flex;
-  gap:7px;
-}
-
-.small-btn{
-  border:1px solid var(--border);
+.assistant-avatar{
+  width:42px;
+  height:42px;
+  border-radius:13px;
+  overflow:hidden;
+  border:1px solid #e5e7eb;
   background:#fff;
-  padding:8px 10px;
-  border-radius:9px;
+  flex:none;
+}
+
+.assistant-avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.chat-header strong{
+  display:block;
+}
+
+.chat-header span{
+  color:#6b7280;
   font-size:13px;
 }
 
-.chat-body{
-  min-height:380px;
-  max-height:650px;
+.dark .chat-header span{
+  color:#9ca3af;
+}
+
+.chat-messages{
+  min-height:300px;
+  max-height:620px;
   overflow-y:auto;
-  padding:24px 18px;
+  padding:20px;
 }
 
 .empty-chat{
-  min-height:330px;
+  min-height:260px;
   display:flex;
   flex-direction:column;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
   text-align:center;
-  padding:30px;
-}
-
-.empty-icon{
-  width:65px;
-  height:65px;
-  border-radius:20px;
-  background:#111827;
-  color:#fff;
-  display:grid;
-  place-items:center;
-  font-size:30px;
-  margin-bottom:18px;
-}
-
-.empty-chat h2{
-  font-size:25px;
-  margin-bottom:9px;
-}
-
-.empty-chat p{
-  color:var(--muted);
-  max-width:520px;
-  line-height:1.6;
-}
-
-.message{
-  display:flex;
-  margin-bottom:20px;
+  color:#6b7280;
   gap:10px;
 }
 
-.message.user{
+.empty-chat img{
+  width:65px;
+  height:65px;
+  border-radius:20px;
+}
+
+.message-row{
+  display:flex;
+  margin-bottom:17px;
+}
+
+.message-row.user{
   justify-content:flex-end;
 }
 
-.message-avatar{
-  width:34px;
-  height:34px;
-  flex:none;
-  border-radius:11px;
-  display:grid;
-  place-items:center;
-  background:#111827;
-  color:#fff;
-  font-size:14px;
-}
-
-.message.user .message-avatar{
-  order:2;
-  background:#2563eb;
-}
-
-.message-content{
-  max-width:min(760px,82%);
-}
-
-.message-bubble{
+.message{
+  max-width:min(82%,700px);
   padding:13px 15px;
-  border-radius:17px;
-  line-height:1.6;
+  border-radius:18px;
   white-space:pre-wrap;
   overflow-wrap:anywhere;
 }
 
-.message.assistant .message-bubble{
-  background:#f3f4f6;
-  border-bottom-left-radius:5px;
-}
-
-.message.user .message-bubble{
+.message.user{
   background:#111827;
   color:#fff;
   border-bottom-right-radius:5px;
 }
 
-.message-image{
-  width:min(320px,100%);
-  max-height:330px;
-  object-fit:cover;
-  display:block;
-  border-radius:15px;
-  margin-top:8px;
+.message.assistant{
+  background:#f1f5f9;
+  color:#111827;
+  border-bottom-left-radius:5px;
 }
 
-/* INPUT */
-
-.composer-area{
-  border-top:1px solid var(--border);
-  padding:14px;
-  background:#fff;
+.dark .message.assistant{
+  background:#1f2937;
+  color:#f3f4f6;
 }
 
-.photo-preview{
-  display:none;
-  margin-bottom:10px;
-  position:relative;
-  width:100px;
-}
-
-.photo-preview img{
-  width:100px;
-  height:100px;
-  object-fit:cover;
+.message-photo{
+  width:220px;
+  max-width:100%;
   border-radius:14px;
-  border:1px solid var(--border);
+  margin-top:8px;
+  display:block;
 }
 
-.remove-photo{
-  position:absolute;
-  top:-7px;
-  right:-7px;
-  width:25px;
-  height:25px;
-  border:0;
-  border-radius:50%;
+.message-tools{
+  display:flex;
+  gap:7px;
+  margin-top:9px;
+  flex-wrap:wrap;
+}
+
+.message-tools button{
+  border:1px solid #d1d5db;
+  background:#fff;
+  border-radius:9px;
+  padding:6px 9px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.dark .message-tools button{
   background:#111827;
   color:#fff;
+  border-color:#374151;
+}
+
+/* COMPOSER */
+
+.composer-wrap{
+  padding:14px;
+  border-top:1px solid #e5e7eb;
+}
+
+.dark .composer-wrap{
+  border-color:#263244;
 }
 
 .composer{
-  display:flex;
-  align-items:flex-end;
-  gap:8px;
   border:1px solid #d1d5db;
-  border-radius:20px;
-  padding:8px;
-  box-shadow:0 2px 12px rgba(0,0,0,.04);
+  border-radius:19px;
+  background:#fff;
+  padding:9px;
+}
+
+.dark .composer{
+  background:#0f172a;
+  border-color:#374151;
 }
 
 .composer textarea{
-  flex:1;
-  min-height:44px;
+  width:100%;
+  min-height:52px;
   max-height:150px;
   resize:none;
   border:0;
   outline:0;
-  padding:11px 8px;
-  color:var(--text);
   background:transparent;
+  color:#111827;
+  padding:8px;
 }
 
-.icon-btn{
-  width:44px;
-  height:44px;
-  border:0;
-  border-radius:13px;
-  background:#f3f4f6;
-  display:grid;
-  place-items:center;
-  font-size:18px;
-  flex:none;
+.dark .composer textarea{
+  color:#fff;
 }
 
-.icon-btn:hover{
-  background:#e5e7eb;
+.composer-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+
+.composer-left,
+.composer-right{
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+
+.icon-btn,
+.send-btn{
+  min-height:40px;
+  border-radius:12px;
+  border:1px solid #e5e7eb;
+  background:#f8fafc;
+  color:#111827;
+  padding:8px 12px;
+  font-weight:700;
+}
+
+.dark .icon-btn,
+.dark .send-btn{
+  background:#1f2937;
+  color:#fff;
+  border-color:#374151;
 }
 
 .send-btn{
-  height:44px;
-  border:0;
-  border-radius:13px;
   background:#111827;
   color:#fff;
-  padding:0 17px;
-  font-weight:700;
+  border-color:#111827;
 }
 
 .send-btn:disabled{
@@ -391,65 +432,176 @@ a{
   cursor:not-allowed;
 }
 
-.chat-status{
-  min-height:20px;
-  font-size:12px;
-  color:var(--muted);
-  padding:7px 5px 0;
+.photo-preview{
+  display:none;
+  position:relative;
+  margin:4px 4px 10px;
+  width:100px;
 }
 
-/* IMAGE CREATOR */
+.photo-preview img{
+  width:100px;
+  height:80px;
+  object-fit:cover;
+  border-radius:12px;
+}
 
-.image-creator{
-  margin-top:14px;
-  padding:17px;
-  border:1px solid var(--border);
+.remove-photo{
+  position:absolute;
+  top:-7px;
+  right:-7px;
+  width:24px;
+  height:24px;
+  border:0;
+  border-radius:50%;
+  background:#111827;
+  color:#fff;
+}
+
+/* VOICE CONTROL */
+
+.voice-control{
+  margin-top:11px;
+  padding:12px 13px;
+  border:1px solid #e5e7eb;
+  background:#f8fafc;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.dark .voice-control{
+  background:#0f172a;
+  border-color:#263244;
+}
+
+.voice-control-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+}
+
+.voice-icon{
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  border-radius:12px;
+  background:#e5e7eb;
+  flex:none;
+}
+
+.dark .voice-icon{
+  background:#1f2937;
+}
+
+.voice-control strong{
+  display:block;
+  font-size:14px;
+}
+
+.voice-control span{
+  display:block;
+  color:#6b7280;
+  font-size:12px;
+}
+
+.dark .voice-control span{
+  color:#9ca3af;
+}
+
+.voice-reply-btn{
+  border:1px solid #d1d5db;
+  background:#fff;
+  color:#111827;
+  border-radius:11px;
+  padding:9px 13px;
+  font-weight:800;
+  min-width:82px;
+}
+
+.dark .voice-reply-btn{
+  background:#111827;
+  color:#fff;
+  border-color:#374151;
+}
+
+.voice-reply-btn.active{
+  background:#111827;
+  color:#fff;
+  border-color:#111827;
+}
+
+.dark .voice-reply-btn.active{
+  background:#fff;
+  color:#111827;
+}
+
+.voice-control.speaking{
+  box-shadow:0 0 0 2px rgba(99,102,241,.15);
+}
+
+/* IMAGE GENERATOR */
+
+.generator{
+  margin-top:15px;
+  padding:16px;
+  border:1px solid #e5e7eb;
   border-radius:18px;
   background:#fafafa;
 }
 
-.image-creator-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  margin-bottom:10px;
+.dark .generator{
+  background:#0f172a;
+  border-color:#263244;
 }
 
-.image-creator-head h3{
-  font-size:16px;
+.generator h3{
+  margin-bottom:5px;
 }
 
-.image-badge{
-  font-size:11px;
-  padding:5px 8px;
-  border-radius:999px;
-  background:#e8eefc;
-  color:#1d4ed8;
+.generator p{
+  color:#6b7280;
+  font-size:13px;
+  margin-bottom:12px;
 }
 
-.image-row{
+.dark .generator p{
+  color:#9ca3af;
+}
+
+.generator-row{
   display:flex;
   gap:8px;
 }
 
-.image-row input{
+.generator input{
   flex:1;
   min-width:0;
-  border:1px solid var(--border);
+  border:1px solid #d1d5db;
   border-radius:12px;
-  padding:12px;
+  padding:11px 12px;
   outline:none;
   background:#fff;
+  color:#111827;
 }
 
-.generate-btn{
-  border:0;
-  border-radius:12px;
-  padding:0 15px;
+.dark .generator input{
   background:#111827;
   color:#fff;
-  font-weight:700;
+  border-color:#374151;
+}
+
+.generator button{
+  border:0;
+  border-radius:12px;
+  background:#111827;
+  color:#fff;
+  padding:11px 15px;
+  font-weight:800;
 }
 
 .generated-result{
@@ -457,280 +609,312 @@ a{
 }
 
 .generated-result img{
-  display:block;
   width:100%;
-  max-height:600px;
+  max-height:500px;
   object-fit:contain;
   border-radius:15px;
-  background:#eee;
+  display:block;
 }
 
 .loading{
-  color:var(--muted);
-  padding:15px;
-  text-align:center;
-}
-
-/* QUICK PROMPTS */
-
-.section{
-  margin-top:22px;
-}
-
-.section-title{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:12px;
-}
-
-.section-title h2{
-  font-size:21px;
-}
-
-.section-title p{
-  color:var(--muted);
+  color:#6b7280;
+  padding:10px 0;
   font-size:13px;
 }
 
-.prompt-grid{
+/* QUICK AI */
+
+.quick-grid,
+.tools-grid,
+.features-grid,
+.pricing-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:9px;
+  gap:13px;
 }
 
-.prompt-btn{
+.quick-card,
+.tool-card,
+.feature-card,
+.price-card{
   background:#fff;
-  border:1px solid var(--border);
-  border-radius:13px;
-  padding:13px 10px;
-  text-align:left;
-  min-height:72px;
-}
-
-.prompt-btn:hover{
-  border-color:#9ca3af;
-  transform:translateY(-1px);
-}
-
-.prompt-btn strong{
-  display:block;
-  font-size:14px;
-  margin-bottom:4px;
-}
-
-.prompt-btn span{
-  font-size:11px;
-  color:var(--muted);
-}
-
-/* PUBLIC TOOLS */
-
-.tools-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:11px;
-}
-
-.tool-card{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:17px;
+  border:1px solid #e5e7eb;
+  border-radius:18px;
   padding:17px;
-  transition:.18s;
 }
 
-.tool-card:hover{
-  transform:translateY(-2px);
-  box-shadow:0 8px 25px rgba(0,0,0,.06);
+.dark .quick-card,
+.dark .tool-card,
+.dark .feature-card,
+.dark .price-card{
+  background:#111827;
+  border-color:#263244;
 }
 
-.tool-icon{
-  font-size:23px;
-  margin-bottom:10px;
+.quick-card button,
+.tool-card button{
+  width:100%;
+  border:0;
+  background:transparent;
+  text-align:left;
 }
 
-.tool-card h3{
-  font-size:15px;
-  margin-bottom:5px;
+.quick-icon{
+  font-size:25px;
+  margin-bottom:8px;
 }
 
-.tool-card p{
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.5;
+.quick-card strong,
+.tool-card strong{
+  display:block;
+  margin-bottom:3px;
+}
+
+.quick-card span,
+.tool-card span,
+.feature-card p{
+  font-size:13px;
+  color:#6b7280;
+}
+
+.dark .quick-card span,
+.dark .tool-card span,
+.dark .feature-card p{
+  color:#9ca3af;
+}
+
+/* FEATURES */
+
+.features-grid{
+  grid-template-columns:repeat(3,1fr);
+}
+
+.feature-icon{
+  font-size:28px;
+  margin-bottom:8px;
 }
 
 /* PREMIUM */
 
-.premium{
-  margin-top:22px;
-  padding:25px;
-  background:#111827;
-  color:#fff;
-  border-radius:23px;
+.pricing-grid{
+  grid-template-columns:repeat(2,1fr);
+  max-width:800px;
+  margin:auto;
 }
 
-.premium-content{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
+.price-card{
+  text-align:center;
 }
 
-.premium h2{
-  margin-bottom:7px;
+.price-card.featured{
+  border:2px solid #111827;
 }
 
-.premium p{
-  color:#cbd5e1;
-  line-height:1.5;
+.dark .price-card.featured{
+  border-color:#fff;
 }
 
 .price{
-  margin-top:12px;
-  font-size:25px;
-  font-weight:800;
+  font-size:38px;
+  font-weight:900;
+  margin:10px 0;
 }
 
 .old-price{
   text-decoration:line-through;
   color:#9ca3af;
-  font-size:15px;
-  margin-right:6px;
+  font-size:18px;
 }
 
-.premium-btn{
+.offer{
+  font-size:13px;
+  color:#16a34a;
+  font-weight:800;
+}
+
+.price-list{
+  text-align:left;
+  margin:17px 0;
+  list-style:none;
+}
+
+.price-list li{
+  padding:7px 0;
+}
+
+.price-btn{
+  width:100%;
   border:0;
+  background:#111827;
+  color:#fff;
+  border-radius:12px;
+  padding:12px;
+  font-weight:800;
+}
+
+.dark .price-btn{
   background:#fff;
   color:#111827;
-  padding:13px 18px;
-  border-radius:12px;
-  font-weight:800;
-  white-space:nowrap;
 }
 
 /* ABOUT */
 
-.about{
-  padding:25px;
+.about-card{
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:20px;
+  padding:24px;
 }
 
-.about p,
-.about li{
-  color:var(--muted);
-  line-height:1.7;
+.dark .about-card{
+  background:#111827;
+  border-color:#263244;
 }
 
-.about h2{
-  margin-bottom:10px;
+.policy{
+  margin-top:20px;
+  padding-top:18px;
+  border-top:1px solid #e5e7eb;
 }
 
-.about h3{
-  margin-top:19px;
-  margin-bottom:7px;
+.dark .policy{
+  border-color:#263244;
 }
 
-.about ul{
-  padding-left:20px;
+.policy h3{
+  margin-bottom:6px;
 }
 
-.about a{
-  color:#2563eb;
+.policy p{
+  color:#6b7280;
+  font-size:14px;
 }
 
-/* MODALS */
+.dark .policy p{
+  color:#9ca3af;
+}
+
+/* FOOTER */
+
+footer{
+  margin-top:35px;
+  border-top:1px solid #e5e7eb;
+  padding:25px 0;
+  text-align:center;
+  color:#6b7280;
+  font-size:13px;
+}
+
+.dark footer{
+  border-color:#263244;
+  color:#9ca3af;
+}
+
+/* MODAL */
 
 .modal{
+  display:none;
   position:fixed;
   inset:0;
-  z-index:500;
-  display:none;
+  z-index:3000;
+  background:rgba(0,0,0,.55);
   align-items:center;
   justify-content:center;
   padding:18px;
-  background:rgba(0,0,0,.48);
 }
 
 .modal.show{
   display:flex;
 }
 
-.modal-card{
-  width:min(440px,100%);
-  max-height:90vh;
-  overflow-y:auto;
+.modal-box{
+  width:min(430px,100%);
   background:#fff;
   border-radius:22px;
   padding:22px;
-  box-shadow:0 25px 80px rgba(0,0,0,.25);
+  position:relative;
 }
 
-.modal-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:17px;
+.dark .modal-box{
+  background:#111827;
+  color:#fff;
 }
 
-.close-btn{
-  width:35px;
-  height:35px;
+.modal-close{
+  position:absolute;
+  right:15px;
+  top:12px;
   border:0;
-  border-radius:10px;
-  background:#f3f4f6;
+  background:transparent;
+  font-size:22px;
 }
 
-.form-group{
-  margin-bottom:12px;
-}
-
-.form-group label{
-  display:block;
-  font-size:13px;
-  font-weight:700;
-  margin-bottom:6px;
-}
-
-.form-group input{
+.auth-input{
   width:100%;
-  border:1px solid var(--border);
-  border-radius:11px;
+  margin-top:10px;
   padding:12px;
+  border:1px solid #d1d5db;
+  border-radius:12px;
   outline:none;
 }
 
-.form-submit{
+.dark .auth-input{
+  background:#0f172a;
+  color:#fff;
+  border-color:#374151;
+}
+
+.auth-main-btn{
   width:100%;
+  margin-top:12px;
   border:0;
+  border-radius:12px;
   background:#111827;
   color:#fff;
-  padding:13px;
-  border-radius:11px;
-  font-weight:700;
+  padding:12px;
+  font-weight:800;
+}
+
+.dark .auth-main-btn{
+  background:#fff;
+  color:#111827;
 }
 
 .google-btn{
   width:100%;
-  border:1px solid var(--border);
-  background:#fff;
-  padding:12px;
-  border-radius:11px;
   margin-top:9px;
+  border:1px solid #d1d5db;
+  border-radius:12px;
+  background:#fff;
+  color:#111827;
+  padding:11px;
+  font-weight:800;
 }
 
-.auth-switch{
+.dark .google-btn{
+  background:#1f2937;
+  color:#fff;
+  border-color:#374151;
+}
+
+.auth-link{
+  display:block;
   text-align:center;
+  margin-top:11px;
+  color:#4f46e5;
   font-size:13px;
-  color:var(--muted);
-  margin-top:14px;
+  font-weight:700;
 }
 
-.mini-btn{
-  border:0;
-  background:transparent;
-  color:#2563eb;
-  font-weight:700;
+.account-info{
+  padding:14px;
+  background:#f8fafc;
+  border-radius:14px;
+  margin:14px 0;
+}
+
+.dark .account-info{
+  background:#0f172a;
 }
 
 /* TOAST */
@@ -740,17 +924,15 @@ a{
   left:50%;
   bottom:22px;
   transform:translate(-50%,20px);
-  z-index:1000;
   background:#111827;
   color:#fff;
-  padding:12px 16px;
+  padding:11px 16px;
   border-radius:12px;
   opacity:0;
   pointer-events:none;
-  transition:.2s;
+  transition:.25s;
+  z-index:5000;
   font-size:13px;
-  max-width:90%;
-  text-align:center;
 }
 
 .toast.show{
@@ -758,712 +940,1031 @@ a{
   transform:translate(-50%,0);
 }
 
-/* FOOTER */
+/* MOBILE */
 
-footer{
-  text-align:center;
-  padding:25px 15px 40px;
-  color:var(--muted);
-  font-size:13px;
-}
+@media(max-width:800px){
 
-footer a{
-  color:#2563eb;
-}
-
-/* DARK */
-
-body.dark{
-  --bg:#0b0f14;
-  --card:#111827;
-  --text:#f9fafb;
-  --muted:#9ca3af;
-  --border:#273244;
-  --soft:#1f2937;
-  --primary:#fff;
-  --primaryText:#111827;
-  --shadow:0 10px 35px rgba(0,0,0,.25);
-}
-
-body.dark .navbar{
-  background:rgba(11,15,20,.9);
-}
-
-body.dark .nav-btn,
-body.dark .small-btn,
-body.dark .icon-btn,
-body.dark .prompt-btn,
-body.dark .tool-card,
-body.dark .composer-area,
-body.dark .modal-card,
-body.dark .google-btn,
-body.dark .image-row input{
-  background:#111827;
-  color:#f9fafb;
-}
-
-body.dark .chat-card{
-  background:#111827;
-}
-
-body.dark .composer{
-  background:#111827;
-  border-color:#374151;
-}
-
-body.dark .message.assistant .message-bubble,
-body.dark .image-creator{
-  background:#1f2937;
-}
-
-body.dark .image-creator{
-  border-color:#374151;
-}
-
-body.dark .image-badge{
-  background:#172554;
-  color:#93c5fd;
-}
-
-body.dark .form-group input{
-  background:#111827;
-  color:#fff;
-}
-
-/* RESPONSIVE */
-
-@media(max-width:760px){
-  .hero{
-    padding-top:35px;
-  }
-
-  .hero h1{
-    letter-spacing:-1.5px;
-  }
-
-  .prompt-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
+  .quick-grid,
   .tools-grid{
     grid-template-columns:repeat(2,1fr);
   }
 
-  .premium-content{
-    flex-direction:column;
-    align-items:flex-start;
+  .features-grid,
+  .pricing-grid{
+    grid-template-columns:1fr;
   }
 
-  .premium-btn{
-    width:100%;
+  .hero{
+    padding-top:42px;
   }
 
-  .image-row{
-    flex-direction:column;
+  .message{
+    max-width:90%;
   }
 
-  .generate-btn{
-    min-height:44px;
-  }
 }
 
-@media(max-width:500px){
-  .nav-inner{
-    height:60px;
-  }
+@media(max-width:520px){
 
-  .brand{
-    font-size:17px;
+  .container{
+    width:min(100% - 18px,1120px);
   }
 
   .brand-logo{
-    width:34px;
-    height:34px;
+    width:36px;
+    height:36px;
+    border-radius:12px;
+  }
+
+  .brand{
+    font-size:16px;
   }
 
   .nav-btn{
     padding:8px 9px;
+    font-size:12px;
   }
 
-  .hero{
-    padding:30px 14px 12px;
+  .hero h1{
+    letter-spacing:-1px;
   }
 
-  .hero p{
-    font-size:14px;
-  }
-
-  .container{
-    padding:12px 9px 50px;
-  }
-
-  .chat-header{
-    padding:14px;
-  }
-
-  .chat-body{
-    min-height:330px;
-    padding:18px 12px;
-  }
-
-  .message-content{
-    max-width:86%;
-  }
-
-  .composer-area{
-    padding:9px;
-  }
-
-  .composer{
-    gap:5px;
-    padding:6px;
-  }
-
-  .icon-btn{
-    width:39px;
-    height:39px;
-    border-radius:11px;
-  }
-
-  .send-btn{
-    height:39px;
-    padding:0 12px;
-    font-size:13px;
-  }
-
-  .composer textarea{
-    min-height:39px;
-    padding:9px 5px;
-    font-size:14px;
-  }
-
-  .prompt-grid,
+  .quick-grid,
   .tools-grid{
     grid-template-columns:1fr 1fr;
   }
 
-  .prompt-btn{
-    min-height:65px;
+  .composer-bottom{
+    align-items:stretch;
   }
 
-  .tool-card{
-    padding:13px;
+  .composer-left,
+  .composer-right{
+    flex-wrap:wrap;
   }
 
-  .about{
-    padding:19px;
+  .icon-btn,
+  .send-btn{
+    min-height:38px;
+    padding:8px 10px;
   }
+
+  .voice-control{
+    align-items:flex-start;
+  }
+
+  .voice-reply-btn{
+    min-width:76px;
+  }
+
+  .generator-row{
+    flex-direction:column;
+  }
+
+  .generator button{
+    width:100%;
+  }
+
 }
+
+/* INSTALL */
+
+.install-btn{
+  display:none;
+}
+
 </style>
+
 </head>
 
 <body>
 
 <!-- NAVBAR -->
-<nav class="navbar">
-  <div class="nav-inner">
 
-    <div class="brand">
-      <div class="brand-logo">B</div>
+<header class="navbar">
+
+  <div class="container nav-inner">
+
+    <a href="#home" class="brand">
+
+      <div class="brand-logo">
+        <img
+          src="/icon-192.png"
+          alt="Bolo AI"
+        >
+      </div>
+
       <span>Bolo AI</span>
-    </div>
+
+    </a>
 
     <div class="nav-actions">
-      <button class="nav-btn" id="themeBtn" onclick="toggleTheme()">🌙</button>
-      <button class="nav-btn" id="accountBtn" onclick="openAuth()">Login</button>
+
+      <button
+        class="nav-btn"
+        id="themeBtn"
+        type="button"
+        onclick="toggleTheme()"
+      >
+        🌙
+      </button>
+
+      <button
+        class="nav-btn"
+        id="authNavBtn"
+        type="button"
+        onclick="openAuth()"
+      >
+        Login
+      </button>
+
+      <button
+        class="nav-btn primary"
+        type="button"
+        onclick="document.getElementById('premium').scrollIntoView()"
+      >
+        Premium
+      </button>
+
     </div>
 
   </div>
-</nav>
 
-<!-- HERO -->
-<header class="hero">
-  <h1>Ask anything.<br><span>Bolo AI can help.</span></h1>
-  <p>
-    Chat, create images, study, write, translate, code, plan and solve
-    everyday problems with your own smart AI assistant.
-  </p>
 </header>
 
-<main class="container">
 
-  <!-- MAIN CHAT -->
-  <section class="card chat-card">
+<main id="home">
 
-    <div class="chat-header">
+<!-- HERO -->
 
-      <div class="chat-title">
-        <span class="online-dot"></span>
-        <span>Bolo AI</span>
-      </div>
+<section class="hero">
 
-      <div class="chat-actions">
-        <button class="small-btn" onclick="exportChat()">Export</button>
-        <button class="small-btn" onclick="clearChat()">Clear</button>
-      </div>
+  <div class="container">
 
+    <div class="hero-badge">
+      ✨ Smart • Fast • Creative
     </div>
 
-    <div class="chat-body" id="chatBody">
+    <h1>
+      Meet Your Own AI Assistant
+    </h1>
 
-      <div class="empty-chat" id="emptyChat">
+    <p>
+      Chat, write, create images, analyse photos, use your voice,
+      plan your day and get things done with Bolo AI.
+    </p>
 
-        <div class="empty-icon">🤖</div>
+  </div>
 
-        <h2>How can I help you today?</h2>
+</section>
 
-        <p>
-          Ask a question, upload a photo, speak your message,
-          or create an image directly from here.
-        </p>
 
-      </div>
+<!-- CHAT -->
 
-    </div>
+<section id="chat">
 
-    <!-- COMPOSER -->
-    <div class="composer-area">
+  <div class="container">
 
-      <div class="photo-preview" id="photoPreview">
+    <h2 class="section-title">
+      Bolo AI Chat
+    </h2>
 
-        <img id="previewImage" src="" alt="Selected photo">
+    <p class="section-subtitle">
+      Ask anything and get an intelligent response.
+    </p>
 
-        <button
-          class="remove-photo"
-          onclick="removePhoto()"
-          aria-label="Remove photo">
-          ×
-        </button>
+    <div class="chat-card">
 
-      </div>
+      <div class="chat-header">
 
-      <div class="composer">
+        <div class="assistant-avatar">
 
-        <!-- Gallery / Photo Upload -->
-        <button
-          class="icon-btn"
-          onclick="document.getElementById('photoInput').click()"
-          title="Upload Photo"
-          aria-label="Upload Photo">
-          🖼️
-        </button>
-
-        <input
-          id="photoInput"
-          type="file"
-          accept="image/*"
-          hidden
-          onchange="handlePhoto(event)"
-        >
-
-        <!-- Voice -->
-        <button
-          class="icon-btn"
-          id="micBtn"
-          onclick="startVoice()"
-          title="Voice Input"
-          aria-label="Voice Input">
-          🎙️
-        </button>
-
-        <textarea
-          id="chatInput"
-          rows="1"
-          placeholder="Message Bolo AI..."
-          onkeydown="handleEnter(event)"
-        ></textarea>
-
-        <button
-          class="send-btn"
-          id="sendBtn"
-          onclick="sendChat()">
-          Send
-        </button>
-
-      </div>
-
-      <div class="chat-status" id="chatStatus"></div>
-
-      <!-- IMAGE GENERATOR IN CHAT -->
-      <div class="image-creator">
-
-        <div class="image-creator-head">
-
-          <h3>✨ Create an Image</h3>
-
-          <span class="image-badge">AI Image</span>
+          <img
+            src="/icon-192.png"
+            alt="Bolo AI"
+          >
 
         </div>
 
-        <div class="image-row">
+        <div>
 
-          <input
-            id="imagePrompt"
-            type="text"
-            placeholder="Describe the image you want..."
+          <strong>
+            Bolo AI
+          </strong>
+
+          <span>
+            Your smart AI assistant
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="chat-messages"
+        id="chatMessages"
+      >
+
+        <div
+          class="empty-chat"
+          id="emptyChat"
+        >
+
+          <img
+            src="/icon-192.png"
+            alt="Bolo AI"
           >
 
+          <strong>
+            How can I help you today?
+          </strong>
+
+          <span>
+            Ask a question, upload a photo or use your voice.
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="composer-wrap">
+
+        <div class="composer">
+
+          <div
+            class="photo-preview"
+            id="photoPreview"
+          >
+
+            <img
+              id="previewImage"
+              src=""
+              alt="Selected photo"
+            >
+
+            <button
+              class="remove-photo"
+              type="button"
+              onclick="removePhoto()"
+            >
+              ×
+            </button>
+
+          </div>
+
+
+          <textarea
+            id="chatInput"
+            placeholder="Message Bolo AI..."
+            rows="1"
+          ></textarea>
+
+
+          <div class="composer-bottom">
+
+            <div class="composer-left">
+
+              <input
+                type="file"
+                id="photoInput"
+                accept="image/*"
+                hidden
+                onchange="handlePhoto(event)"
+              >
+
+              <button
+                class="icon-btn"
+                type="button"
+                onclick="document.getElementById('photoInput').click()"
+                title="Photo Upload"
+              >
+                🖼️ Photo
+              </button>
+
+              <button
+                class="icon-btn"
+                id="micBtn"
+                type="button"
+                onclick="startVoice()"
+                title="Voice Input"
+              >
+                🎙️
+              </button>
+
+            </div>
+
+
+            <div class="composer-right">
+
+              <button
+                class="send-btn"
+                id="sendBtn"
+                type="button"
+                onclick="sendChat()"
+              >
+                Send
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- VOICE CONTROL DIRECTLY BELOW MESSAGE BOX -->
+
+        <div
+          class="voice-control"
+          id="voiceControl"
+        >
+
+          <div class="voice-control-left">
+
+            <div
+              class="voice-icon"
+              id="voiceIcon"
+            >
+              🔇
+            </div>
+
+            <div>
+
+              <strong id="voiceTitle">
+                Voice Reply Off
+              </strong>
+
+              <span id="voiceStatus">
+                Tap to speak AI replies
+              </span>
+
+            </div>
+
+          </div>
+
+
           <button
-            class="generate-btn"
-            id="generateBtn"
-            onclick="generateImage()">
-            Create
+            type="button"
+            id="voiceReplyBtn"
+            class="voice-reply-btn"
+            onclick="toggleVoiceReply()"
+          >
+            🔇 OFF
           </button>
 
         </div>
 
-        <div
-          class="generated-result"
-          id="generatedResult">
+
+        <!-- IMAGE GENERATOR -->
+
+        <div class="generator">
+
+          <h3>
+            🎨 AI Image Generator
+          </h3>
+
+          <p>
+            Describe the image you want Bolo AI to create.
+          </p>
+
+          <div class="generator-row">
+
+            <input
+              id="imagePrompt"
+              type="text"
+              placeholder="Example: cinematic romantic sunset..."
+            >
+
+            <button
+              id="generateBtn"
+              type="button"
+              onclick="generateImage()"
+            >
+              Create
+            </button>
+
+          </div>
+
+          <div
+            class="generated-result"
+            id="generatedResult"
+          ></div>
+
         </div>
 
+
+        <div
+          id="chatStatus"
+          class="loading"
+        ></div>
+
       </div>
 
     </div>
 
-  </section>
+  </div>
+
+</section>
 
 
-  <!-- QUICK AI -->
-  <section class="section">
+<!-- QUICK AI -->
 
-    <div class="section-title">
-      <div>
-        <h2>Quick AI</h2>
-        <p>Start common tasks instantly</p>
+<section>
+
+  <div class="container">
+
+    <h2 class="section-title">
+      Quick AI
+    </h2>
+
+    <p class="section-subtitle">
+      Start common AI tasks instantly.
+    </p>
+
+    <div class="quick-grid">
+
+      <div class="quick-card">
+        <button onclick="usePrompt('Write a professional YouTube video title and description for my topic.')">
+          <div class="quick-icon">▶️</div>
+          <strong>YouTube</strong>
+          <span>Titles, descriptions and ideas</span>
+        </button>
       </div>
-    </div>
 
-    <div class="prompt-grid">
-
-      <button class="prompt-btn" onclick="quickPrompt('Help me write a professional email')">
-        <strong>✉️ Email</strong>
-        <span>Write better emails</span>
-      </button>
-
-      <button class="prompt-btn" onclick="quickPrompt('Explain this topic in very simple language')">
-        <strong>📚 Explain</strong>
-        <span>Learn anything</span>
-      </button>
-
-      <button class="prompt-btn" onclick="quickPrompt('Give me a YouTube video idea with title and description')">
-        <strong>▶️ YouTube</strong>
-        <span>Ideas and scripts</span>
-      </button>
-
-      <button class="prompt-btn" onclick="quickPrompt('Write a catchy social media caption')">
-        <strong>📱 Caption</strong>
-        <span>Social media content</span>
-      </button>
-
-      <button class="prompt-btn" onclick="quickPrompt('Translate the following text into English')">
-        <strong>🌐 Translate</strong>
-        <span>Multiple languages</span>
-      </button>
-
-      <button class="prompt-btn" onclick="quickPrompt('Help me make a professional resume')">
-        <strong>📄 Resume</strong>
-        <span>Career assistance</span>
-      </button>
-
-      <button class="prompt-btn" onclick="quickPrompt('Help me understand this coding problem')">
-        <strong>💻 Coding</strong>
-        <span>Programming help</span>
-      </button>
-
-      <button class="prompt-btn" onclick="quickPrompt('Give me useful study notes for this topic')">
-        <strong>🎓 Study</strong>
-        <span>Student assistant</span>
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <!-- PUBLIC TOOLS -->
-  <section class="section">
-
-    <div class="section-title">
-      <div>
-        <h2>Tools for Everyone</h2>
-        <p>Useful for everyday life</p>
+      <div class="quick-card">
+        <button onclick="usePrompt('Write original song lyrics with a strong emotional chorus.')">
+          <div class="quick-icon">🎵</div>
+          <strong>Lyrics</strong>
+          <span>Create original lyrics</span>
+        </button>
       </div>
+
+      <div class="quick-card">
+        <button onclick="usePrompt('Write a professional social media caption for my post.')">
+          <div class="quick-icon">📱</div>
+          <strong>Caption</strong>
+          <span>Social media captions</span>
+        </button>
+      </div>
+
+      <div class="quick-card">
+        <button onclick="document.getElementById('imagePrompt').focus()">
+          <div class="quick-icon">🎨</div>
+          <strong>Image</strong>
+          <span>Create an AI image</span>
+        </button>
+      </div>
+
     </div>
+
+  </div>
+
+</section>
+
+
+<!-- TOOLS -->
+
+<section id="tools">
+
+  <div class="container">
+
+    <h2 class="section-title">
+      AI Tools
+    </h2>
+
+    <p class="section-subtitle">
+      Useful tools for work, study and creativity.
+    </p>
 
     <div class="tools-grid">
 
-      <button class="tool-card" onclick="quickPrompt('Act as a calculator. Solve the calculation I provide and show the steps clearly.')">
-        <div class="tool-icon">🧮</div>
-        <h3>Calculator</h3>
-        <p>Math, percentages and calculations.</p>
-      </button>
+      <div class="tool-card">
+        <button onclick="usePrompt('Act as a professional writing assistant. Help me write this clearly and professionally: ')">
+          <strong>✍️ Writing</strong>
+          <span>Professional writing help</span>
+        </button>
+      </div>
 
-      <button class="tool-card" onclick="quickPrompt('Help me create a daily schedule based on my tasks.')">
-        <div class="tool-icon">📅</div>
-        <h3>Daily Planner</h3>
-        <p>Organise your day and tasks.</p>
-      </button>
+      <div class="tool-card">
+        <button onclick="usePrompt('Write an original Hindi romantic song with verses and a catchy chorus.')">
+          <strong>🎵 Song Lyrics</strong>
+          <span>Original song ideas</span>
+        </button>
+      </div>
 
-      <button class="tool-card" onclick="quickPrompt('Help me plan a budget and calculate my monthly expenses.')">
-        <div class="tool-icon">💰</div>
-        <h3>Budget Helper</h3>
-        <p>Plan expenses and savings.</p>
-      </button>
+      <div class="tool-card">
+        <button onclick="usePrompt('Help me create a complete YouTube video plan including title, hook, script outline and description.')">
+          <strong>▶️ YouTube</strong>
+          <span>Video planning</span>
+        </button>
+      </div>
 
-      <button class="tool-card" onclick="quickPrompt('Help me plan a trip with places to visit, food and a simple itinerary.')">
-        <div class="tool-icon">✈️</div>
-        <h3>Trip Planner</h3>
-        <p>Create practical travel plans.</p>
-      </button>
+      <div class="tool-card">
+        <button onclick="usePrompt('Translate the following text naturally and professionally: ')">
+          <strong>🌐 Translation</strong>
+          <span>Natural translations</span>
+        </button>
+      </div>
 
-      <button class="tool-card" onclick="quickPrompt('Suggest a simple healthy recipe from the ingredients I provide.')">
-        <div class="tool-icon">🍳</div>
-        <h3>Recipe Helper</h3>
-        <p>Get ideas from available ingredients.</p>
-      </button>
+      <div class="tool-card">
+        <button onclick="usePrompt('Create a professional resume for me. Ask for missing details if needed.')">
+          <strong>📄 Resume</strong>
+          <span>Resume assistance</span>
+        </button>
+      </div>
 
-      <button class="tool-card" onclick="quickPrompt('Help me prepare for an interview with questions and strong sample answers.')">
-        <div class="tool-icon">💼</div>
-        <h3>Interview Coach</h3>
-        <p>Prepare for job interviews.</p>
-      </button>
+      <div class="tool-card">
+        <button onclick="usePrompt('Give me a professional YouTube thumbnail concept with short powerful text and visual direction.')">
+          <strong>🖼️ Thumbnail</strong>
+          <span>Thumbnail concepts</span>
+        </button>
+      </div>
 
-      <button class="tool-card" onclick="quickPrompt('Summarise the text I provide into short easy-to-read points.')">
-        <div class="tool-icon">📝</div>
-        <h3>Summarizer</h3>
-        <p>Turn long text into key points.</p>
-      </button>
+      <div class="tool-card">
+        <button onclick="usePrompt('Create a professional promotional poster concept for my project.')">
+          <strong>🎨 Poster</strong>
+          <span>Poster concepts</span>
+        </button>
+      </div>
 
-      <button class="tool-card" onclick="quickPrompt('Help me write a polite customer support message about my problem.')">
-        <div class="tool-icon">🆘</div>
-        <h3>Support Writer</h3>
-        <p>Write clear support requests.</p>
-      </button>
+      <div class="tool-card">
+        <button onclick="usePrompt('Help me solve this programming problem and explain the solution clearly: ')">
+          <strong>💻 Coding</strong>
+          <span>Programming help</span>
+        </button>
+      </div>
 
-      <button class="tool-card" onclick="quickPrompt('Help me compare two options and give me a simple pros and cons table.')">
-        <div class="tool-icon">⚖️</div>
-        <h3>Compare</h3>
-        <p>Compare choices clearly.</p>
-      </button>
+      <div class="tool-card">
+        <button onclick="usePrompt('Calculate and explain this problem step by step: ')">
+          <strong>🧮 Calculator</strong>
+          <span>Math assistance</span>
+        </button>
+      </div>
 
-      <button class="tool-card" onclick="quickPrompt('Help me create a study plan for my exam.')">
-        <div class="tool-icon">📖</div>
-        <h3>Study Planner</h3>
-        <p>Build an exam preparation plan.</p>
-      </button>
+      <div class="tool-card">
+        <button onclick="usePrompt('Create a practical daily planner for me with priorities, tasks and time blocks.')">
+          <strong>📅 Daily Planner</strong>
+          <span>Organise your day</span>
+        </button>
+      </div>
 
-      <button class="tool-card" onclick="quickPrompt('Give me creative ideas for a small business or online side project.')">
-        <div class="tool-icon">💡</div>
-        <h3>Idea Generator</h3>
-        <p>Business and project ideas.</p>
-      </button>
+      <div class="tool-card">
+        <button onclick="usePrompt('Help me make a monthly budget and organise income and expenses.')">
+          <strong>💰 Budget Helper</strong>
+          <span>Budget planning</span>
+        </button>
+      </div>
 
-      <button class="tool-card" onclick="quickPrompt('Help me improve the English grammar and wording of this text.')">
-        <div class="tool-icon">🔤</div>
-        <h3>English Helper</h3>
-        <p>Grammar and better wording.</p>
-      </button>
+      <div class="tool-card">
+        <button onclick="usePrompt('Create a practical travel itinerary based on my destination, days and budget: ')">
+          <strong>✈️ Trip Planner</strong>
+          <span>Travel planning</span>
+        </button>
+      </div>
+
+      <div class="tool-card">
+        <button onclick="usePrompt('Give me a simple and delicious recipe using these ingredients: ')">
+          <strong>🍳 Recipe Helper</strong>
+          <span>Recipe ideas</span>
+        </button>
+      </div>
+
+      <div class="tool-card">
+        <button onclick="usePrompt('Act as an interview coach. Ask me realistic interview questions and evaluate my answers.')">
+          <strong>🎤 Interview Coach</strong>
+          <span>Interview practice</span>
+        </button>
+      </div>
+
+      <div class="tool-card">
+        <button onclick="usePrompt('Summarise the following text clearly, keeping the important points: ')">
+          <strong>📝 Summarizer</strong>
+          <span>Clear summaries</span>
+        </button>
+      </div>
+
+      <div class="tool-card">
+        <button onclick="usePrompt('Write a polite and professional support message for this situation: ')">
+          <strong>💬 Support Writer</strong>
+          <span>Professional messages</span>
+        </button>
+      </div>
+
+      <div class="tool-card">
+        <button onclick="usePrompt('Compare these two options objectively and tell me the advantages, disadvantages and best choice: ')">
+          <strong>⚖️ Compare</strong>
+          <span>Compare options</span>
+        </button>
+      </div>
+
+      <div class="tool-card">
+        <button onclick="usePrompt('Create a study plan for this subject and goal: ')">
+          <strong>📚 Study Planner</strong>
+          <span>Study organisation</span>
+        </button>
+      </div>
+
+      <div class="tool-card">
+        <button onclick="usePrompt('Give me 20 creative ideas for this topic: ')">
+          <strong>💡 Idea Generator</strong>
+          <span>Creative brainstorming</span>
+        </button>
+      </div>
+
+      <div class="tool-card">
+        <button onclick="usePrompt('Help me improve my English naturally. Correct this text and explain the mistakes: ')">
+          <strong>🇬🇧 English Helper</strong>
+          <span>English improvement</span>
+        </button>
+      </div>
 
     </div>
 
-  </section>
+  </div>
+
+</section>
 
 
-  <!-- PREMIUM -->
-  <section class="premium">
+<!-- FEATURES -->
 
-    <div class="premium-content">
+<section>
 
-      <div>
+  <div class="container">
 
-        <h2>💎 Bolo AI Premium</h2>
+    <h2 class="section-title">
+      Why Bolo AI?
+    </h2>
 
-        <p>
-          Unlock a more powerful AI experience with Premium.
-        </p>
+    <p class="section-subtitle">
+      Built to make everyday AI simple.
+    </p>
+
+    <div class="features-grid">
+
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3>Smart AI Chat</h3>
+        <p>Get helpful AI responses through your Bolo AI assistant.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🖼️</div>
+        <h3>Photo Understanding</h3>
+        <p>Upload an image and ask Bolo AI to analyse it.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎙️</div>
+        <h3>Voice</h3>
+        <p>Speak your message and listen to AI responses.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎨</div>
+        <h3>AI Images</h3>
+        <p>Create images from your own text prompts.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🔐</div>
+        <h3>Account</h3>
+        <p>Use Firebase authentication for your Bolo AI account.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3>Installable</h3>
+        <p>Use Bolo AI like an app on supported devices.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PREMIUM -->
+
+<section id="premium">
+
+  <div class="container">
+
+    <h2 class="section-title">
+      Bolo AI Premium
+    </h2>
+
+    <p class="section-subtitle">
+      Unlock the premium experience.
+    </p>
+
+    <div class="pricing-grid">
+
+      <div class="price-card">
+
+        <h3>Free</h3>
 
         <div class="price">
-          <span class="old-price">₹249</span>
-          ₹149/month
+          ₹0
         </div>
+
+        <ul class="price-list">
+          <li>✓ AI Chat</li>
+          <li>✓ Photo Upload</li>
+          <li>✓ Voice Input</li>
+          <li>✓ AI Tools</li>
+          <li>✓ Basic Image Generation</li>
+        </ul>
+
+        <button
+          class="price-btn"
+          type="button"
+          onclick="showToast('You are using the Free plan.')"
+        >
+          Current Plan
+        </button>
 
       </div>
 
-      <button
-        class="premium-btn"
-        onclick="activatePremium()">
-        Try Premium
-      </button>
+
+      <div class="price-card featured">
+
+        <h3>Premium</h3>
+
+        <div>
+          <span class="old-price">
+            ₹249
+          </span>
+        </div>
+
+        <div class="price">
+          ₹149<span style="font-size:16px">/month</span>
+        </div>
+
+        <div class="offer">
+          Limited Offer
+        </div>
+
+        <ul class="price-list">
+          <li>✓ Premium AI experience</li>
+          <li>✓ Advanced creative tools</li>
+          <li>✓ Priority experience</li>
+          <li>✓ Premium features</li>
+          <li>✓ More productivity</li>
+        </ul>
+
+        <button
+          class="price-btn"
+          type="button"
+          onclick="startMockPayment()"
+        >
+          Upgrade — ₹149/month
+        </button>
+
+      </div>
 
     </div>
 
-  </section>
+  </div>
+
+</section>
 
 
-  <!-- ABOUT -->
-  <section class="section">
+<!-- ABOUT -->
 
-    <div class="card about">
+<section id="about">
 
-      <h2>About Bolo AI</h2>
+  <div class="container">
 
-      <p>
-        Bolo AI is your own smart AI assistant for everyday tasks,
-        learning, creativity, writing, images, coding and productivity.
+    <h2 class="section-title">
+      About Bolo AI
+    </h2>
+
+    <p class="section-subtitle">
+      Simple, useful and creative AI for everyday users.
+    </p>
+
+    <div class="about-card">
+
+      <h3>
+        About Us
+      </h3>
+
+      <p style="margin-top:8px;color:#6b7280">
+        Bolo AI is your own smart AI assistant designed to help
+        you chat, write, create, learn, plan and explore ideas
+        from one simple interface.
       </p>
 
-      <h3>What you can do</h3>
-
-      <ul>
-        <li>Ask questions and get AI assistance.</li>
-        <li>Upload photos for AI analysis.</li>
-        <li>Use voice input.</li>
-        <li>Create AI images.</li>
-        <li>Write emails, captions, scripts and documents.</li>
-        <li>Get study, career and everyday-life assistance.</li>
-      </ul>
-
-      <h3>Privacy Policy</h3>
-
-      <p>
-        Bolo AI is designed to provide useful AI assistance while
-        respecting user privacy. Do not submit passwords, financial
-        credentials or highly sensitive personal information.
+      <p style="margin-top:10px;color:#6b7280">
+        Created by Sabroj Babu.
       </p>
 
-      <h3>Terms & Conditions</h3>
 
-      <p>
-        By using Bolo AI, you agree to use the service responsibly and
-        legally. AI responses should be reviewed before being used for
-        important decisions.
-      </p>
+      <div class="policy">
 
-      <h3>Content Policy</h3>
+        <h3>
+          Privacy Policy
+        </h3>
 
-      <p>
-        Do not use Bolo AI to create or distribute illegal, harmful,
-        abusive or deceptive content.
-      </p>
+        <p>
+          Bolo AI aims to handle user information responsibly.
+          Do not enter passwords, financial details or other
+          highly sensitive information into AI conversations.
+        </p>
 
-      <h3>AI Usage Policy</h3>
+      </div>
 
-      <p>
-        AI responses can sometimes be inaccurate. Always verify important
-        medical, legal, financial or safety-related information with a
-        qualified professional or trusted source.
-      </p>
 
-      <h3>Contact</h3>
+      <div class="policy">
 
-      <p>
-        Email:
-        <a href="mailto:Sabrojalam8454@gmail.com">
-          Sabrojalam8454@gmail.com
-        </a>
-      </p>
+        <h3>
+          Terms & Conditions
+        </h3>
 
-      <p style="margin-top:14px;">
-        Created by <strong>Sabroj Babu</strong>.
-      </p>
+        <p>
+          By using Bolo AI, you agree to use the service lawfully,
+          responsibly and without attempting to misuse, disrupt
+          or abuse the service.
+        </p>
+
+      </div>
+
+
+      <div class="policy">
+
+        <h3>
+          Content Policy
+        </h3>
+
+        <p>
+          Users are responsible for the content they submit.
+          Do not use Bolo AI for illegal, harmful or abusive
+          activities.
+        </p>
+
+      </div>
+
+
+      <div class="policy">
+
+        <h3>
+          AI Usage Policy
+        </h3>
+
+        <p>
+          AI responses can contain mistakes. Always verify
+          important information before making decisions based
+          on AI-generated content.
+        </p>
+
+      </div>
+
+
+      <div class="policy">
+
+        <h3>
+          Contact
+        </h3>
+
+        <p>
+          Email:
+          <a
+            href="mailto:Sabrojalam8454@gmail.com"
+            style="color:#4f46e5;font-weight:700"
+          >
+            Sabrojalam8454@gmail.com
+          </a>
+        </p>
+
+      </div>
 
     </div>
 
-  </section>
+  </div>
+
+</section>
 
 </main>
 
 
+<!-- FOOTER -->
+
 <footer>
-  <div>Bolo AI © 2026</div>
-  <div style="margin-top:7px;">
-    Contact:
-    <a href="mailto:Sabrojalam8454@gmail.com">
-      Sabrojalam8454@gmail.com
-    </a>
+
+  <div class="container">
+
+    <div>
+      © 2026 Bolo AI. All rights reserved.
+    </div>
+
+    <div style="margin-top:5px">
+      Created by Sabroj Babu •
+      <a
+        href="mailto:Sabrojalam8454@gmail.com"
+        style="font-weight:700"
+      >
+        Sabrojalam8454@gmail.com
+      </a>
+    </div>
+
   </div>
+
 </footer>
 
 
 <!-- AUTH MODAL -->
-<div class="modal" id="authModal">
 
-  <div class="modal-card">
+<div
+  class="modal"
+  id="authModal"
+>
 
-    <div class="modal-head">
+  <div class="modal-box">
 
-      <h2 id="authTitle">Login</h2>
+    <button
+      class="modal-close"
+      onclick="closeModal('authModal')"
+      type="button"
+    >
+      ×
+    </button>
 
-      <button
-        class="close-btn"
-        onclick="closeAuth()">
-        ×
-      </button>
+    <h2 id="authTitle">
+      Login to Bolo AI
+    </h2>
 
-    </div>
+    <p
+      id="authSubtitle"
+      style="color:#6b7280;font-size:13px;margin-top:5px"
+    >
+      Access your Bolo AI account.
+    </p>
 
-    <form onsubmit="handleAuth(event)">
 
-      <div class="form-group">
+    <input
+      class="auth-input"
+      id="authName"
+      type="text"
+      placeholder="Your name"
+    >
 
-        <label>Email</label>
 
-        <input
-          id="authEmail"
-          type="email"
-          required
-          placeholder="Enter your email"
-        >
+    <input
+      class="auth-input"
+      id="authEmail"
+      type="email"
+      placeholder="Email address"
+    >
 
-      </div>
 
-      <div class="form-group">
+    <input
+      class="auth-input"
+      id="authPassword"
+      type="password"
+      placeholder="Password"
+    >
 
-        <label>Password</label>
 
-        <input
-          id="authPassword"
-          type="password"
-          required
-          minlength="6"
-          placeholder="Enter your password"
-        >
+    <button
+      class="auth-main-btn"
+      id="authMainBtn"
+      type="button"
+      onclick="submitAuth()"
+    >
+      Login
+    </button>
 
-      </div>
-
-      <button
-        class="form-submit"
-        id="authSubmit">
-        Login
-      </button>
-
-    </form>
 
     <button
       class="google-btn"
-      onclick="googleLogin()">
+      type="button"
+      onclick="googleLogin()"
+    >
       Continue with Google
     </button>
 
-    <div style="text-align:center;margin-top:10px;">
-      <button
-        class="mini-btn"
-        onclick="forgotPassword()">
-        Forgot password?
-      </button>
-    </div>
 
-    <div
-      class="auth-switch"
-      id="authSwitch">
-      New here?
-      <button
-        class="mini-btn"
-        onclick="setAuthMode('signup')">
-        Create account
-      </button>
-    </div>
+    <a
+      href="#"
+      class="auth-link"
+      id="forgotLink"
+      onclick="forgotPassword(event)"
+    >
+      Forgot password?
+    </a>
+
+
+    <a
+      href="#"
+      class="auth-link"
+      id="switchAuth"
+      onclick="switchAuthMode(event)"
+    >
+      Create an account
+    </a>
 
   </div>
 
@@ -1471,28 +1972,38 @@ body.dark .form-group input{
 
 
 <!-- ACCOUNT MODAL -->
-<div class="modal" id="accountModal">
 
-  <div class="modal-card">
+<div
+  class="modal"
+  id="accountModal"
+>
 
-    <div class="modal-head">
-
-      <h2>My Account</h2>
-
-      <button
-        class="close-btn"
-        onclick="closeAccount()">
-        ×
-      </button>
-
-    </div>
-
-    <div id="accountInfo"></div>
+  <div class="modal-box">
 
     <button
-      class="form-submit"
-      style="margin-top:16px;"
-      onclick="logoutUser()">
+      class="modal-close"
+      onclick="closeModal('accountModal')"
+      type="button"
+    >
+      ×
+    </button>
+
+    <h2>
+      My Account
+    </h2>
+
+    <div
+      class="account-info"
+      id="accountInfo"
+    >
+      Not logged in.
+    </div>
+
+    <button
+      class="auth-main-btn"
+      type="button"
+      onclick="logoutUser()"
+    >
       Logout
     </button>
 
@@ -1502,74 +2013,57 @@ body.dark .form-group input{
 
 
 <!-- TOAST -->
-<div class="toast" id="toast"></div>
 
+<div
+  class="toast"
+  id="toast"
+></div>
 
-<!-- FIREBASE -->
-<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
 
 <script>
 
-/* =========================
+/* =========================================
    BOLO AI CONFIG
-========================= */
+========================================= */
 
 const BACKEND_URL =
   "https://bolo-ai-backend-cfft.onrender.com";
 
+
 const firebaseConfig = {
+
   apiKey:
     "AIzaSyAAztA2xqtWWWKYzzvL9A0UTbk6Pw1-FC8",
+
   authDomain:
     "bolo-ai-c429f.firebaseapp.com",
+
   projectId:
     "bolo-ai-c429f",
+
   storageBucket:
     "bolo-ai-c429f.firebasestorage.app",
+
   messagingSenderId:
     "168156718400",
+
   appId:
     "1:168156718400:web:086f58868044daef9146a5",
+
   measurementId:
     "G-0Q60GF4EPN"
+
 };
 
 
-/* =========================
-   FIREBASE
-========================= */
-
-let firebaseReady = false;
-let auth = null;
-
-try{
-
-  firebase.initializeApp(firebaseConfig);
-
-  auth =
-    firebase.auth();
-
-  firebaseReady = true;
-
-}catch(error){
-
-  console.error(
-    "Firebase error:",
-    error
-  );
-
-}
-
-
-/* =========================
+/* =========================================
    HELPERS
-========================= */
+========================================= */
 
 function $(id){
   return document.getElementById(id);
 }
+
 
 function showToast(message){
 
@@ -1582,36 +2076,469 @@ function showToast(message){
   toast.classList.add("show");
 
   clearTimeout(
-    window.toastTimer
+    window.__toastTimer
   );
 
-  window.toastTimer =
+  window.__toastTimer =
     setTimeout(
-      () => {
+      function(){
+
         toast.classList.remove("show");
+
       },
-      2800
+      2600
     );
+
 }
 
 
-/* =========================
-   CHAT STATE
-========================= */
+/* =========================================
+   FIREBASE
+========================================= */
 
-let selectedPhoto = null;
-let recognition = null;
-let messages = [];
+let firebaseReady =
+  false;
+
+let currentUser =
+  null;
+
+let authMode =
+  "login";
 
 
-/* =========================
-   CHAT UI
-========================= */
+try{
+
+  if(
+    typeof firebase !==
+    "undefined"
+  ){
+
+    firebase.initializeApp(
+      firebaseConfig
+    );
+
+    firebaseReady =
+      true;
+
+    firebase.auth().onAuthStateChanged(
+      function(user){
+
+        currentUser =
+          user || null;
+
+        updateAuthUI();
+
+      }
+    );
+
+  }
+
+}catch(error){
+
+  console.error(
+    "Firebase error:",
+    error
+  );
+
+}
+
+
+function updateAuthUI(){
+
+  const button =
+    $("authNavBtn");
+
+  if(!button){
+    return;
+  }
+
+  if(currentUser){
+
+    button.textContent =
+      "Account";
+
+    button.onclick =
+      openAccount;
+
+  }else{
+
+    button.textContent =
+      "Login";
+
+    button.onclick =
+      openAuth;
+
+  }
+
+}
+
+
+function openAuth(){
+
+  $("authModal")
+    .classList.add("show");
+
+}
+
+
+function closeModal(id){
+
+  $(id)
+    .classList.remove("show");
+
+}
+
+
+function switchAuthMode(event){
+
+  if(event){
+    event.preventDefault();
+  }
+
+  authMode =
+    authMode === "login"
+      ? "signup"
+      : "login";
+
+  if(authMode === "login"){
+
+    $("authTitle").textContent =
+      "Login to Bolo AI";
+
+    $("authSubtitle").textContent =
+      "Access your Bolo AI account.";
+
+    $("authName").style.display =
+      "none";
+
+    $("authMainBtn").textContent =
+      "Login";
+
+    $("forgotLink").style.display =
+      "block";
+
+    $("switchAuth").textContent =
+      "Create an account";
+
+  }else{
+
+    $("authTitle").textContent =
+      "Create your Bolo AI account";
+
+    $("authSubtitle").textContent =
+      "Create a free account.";
+
+    $("authName").style.display =
+      "block";
+
+    $("authMainBtn").textContent =
+      "Sign Up";
+
+    $("forgotLink").style.display =
+      "none";
+
+    $("switchAuth").textContent =
+      "Already have an account? Login";
+
+  }
+
+}
+
+
+$("authName").style.display =
+  "none";
+
+
+async function submitAuth(){
+
+  if(!firebaseReady){
+
+    showToast(
+      "Firebase is not available right now."
+    );
+
+    return;
+  }
+
+  const email =
+    $("authEmail")
+      .value
+      .trim();
+
+  const password =
+    $("authPassword")
+      .value;
+
+  const name =
+    $("authName")
+      .value
+      .trim();
+
+  if(!email || !password){
+
+    showToast(
+      "Enter your email and password."
+    );
+
+    return;
+  }
+
+  try{
+
+    if(authMode === "login"){
+
+      await firebase
+        .auth()
+        .signInWithEmailAndPassword(
+          email,
+          password
+        );
+
+      showToast(
+        "Login successful."
+      );
+
+    }else{
+
+      if(!name){
+
+        showToast(
+          "Enter your name."
+        );
+
+        return;
+      }
+
+      const result =
+        await firebase
+          .auth()
+          .createUserWithEmailAndPassword(
+            email,
+            password
+          );
+
+      if(
+        result.user
+      ){
+
+        await result.user
+          .updateProfile({
+            displayName:name
+          });
+
+      }
+
+      showToast(
+        "Account created successfully."
+      );
+
+    }
+
+    closeModal(
+      "authModal"
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Authentication failed."
+    );
+
+  }
+
+}
+
+
+async function googleLogin(){
+
+  if(!firebaseReady){
+
+    showToast(
+      "Firebase is not available right now."
+    );
+
+    return;
+  }
+
+  try{
+
+    const provider =
+      new firebase.auth.GoogleAuthProvider();
+
+    await firebase
+      .auth()
+      .signInWithPopup(
+        provider
+      );
+
+    closeModal(
+      "authModal"
+    );
+
+    showToast(
+      "Google login successful."
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Google login failed."
+    );
+
+  }
+
+}
+
+
+async function forgotPassword(event){
+
+  if(event){
+    event.preventDefault();
+  }
+
+  if(!firebaseReady){
+    return;
+  }
+
+  const email =
+    $("authEmail")
+      .value
+      .trim();
+
+  if(!email){
+
+    showToast(
+      "Enter your email first."
+    );
+
+    return;
+  }
+
+  try{
+
+    await firebase
+      .auth()
+      .sendPasswordResetEmail(
+        email
+      );
+
+    showToast(
+      "Password reset email sent."
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Could not send reset email."
+    );
+
+  }
+
+}
+
+
+function openAccount(){
+
+  if(!currentUser){
+
+    openAuth();
+
+    return;
+  }
+
+  $("accountInfo").innerHTML =
+
+    "<strong>" +
+    escapeHtml(
+      currentUser.displayName ||
+      "Bolo AI User"
+    ) +
+    "</strong>" +
+
+    "<br>" +
+
+    "<span style='color:#6b7280'>" +
+    escapeHtml(
+      currentUser.email ||
+      ""
+    ) +
+    "</span>";
+
+  $("accountModal")
+    .classList.add("show");
+
+}
+
+
+async function logoutUser(){
+
+  if(!firebaseReady){
+    return;
+  }
+
+  try{
+
+    await firebase
+      .auth()
+      .signOut();
+
+    closeModal(
+      "accountModal"
+    );
+
+    showToast(
+      "Logged out successfully."
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+  }
+
+}
+
+
+/* =========================================
+   ESCAPE HTML
+========================================= */
+
+function escapeHtml(text){
+
+  return String(text)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+/* =========================================
+   CHAT
+========================================= */
+
+let selectedPhoto =
+  null;
+
+let recognition =
+  null;
+
 
 function addMessage(
   text,
-  role = "assistant",
-  image = null
+  role,
+  photo
 ){
 
   const empty =
@@ -1621,87 +2548,146 @@ function addMessage(
     empty.remove();
   }
 
-  const wrapper =
-    document.createElement("div");
-
-  wrapper.className =
-    "message " + role;
-
-  const avatar =
-    document.createElement("div");
-
-  avatar.className =
-    "message-avatar";
-
-  avatar.textContent =
-    role === "user"
-      ? "You"
-      : "B";
-
-  const content =
-    document.createElement("div");
-
-  content.className =
-    "message-content";
-
-  const bubble =
-    document.createElement("div");
-
-  bubble.className =
-    "message-bubble";
-
-  bubble.textContent =
-    text || "";
-
-  content.appendChild(
-    bubble
-  );
-
-  if(image){
-
-    const imageElement =
-      document.createElement("img");
-
-    imageElement.className =
-      "message-image";
-
-    imageElement.src =
-      image;
-
-    imageElement.alt =
-      "Uploaded photo";
-
-    content.appendChild(
-      imageElement
+  const row =
+    document.createElement(
+      "div"
     );
+
+  row.className =
+    "message-row " +
+    role;
+
+  const box =
+    document.createElement(
+      "div"
+    );
+
+  box.className =
+    "message " +
+    role;
+
+  if(text){
+
+    const textDiv =
+      document.createElement(
+        "div"
+      );
+
+    textDiv.textContent =
+      text;
+
+    box.appendChild(
+      textDiv
+    );
+
   }
 
-  wrapper.appendChild(
-    avatar
+  if(photo){
+
+    const img =
+      document.createElement(
+        "img"
+      );
+
+    img.className =
+      "message-photo";
+
+    img.src =
+      photo;
+
+    img.alt =
+      "Uploaded photo";
+
+    box.appendChild(
+      img
+    );
+
+  }
+
+
+  if(role === "assistant" && text){
+
+    const tools =
+      document.createElement(
+        "div"
+      );
+
+    tools.className =
+      "message-tools";
+
+
+    const listen =
+      document.createElement(
+        "button"
+      );
+
+    listen.type =
+      "button";
+
+    listen.textContent =
+      "🔊 Listen";
+
+    listen.onclick =
+      function(){
+
+        speakText(
+          text
+        );
+
+      };
+
+
+    const stop =
+      document.createElement(
+        "button"
+      );
+
+    stop.type =
+      "button";
+
+    stop.textContent =
+      "⏹ Stop";
+
+    stop.onclick =
+      function(){
+
+        stopSpeaking();
+
+      };
+
+
+    tools.appendChild(
+      listen
+    );
+
+    tools.appendChild(
+      stop
+    );
+
+    box.appendChild(
+      tools
+    );
+
+  }
+
+
+  row.appendChild(
+    box
   );
 
-  wrapper.appendChild(
-    content
-  );
+  $("chatMessages")
+    .appendChild(
+      row
+    );
 
-  $("chatBody").appendChild(
-    wrapper
-  );
+  const messages =
+    $("chatMessages");
 
-  $("chatBody").scrollTop =
-    $("chatBody").scrollHeight;
+  messages.scrollTop =
+    messages.scrollHeight;
 
-  messages.push({
-    role:role,
-    text:text || "",
-    image:image || null
-  });
 }
 
-
-/* =========================
-   SEND CHAT
-========================= */
 
 async function sendChat(){
 
@@ -1711,7 +2697,10 @@ async function sendChat(){
   const text =
     input.value.trim();
 
-  if(!text && !selectedPhoto){
+  if(
+    !text &&
+    !selectedPhoto
+  ){
 
     showToast(
       "Type a message or upload a photo."
@@ -1730,13 +2719,15 @@ async function sendChat(){
     photo
   );
 
-  input.value = "";
+  input.value =
+    "";
 
   $("chatStatus").textContent =
     "Bolo AI is thinking…";
 
   $("sendBtn").disabled =
     true;
+
 
   try{
 
@@ -1745,28 +2736,34 @@ async function sendChat(){
         BACKEND_URL +
         "/api/chat",
         {
-          method:"POST",
+
+          method:
+            "POST",
 
           headers:{
             "Content-Type":
               "application/json"
           },
 
-          body:JSON.stringify({
+          body:
+            JSON.stringify({
 
-            message:
-              text ||
-              "Analyse this image.",
+              message:
+                text ||
+                "Analyse this image.",
 
-            image:
-              photo
+              image:
+                photo
 
-          })
+            })
+
         }
       );
 
+
     const data =
       await response.json();
+
 
     if(!response.ok){
 
@@ -1777,28 +2774,41 @@ async function sendChat(){
 
     }
 
+
     const reply =
       data.reply ||
       data.message ||
       "I could not generate a reply.";
+
 
     addMessage(
       reply,
       "assistant"
     );
 
-    /* Voice reply */
+
     if(
-      localStorage.getItem(
-        "boloVoiceReply"
-      ) === "on"
+      voiceReplyEnabled
     ){
-      speakText(reply);
+
+      setTimeout(
+        function(){
+
+          speakText(
+            reply
+          );
+
+        },
+        180
+      );
+
     }
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      error
+    );
 
     addMessage(
       "Sorry, I could not connect to Bolo AI right now. Please check your Render backend.",
@@ -1816,31 +2826,13 @@ async function sendChat(){
     removePhoto();
 
   }
+
 }
 
 
-/* =========================
-   ENTER TO SEND
-========================= */
-
-function handleEnter(event){
-
-  if(
-    event.key === "Enter" &&
-    !event.shiftKey
-  ){
-
-    event.preventDefault();
-
-    sendChat();
-
-  }
-}
-
-
-/* =========================
-   PHOTO
-========================= */
+/* =========================================
+   PHOTO UPLOAD
+========================================= */
 
 function handlePhoto(event){
 
@@ -1865,7 +2857,9 @@ function handlePhoto(event){
   }
 
   if(
-    !file.type.startsWith("image/")
+    !file.type.startsWith(
+      "image/"
+    )
   ){
 
     showToast(
@@ -1875,8 +2869,10 @@ function handlePhoto(event){
     return;
   }
 
+
   const reader =
     new FileReader();
+
 
   reader.onload =
     function(){
@@ -1891,14 +2887,16 @@ function handlePhoto(event){
         "block";
 
       showToast(
-        "Photo ready"
+        "Photo ready."
       );
 
     };
 
+
   reader.readAsDataURL(
     file
   );
+
 }
 
 
@@ -1919,15 +2917,16 @@ function removePhoto(){
 }
 
 
-/* =========================
+/* =========================================
    VOICE INPUT
-========================= */
+========================================= */
 
 function startVoice(){
 
   const SpeechRecognition =
     window.SpeechRecognition ||
     window.webkitSpeechRecognition;
+
 
   if(!SpeechRecognition){
 
@@ -1937,6 +2936,7 @@ function startVoice(){
 
     return;
   }
+
 
   if(recognition){
 
@@ -1948,8 +2948,10 @@ function startVoice(){
     return;
   }
 
+
   recognition =
     new SpeechRecognition();
+
 
   recognition.lang =
     "en-IN";
@@ -1959,6 +2961,7 @@ function startVoice(){
 
   recognition.continuous =
     false;
+
 
   recognition.onstart =
     function(){
@@ -1970,6 +2973,7 @@ function startVoice(){
         "⏹️";
 
     };
+
 
   recognition.onresult =
     function(event){
@@ -1992,6 +2996,7 @@ function startVoice(){
 
     };
 
+
   recognition.onerror =
     function(){
 
@@ -2000,6 +3005,7 @@ function startVoice(){
       );
 
     };
+
 
   recognition.onend =
     function(){
@@ -2015,63 +3021,410 @@ function startVoice(){
 
     };
 
+
   try{
 
     recognition.start();
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      error
+    );
 
   }
 
 }
 
 
-/* =========================
+/* =========================================
    VOICE REPLY
-========================= */
+========================================= */
 
-function speakText(text){
+let voiceReplyEnabled =
+  localStorage.getItem(
+    "boloVoiceReply"
+  ) === "on";
+
+
+let currentlySpeaking =
+  false;
+
+
+function updateVoiceReplyUI(){
+
+  const button =
+    $("voiceReplyBtn");
+
+  const icon =
+    $("voiceIcon");
+
+  const title =
+    $("voiceTitle");
+
+  const status =
+    $("voiceStatus");
+
+  const control =
+    $("voiceControl");
+
+
+  if(!button){
+    return;
+  }
+
+
+  if(
+    voiceReplyEnabled
+  ){
+
+    button.textContent =
+      "🔊 ON";
+
+    button.classList.add(
+      "active"
+    );
+
+    icon.textContent =
+      "🔊";
+
+    title.textContent =
+      "Voice Reply On";
+
+    status.textContent =
+      currentlySpeaking
+        ? "Bolo AI is speaking…"
+        : "AI replies will speak automatically";
+
+  }else{
+
+    button.textContent =
+      "🔇 OFF";
+
+    button.classList.remove(
+      "active"
+    );
+
+    icon.textContent =
+      "🔇";
+
+    title.textContent =
+      "Voice Reply Off";
+
+    status.textContent =
+      "Tap to speak AI replies";
+
+  }
+
+
+  if(control){
+
+    control.classList.toggle(
+      "speaking",
+      currentlySpeaking
+    );
+
+  }
+
+}
+
+
+function toggleVoiceReply(){
+
+  voiceReplyEnabled =
+    !voiceReplyEnabled;
+
+
+  localStorage.setItem(
+    "boloVoiceReply",
+    voiceReplyEnabled
+      ? "on"
+      : "off"
+  );
+
+
+  updateVoiceReplyUI();
+
+
+  if(
+    voiceReplyEnabled
+  ){
+
+    showToast(
+      "Voice replies are ON."
+    );
+
+    /*
+      A user tap is used here to unlock
+      browser speech where required.
+    */
+
+    speakText(
+      "Voice replies are now on."
+    );
+
+  }else{
+
+    stopSpeaking();
+
+    showToast(
+      "Voice replies are OFF."
+    );
+
+  }
+
+}
+
+
+function getVoiceLanguage(
+  text
+){
+
+  if(
+    /[\u0900-\u097F]/.test(
+      text
+    )
+  ){
+
+    return "hi-IN";
+
+  }
+
+  return "en-IN";
+
+}
+
+
+function getBestVoice(
+  language
+){
+
+  if(
+    !window.speechSynthesis
+  ){
+
+    return null;
+  }
+
+
+  const voices =
+    window.speechSynthesis
+      .getVoices();
+
+
+  if(!voices.length){
+    return null;
+  }
+
+
+  const exact =
+    voices.find(
+      function(voice){
+
+        return (
+          voice.lang &&
+          voice.lang.toLowerCase() ===
+          language.toLowerCase()
+        );
+
+      }
+    );
+
+
+  if(exact){
+    return exact;
+  }
+
+
+  const prefix =
+    language
+      .split("-")[0]
+      .toLowerCase();
+
+
+  return voices.find(
+    function(voice){
+
+      return (
+        voice.lang &&
+        voice.lang
+          .toLowerCase()
+          .startsWith(
+            prefix
+          )
+      );
+
+    }
+  ) || voices[0];
+
+}
+
+
+function speakText(
+  text
+){
 
   if(
     !text ||
     !window.speechSynthesis
   ){
 
+    showToast(
+      "Speech is not supported in this browser."
+    );
+
     return;
   }
 
-  window.speechSynthesis.cancel();
 
-  const speech =
+  stopSpeaking();
+
+
+  const utterance =
     new SpeechSynthesisUtterance(
       text
     );
 
-  speech.lang =
-    /[\u0900-\u097F]/.test(text)
-      ? "hi-IN"
-      : "en-IN";
 
-  speech.rate =
-    0.98;
+  const language =
+    getVoiceLanguage(
+      text
+    );
 
-  window.speechSynthesis.speak(
-    speech
+
+  utterance.lang =
+    language;
+
+
+  const voice =
+    getBestVoice(
+      language
+    );
+
+
+  if(voice){
+
+    utterance.voice =
+      voice;
+
+  }
+
+
+  utterance.rate =
+    0.96;
+
+  utterance.pitch =
+    1;
+
+  utterance.volume =
+    1;
+
+
+  utterance.onstart =
+    function(){
+
+      currentlySpeaking =
+        true;
+
+      updateVoiceReplyUI();
+
+    };
+
+
+  utterance.onend =
+    function(){
+
+      currentlySpeaking =
+        false;
+
+      updateVoiceReplyUI();
+
+    };
+
+
+  utterance.onerror =
+    function(){
+
+      currentlySpeaking =
+        false;
+
+      updateVoiceReplyUI();
+
+    };
+
+
+  window.speechSynthesis
+    .speak(
+      utterance
+    );
+
+}
+
+
+function stopSpeaking(){
+
+  if(
+    window.speechSynthesis
+  ){
+
+    window.speechSynthesis.cancel();
+
+  }
+
+  currentlySpeaking =
+    false;
+
+  updateVoiceReplyUI();
+
+}
+
+
+function listenToMessage(
+  text
+){
+
+  if(!text){
+    return;
+  }
+
+  speakText(
+    text
   );
 
 }
 
 
-/* =========================
+if(
+  window.speechSynthesis
+){
+
+  window.speechSynthesis
+    .addEventListener(
+      "voiceschanged",
+      function(){
+
+        updateVoiceReplyUI();
+
+      }
+    );
+
+}
+
+
+updateVoiceReplyUI();
+
+
+/* =========================================
    IMAGE GENERATOR
-========================= */
+========================================= */
 
 async function generateImage(){
 
   const prompt =
-    $("imagePrompt").value.trim();
+    $("imagePrompt")
+      .value
+      .trim();
+
 
   if(!prompt){
 
@@ -2082,8 +3435,10 @@ async function generateImage(){
     return;
   }
 
+
   const button =
     $("generateBtn");
+
 
   button.disabled =
     true;
@@ -2091,8 +3446,10 @@ async function generateImage(){
   button.textContent =
     "Creating…";
 
+
   $("generatedResult").innerHTML =
     '<div class="loading">Creating your image…</div>';
+
 
   try{
 
@@ -2101,21 +3458,27 @@ async function generateImage(){
         BACKEND_URL +
         "/api/generate-image",
         {
-          method:"POST",
+
+          method:
+            "POST",
 
           headers:{
             "Content-Type":
               "application/json"
           },
 
-          body:JSON.stringify({
-            prompt:prompt
-          })
+          body:
+            JSON.stringify({
+              prompt
+            })
+
         }
       );
 
+
     const data =
       await response.json();
+
 
     if(!response.ok){
 
@@ -2126,24 +3489,31 @@ async function generateImage(){
 
     }
 
+
     const image =
       data.image ||
       data.imageUrl ||
       data.url;
 
+
     if(!image){
 
       throw new Error(
-        "No image returned"
+        "No image returned."
       );
 
     }
 
+
     $("generatedResult").innerHTML =
       "";
 
+
     const imageElement =
-      document.createElement("img");
+      document.createElement(
+        "img"
+      );
+
 
     imageElement.src =
       image;
@@ -2151,11 +3521,13 @@ async function generateImage(){
     imageElement.alt =
       "Generated by Bolo AI";
 
-    $("generatedResult").appendChild(
-      imageElement
-    );
 
-    /* Also show generated image in chat */
+    $("generatedResult")
+      .appendChild(
+        imageElement
+      );
+
+
     addMessage(
       "I created this image from your prompt: " +
       prompt,
@@ -2163,13 +3535,18 @@ async function generateImage(){
       image
     );
 
+
     showToast(
-      "Image created successfully"
+      "Image created successfully."
     );
+
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      error
+    );
+
 
     $("generatedResult").innerHTML =
       '<div class="loading">Image generation is unavailable right now. Please check the Render /api/generate-image endpoint.</div>';
@@ -2187,635 +3564,176 @@ async function generateImage(){
 }
 
 
-/* =========================
+/* =========================================
    QUICK PROMPTS
-========================= */
+========================================= */
 
-function quickPrompt(text){
+function usePrompt(
+  prompt
+){
 
   $("chatInput").value =
-    text;
+    prompt;
 
   $("chatInput").focus();
 
-  $("chatInput").scrollIntoView({
-    behavior:"smooth",
-    block:"center"
-  });
+  document
+    .getElementById(
+      "chat"
+    )
+    .scrollIntoView({
+      behavior:"smooth"
+    });
 
 }
 
 
-/* =========================
-   CLEAR CHAT
-========================= */
-
-function clearChat(){
-
-  messages = [];
-
-  $("chatBody").innerHTML = `
-
-    <div class="empty-chat" id="emptyChat">
-
-      <div class="empty-icon">🤖</div>
-
-      <h2>How can I help you today?</h2>
-
-      <p>
-        Ask a question, upload a photo,
-        speak your message, or create an image.
-      </p>
-
-    </div>
-
-  `;
-
-  showToast(
-    "Chat cleared"
-  );
-
-}
-
-
-/* =========================
-   EXPORT CHAT
-========================= */
-
-function exportChat(){
-
-  if(!messages.length){
-
-    showToast(
-      "There is no chat to export."
-    );
-
-    return;
-  }
-
-  let text =
-    "Bolo AI Chat Export\n";
-
-  text +=
-    "====================\n\n";
-
-  messages.forEach(
-    function(message){
-
-      text +=
-        (
-          message.role === "user"
-            ? "You"
-            : "Bolo AI"
-        ) +
-        ":\n";
-
-      text +=
-        message.text +
-        "\n\n";
-
-    }
-  );
-
-  const blob =
-    new Blob(
-      [text],
-      {
-        type:
-          "text/plain"
-      }
-    );
-
-  const url =
-    URL.createObjectURL(
-      blob
-    );
-
-  const a =
-    document.createElement("a");
-
-  a.href =
-    url;
-
-  a.download =
-    "bolo-ai-chat.txt";
-
-  a.click();
-
-  URL.revokeObjectURL(
-    url
-  );
-
-  showToast(
-    "Chat exported"
-  );
-
-}
-
-
-/* =========================
+/* =========================================
    THEME
-========================= */
+========================================= */
 
-function toggleTheme(){
-
-  document.body.classList.toggle(
-    "dark"
-  );
-
-  const dark =
-    document.body.classList.contains(
-      "dark"
-    );
-
-  localStorage.setItem(
-    "boloTheme",
-    dark
-      ? "dark"
-      : "light"
-  );
-
-  $("themeBtn").textContent =
-    dark
-      ? "☀️"
-      : "🌙";
-
-}
+let savedTheme =
+  localStorage.getItem(
+    "boloTheme"
+  ) || "light";
 
 
-(function loadTheme(){
+function applyTheme(){
 
-  const theme =
-    localStorage.getItem(
-      "boloTheme"
-    );
+  if(
+    savedTheme === "dark"
+  ){
 
-  if(theme === "dark"){
-
-    document.body.classList.add(
-      "dark"
-    );
+    document.body
+      .classList.add(
+        "dark"
+      );
 
     $("themeBtn").textContent =
       "☀️";
 
+  }else{
+
+    document.body
+      .classList.remove(
+        "dark"
+      );
+
+    $("themeBtn").textContent =
+      "🌙";
+
   }
 
-})();
+}
 
 
-/* =========================
-   AUTH STATE
-========================= */
+function toggleTheme(){
 
-if(firebaseReady){
+  savedTheme =
+    savedTheme === "dark"
+      ? "light"
+      : "dark";
 
-  auth.onAuthStateChanged(
-    function(user){
+  localStorage.setItem(
+    "boloTheme",
+    savedTheme
+  );
 
-      if(user){
+  applyTheme();
 
-        $("accountBtn").textContent =
-          "Account";
+}
 
-        $("accountBtn").onclick =
-          openAccount;
 
-      }else{
+applyTheme();
 
-        $("accountBtn").textContent =
-          "Login";
 
-        $("accountBtn").onclick =
-          openAuth;
+/* =========================================
+   MOCK PREMIUM PAYMENT
+========================================= */
+
+function startMockPayment(){
+
+  showToast(
+    "Premium payment testing mode — no real payment is being charged."
+  );
+
+  setTimeout(
+    function(){
+
+      const confirmed =
+        confirm(
+          "Bolo AI Premium\n\n₹249 → ₹149/month offer\n\nThis is a testing payment flow only. No real money will be charged.\n\nContinue?"
+        );
+
+      if(confirmed){
+
+        localStorage.setItem(
+          "boloPremiumTest",
+          "active"
+        );
+
+        showToast(
+          "Premium testing mode activated."
+        );
+
+      }
+
+    },
+    200
+  );
+
+}
+
+
+/* =========================================
+   KEYBOARD
+========================================= */
+
+$("chatInput")
+  .addEventListener(
+    "keydown",
+    function(event){
+
+      if(
+        event.key === "Enter" &&
+        !event.shiftKey
+      ){
+
+        event.preventDefault();
+
+        sendChat();
 
       }
 
     }
   );
 
-}
 
+$("chatInput")
+  .addEventListener(
+    "input",
+    function(){
 
-/* =========================
-   AUTH MODE
-========================= */
+      this.style.height =
+        "auto";
 
-let authMode =
-  "login";
-
-
-function setAuthMode(mode){
-
-  authMode =
-    mode;
-
-  if(mode === "signup"){
-
-    $("authTitle").textContent =
-      "Create Account";
-
-    $("authSubmit").textContent =
-      "Create Account";
-
-    $("authSwitch").innerHTML =
-      'Already have an account? <button class="mini-btn" onclick="setAuthMode(\'login\')">Login</button>';
-
-  }else{
-
-    $("authTitle").textContent =
-      "Login";
-
-    $("authSubmit").textContent =
-      "Login";
-
-    $("authSwitch").innerHTML =
-      'New here? <button class="mini-btn" onclick="setAuthMode(\'signup\')">Create account</button>';
-
-  }
-
-}
-
-
-/* =========================
-   OPEN AUTH
-========================= */
-
-function openAuth(){
-
-  setAuthMode("login");
-
-  $("authModal").classList.add(
-    "show"
-  );
-
-}
-
-
-function closeAuth(){
-
-  $("authModal").classList.remove(
-    "show"
-  );
-
-}
-
-
-/* =========================
-   AUTH SUBMIT
-========================= */
-
-async function handleAuth(event){
-
-  event.preventDefault();
-
-  if(!firebaseReady){
-
-    showToast(
-      "Firebase is not available."
-    );
-
-    return;
-  }
-
-  const email =
-    $("authEmail").value.trim();
-
-  const password =
-    $("authPassword").value;
-
-  const button =
-    $("authSubmit");
-
-  button.disabled =
-    true;
-
-  try{
-
-    if(authMode === "signup"){
-
-      await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-
-      showToast(
-        "Account created successfully"
-      );
-
-    }else{
-
-      await auth.signInWithEmailAndPassword(
-        email,
-        password
-      );
-
-      showToast(
-        "Login successful"
-      );
+      this.style.height =
+        Math.min(
+          this.scrollHeight,
+          150
+        ) + "px";
 
     }
-
-    closeAuth();
-
-  }catch(error){
-
-    console.error(error);
-
-    let message =
-      "Authentication failed.";
-
-    if(
-      error.code ===
-      "auth/email-already-in-use"
-    ){
-
-      message =
-        "This email is already registered.";
-
-    }else if(
-      error.code ===
-      "auth/invalid-credential"
-    ){
-
-      message =
-        "Invalid email or password.";
-
-    }else if(
-      error.code ===
-      "auth/weak-password"
-    ){
-
-      message =
-        "Password should be at least 6 characters.";
-
-    }
-
-    showToast(
-      message
-    );
-
-  }finally{
-
-    button.disabled =
-      false;
-
-  }
-
-}
-
-
-/* =========================
-   GOOGLE LOGIN
-========================= */
-
-async function googleLogin(){
-
-  if(!firebaseReady){
-
-    showToast(
-      "Firebase is not available."
-    );
-
-    return;
-  }
-
-  try{
-
-    const provider =
-      new firebase.auth.GoogleAuthProvider();
-
-    await auth.signInWithPopup(
-      provider
-    );
-
-    showToast(
-      "Google login successful"
-    );
-
-    closeAuth();
-
-  }catch(error){
-
-    console.error(error);
-
-    showToast(
-      "Google login could not be completed."
-    );
-
-  }
-
-}
-
-
-/* =========================
-   FORGOT PASSWORD
-========================= */
-
-async function forgotPassword(){
-
-  if(!firebaseReady){
-
-    showToast(
-      "Firebase is not available."
-    );
-
-    return;
-  }
-
-  const email =
-    $("authEmail").value.trim();
-
-  if(!email){
-
-    showToast(
-      "Enter your email first."
-    );
-
-    return;
-  }
-
-  try{
-
-    await auth.sendPasswordResetEmail(
-      email
-    );
-
-    showToast(
-      "Password reset email sent."
-    );
-
-  }catch(error){
-
-    console.error(error);
-
-    showToast(
-      "Could not send reset email."
-    );
-
-  }
-
-}
-
-
-/* =========================
-   ACCOUNT
-========================= */
-
-function openAccount(){
-
-  if(!firebaseReady){
-
-    openAuth();
-
-    return;
-  }
-
-  const user =
-    auth.currentUser;
-
-  if(!user){
-
-    openAuth();
-
-    return;
-  }
-
-  $("accountInfo").innerHTML = `
-
-    <div style="
-      padding:16px;
-      border:1px solid var(--border);
-      border-radius:14px;
-      background:var(--soft);
-    ">
-
-      <strong>
-        ${escapeHtml(
-          user.displayName ||
-          "Bolo AI User"
-        )}
-      </strong>
-
-      <div style="
-        margin-top:7px;
-        color:var(--muted);
-        font-size:13px;
-        word-break:break-all;
-      ">
-        ${escapeHtml(
-          user.email ||
-          ""
-        )}
-      </div>
-
-    </div>
-
-  `;
-
-  $("accountModal").classList.add(
-    "show"
   );
 
-}
 
-
-function closeAccount(){
-
-  $("accountModal").classList.remove(
-    "show"
-  );
-
-}
-
-
-async function logoutUser(){
-
-  if(!firebaseReady){
-    return;
-  }
-
-  try{
-
-    await auth.signOut();
-
-    closeAccount();
-
-    showToast(
-      "Logged out successfully"
-    );
-
-  }catch(error){
-
-    console.error(error);
-
-  }
-
-}
-
-
-/* =========================
-   ESCAPE HTML
-========================= */
-
-function escapeHtml(value){
-
-  return String(value)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-
-}
-
-
-/* =========================
-   MOCK PREMIUM
-========================= */
-
-function activatePremium(){
-
-  const existing =
-    localStorage.getItem(
-      "boloPremium"
-    );
-
-  if(existing === "active"){
-
-    showToast(
-      "Premium is already active in testing mode."
-    );
-
-    return;
-  }
-
-  const confirmed =
-    confirm(
-      "Bolo AI Premium\n\n₹149/month offer\n\nThis is a testing/demo activation only. No real payment will be charged.\n\nActivate Premium for testing?"
-    );
-
-  if(!confirmed){
-    return;
-  }
-
-  localStorage.setItem(
-    "boloPremium",
-    "active"
-  );
-
-  showToast(
-    "Premium activated in testing mode."
-  );
-
-}
-
-
-/* =========================
+/* =========================================
    PWA INSTALL
-========================= */
+========================================= */
 
-let deferredPrompt = null;
+let deferredInstallPrompt =
+  null;
+
 
 window.addEventListener(
   "beforeinstallprompt",
@@ -2823,16 +3741,31 @@ window.addEventListener(
 
     event.preventDefault();
 
-    deferredPrompt =
+    deferredInstallPrompt =
       event;
 
   }
 );
 
 
-/* =========================
+window.addEventListener(
+  "appinstalled",
+  function(){
+
+    deferredInstallPrompt =
+      null;
+
+    showToast(
+      "Bolo AI installed successfully."
+    );
+
+  }
+);
+
+
+/* =========================================
    SERVICE WORKER
-========================= */
+========================================= */
 
 if(
   "serviceWorker" in navigator
@@ -2847,7 +3780,14 @@ if(
           "/sw.js?v=20260914-4"
         )
         .catch(
-          console.warn
+          function(error){
+
+            console.warn(
+              "Service worker:",
+              error
+            );
+
+          }
         );
 
     }
@@ -2856,81 +3796,17 @@ if(
 }
 
 
-/* =========================
-   CLOSE MODAL ON BACKDROP
-========================= */
+/* =========================================
+   STARTUP
+========================================= */
 
-$("authModal").addEventListener(
-  "click",
-  function(event){
-
-    if(
-      event.target ===
-      $("authModal")
-    ){
-
-      closeAuth();
-
-    }
-
-  }
-);
-
-$("accountModal").addEventListener(
-  "click",
-  function(event){
-
-    if(
-      event.target ===
-      $("accountModal")
-    ){
-
-      closeAccount();
-
-    }
-
-  }
-);
-
-
-/* =========================
-   AUTO RESIZE TEXTAREA
-========================= */
-
-$("chatInput").addEventListener(
-  "input",
+window.addEventListener(
+  "load",
   function(){
 
-    this.style.height =
-      "auto";
+    updateVoiceReplyUI();
 
-    this.style.height =
-      Math.min(
-        this.scrollHeight,
-        150
-      ) + "px";
-
-  }
-);
-
-
-/* =========================
-   IMAGE ENTER
-========================= */
-
-$("imagePrompt").addEventListener(
-  "keydown",
-  function(event){
-
-    if(
-      event.key === "Enter"
-    ){
-
-      event.preventDefault();
-
-      generateImage();
-
-    }
+    updateAuthUI();
 
   }
 );
