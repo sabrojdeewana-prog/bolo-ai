@@ -2,3708 +2,2638 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width,initial-scale=1,viewport-fit=cover">
-
-<meta name="theme-color" content="#0b1026">
-
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-<title>Bolo AI – आपका अपना AI Assistant</title>
-
-<meta name="description"
-      content="Bolo AI - Chat, Writing, Coding, Images, Voice, YouTube, Thumbnail और Poster बनाने वाला AI Assistant">
-
-<style>
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:#080b1d;
-  color:#fff;
-  min-height:100vh;
-}
-
-button,
-input,
-textarea,
-select{
-  font-family:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-
-/* =========================
-   NAVBAR
-========================= */
-
-.navbar{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  background:rgba(8,11,29,.94);
-  backdrop-filter:blur(15px);
-  border-bottom:1px solid rgba(255,255,255,.08);
-}
-
-.nav-inner{
-  max-width:1200px;
-  margin:auto;
-  padding:14px 18px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-}
-
-.logo{
-  font-size:24px;
-  font-weight:800;
-  color:#fff;
-}
-
-.logo span{
-  color:#7c5cff;
-}
-
-.nav-actions{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
-.nav-btn{
-  border:0;
-  padding:10px 16px;
-  border-radius:10px;
-  background:#171c3c;
-  color:#fff;
-  font-weight:700;
-}
-
-.nav-btn.primary{
-  background:#7057ff;
-}
-
-.nav-btn:hover{
-  opacity:.88;
-}
-
-#accountBox{
-  display:none;
-  align-items:center;
-  gap:8px;
-}
-
-.user-avatar{
-  width:34px;
-  height:34px;
-  border-radius:50%;
-  object-fit:cover;
-  background:#272d52;
-}
-
-.user-name{
-  max-width:130px;
-  overflow:hidden;
-  white-space:nowrap;
-  text-overflow:ellipsis;
-}
-
-
-/* =========================
-   HERO
-========================= */
-
-.hero{
-  max-width:1200px;
-  margin:auto;
-  padding:70px 20px 40px;
-  text-align:center;
-}
-
-.badge{
-  display:inline-block;
-  background:rgba(112,87,255,.15);
-  border:1px solid rgba(112,87,255,.35);
-  color:#bdb2ff;
-  padding:8px 14px;
-  border-radius:30px;
-  margin-bottom:18px;
-  font-size:14px;
-}
-
-.hero h1{
-  font-size:clamp(36px,7vw,68px);
-  line-height:1.05;
-  margin-bottom:18px;
-}
-
-.gradient{
-  background:linear-gradient(90deg,#8d73ff,#4fd1ff);
-  -webkit-background-clip:text;
-  color:transparent;
-}
-
-.hero p{
-  max-width:700px;
-  margin:auto;
-  color:#b9bdd3;
-  font-size:18px;
-  line-height:1.7;
-}
-
-.hero-buttons{
-  margin-top:28px;
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  flex-wrap:wrap;
-}
-
-.big-btn{
-  padding:14px 24px;
-  border:0;
-  border-radius:13px;
-  font-weight:800;
-  font-size:15px;
-}
-
-.big-btn.primary{
-  background:#7057ff;
-  color:#fff;
-}
-
-.big-btn.secondary{
-  background:#171c3c;
-  color:#fff;
-  border:1px solid rgba(255,255,255,.1);
-}
-
-
-/* =========================
-   SECTION
-========================= */
-
-.section{
-  max-width:1100px;
-  margin:auto;
-  padding:45px 18px;
-}
-
-.section-title{
-  font-size:30px;
-  margin-bottom:10px;
-}
-
-.section-subtitle{
-  color:#9298b7;
-  margin-bottom:25px;
-}
-
-
-/* =========================
-   CHAT
-========================= */
-
-.chat-card{
-  background:#10152e;
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:20px;
-  overflow:hidden;
-  box-shadow:0 15px 50px rgba(0,0,0,.25);
-}
-
-.chat-header{
-  padding:17px;
-  background:#151b38;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.chat-title{
-  font-weight:800;
-}
-
-.chat-status{
-  color:#63e6a7;
-  font-size:13px;
-}
-
-.chat-messages{
-  min-height:300px;
-  max-height:500px;
-  overflow-y:auto;
-  padding:20px;
-}
-
-.message{
-  margin-bottom:15px;
-  display:flex;
-  flex-direction:column;
-}
-
-.message.user{
-  align-items:flex-end;
-}
-
-.message-bubble{
-  max-width:80%;
-  padding:12px 15px;
-  border-radius:15px;
-  line-height:1.55;
-  white-space:pre-wrap;
-}
-
-.message.ai .message-bubble{
-  background:#1b2244;
-}
-
-.message.user .message-bubble{
-  background:#7057ff;
-}
-
-.message-image{
-  max-width:250px;
-  max-height:250px;
-  object-fit:cover;
-  border-radius:14px;
-  margin-top:8px;
-  border:1px solid rgba(255,255,255,.12);
-}
-
-.chat-input-area{
-  padding:15px;
-  border-top:1px solid rgba(255,255,255,.08);
-  display:flex;
-  gap:8px;
-  align-items:center;
-}
-
-.chat-input{
-  flex:1;
-  min-width:0;
-  border:1px solid #30375f;
-  background:#0b1026;
-  color:#fff;
-  padding:13px;
-  border-radius:12px;
-  outline:none;
-}
-
-.chat-send,
-.mic-btn,
-.photo-btn{
-  width:48px;
-  height:48px;
-  flex-shrink:0;
-  border:0;
-  border-radius:12px;
-  color:#fff;
-  background:#7057ff;
-  font-size:18px;
-}
-
-.photo-btn{
-  background:#292f52;
-}
-
-.photo-btn:hover,
-.mic-btn:hover,
-.chat-send:hover{
-  opacity:.88;
-}
-
-.photo-upload{
-  display:none;
-}
-
-.photo-preview{
-  display:none;
-  padding:10px 15px;
-  border-top:1px solid rgba(255,255,255,.08);
-  background:#0c1127;
-}
-
-.photo-preview-inner{
-  position:relative;
-  display:inline-block;
-}
-
-.photo-preview img{
-  width:90px;
-  height:90px;
-  object-fit:cover;
-  border-radius:12px;
-  border:1px solid rgba(255,255,255,.15);
-}
-
-.remove-photo{
-  position:absolute;
-  right:-7px;
-  top:-7px;
-  width:25px;
-  height:25px;
-  border:0;
-  border-radius:50%;
-  background:#ff4d6d;
-  color:#fff;
-  font-weight:800;
-}
-
-
-/* =========================
-   CARDS
-========================= */
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-}
-
-.card{
-  background:#10152e;
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:17px;
-  padding:22px;
-  transition:.2s;
-  cursor:pointer;
-}
-
-.card:hover{
-  transform:translateY(-3px);
-  border-color:rgba(112,87,255,.4);
-}
-
-.card-icon{
-  font-size:30px;
-  margin-bottom:12px;
-}
-
-.card h3{
-  margin-bottom:8px;
-}
-
-.card p{
-  color:#9298b7;
-  line-height:1.6;
-}
-
-
-/* =========================
-   GENERATOR
-========================= */
-
-.generator{
-  background:#10152e;
-  border:1px solid rgba(255,255,255,.08);
-  padding:20px;
-  border-radius:18px;
-}
-
-.input,
-.textarea{
-  width:100%;
-  border:1px solid #30375f;
-  background:#0b1026;
-  color:#fff;
-  border-radius:12px;
-  padding:13px;
-  outline:none;
-  margin-bottom:12px;
-}
-
-.textarea{
-  min-height:130px;
-  resize:vertical;
-}
-
-.generate-btn{
-  width:100%;
-  border:0;
-  background:#7057ff;
-  color:#fff;
-  padding:13px;
-  border-radius:12px;
-  font-weight:800;
-}
-
-.result{
-  margin-top:15px;
-  display:none;
-  padding:15px;
-  border-radius:12px;
-  background:#0b1026;
-  border:1px solid rgba(255,255,255,.08);
-  white-space:pre-wrap;
-  line-height:1.6;
-}
-
-.generated-image{
-  width:100%;
-  border-radius:12px;
-  display:block;
-}
-
-
-/* =========================
-   PREMIUM
-========================= */
-
-.premium{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:18px;
-}
-
-.plan{
-  background:#10152e;
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:18px;
-  padding:25px;
-}
-
-.plan.premium-plan{
-  border-color:#7057ff;
-}
-
-.price{
-  font-size:35px;
-  font-weight:900;
-  margin:15px 0;
-}
-
-.plan ul{
-  list-style:none;
-  line-height:2;
-  color:#c2c5d7;
-}
-
-.plan button{
-  width:100%;
-  margin-top:20px;
-  padding:13px;
-  border:0;
-  border-radius:12px;
-  background:#7057ff;
-  color:#fff;
-  font-weight:800;
-}
-
-
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-  margin-top:40px;
-  border-top:1px solid rgba(255,255,255,.08);
-  padding:35px 18px;
-  text-align:center;
-  color:#858ba9;
-}
-
-
-/* =========================
-   MODALS
-========================= */
-
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:3000;
-  background:rgba(0,0,0,.72);
-  backdrop-filter:blur(7px);
-  align-items:center;
-  justify-content:center;
-  padding:18px;
-}
-
-.modal.show{
-  display:flex;
-}
-
-.modal-box{
-  width:100%;
-  max-width:430px;
-  background:#10152e;
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:20px;
-  padding:25px;
-  position:relative;
-  max-height:90vh;
-  overflow-y:auto;
-}
-
-.close{
-  position:absolute;
-  right:15px;
-  top:12px;
-  border:0;
-  background:none;
-  color:#aaa;
-  font-size:27px;
-}
-
-.modal-box h2{
-  margin-bottom:8px;
-}
-
-.modal-description{
-  color:#9298b7;
-  margin-bottom:20px;
-  line-height:1.5;
-}
-
-.auth-form input{
-  width:100%;
-  margin-bottom:11px;
-  padding:13px;
-  border-radius:11px;
-  border:1px solid #30375f;
-  background:#0b1026;
-  color:#fff;
-  outline:none;
-}
-
-.auth-btn{
-  width:100%;
-  padding:13px;
-  border:0;
-  border-radius:11px;
-  background:#7057ff;
-  color:#fff;
-  font-weight:800;
-}
-
-.google-btn{
-  width:100%;
-  padding:13px;
-  border:1px solid #444b70;
-  border-radius:11px;
-  background:#fff;
-  color:#111;
-  font-weight:800;
-  margin-top:12px;
-}
-
-.google-btn:disabled,
-.auth-btn:disabled{
-  opacity:.6;
-  cursor:not-allowed;
-}
-
-.divider{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  color:#747b9d;
-  margin:15px 0;
-}
-
-.divider:before,
-.divider:after{
-  content:"";
-  height:1px;
-  flex:1;
-  background:#30375f;
-}
-
-.switch-auth{
-  margin-top:16px;
-  text-align:center;
-  color:#9298b7;
-  font-size:14px;
-}
-
-.switch-auth button,
-.forgot-btn{
-  border:0;
-  background:none;
-  color:#8d73ff;
-  font-weight:700;
-}
-
-.forgot-wrap{
-  text-align:right;
-  margin:3px 0 14px;
-}
-
-.auth-message{
-  display:none;
-  padding:10px;
-  border-radius:10px;
-  margin-bottom:12px;
-  background:#2a1830;
-  color:#ffb7c5;
-  font-size:14px;
-  line-height:1.4;
-}
-
-.auth-message.success{
-  background:#102b25;
-  color:#8ff0c3;
-}
-
-
-/* =========================
-   ACCOUNT
-========================= */
-
-.account-panel{
-  text-align:center;
-}
-
-.account-panel img{
-  width:75px;
-  height:75px;
-  border-radius:50%;
-  object-fit:cover;
-  margin-bottom:12px;
-}
-
-.account-info{
-  background:#0b1026;
-  border-radius:12px;
-  padding:15px;
-  text-align:left;
-  margin-top:18px;
-  line-height:1.8;
-}
-
-.logout-btn{
-  width:100%;
-  margin-top:15px;
-  padding:13px;
-  border:0;
-  border-radius:11px;
-  background:#292f52;
-  color:#fff;
-  font-weight:800;
-}
-
-
-/* =========================
-   LOADING
-========================= */
-
-.loading{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-}
-
-.dot{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#aaa;
-  animation:blink 1s infinite;
-}
-
-.dot:nth-child(2){
-  animation-delay:.15s;
-}
-
-.dot:nth-child(3){
-  animation-delay:.3s;
-}
-
-@keyframes blink{
-
-  0%,100%{
-    opacity:.25
-  }
-
-  50%{
-    opacity:1
-  }
-
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:800px){
-
-  .grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .premium{
-    grid-template-columns:1fr;
-  }
-
-  .user-name{
-    display:none;
-  }
-
-}
-
-@media(max-width:560px){
-
-  .nav-inner{
-    padding:12px;
-  }
-
-  .logo{
-    font-size:20px;
-  }
-
-  .nav-btn{
-    padding:8px 11px;
-    font-size:12px;
-  }
-
-  .hero{
-    padding-top:50px;
-  }
-
-  .hero p{
-    font-size:15px;
-  }
-
-  .grid{
-    grid-template-columns:1fr;
-  }
-
-  .chat-input-area{
-    padding:10px;
-  }
-
-  .chat-send,
-  .mic-btn,
-  .photo-btn{
-    width:42px;
-    height:42px;
-  }
-
-  .message-bubble{
-    max-width:90%;
-  }
-
-}
-
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Bolo AI — आपका अपना AI Assistant</title>
+  <meta name="description" content="Bolo AI आपका अपना AI Assistant है। Chat, Writing, Lyrics, YouTube Content, Image Generation, Thumbnail, Poster, Photo और Coding tools एक ही जगह।">
+  <meta name="theme-color" content="#09051a">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Bolo AI">
+
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+  <link rel="apple-touch-icon" href="/icon-192.png">
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(124,58,237,.20), transparent 28%),
+        radial-gradient(circle at 85% 20%, rgba(59,130,246,.15), transparent 28%),
+        #09051a;
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    button,
+    input,
+    textarea {
+      font-family: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 30px));
+      margin: auto;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(18px);
+      background: rgba(9,5,26,.82);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .nav-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      object-fit: cover;
+      box-shadow: 0 8px 25px rgba(124,58,237,.35);
+    }
+
+    .brand-text span {
+      color: #a78bfa;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-btn,
+    .install-btn {
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 11px;
+      font-weight: 700;
+    }
+
+    .nav-btn:hover,
+    .install-btn:hover {
+      background: rgba(255,255,255,.11);
+    }
+
+    .signup-btn {
+      background: linear-gradient(135deg,#7c3aed,#4f46e5);
+      border: none;
+    }
+
+    .install-btn {
+      display: none;
+      background: linear-gradient(135deg,#7c3aed,#4f46e5);
+      border: none;
+      box-shadow: 0 8px 25px rgba(79,70,229,.25);
+    }
+
+    .account-box {
+      display: none;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(167,139,250,.6);
+    }
+
+    /* HERO */
+    .hero {
+      padding: 80px 0 55px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      padding: 9px 15px;
+      border-radius: 999px;
+      background: rgba(124,58,237,.13);
+      border: 1px solid rgba(167,139,250,.28);
+      color: #ddd6fe;
+      font-weight: 700;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 7vw, 76px);
+      line-height: 1.05;
+      font-weight: 900;
+      letter-spacing: -2px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg,#a78bfa,#60a5fa,#c084fc);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 22px auto;
+      color: #b8b3ca;
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+      padding: 14px 20px;
+      border-radius: 13px;
+      font-weight: 800;
+      border: none;
+      font-size: 15px;
+    }
+
+    .primary-btn {
+      background: linear-gradient(135deg,#7c3aed,#4f46e5);
+      color: #fff;
+      box-shadow: 0 12px 35px rgba(79,70,229,.28);
+    }
+
+    .secondary-btn {
+      background: rgba(255,255,255,.06);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.12);
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 55px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 32px;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: #aaa5bd;
+      margin-bottom: 30px;
+    }
+
+    /* CHAT */
+    .chat-card {
+      max-width: 900px;
+      margin: auto;
+      border: 1px solid rgba(255,255,255,.09);
+      background: rgba(20,13,45,.72);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 25px 80px rgba(0,0,0,.25);
+    }
+
+    .chat-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .chat-title {
+      font-weight: 900;
+      font-size: 18px;
+    }
+
+    .online {
+      color: #86efac;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .chat-messages {
+      height: 420px;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .message {
+      display: flex;
+      margin-bottom: 16px;
+    }
+
+    .message.user {
+      justify-content: flex-end;
+    }
+
+    .message-bubble {
+      max-width: 82%;
+      padding: 13px 15px;
+      border-radius: 17px;
+      line-height: 1.55;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .message.ai .message-bubble {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.06);
+    }
+
+    .message.user .message-bubble {
+      background: linear-gradient(135deg,#6d28d9,#4338ca);
+    }
+
+    .message-image {
+      display: block;
+      max-width: 240px;
+      max-height: 240px;
+      border-radius: 13px;
+      margin-top: 8px;
+    }
+
+    .chat-input-area {
+      padding: 15px;
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+
+    .chat-input-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .chat-input {
+      flex: 1;
+      min-width: 0;
+      padding: 14px;
+      border-radius: 13px;
+      border: 1px solid rgba(255,255,255,.11);
+      background: rgba(0,0,0,.22);
+      color: #fff;
+      outline: none;
+    }
+
+    .chat-input:focus {
+      border-color: rgba(139,92,246,.7);
+    }
+
+    .icon-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.06);
+      color: #fff;
+      font-size: 19px;
+      flex-shrink: 0;
+    }
+
+    .send-btn {
+      width: 48px;
+      height: 46px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg,#7c3aed,#4f46e5);
+      color: #fff;
+      font-size: 18px;
+    }
+
+    .photo-upload {
+      display: none;
+    }
+
+    .photo-preview {
+      display: none;
+      margin-bottom: 10px;
+      position: relative;
+      width: fit-content;
+    }
+
+    .photo-preview img {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.15);
+    }
+
+    .remove-photo {
+      position: absolute;
+      right: -7px;
+      top: -7px;
+      width: 23px;
+      height: 23px;
+      border-radius: 50%;
+      border: none;
+      background: #ef4444;
+      color: white;
+      font-weight: bold;
+    }
+
+    /* IMAGE GENERATOR */
+    .generator {
+      max-width: 900px;
+      margin: auto;
+      padding: 22px;
+      background: rgba(20,13,45,.72);
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 22px;
+    }
+
+    .generator textarea {
+      width: 100%;
+      min-height: 110px;
+      resize: vertical;
+      padding: 15px;
+      background: rgba(0,0,0,.22);
+      border: 1px solid rgba(255,255,255,.1);
+      color: #fff;
+      border-radius: 14px;
+      outline: none;
+    }
+
+    .generator-actions {
+      margin-top: 12px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .generated-image {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .generated-image img {
+      max-width: 100%;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.1);
+    }
+
+    /* TOOLS */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 15px;
+    }
+
+    .tool-card {
+      padding: 22px;
+      border-radius: 18px;
+      background: rgba(20,13,45,.68);
+      border: 1px solid rgba(255,255,255,.08);
+      transition: .2s ease;
+      cursor: pointer;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(139,92,246,.35);
+      background: rgba(30,20,60,.8);
+    }
+
+    .tool-icon {
+      font-size: 29px;
+      margin-bottom: 13px;
+    }
+
+    .tool-card h3 {
+      font-size: 17px;
+      margin-bottom: 7px;
+    }
+
+    .tool-card p {
+      color: #aaa5bd;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* QUICK */
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 12px;
+    }
+
+    .quick-btn {
+      padding: 16px;
+      border-radius: 14px;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.045);
+      font-weight: 700;
+    }
+
+    .quick-btn:hover {
+      background: rgba(124,58,237,.15);
+    }
+
+    /* PRICING */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 18px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .price-card {
+      padding: 28px;
+      border-radius: 22px;
+      background: rgba(20,13,45,.72);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .price-card.featured {
+      border-color: rgba(139,92,246,.5);
+    }
+
+    .price {
+      font-size: 36px;
+      font-weight: 900;
+      margin: 15px 0;
+    }
+
+    .price-card ul {
+      list-style: none;
+      color: #bbb5ca;
+      line-height: 2;
+    }
+
+    /* ABOUT */
+    .about-card {
+      max-width: 900px;
+      margin: auto;
+      padding: 28px;
+      border-radius: 22px;
+      background: rgba(20,13,45,.65);
+      border: 1px solid rgba(255,255,255,.08);
+      text-align: center;
+    }
+
+    .about-card p {
+      color: #aaa5bd;
+      line-height: 1.8;
+    }
+
+    /* FOOTER */
+    footer {
+      margin-top: 40px;
+      border-top: 1px solid rgba(255,255,255,.07);
+      padding: 30px 0;
+      text-align: center;
+      color: #8f899f;
+    }
+
+    /* MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-box {
+      width: min(430px,100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      background: #130d2c;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 22px;
+      padding: 25px;
+      position: relative;
+      box-shadow: 0 30px 100px rgba(0,0,0,.45);
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 13px;
+      right: 13px;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255,255,255,.07);
+      color: #fff;
+      font-size: 19px;
+    }
+
+    .modal-title {
+      font-size: 25px;
+      font-weight: 900;
+      margin-bottom: 5px;
+    }
+
+    .modal-subtitle {
+      color: #9993aa;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 13px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 7px;
+      color: #c9c3d6;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 13px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(0,0,0,.2);
+      color: #fff;
+      outline: none;
+    }
+
+    .form-input:focus {
+      border-color: #8b5cf6;
+    }
+
+    .full-btn {
+      width: 100%;
+      padding: 13px;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(135deg,#7c3aed,#4f46e5);
+      color: #fff;
+      font-weight: 800;
+      margin-top: 5px;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 17px 0;
+      color: #777184;
+      font-size: 12px;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,.08);
+    }
+
+    .google-btn {
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      background: #fff;
+      color: #222;
+      border: none;
+      font-weight: 800;
+    }
+
+    .modal-link {
+      display: block;
+      text-align: center;
+      margin-top: 13px;
+      color: #a78bfa;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .error-msg,
+    .success-msg {
+      display: none;
+      padding: 10px;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      font-size: 13px;
+    }
+
+    .error-msg {
+      background: rgba(239,68,68,.12);
+      color: #fca5a5;
+    }
+
+    .success-msg {
+      background: rgba(34,197,94,.12);
+      color: #86efac;
+    }
+
+    /* ACCOUNT */
+    .account-profile {
+      text-align: center;
+      padding: 10px 0 20px;
+    }
+
+    .large-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .account-email {
+      color: #9690a6;
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    .account-info {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .info-box {
+      padding: 12px 5px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.05);
+      text-align: center;
+    }
+
+    .info-box strong {
+      display: block;
+      font-size: 16px;
+    }
+
+    .info-box span {
+      color: #8f899f;
+      font-size: 11px;
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translate(-50%,120px);
+      opacity: 0;
+      z-index: 5000;
+      background: #211742;
+      border: 1px solid rgba(255,255,255,.1);
+      padding: 12px 17px;
+      border-radius: 12px;
+      color: #fff;
+      transition: .3s ease;
+      max-width: calc(100% - 30px);
+      text-align: center;
+    }
+
+    .toast.show {
+      transform: translate(-50%,0);
+      opacity: 1;
+    }
+
+    .loading {
+      opacity: .65;
+      pointer-events: none;
+    }
+
+    /* MOBILE */
+    @media (max-width: 850px) {
+      .tools-grid {
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      .quick-grid {
+        grid-template-columns: repeat(2,1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: min(100% - 20px,1180px);
+      }
+
+      .navbar .container {
+        width: calc(100% - 18px);
+      }
+
+      .nav-inner {
+        min-height: 64px;
+      }
+
+      .brand {
+        font-size: 19px;
+      }
+
+      .brand-icon {
+        width: 35px;
+        height: 35px;
+      }
+
+      .nav-btn {
+        padding: 8px 10px;
+        font-size: 12px;
+      }
+
+      .install-btn {
+        padding: 8px 10px;
+        font-size: 12px;
+      }
+
+      .hero {
+        padding: 55px 0 35px;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+
+      .section-title {
+        font-size: 27px;
+      }
+
+      .tools-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .chat-messages {
+        height: 360px;
+      }
+
+      .message-bubble {
+        max-width: 90%;
+      }
+
+      .chat-input-row {
+        gap: 5px;
+      }
+
+      .icon-btn,
+      .send-btn {
+        width: 42px;
+        height: 43px;
+      }
+
+      .account-box .nav-btn {
+        display: none;
+      }
+    }
+  </style>
 </head>
-
 
 <body>
 
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="container nav-inner">
 
-<!-- =========================
-     NAVBAR
-========================= -->
+      <a href="/" class="brand">
+        <img
+          src="/icon-192.png"
+          class="brand-icon"
+          alt="Bolo AI"
+          onerror="this.style.display='none'"
+        >
+        <div class="brand-text">Bolo <span>AI</span></div>
+      </a>
 
-<nav class="navbar">
+      <div class="nav-actions" id="loggedOutActions">
+        <button class="install-btn" id="installBtn" onclick="installApp()">
+          📲 Install
+        </button>
+        <button class="nav-btn" onclick="openModal('loginModal')">
+          Login
+        </button>
+        <button class="nav-btn signup-btn" onclick="openModal('signupModal')">
+          Sign Up
+        </button>
+      </div>
 
-  <div class="nav-inner">
-
-    <div class="logo">
-      Bolo <span>AI</span>
-    </div>
-
-    <div class="nav-actions">
-
-      <button
-        class="nav-btn"
-        id="loginNavBtn"
-        onclick="openLogin()">
-        Login
-      </button>
-
-      <button
-        class="nav-btn primary"
-        id="signupNavBtn"
-        onclick="openSignup()">
-        Sign Up
-      </button>
-
-      <div id="accountBox">
+      <div class="account-box" id="loggedInActions">
+        <button class="install-btn" id="installBtnLogged" onclick="installApp()">
+          📲 Install
+        </button>
 
         <img
           id="navAvatar"
-          class="user-avatar"
-          src=""
-          alt="User">
+          class="avatar"
+          src="https://ui-avatars.com/api/?name=Bolo+AI&background=7c3aed&color=fff"
+          alt="Account"
+        >
 
-        <span
-          id="navUserName"
-          class="user-name">
-          User
-        </span>
-
-        <button
-          class="nav-btn"
-          onclick="openAccount()">
+        <button class="nav-btn" onclick="openAccount()">
           Account
         </button>
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- HERO -->
+  <main>
+
+    <section class="hero">
+      <div class="container">
+
+        <div class="hero-badge">
+          🤖 आपका अपना AI Assistant
+        </div>
+
+        <h1>
+          आपका अपना
+          <span class="gradient-text">Bolo AI</span>
+        </h1>
+
+        <p>
+          सवाल पूछिए, लिखिए, ideas बनाइए, images तैयार कीजिए,
+          YouTube content बनाइए और अपने रोज़ के creative काम
+          एक ही जगह आसानी से कीजिए।
+        </p>
+
+        <div class="hero-buttons">
+          <button class="primary-btn" onclick="scrollToChat()">
+            ✨ AI शुरू करें
+          </button>
+
+          <button class="secondary-btn" onclick="scrollToTools()">
+            🛠️ AI Tools देखें
+          </button>
+        </div>
 
       </div>
+    </section>
+
+
+    <!-- CHAT -->
+    <section id="chatSection">
+      <div class="container">
+
+        <h2 class="section-title">Bolo AI Chat</h2>
+        <p class="section-subtitle">
+          अपने सवाल या काम सीधे Bolo AI को बताइए
+        </p>
+
+        <div class="chat-card">
+
+          <div class="chat-header">
+            <div class="chat-title">🤖 Bolo AI</div>
+            <div class="online">● Online</div>
+          </div>
+
+          <div class="chat-messages" id="chatMessages">
+
+            <div class="message ai">
+              <div class="message-bubble">
+                नमस्ते! 👋 मैं Bolo AI हूँ।<br><br>
+                आप मुझसे सवाल पूछ सकते हैं, content लिखवा सकते हैं,
+                ideas ले सकते हैं या किसी भी creative काम में मदद ले सकते हैं।
+              </div>
+            </div>
+
+          </div>
+
+          <div class="chat-input-area">
+
+            <div class="photo-preview" id="photoPreview">
+              <img id="previewImage" src="" alt="Selected photo">
+              <button class="remove-photo" onclick="removePhoto()">×</button>
+            </div>
+
+            <div class="chat-input-row">
+
+              <input
+                id="photoUpload"
+                class="photo-upload"
+                type="file"
+                accept="image/*"
+                onchange="handlePhotoUpload(event)"
+              >
+
+              <button
+                class="icon-btn"
+                type="button"
+                onclick="openPhotoGallery()"
+                title="Photo Upload"
+              >
+                📷
+              </button>
+
+              <button
+                class="icon-btn"
+                type="button"
+                onclick="startVoiceInput()"
+                title="Voice Input"
+                id="voiceBtn"
+              >
+                🎤
+              </button>
+
+              <input
+                id="chatInput"
+                class="chat-input"
+                type="text"
+                placeholder="Bolo AI से कुछ पूछें..."
+                autocomplete="off"
+                onkeydown="if(event.key==='Enter') sendChat()"
+              >
+
+              <button
+                class="send-btn"
+                type="button"
+                onclick="sendChat()"
+              >
+                ➤
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- IMAGE GENERATOR -->
+    <section id="imageSection">
+      <div class="container">
+
+        <h2 class="section-title">🎨 AI Image Generator</h2>
+
+        <p class="section-subtitle">
+          अपनी imagination को image में बदलें
+        </p>
+
+        <div class="generator">
+
+          <textarea
+            id="imagePrompt"
+            placeholder="उदाहरण: एक सुंदर cinematic sunset landscape..."
+          ></textarea>
+
+          <div class="generator-actions">
+            <button
+              class="primary-btn"
+              onclick="generateImage()"
+              id="generateImageBtn"
+            >
+              ✨ Generate Image
+            </button>
+          </div>
+
+          <div class="generated-image" id="generatedImage"></div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- TOOLS -->
+    <section id="toolsSection">
+      <div class="container">
+
+        <h2 class="section-title">🛠️ AI Tools</h2>
+
+        <p class="section-subtitle">
+          अपने काम के लिए सही AI tool चुनें
+        </p>
+
+        <div class="tools-grid">
+
+          <div class="tool-card" onclick="useTool('writing')">
+            <div class="tool-icon">✍️</div>
+            <h3>AI Writing</h3>
+            <p>Professional content, captions और articles लिखें।</p>
+          </div>
+
+          <div class="tool-card" onclick="useTool('lyrics')">
+            <div class="tool-icon">🎵</div>
+            <h3>Lyrics</h3>
+            <p>नए songs और lyrics के ideas तैयार करें।</p>
+          </div>
+
+          <div class="tool-card" onclick="useTool('youtube')">
+            <div class="tool-icon">▶️</div>
+            <h3>YouTube Content</h3>
+            <p>Title, description, tags और content ideas बनाएं।</p>
+          </div>
+
+          <div class="tool-card" onclick="useTool('translation')">
+            <div class="tool-icon">🌐</div>
+            <h3>Translation</h3>
+            <p>Content को अलग-अलग languages में translate करें।</p>
+          </div>
+
+          <div class="tool-card" onclick="useTool('resume')">
+            <div class="tool-icon">📄</div>
+            <h3>Resume</h3>
+            <p>Professional resume और CV तैयार करें।</p>
+          </div>
+
+          <div class="tool-card" onclick="useTool('thumbnail')">
+            <div class="tool-icon">🖼️</div>
+            <h3>Thumbnail Maker</h3>
+            <p>Clickable YouTube thumbnail ideas और prompts बनाएं।</p>
+          </div>
+
+          <div class="tool-card" onclick="useTool('poster')">
+            <div class="tool-icon">🎨</div>
+            <h3>Poster Maker</h3>
+            <p>Professional poster design ideas तैयार करें।</p>
+          </div>
+
+          <div class="tool-card" onclick="useTool('photo')">
+            <div class="tool-icon">📸</div>
+            <h3>Photo Creator</h3>
+            <p>Realistic AI photo generation prompts बनाएं।</p>
+          </div>
+
+          <div class="tool-card" onclick="useTool('coding')">
+            <div class="tool-icon">💻</div>
+            <h3>Coding</h3>
+            <p>Coding problems समझें और solutions पाएं।</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- QUICK AI -->
+    <section>
+      <div class="container">
+
+        <h2 class="section-title">⚡ Quick AI</h2>
+
+        <p class="section-subtitle">
+          एक click में काम शुरू करें
+        </p>
+
+        <div class="quick-grid">
+
+          <button class="quick-btn" onclick="quickPrompt('एक professional YouTube title और description बनाइए')">
+            ▶️ YouTube
+          </button>
+
+          <button class="quick-btn" onclick="quickPrompt('एक नया song lyrics idea दीजिए')">
+            🎵 Lyrics
+          </button>
+
+          <button class="quick-btn" onclick="quickPrompt('एक professional social media caption लिखिए')">
+            ✍️ Caption
+          </button>
+
+          <button class="quick-btn" onclick="quickPrompt('एक realistic AI image का detailed prompt बनाइए')">
+            🎨 Image
+          </button>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- PRICING -->
+    <section>
+      <div class="container">
+
+        <h2 class="section-title">💎 Plans</h2>
+
+        <p class="section-subtitle">
+          अभी Bolo AI को आसान तरीके से इस्तेमाल करें
+        </p>
+
+        <div class="pricing-grid">
+
+          <div class="price-card">
+            <h3>Free</h3>
+            <div class="price">₹0</div>
+
+            <ul>
+              <li>✓ AI Chat</li>
+              <li>✓ AI Writing</li>
+              <li>✓ Creative Tools</li>
+              <li>✓ Voice Input</li>
+              <li>✓ Basic AI Features</li>
+            </ul>
+
+            <button class="secondary-btn" style="width:100%;margin-top:20px;">
+              Current Plan
+            </button>
+          </div>
+
+          <div class="price-card featured">
+            <h3>Premium</h3>
+            <div class="price">₹149</div>
+
+            <ul>
+              <li>✓ More AI usage</li>
+              <li>✓ Advanced features</li>
+              <li>✓ Priority tools</li>
+              <li>✓ Creative generation</li>
+              <li>✓ Premium experience</li>
+            </ul>
+
+            <button
+              class="primary-btn"
+              style="width:100%;margin-top:20px;"
+              onclick="showToast('Premium payment feature जल्द उपलब्ध होगा।')"
+            >
+              Get Premium
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ABOUT -->
+    <section>
+      <div class="container">
+
+        <h2 class="section-title">ℹ️ Bolo AI के बारे में</h2>
+
+        <div class="about-card">
+
+          <p>
+            Bolo AI एक simple और powerful AI Assistant platform है,
+            जिसे रोज़ के creative और productivity काम आसान बनाने के लिए
+            बनाया गया है। यहाँ आप chat, writing, lyrics, YouTube content,
+            images, thumbnails, posters, photos और coding जैसे कई काम
+            एक ही जगह कर सकते हैं।
+          </p>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <footer>
+    <div class="container">
+      <strong>Bolo AI</strong>
+      <br><br>
+      आपका अपना AI Assistant
+      <br><br>
+      © 2026 Bolo AI. All rights reserved.
+    </div>
+  </footer>
+
+
+  <!-- LOGIN MODAL -->
+  <div class="modal" id="loginModal" onclick="closeModalOutside(event,'loginModal')">
+
+    <div class="modal-box">
+
+      <button class="close-modal" onclick="closeModal('loginModal')">×</button>
+
+      <div class="modal-title">Welcome Back 👋</div>
+      <div class="modal-subtitle">अपने Bolo AI account में login करें</div>
+
+      <div class="error-msg" id="loginError"></div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input
+          id="loginEmail"
+          class="form-input"
+          type="email"
+          placeholder="you@example.com"
+        >
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <input
+          id="loginPassword"
+          class="form-input"
+          type="password"
+          placeholder="Password"
+        >
+      </div>
+
+      <button class="full-btn" onclick="emailLogin()">
+        Login
+      </button>
+
+      <span class="modal-link" onclick="forgotPassword()">
+        Forgot Password?
+      </span>
+
+      <div class="divider">OR</div>
+
+      <button class="google-btn" onclick="googleLogin()">
+        🔵 Continue with Google
+      </button>
+
+      <span class="modal-link" onclick="switchModal('loginModal','signupModal')">
+        नया account बनाएं
+      </span>
 
     </div>
 
   </div>
 
-</nav>
 
+  <!-- SIGNUP MODAL -->
+  <div class="modal" id="signupModal" onclick="closeModalOutside(event,'signupModal')">
 
+    <div class="modal-box">
 
-<!-- =========================
-     HERO
-========================= -->
+      <button class="close-modal" onclick="closeModal('signupModal')">×</button>
 
-<section class="hero">
+      <div class="modal-title">Create Account 🚀</div>
+      <div class="modal-subtitle">अपना Bolo AI account बनाएं</div>
 
-  <div class="badge">
-    🤖 आपका अपना AI Assistant
-  </div>
+      <div class="error-msg" id="signupError"></div>
 
-  <h1>
-    आपका अपना
-    <span class="gradient">Bolo AI</span>
-  </h1>
-
-  <p>
-    Chat, Writing, Coding, YouTube Content, Thumbnail Creation,
-    Poster Design, Photo Generation, Voice Tools और बहुत कुछ —
-    सब एक जगह।
-  </p>
-
-  <div class="hero-buttons">
-
-    <button
-      class="big-btn primary"
-      onclick="requireLogin()">
-      🚀 AI शुरू करें
-    </button>
-
-    <button
-      class="big-btn secondary"
-      onclick="document.getElementById('tools').scrollIntoView()">
-      ✨ AI Tools देखें
-    </button>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================
-     CHAT
-========================= -->
-
-<section
-  class="section"
-  id="chatSection">
-
-  <h2 class="section-title">
-    🤖 Bolo AI Chat
-  </h2>
-
-  <p class="section-subtitle">
-    आप जो पूछें, Bolo AI उसी के अनुसार आपकी मदद करेगा।
-  </p>
-
-  <div class="chat-card">
-
-    <div class="chat-header">
-
-      <div class="chat-title">
-        Bolo AI Assistant
+      <div class="form-group">
+        <label>Name</label>
+        <input
+          id="signupName"
+          class="form-input"
+          type="text"
+          placeholder="आपका नाम"
+        >
       </div>
 
-      <div class="chat-status">
-        ● Online
+      <div class="form-group">
+        <label>Email</label>
+        <input
+          id="signupEmail"
+          class="form-input"
+          type="email"
+          placeholder="you@example.com"
+        >
       </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <input
+          id="signupPassword"
+          class="form-input"
+          type="password"
+          placeholder="कम से कम 6 characters"
+        >
+      </div>
+
+      <button class="full-btn" onclick="emailSignup()">
+        Create Account
+      </button>
+
+      <div class="divider">OR</div>
+
+      <button class="google-btn" onclick="googleLogin()">
+        🔵 Sign up with Google
+      </button>
+
+      <span class="modal-link" onclick="switchModal('signupModal','loginModal')">
+        पहले से account है? Login करें
+      </span>
 
     </div>
 
+  </div>
 
-    <div
-      id="chatMessages"
-      class="chat-messages">
 
-      <div class="message ai">
+  <!-- ACCOUNT MODAL -->
+  <div class="modal" id="accountModal" onclick="closeModalOutside(event,'accountModal')">
 
-        <div class="message-bubble">
-          नमस्ते भाई 👋 मैं Bolo AI हूँ। आप क्या करना चाहते हैं?
+    <div class="modal-box">
+
+      <button class="close-modal" onclick="closeModal('accountModal')">×</button>
+
+      <div class="account-profile">
+
+        <img
+          id="accountAvatar"
+          class="large-avatar"
+          src="https://ui-avatars.com/api/?name=Bolo+AI&background=7c3aed&color=fff"
+          alt="Profile"
+        >
+
+        <h2 id="accountName">Bolo AI User</h2>
+        <div class="account-email" id="accountEmail"></div>
+
+      </div>
+
+      <div class="account-info">
+
+        <div class="info-box">
+          <strong id="accountRole">User</strong>
+          <span>Role</span>
+        </div>
+
+        <div class="info-box">
+          <strong id="accountPlan">Free</strong>
+          <span>Plan</span>
+        </div>
+
+        <div class="info-box">
+          <strong id="accountCredits">10</strong>
+          <span>Credits</span>
         </div>
 
       </div>
 
-    </div>
-
-
-    <!-- PHOTO PREVIEW -->
-
-    <div
-      id="photoPreview"
-      class="photo-preview">
-
-      <div class="photo-preview-inner">
-
-        <img
-          id="previewImage"
-          src=""
-          alt="Selected Photo">
-
-        <button
-          class="remove-photo"
-          onclick="removeSelectedPhoto()">
-          ×
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <div class="chat-input-area">
-
-
-      <!-- PHOTO UPLOAD -->
-
-      <input
-        id="photoUpload"
-        class="photo-upload"
-        type="file"
-        accept="image/*"
-        onchange="handlePhotoUpload(event)">
-
-
       <button
-        class="photo-btn"
-        type="button"
-        onclick="openPhotoGallery()"
-        title="Photo Upload">
-        📷
-      </button>
-
-
-      <!-- VOICE -->
-
-      <button
-        class="mic-btn"
-        onclick="startVoiceInput()"
-        title="Voice">
-        🎤
-      </button>
-
-
-      <input
-        id="chatInput"
-        class="chat-input"
-        type="text"
-        placeholder="यहाँ अपना सवाल लिखें..."
-        autocomplete="off">
-
-
-      <button
-        class="chat-send"
-        onclick="sendChat()">
-        ➤
+        class="full-btn"
+        style="margin-top:20px;background:#dc2626;"
+        onclick="logout()"
+      >
+        Logout
       </button>
 
     </div>
 
   </div>
 
-</section>
 
-
-
-<!-- =========================
-     IMAGE GENERATOR
-========================= -->
-
-<section class="section">
-
-  <h2 class="section-title">
-    🎨 AI Image Generator
-  </h2>
-
-  <p class="section-subtitle">
-    अपने आइडिया से AI image बनाइए।
-  </p>
-
-  <div class="generator">
-
-    <textarea
-      id="imagePrompt"
-      class="textarea"
-      placeholder="उदाहरण: एक सुंदर cinematic sunset landscape..."></textarea>
-
-    <button
-      class="generate-btn"
-      onclick="generateImage()">
-      🎨 Generate Image
-    </button>
-
-    <div
-      id="imageResult"
-      class="result">
-    </div>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================
-     TOOLS
-========================= -->
-
-<section
-  class="section"
-  id="tools">
-
-  <h2 class="section-title">
-    ✨ AI Tools
-  </h2>
-
-  <p class="section-subtitle">
-    अलग-अलग कामों के लिए AI tools।
-  </p>
-
-  <div class="grid">
-
-
-    <div
-      class="card"
-      onclick="useTool('writing')">
-
-      <div class="card-icon">
-        ✍️
-      </div>
-
-      <h3>
-        AI Writing
-      </h3>
-
-      <p>
-        Title, description, post और content लिखवाइए।
-      </p>
-
-    </div>
-
-
-    <div
-      class="card"
-      onclick="useTool('lyrics')">
-
-      <div class="card-icon">
-        🎵
-      </div>
-
-      <h3>
-        Lyrics
-      </h3>
-
-      <p>
-        गाने के lyrics और creative ideas बनाइए।
-      </p>
-
-    </div>
-
-
-    <div
-      class="card"
-      onclick="useTool('youtube')">
-
-      <div class="card-icon">
-        ▶️
-      </div>
-
-      <h3>
-        YouTube
-      </h3>
-
-      <p>
-        Title, description, tags और SEO ideas।
-      </p>
-
-    </div>
-
-
-    <div
-      class="card"
-      onclick="useTool('translation')">
-
-      <div class="card-icon">
-        🌐
-      </div>
-
-      <h3>
-        Translation
-      </h3>
-
-      <p>
-        एक भाषा के content को दूसरी भाषा में बदलें।
-      </p>
-
-    </div>
-
-
-    <div
-      class="card"
-      onclick="useTool('resume')">
-
-      <div class="card-icon">
-        📄
-      </div>
-
-      <h3>
-        Resume
-      </h3>
-
-      <p>
-        Professional resume बनाने में मदद।
-      </p>
-
-    </div>
-
-
-    <div
-      class="card"
-      onclick="useTool('thumbnail')">
-
-      <div class="card-icon">
-        🖼️
-      </div>
-
-      <h3>
-        Thumbnail Maker
-      </h3>
-
-      <p>
-        YouTube thumbnail ideas और prompts बनाइए।
-      </p>
-
-    </div>
-
-
-    <div
-      class="card"
-      onclick="useTool('poster')">
-
-      <div class="card-icon">
-        🎨
-      </div>
-
-      <h3>
-        Poster Maker
-      </h3>
-
-      <p>
-        Poster design ideas और creative prompts बनाइए।
-      </p>
-
-    </div>
-
-
-    <div
-      class="card"
-      onclick="useTool('photo')">
-
-      <div class="card-icon">
-        📸
-      </div>
-
-      <h3>
-        Photo Creator
-      </h3>
-
-      <p>
-        Photo generation और editing ideas बनाइए।
-      </p>
-
-    </div>
-
-
-    <div
-      class="card"
-      onclick="useTool('coding')">
-
-      <div class="card-icon">
-        💻
-      </div>
-
-      <h3>
-        Coding
-      </h3>
-
-      <p>
-        Code लिखने, समझने और सुधारने में मदद।
-      </p>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================
-     QUICK AI CREATOR
-========================= -->
-
-<section class="section">
-
-  <h2 class="section-title">
-    🧠 Quick AI Creator
-  </h2>
-
-  <p class="section-subtitle">
-    बस बताइए क्या बनाना है।
-  </p>
-
-  <div class="generator">
-
-    <input
-      id="toolInput"
-      class="input"
-      placeholder="क्या बनाना है? जैसे: YouTube का SEO title">
-
-    <button
-      class="generate-btn"
-      onclick="runQuickTool()">
-      ✨ Generate
-    </button>
-
-    <div
-      id="toolResult"
-      class="result">
-    </div>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================
-     PREMIUM
-========================= -->
-
-<section class="section">
-
-  <h2 class="section-title">
-    👑 Premium
-  </h2>
-
-  <p class="section-subtitle">
-    ज्यादा features के लिए Premium plan।
-  </p>
-
-  <div class="premium">
-
-
-    <div class="plan">
-
-      <h3>
-        Free
-      </h3>
-
-      <div class="price">
-        ₹0
-      </div>
-
-      <ul>
-        <li>✓ AI Chat</li>
-        <li>✓ Basic AI Tools</li>
-        <li>✓ 10 Free Credits</li>
-        <li>✓ Firebase Account</li>
-      </ul>
-
-      <button onclick="requireLogin()">
-        Start Free
-      </button>
-
-    </div>
-
-
-    <div class="plan premium-plan">
-
-      <h3>
-        Premium
-      </h3>
-
-      <div class="price">
-        ₹149
-      </div>
-
-      <ul>
-        <li>✓ ज्यादा AI usage</li>
-        <li>✓ Premium tools</li>
-        <li>✓ Advanced creator features</li>
-        <li>✓ Future premium benefits</li>
-      </ul>
-
-      <button onclick="premiumComingSoon()">
-        Get Premium
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================
-     ABOUT
-========================= -->
-
-<section class="section">
-
-  <h2 class="section-title">
-    🚀 Bolo AI
-  </h2>
-
-  <p class="section-subtitle">
-    एक ऐसा AI Assistant जो आपके अलग-अलग कामों में मदद करता है।
-  </p>
-
-  <div class="card">
-
-    <p>
-      Bolo AI का उद्देश्य Chat, Writing, Coding, YouTube Content,
-      Image Generation, Photo Creation, Thumbnail, Poster और
-      Voice जैसे कामों को एक ही जगह आसान बनाना है।
-    </p>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer>
-  © 2026 Bolo AI — आपका अपना AI Assistant
-</footer>
-
-
-
-<!-- =========================
-     LOGIN MODAL
-========================= -->
-
-<div
-  id="loginModal"
-  class="modal"
-  onclick="closeModalOutside(event,'loginModal')">
-
-  <div class="modal-box">
-
-    <button
-      class="close"
-      onclick="closeLogin()">
-      ×
-    </button>
-
-    <h2>
-      Login करें 👋
-    </h2>
-
-    <p class="modal-description">
-      अपने Bolo AI account में login करें।
-    </p>
-
-    <div
-      id="loginMessage"
-      class="auth-message">
-    </div>
-
-    <form
-      id="loginForm"
-      class="auth-form">
-
-      <input
-        id="loginEmail"
-        type="email"
-        placeholder="Email"
-        autocomplete="email"
-        required>
-
-      <input
-        id="loginPassword"
-        type="password"
-        placeholder="Password"
-        autocomplete="current-password"
-        required>
-
-      <div class="forgot-wrap">
-
-        <button
-          type="button"
-          class="forgot-btn"
-          onclick="forgotPassword()">
-          Password भूल गए?
-        </button>
-
-      </div>
-
-      <button
-        type="submit"
-        class="auth-btn">
-        Login
-      </button>
-
-    </form>
-
-    <div class="divider">
-      या
-    </div>
-
-    <button
-      id="googleLoginBtn"
-      class="google-btn"
-      type="button"
-      onclick="googleLogin()">
-      🔵 Continue with Google
-    </button>
-
-    <div class="switch-auth">
-
-      Account नहीं है?
-
-      <button
-        type="button"
-        onclick="switchToSignup()">
-        Sign Up
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-
-<!-- =========================
-     SIGNUP MODAL
-========================= -->
-
-<div
-  id="signupModal"
-  class="modal"
-  onclick="closeModalOutside(event,'signupModal')">
-
-  <div class="modal-box">
-
-    <button
-      class="close"
-      onclick="closeSignup()">
-      ×
-    </button>
-
-    <h2>
-      Account बनाएं 🚀
-    </h2>
-
-    <p class="modal-description">
-      Bolo AI में अपना free account बनाइए।
-    </p>
-
-    <div
-      id="signupMessage"
-      class="auth-message">
-    </div>
-
-    <form
-      id="signupForm"
-      class="auth-form">
-
-      <input
-        id="signupName"
-        type="text"
-        placeholder="आपका नाम"
-        autocomplete="name"
-        required>
-
-      <input
-        id="signupEmail"
-        type="email"
-        placeholder="Email"
-        autocomplete="email"
-        required>
-
-      <input
-        id="signupPassword"
-        type="password"
-        placeholder="Password (कम से कम 6 characters)"
-        autocomplete="new-password"
-        minlength="6"
-        required>
-
-      <button
-        type="submit"
-        class="auth-btn">
-        Create Account
-      </button>
-
-    </form>
-
-    <div class="divider">
-      या
-    </div>
-
-    <button
-      id="googleSignupBtn"
-      class="google-btn"
-      type="button"
-      onclick="googleLogin()">
-      🔵 Sign up with Google
-    </button>
-
-    <div class="switch-auth">
-
-      पहले से account है?
-
-      <button
-        type="button"
-        onclick="switchToLogin()">
-        Login
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-
-<!-- =========================
-     ACCOUNT MODAL
-========================= -->
-
-<div
-  id="accountModal"
-  class="modal"
-  onclick="closeModalOutside(event,'accountModal')">
-
-  <div class="modal-box account-panel">
-
-    <button
-      class="close"
-      onclick="closeAccount()">
-      ×
-    </button>
-
-    <h2>
-      My Account
-    </h2>
-
-    <br>
-
-    <img
-      id="accountAvatar"
-      src=""
-      alt="Profile">
-
-    <h3 id="accountName">
-      User
-    </h3>
-
-    <div class="account-info">
-
-      <div>
-        📧 <strong>Email:</strong>
-        <span id="accountEmail">-</span>
-      </div>
-
-      <div>
-        👤 <strong>Role:</strong>
-        <span id="accountRole">user</span>
-      </div>
-
-      <div>
-        💎 <strong>Plan:</strong>
-        <span id="accountPlan">free</span>
-      </div>
-
-      <div>
-        ⚡ <strong>Credits:</strong>
-        <span id="accountCredits">10</span>
-      </div>
-
-    </div>
-
-    <button
-      class="logout-btn"
-      onclick="logoutUser()">
-      Logout
-    </button>
-
-  </div>
-
-</div>
-
-
-
-<!-- =========================
-     FIREBASE SDK
-========================= -->
-
-<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
-
-<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
-
-<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
-
-
-
-<script>
-
-/* =====================================================
-   FIREBASE CONFIG
-===================================================== */
-
-const firebaseConfig = {
-
-  apiKey:
-    "AIzaSyAAztA2xqtWWWKYzzvL9A0UTbk6Pw1-FC8",
-
-  authDomain:
-    "bolo-ai-c429f.firebaseapp.com",
-
-  projectId:
-    "bolo-ai-c429f",
-
-  storageBucket:
-    "bolo-ai-c429f.firebasestorage.app",
-
-  messagingSenderId:
-    "168156718400",
-
-  appId:
-    "1:168156718400:web:086f58868044daef9146a5",
-
-  measurementId:
-    "G-0Q60GF4EPN"
-
-};
-
-
-/* =====================================================
-   FIREBASE INITIALIZE
-===================================================== */
-
-if(!firebase.apps.length){
-
-  firebase.initializeApp(firebaseConfig);
-
-}
-
-const auth =
-  firebase.auth();
-
-const db =
-  firebase.firestore();
-
-
-/* =====================================================
-   KEEP LOGIN PERSISTENT
-===================================================== */
-
-auth.setPersistence(
-  firebase.auth.Auth.Persistence.LOCAL
-).catch(error => {
-
-  console.error(
-    "Auth persistence error:",
-    error
-  );
-
-});
-
-
-/* =====================================================
-   EXISTING BACKEND
-===================================================== */
-
-const API_BASE_URL =
-  "https://bolo-ai-backend-cfft.onrender.com";
-
-
-/* =====================================================
-   GLOBAL USER
-===================================================== */
-
-let currentUser = null;
-
-let currentUserData = null;
-
-let selectedPhoto = null;
-
-
-/* =====================================================
-   MODALS
-===================================================== */
-
-function openLogin(){
-
-  clearAuthMessage("loginMessage");
-
-  document
-    .getElementById("loginModal")
-    .classList.add("show");
-
-}
-
-
-function closeLogin(){
-
-  document
-    .getElementById("loginModal")
-    .classList.remove("show");
-
-}
-
-
-function openSignup(){
-
-  clearAuthMessage("signupMessage");
-
-  document
-    .getElementById("signupModal")
-    .classList.add("show");
-
-}
-
-
-function closeSignup(){
-
-  document
-    .getElementById("signupModal")
-    .classList.remove("show");
-
-}
-
-
-function openAccount(){
-
-  if(!currentUser){
-
-    openLogin();
-
-    return;
-
-  }
-
-  updateAccountUI();
-
-  document
-    .getElementById("accountModal")
-    .classList.add("show");
-
-}
-
-
-function closeAccount(){
-
-  document
-    .getElementById("accountModal")
-    .classList.remove("show");
-
-}
-
-
-function switchToSignup(){
-
-  closeLogin();
-
-  openSignup();
-
-}
-
-
-function switchToLogin(){
-
-  closeSignup();
-
-  openLogin();
-
-}
-
-
-function closeModalOutside(event,id){
-
-  if(event.target.id === id){
-
-    document
-      .getElementById(id)
-      .classList.remove("show");
-
-  }
-
-}
-
-
-/* =====================================================
-   AUTH MESSAGE
-===================================================== */
-
-function showMessage(
-  id,
-  text,
-  success=false
-){
-
-  const box =
-    document.getElementById(id);
-
-  if(!box) return;
-
-  box.textContent =
-    text;
-
-  box.style.display =
-    "block";
-
-  if(success){
-
-    box.classList.add("success");
-
-  }else{
-
-    box.classList.remove("success");
-
-  }
-
-}
-
-
-function clearAuthMessage(id){
-
-  const box =
-    document.getElementById(id);
-
-  if(!box) return;
-
-  box.textContent = "";
-
-  box.style.display =
-    "none";
-
-  box.classList.remove("success");
-
-}
-
-
-/* =====================================================
-   LOGIN CHECK
-===================================================== */
-
-function isLoggedIn(){
-
-  return !!currentUser;
-
-}
-
-
-function requireLogin(){
-
-  if(!currentUser){
-
-    openLogin();
-
-    showMessage(
-      "loginMessage",
-      "पहले Login या Google से Sign In करें।"
-    );
-
-    return false;
-
-  }
-
-  return true;
-
-}
-
-
-/* =====================================================
-   FIRESTORE USER PROFILE
-===================================================== */
-
-async function saveUserProfile(user){
-
-  if(!user) return;
-
-  const ref =
-    db.collection("users")
-      .doc(user.uid);
-
-  try{
-
-    const snap =
-      await ref.get();
-
-    const provider =
-      user.providerData &&
-      user.providerData.length > 0
-        ? user.providerData[0].providerId
-        : "password";
-
-
-    if(!snap.exists){
-
-      await ref.set({
-
-        uid:
-          user.uid,
-
-        displayName:
-          user.displayName ||
-          "Bolo AI User",
-
-        email:
-          user.email ||
-          "",
-
-        photoURL:
-          user.photoURL ||
-          "",
-
-        provider:
-          provider,
-
-        role:
-          "user",
-
-        plan:
-          "free",
-
-        credits:
-          10,
-
-        createdAt:
-          firebase.firestore.FieldValue.serverTimestamp(),
-
-        lastLoginAt:
-          firebase.firestore.FieldValue.serverTimestamp()
-
-      });
-
+  <div class="toast" id="toast"></div>
+
+
+  <script>
+    /* =========================================
+       FIREBASE
+    ========================================= */
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAAztA2xqtWWWKYzzL9A0UTbk6Pw1-FC8",
+      authDomain: "bolo-ai-c429f.firebaseapp.com",
+      projectId: "bolo-ai-c429f",
+      storageBucket: "bolo-ai-c429f.firebasestorage.app",
+      messagingSenderId: "168156718400",
+      appId: "1:168156718400:web:086f58868044daef9146a5",
+      measurementId: "G-0Q60GF4EPN"
+    };
+
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
     }
 
-    else{
+    const auth = firebase.auth();
+    const db = firebase.firestore();
 
-      const oldData =
-        snap.data() || {};
+    auth.setPersistence(
+      firebase.auth.Auth.Persistence.LOCAL
+    ).catch(error => {
+      console.log("Persistence:", error);
+    });
 
-      await ref.set({
 
-        uid:
-          user.uid,
+    /* =========================================
+       BACKEND
+    ========================================= */
 
-        displayName:
-          user.displayName ||
-          oldData.displayName ||
-          "Bolo AI User",
+    const BACKEND_URL =
+      "https://bolo-ai-backend-cfft.onrender.com";
 
-        email:
-          user.email ||
-          oldData.email ||
-          "",
 
-        photoURL:
-          user.photoURL ||
-          oldData.photoURL ||
-          "",
+    /* =========================================
+       GLOBAL STATE
+    ========================================= */
 
-        provider:
-          oldData.provider ||
-          provider,
+    let currentUser = null;
+    let selectedPhotoData = null;
+    let deferredInstallPrompt = null;
 
-        lastLoginAt:
-          firebase.firestore.FieldValue.serverTimestamp()
 
-      },{
-        merge:true
-      });
+    /* =========================================
+       TOAST
+    ========================================= */
 
+    function showToast(message) {
+
+      const toast = document.getElementById("toast");
+
+      toast.textContent = message;
+      toast.classList.add("show");
+
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 3000);
     }
 
 
-    const updated =
-      await ref.get();
+    /* =========================================
+       MODALS
+    ========================================= */
 
-    currentUserData =
-      updated.data() || {};
-
-    updateAccountUI();
-
-
-  }catch(error){
-
-    console.error(
-      "Firestore profile error:",
-      error
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   AUTH STATE
-===================================================== */
-
-auth.onAuthStateChanged(
-  async user => {
-
-    currentUser =
-      user || null;
-
-    if(user){
-
-      await saveUserProfile(user);
-
-      updateNavbar();
-
-      updateAccountUI();
-
+    function openModal(id) {
+      document.getElementById(id).classList.add("active");
     }
 
-    else{
-
-      currentUserData =
-        null;
-
-      updateNavbar();
-
-      closeAccount();
-
+    function closeModal(id) {
+      document.getElementById(id).classList.remove("active");
     }
 
-  }
-);
-
-
-/* =====================================================
-   NAVBAR UPDATE
-===================================================== */
-
-function updateNavbar(){
-
-  const loginBtn =
-    document.getElementById(
-      "loginNavBtn"
-    );
-
-  const signupBtn =
-    document.getElementById(
-      "signupNavBtn"
-    );
-
-  const accountBox =
-    document.getElementById(
-      "accountBox"
-    );
-
-
-  if(currentUser){
-
-    loginBtn.style.display =
-      "none";
-
-    signupBtn.style.display =
-      "none";
-
-    accountBox.style.display =
-      "flex";
-
-
-    const name =
-      currentUser.displayName ||
-      currentUser.email?.split("@")[0] ||
-      "User";
-
-
-    document.getElementById(
-      "navUserName"
-    ).textContent =
-      name;
-
-
-    document.getElementById(
-      "navAvatar"
-    ).src =
-      getAvatarURL(
-        currentUser.photoURL,
-        name
-      );
-
-  }
-
-  else{
-
-    loginBtn.style.display =
-      "";
-
-    signupBtn.style.display =
-      "";
-
-    accountBox.style.display =
-      "none";
-
-  }
-
-}
-
-
-/* =====================================================
-   ACCOUNT UI
-===================================================== */
-
-function updateAccountUI(){
-
-  if(!currentUser)
-    return;
-
-
-  const data =
-    currentUserData || {};
-
-
-  const name =
-    currentUser.displayName ||
-    data.displayName ||
-    currentUser.email?.split("@")[0] ||
-    "User";
-
-
-  document.getElementById(
-    "accountName"
-  ).textContent =
-    name;
-
-
-  document.getElementById(
-    "accountEmail"
-  ).textContent =
-    currentUser.email || "-";
-
-
-  document.getElementById(
-    "accountRole"
-  ).textContent =
-    data.role || "user";
-
-
-  document.getElementById(
-    "accountPlan"
-  ).textContent =
-    data.plan || "free";
-
-
-  document.getElementById(
-    "accountCredits"
-  ).textContent =
-    data.credits ?? 10;
-
-
-  document.getElementById(
-    "accountAvatar"
-  ).src =
-    getAvatarURL(
-      currentUser.photoURL,
-      name
-    );
-
-}
-
-
-/* =====================================================
-   AVATAR
-===================================================== */
-
-function getAvatarURL(
-  photoURL,
-  name
-){
-
-  if(photoURL)
-    return photoURL;
-
-  return (
-    "https://ui-avatars.com/api/?name=" +
-    encodeURIComponent(name) +
-    "&background=7057ff&color=ffffff"
-  );
-
-}
-
-
-/* =====================================================
-   GOOGLE LOGIN
-===================================================== */
-
-async function googleLogin(){
-
-  const provider =
-    new firebase.auth.GoogleAuthProvider();
-
-
-  provider.setCustomParameters({
-    prompt:"select_account"
-  });
-
-
-  const loginButtons = [
-
-    document.getElementById(
-      "googleLoginBtn"
-    ),
-
-    document.getElementById(
-      "googleSignupBtn"
-    )
-
-  ];
-
-
-  loginButtons.forEach(button => {
-
-    if(button){
-
-      button.disabled =
-        true;
-
-      button.textContent =
-        "Google Login हो रहा है...";
-
+    function switchModal(from,to) {
+      closeModal(from);
+      openModal(to);
     }
 
-  });
-
-
-  try{
-
-    const result =
-      await auth.signInWithPopup(
-        provider
-      );
-
-
-    if(result &&
-       result.user){
-
-      await saveUserProfile(
-        result.user
-      );
-
+    function closeModalOutside(event,id) {
+      if (event.target.id === id) {
+        closeModal(id);
+      }
     }
 
-
-    closeLogin();
-
-    closeSignup();
-
-
-  }catch(error){
-
-    console.error(
-      "Google Login Error:",
-      error
-    );
-
-
-    if(
-      error.code ===
-        "auth/popup-blocked" ||
-
-      error.code ===
-        "auth/operation-not-supported-in-this-environment"
-    ){
-
-      try{
-
-        await auth.signInWithRedirect(
-          provider
-        );
-
+    function openAccount() {
+      if (!currentUser) {
+        openModal("loginModal");
         return;
-
-      }catch(redirectError){
-
-        console.error(
-          redirectError
-        );
-
-        showMessage(
-          "loginMessage",
-          getAuthError(
-            redirectError
-          )
-        );
-
       }
 
+      updateAccountUI(currentUser);
+      openModal("accountModal");
     }
 
-    else if(
-      error.code !==
-      "auth/popup-closed-by-user"
-    ){
 
-      showMessage(
-        "loginMessage",
-        getAuthError(error)
-      );
+    /* =========================================
+       AUTH ERROR
+    ========================================= */
 
-      showMessage(
-        "signupMessage",
-        getAuthError(error)
-      );
+    function firebaseError(error) {
 
+      const code = error && error.code ? error.code : "";
+
+      const errors = {
+        "auth/invalid-email":
+          "Email address सही नहीं है।",
+
+        "auth/user-not-found":
+          "इस email से कोई account नहीं मिला।",
+
+        "auth/wrong-password":
+          "Password गलत है।",
+
+        "auth/invalid-credential":
+          "Email या password सही नहीं है।",
+
+        "auth/email-already-in-use":
+          "इस email से account पहले से मौजूद है।",
+
+        "auth/weak-password":
+          "Password कम से कम 6 characters का रखें।",
+
+        "auth/popup-closed-by-user":
+          "Google login window बंद कर दी गई।",
+
+        "auth/popup-blocked":
+          "Popup block हो गया। Redirect login शुरू किया जा रहा है।",
+
+        "auth/unauthorized-domain":
+          "यह website Firebase में authorized नहीं है। Firebase Authentication → Settings → Authorized domains में domain जोड़ें।",
+
+        "auth/network-request-failed":
+          "Internet connection check करें।"
+      };
+
+      return errors[code] || error.message || "कुछ गलत हो गया।";
     }
 
-  }
 
-  finally{
+    function showError(id,message) {
 
-    loginButtons.forEach(button => {
+      const el = document.getElementById(id);
 
-      if(button){
+      if (!el) return;
 
-        button.disabled =
-          false;
+      el.textContent = message;
+      el.style.display = "block";
+    }
 
-        button.textContent =
-          "🔵 Continue with Google";
+    function hideError(id) {
 
+      const el = document.getElementById(id);
+
+      if (el) {
+        el.style.display = "none";
+      }
+    }
+
+
+    /* =========================================
+       SAVE USER PROFILE
+    ========================================= */
+
+    async function saveUserProfile(user) {
+
+      if (!user) return;
+
+      try {
+
+        const ref = db.collection("users").doc(user.uid);
+        const snap = await ref.get();
+
+        const provider =
+          user.providerData &&
+          user.providerData[0]
+            ? user.providerData[0].providerId
+            : "password";
+
+        if (!snap.exists) {
+
+          await ref.set({
+            uid: user.uid,
+            displayName: user.displayName || "Bolo AI User",
+            email: user.email || "",
+            photoURL: user.photoURL || "",
+            provider: provider,
+            role: "user",
+            plan: "free",
+            credits: 10,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            lastLoginAt: firebase.firestore.FieldValue.serverTimestamp()
+          });
+
+        } else {
+
+          await ref.set({
+            uid: user.uid,
+            displayName: user.displayName || "Bolo AI User",
+            email: user.email || "",
+            photoURL: user.photoURL || "",
+            provider: provider,
+            lastLoginAt: firebase.firestore.FieldValue.serverTimestamp()
+          }, {
+            merge: true
+          });
+
+        }
+
+      } catch (error) {
+        console.log("Profile save:", error);
+      }
+    }
+
+
+    /* =========================================
+       UPDATE UI
+    ========================================= */
+
+    async function updateAccountUI(user) {
+
+      const loggedOut =
+        document.getElementById("loggedOutActions");
+
+      const loggedIn =
+        document.getElementById("loggedInActions");
+
+      if (!user) {
+
+        loggedOut.style.display = "flex";
+        loggedIn.style.display = "none";
+        return;
+      }
+
+      loggedOut.style.display = "none";
+      loggedIn.style.display = "flex";
+
+      const name =
+        user.displayName ||
+        user.email?.split("@")[0] ||
+        "Bolo AI User";
+
+      const avatar =
+        user.photoURL ||
+        "https://ui-avatars.com/api/?name=" +
+        encodeURIComponent(name) +
+        "&background=7c3aed&color=fff";
+
+      document.getElementById("navAvatar").src = avatar;
+      document.getElementById("accountAvatar").src = avatar;
+      document.getElementById("accountName").textContent = name;
+      document.getElementById("accountEmail").textContent =
+        user.email || "";
+
+      try {
+
+        const snap =
+          await db.collection("users")
+            .doc(user.uid)
+            .get();
+
+        if (snap.exists) {
+
+          const data = snap.data();
+
+          document.getElementById("accountRole")
+            .textContent =
+            data.role || "user";
+
+          document.getElementById("accountPlan")
+            .textContent =
+            data.plan || "free";
+
+          document.getElementById("accountCredits")
+            .textContent =
+            data.credits ?? 10;
+        }
+
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+
+    /* =========================================
+       AUTH STATE
+    ========================================= */
+
+    auth.onAuthStateChanged(async user => {
+
+      currentUser = user;
+
+      if (user) {
+
+        await saveUserProfile(user);
+        await updateAccountUI(user);
+
+      } else {
+
+        updateAccountUI(null);
       }
 
     });
 
-  }
 
-}
+    /* =========================================
+       GOOGLE LOGIN
+    ========================================= */
 
+    async function googleLogin() {
 
-/* =====================================================
-   GOOGLE REDIRECT RESULT
-===================================================== */
+      hideError("loginError");
+      hideError("signupError");
 
-auth.getRedirectResult()
+      const provider =
+        new firebase.auth.GoogleAuthProvider();
 
-.then(
-  async result => {
+      provider.setCustomParameters({
+        prompt: "select_account"
+      });
 
-    if(
-      result &&
-      result.user
-    ){
+      try {
 
-      await saveUserProfile(
-        result.user
-      );
+        await auth.signInWithPopup(provider);
 
-      closeLogin();
+        closeModal("loginModal");
+        closeModal("signupModal");
 
-      closeSignup();
+        showToast("Google से login सफल हुआ। 🎉");
 
+      } catch (error) {
+
+        if (
+          error.code === "auth/popup-blocked" ||
+          error.code === "auth/operation-not-supported-in-this-environment"
+        ) {
+
+          try {
+
+            await auth.signInWithRedirect(provider);
+
+          } catch (redirectError) {
+
+            showError(
+              "loginError",
+              firebaseError(redirectError)
+            );
+
+          }
+
+        } else {
+
+          const message = firebaseError(error);
+
+          showError("loginError",message);
+          showError("signupError",message);
+        }
+      }
     }
 
-  }
-)
 
-.catch(error => {
+    /* =========================================
+       REDIRECT RESULT
+    ========================================= */
 
-  if(error){
+    auth.getRedirectResult()
+      .then(result => {
 
-    console.error(
-      "Google redirect error:",
-      error
-    );
+        if (result && result.user) {
+          showToast("Google login सफल हुआ। 🎉");
+        }
 
-    if(
-      error.code !==
-      "auth/popup-closed-by-user"
-    ){
+      })
+      .catch(error => {
 
-      showMessage(
-        "loginMessage",
-        getAuthError(error)
-      );
+        if (error && error.code) {
+          console.log("Redirect:", firebaseError(error));
+        }
 
-    }
-
-  }
-
-});
+      });
 
 
-/* =====================================================
-   EMAIL SIGNUP
-===================================================== */
+    /* =========================================
+       EMAIL SIGNUP
+    ========================================= */
 
-document
-  .getElementById("signupForm")
-  .addEventListener(
-    "submit",
-    async function(e){
+    async function emailSignup() {
 
-      e.preventDefault();
-
+      hideError("signupError");
 
       const name =
-        document
-          .getElementById("signupName")
-          .value
-          .trim();
-
+        document.getElementById("signupName")
+          .value.trim();
 
       const email =
-        document
-          .getElementById("signupEmail")
-          .value
-          .trim();
-
+        document.getElementById("signupEmail")
+          .value.trim();
 
       const password =
-        document
-          .getElementById("signupPassword")
+        document.getElementById("signupPassword")
           .value;
 
-
-      if(
-        !name ||
-        !email ||
-        !password
-      ){
-
-        showMessage(
-          "signupMessage",
-          "सभी जानकारी भरें।"
-        );
-
+      if (!name) {
+        showError("signupError","अपना नाम लिखें।");
         return;
-
       }
 
+      if (!email) {
+        showError("signupError","Email लिखें।");
+        return;
+      }
 
-      try{
-
-        showMessage(
-          "signupMessage",
-          "Account बनाया जा रहा है..."
+      if (password.length < 6) {
+        showError(
+          "signupError",
+          "Password कम से कम 6 characters का रखें।"
         );
+        return;
+      }
 
+      try {
 
-        const result =
-          await auth
-            .createUserWithEmailAndPassword(
-              email,
-              password
-            );
+        const credential =
+          await auth.createUserWithEmailAndPassword(
+            email,
+            password
+          );
 
-
-        await result.user.updateProfile({
-
-          displayName:
-            name
-
+        await credential.user.updateProfile({
+          displayName: name
         });
 
+        await saveUserProfile(auth.currentUser);
 
-        await saveUserProfile(
-          result.user
+        closeModal("signupModal");
+
+        showToast("Account successfully बनाया गया। 🎉");
+
+      } catch (error) {
+
+        showError(
+          "signupError",
+          firebaseError(error)
         );
-
-
-        showMessage(
-          "signupMessage",
-          "Account सफलतापूर्वक बन गया! 🎉",
-          true
-        );
-
-
-        setTimeout(
-          () => {
-
-            closeSignup();
-
-          },
-          1000
-        );
-
-
-      }catch(error){
-
-        console.error(
-          "Signup error:",
-          error
-        );
-
-
-        showMessage(
-          "signupMessage",
-          getAuthError(error)
-        );
-
       }
-
     }
-  );
 
 
-/* =====================================================
-   EMAIL LOGIN
-===================================================== */
+    /* =========================================
+       EMAIL LOGIN
+    ========================================= */
 
-document
-  .getElementById("loginForm")
-  .addEventListener(
-    "submit",
-    async function(e){
+    async function emailLogin() {
 
-      e.preventDefault();
-
+      hideError("loginError");
 
       const email =
-        document
-          .getElementById("loginEmail")
-          .value
-          .trim();
-
+        document.getElementById("loginEmail")
+          .value.trim();
 
       const password =
-        document
-          .getElementById("loginPassword")
+        document.getElementById("loginPassword")
           .value;
 
+      if (!email || !password) {
 
-      if(!email || !password){
-
-        showMessage(
-          "loginMessage",
-          "Email और Password भरें।"
+        showError(
+          "loginError",
+          "Email और password दोनों भरें।"
         );
 
         return;
-
       }
 
+      try {
 
-      try{
-
-        showMessage(
-          "loginMessage",
-          "Login हो रहा है..."
+        await auth.signInWithEmailAndPassword(
+          email,
+          password
         );
 
+        closeModal("loginModal");
 
-        const result =
-          await auth
-            .signInWithEmailAndPassword(
-              email,
-              password
+        showToast("Login सफल हुआ। 👋");
+
+      } catch (error) {
+
+        showError(
+          "loginError",
+          firebaseError(error)
+        );
+      }
+    }
+
+
+    /* =========================================
+       FORGOT PASSWORD
+    ========================================= */
+
+    async function forgotPassword() {
+
+      const email =
+        document.getElementById("loginEmail")
+          .value.trim();
+
+      if (!email) {
+
+        showError(
+          "loginError",
+          "पहले अपना email लिखें।"
+        );
+
+        return;
+      }
+
+      try {
+
+        await auth.sendPasswordResetEmail(email);
+
+        showToast(
+          "Password reset email भेज दिया गया। 📧"
+        );
+
+      } catch (error) {
+
+        showError(
+          "loginError",
+          firebaseError(error)
+        );
+      }
+    }
+
+
+    /* =========================================
+       LOGOUT
+    ========================================= */
+
+    async function logout() {
+
+      try {
+
+        await auth.signOut();
+
+        closeModal("accountModal");
+
+        showToast("Logout हो गया।");
+
+      } catch (error) {
+
+        showToast(firebaseError(error));
+      }
+    }
+
+
+    /* =========================================
+       LOGIN REQUIREMENT
+    ========================================= */
+
+    function requireLogin() {
+
+      if (!currentUser) {
+
+        openModal("loginModal");
+
+        showToast(
+          "इस feature के लिए पहले login करें।"
+        );
+
+        return false;
+      }
+
+      return true;
+    }
+
+
+    /* =========================================
+       PHOTO UPLOAD
+    ========================================= */
+
+    function openPhotoGallery() {
+
+      if (!requireLogin()) return;
+
+      document.getElementById("photoUpload").click();
+    }
+
+
+    function handlePhotoUpload(event) {
+
+      const file =
+        event.target.files &&
+        event.target.files[0];
+
+      if (!file) return;
+
+      if (!file.type.startsWith("image/")) {
+
+        showToast("कृपया image file चुनें।");
+        return;
+      }
+
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+
+        selectedPhotoData = e.target.result;
+
+        document.getElementById("previewImage").src =
+          selectedPhotoData;
+
+        document.getElementById("photoPreview")
+          .style.display = "block";
+
+      };
+
+      reader.readAsDataURL(file);
+    }
+
+
+    function removePhoto() {
+
+      selectedPhotoData = null;
+
+      document.getElementById("photoUpload").value = "";
+      document.getElementById("previewImage").src = "";
+      document.getElementById("photoPreview")
+        .style.display = "none";
+    }
+
+
+    /* =========================================
+       CHAT UI
+    ========================================= */
+
+    function addMessage(text,type,image=null) {
+
+      const box =
+        document.getElementById("chatMessages");
+
+      const message =
+        document.createElement("div");
+
+      message.className =
+        "message " + type;
+
+      const bubble =
+        document.createElement("div");
+
+      bubble.className =
+        "message-bubble";
+
+      bubble.textContent = text || "";
+
+      if (image) {
+
+        const img =
+          document.createElement("img");
+
+        img.src = image;
+        img.className = "message-image";
+        img.alt = "Uploaded image";
+
+        bubble.appendChild(img);
+      }
+
+      message.appendChild(bubble);
+      box.appendChild(message);
+
+      box.scrollTop = box.scrollHeight;
+    }
+
+
+    /* =========================================
+       SEND CHAT
+    ========================================= */
+
+    async function sendChat() {
+
+      if (!requireLogin()) return;
+
+      const input =
+        document.getElementById("chatInput");
+
+      const text =
+        input.value.trim();
+
+      if (!text && !selectedPhotoData) return;
+
+      const imageToShow =
+        selectedPhotoData;
+
+      addMessage(
+        text || "Photo uploaded",
+        "user",
+        imageToShow
+      );
+
+      input.value = "";
+
+      const photoWasSelected =
+        !!selectedPhotoData;
+
+      removePhoto();
+
+      addMessage(
+        "सोच रहा हूँ... ⏳",
+        "ai"
+      );
+
+      const messages =
+        document.getElementById("chatMessages");
+
+      const loadingMessage =
+        messages.lastElementChild;
+
+      try {
+
+        const body = {
+          message:
+            text ||
+            "इस photo के बारे में बताइए।"
+        };
+
+        /*
+          Existing backend endpoint को सुरक्षित रखा गया है।
+          Backend का current chat API message स्वीकार करता है।
+        */
+
+        const response =
+          await fetch(
+            BACKEND_URL + "/api/chat",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(body)
+            }
+          );
+
+        if (!response.ok) {
+          throw new Error(
+            "Server error: " + response.status
+          );
+        }
+
+        const data =
+          await response.json();
+
+        let reply =
+          data.reply ||
+          data.response ||
+          data.message ||
+          data.text ||
+          data.answer;
+
+        if (typeof reply !== "string") {
+
+          reply =
+            JSON.stringify(
+              data,
+              null,
+              2
             );
+        }
 
+        loadingMessage.remove();
 
-        await saveUserProfile(
-          result.user
+        addMessage(
+          reply || "AI से response नहीं मिला।",
+          "ai"
         );
 
+      } catch (error) {
 
-        showMessage(
-          "loginMessage",
-          "Login सफल हुआ! 🎉",
-          true
+        loadingMessage.remove();
+
+        let message =
+          "AI से connect नहीं हो पाया।";
+
+        if (
+          photoWasSelected &&
+          !text
+        ) {
+          message +=
+            " Photo upload दिख रहा है, लेकिन photo को AI से समझने के लिए backend में vision support भी चाहिए।";
+        }
+
+        addMessage(
+          message,
+          "ai"
         );
 
+        console.log("Chat error:",error);
+      }
+    }
 
-        setTimeout(
-          () => {
 
-            closeLogin();
+    /* =========================================
+       VOICE INPUT
+    ========================================= */
 
-          },
-          700
+    function startVoiceInput() {
+
+      if (!requireLogin()) return;
+
+      const SpeechRecognition =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
+
+      if (!SpeechRecognition) {
+
+        showToast(
+          "आपके Chrome/browser में voice input support नहीं है।"
         );
 
+        return;
+      }
 
-      }catch(error){
+      const recognition =
+        new SpeechRecognition();
 
-        console.error(
-          "Login error:",
+      recognition.lang = "hi-IN";
+      recognition.interimResults = false;
+      recognition.continuous = false;
+
+      const voiceBtn =
+        document.getElementById("voiceBtn");
+
+      voiceBtn.textContent = "🔴";
+
+      recognition.start();
+
+      recognition.onresult = function(event) {
+
+        const transcript =
+          event.results[0][0].transcript;
+
+        document.getElementById("chatInput")
+          .value +=
+          (document.getElementById("chatInput").value
+            ? " "
+            : "") +
+          transcript;
+      };
+
+      recognition.onerror = function() {
+        showToast("Voice input में समस्या हुई।");
+      };
+
+      recognition.onend = function() {
+        voiceBtn.textContent = "🎤";
+      };
+    }
+
+
+    /* =========================================
+       IMAGE GENERATION
+    ========================================= */
+
+    async function generateImage() {
+
+      if (!requireLogin()) return;
+
+      const prompt =
+        document.getElementById("imagePrompt")
+          .value.trim();
+
+      if (!prompt) {
+
+        showToast(
+          "पहले image का prompt लिखें।"
+        );
+
+        return;
+      }
+
+      const btn =
+        document.getElementById("generateImageBtn");
+
+      const output =
+        document.getElementById("generatedImage");
+
+      btn.classList.add("loading");
+      btn.textContent = "Generating...";
+
+      output.innerHTML =
+        "<p style='color:#aaa5bd;padding:20px'>✨ Image generate हो रही है...</p>";
+
+      try {
+
+        const response =
+          await fetch(
+            BACKEND_URL + "/api/generate-image",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                prompt: prompt
+              })
+            }
+          );
+
+        if (!response.ok) {
+          throw new Error(
+            "Server error: " + response.status
+          );
+        }
+
+        const data =
+          await response.json();
+
+        const imageUrl =
+          data.imageUrl ||
+          data.image ||
+          data.url;
+
+        if (!imageUrl) {
+          throw new Error(
+            "Image URL नहीं मिला।"
+          );
+        }
+
+        const img =
+          document.createElement("img");
+
+        img.src = imageUrl;
+        img.alt = "Generated AI image";
+
+        output.innerHTML = "";
+        output.appendChild(img);
+
+        showToast(
+          "Image तैयार है। 🎨"
+        );
+
+      } catch (error) {
+
+        output.innerHTML =
+          "<p style='color:#fca5a5;padding:20px'>Image generate नहीं हो पाई। Backend check करें।</p>";
+
+        console.log(
+          "Image error:",
           error
         );
 
+      } finally {
 
-        showMessage(
-          "loginMessage",
-          getAuthError(error)
+        btn.classList.remove("loading");
+        btn.textContent =
+          "✨ Generate Image";
+      }
+    }
+
+
+    /* =========================================
+       TOOLS
+    ========================================= */
+
+    const toolPrompts = {
+
+      writing:
+        "एक अच्छा professional content लिखिए",
+
+      lyrics:
+        "एक नया गाना lyrics idea दीजिए",
+
+      youtube:
+        "YouTube के लिए SEO friendly title, description और hashtags बनाइए",
+
+      translation:
+        "इस content को दूसरी भाषा में translate कीजिए",
+
+      resume:
+        "एक professional resume का format बनाइए",
+
+      thumbnail:
+        "एक clickable YouTube thumbnail का detailed design prompt बनाइए",
+
+      poster:
+        "एक professional poster design का detailed prompt बनाइए",
+
+      photo:
+        "एक realistic AI photo generation का detailed prompt बनाइए",
+
+      coding:
+        "मेरी coding problem को समझकर solution दीजिए"
+    };
+
+
+    function useTool(type) {
+
+      if (!requireLogin()) return;
+
+      const prompt =
+        toolPrompts[type];
+
+      document.getElementById("chatInput")
+        .value = prompt;
+
+      scrollToChat();
+
+      setTimeout(() => {
+        document.getElementById("chatInput")
+          .focus();
+      },300);
+    }
+
+
+    function quickPrompt(prompt) {
+
+      if (!requireLogin()) return;
+
+      document.getElementById("chatInput")
+        .value = prompt;
+
+      scrollToChat();
+
+      setTimeout(() => {
+        document.getElementById("chatInput")
+          .focus();
+      },300);
+    }
+
+
+    /* =========================================
+       SCROLL
+    ========================================= */
+
+    function scrollToChat() {
+
+      document.getElementById("chatSection")
+        .scrollIntoView({
+          behavior: "smooth"
+        });
+    }
+
+    function scrollToTools() {
+
+      document.getElementById("toolsSection")
+        .scrollIntoView({
+          behavior: "smooth"
+        });
+    }
+
+
+    /* =========================================
+       PWA INSTALL
+    ========================================= */
+
+    window.addEventListener(
+      "beforeinstallprompt",
+      event => {
+
+        event.preventDefault();
+
+        deferredInstallPrompt = event;
+
+        showInstallButtons();
+      }
+    );
+
+
+    function showInstallButtons() {
+
+      const buttons = [
+        document.getElementById("installBtn"),
+        document.getElementById("installBtnLogged")
+      ];
+
+      buttons.forEach(button => {
+
+        if (button) {
+          button.style.display = "inline-flex";
+        }
+
+      });
+    }
+
+
+    function hideInstallButtons() {
+
+      const buttons = [
+        document.getElementById("installBtn"),
+        document.getElementById("installBtnLogged")
+      ];
+
+      buttons.forEach(button => {
+
+        if (button) {
+          button.style.display = "none";
+        }
+
+      });
+    }
+
+
+    async function installApp() {
+
+      if (!deferredInstallPrompt) {
+
+        showToast(
+          "Chrome के menu में जाकर “Install app” या “Add to Home screen” चुनें।"
+        );
+
+        return;
+      }
+
+      try {
+
+        await deferredInstallPrompt.prompt();
+
+        const result =
+          await deferredInstallPrompt.userChoice;
+
+        if (result.outcome === "accepted") {
+          hideInstallButtons();
+        }
+
+      } catch (error) {
+
+        console.log(
+          "Install error:",
+          error
         );
 
       }
 
+      deferredInstallPrompt = null;
     }
-  );
 
 
-/* =====================================================
-   FORGOT PASSWORD
-===================================================== */
+    window.addEventListener(
+      "appinstalled",
+      () => {
 
-async function forgotPassword(){
+        deferredInstallPrompt = null;
 
-  const email =
-    document
-      .getElementById("loginEmail")
-      .value
-      .trim();
+        hideInstallButtons();
 
-
-  if(!email){
-
-    showMessage(
-      "loginMessage",
-      "पहले अपना Email लिखें।"
-    );
-
-    return;
-
-  }
-
-
-  try{
-
-    await auth
-      .sendPasswordResetEmail(
-        email
-      );
-
-
-    showMessage(
-      "loginMessage",
-      "Password reset link आपके Email पर भेज दिया गया है।",
-      true
-    );
-
-
-  }catch(error){
-
-    console.error(
-      "Password reset error:",
-      error
-    );
-
-
-    showMessage(
-      "loginMessage",
-      getAuthError(error)
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   LOGOUT
-===================================================== */
-
-async function logoutUser(){
-
-  try{
-
-    await auth.signOut();
-
-    closeAccount();
-
-    alert(
-      "आप Logout हो गए हैं।"
-    );
-
-
-  }catch(error){
-
-    console.error(
-      "Logout error:",
-      error
-    );
-
-
-    alert(
-      "Logout नहीं हो पाया: " +
-      getAuthError(error)
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   FIREBASE ERROR TRANSLATION
-===================================================== */
-
-function getAuthError(error){
-
-  const code =
-    error?.code || "";
-
-
-  const messages = {
-
-    "auth/invalid-email":
-      "Email सही नहीं है।",
-
-    "auth/user-disabled":
-      "यह account disabled है।",
-
-    "auth/user-not-found":
-      "इस Email से account नहीं मिला।",
-
-    "auth/wrong-password":
-      "Password गलत है।",
-
-    "auth/invalid-credential":
-      "Email या Password गलत है।",
-
-    "auth/email-already-in-use":
-      "इस Email से पहले से account बना हुआ है।",
-
-    "auth/weak-password":
-      "Password कम से कम 6 characters का रखें।",
-
-    "auth/popup-closed-by-user":
-      "Google Login window बंद कर दी गई।",
-
-    "auth/popup-blocked":
-      "Browser ने Google popup block कर दिया।",
-
-    "auth/network-request-failed":
-      "Internet connection check करें।",
-
-    "auth/too-many-requests":
-      "बहुत ज्यादा कोशिश हुई है। थोड़ी देर बाद फिर प्रयास करें।",
-
-    "auth/operation-not-allowed":
-      "यह Login method Firebase में enabled नहीं है।",
-
-    "auth/account-exists-with-different-credential":
-      "इस Email से पहले किसी दूसरे Login method से account बना है।",
-
-    "auth/unauthorized-domain":
-      "यह website Firebase में Authorized Domain के रूप में add नहीं है।",
-
-    "auth/internal-error":
-      "Firebase में temporary समस्या है। फिर कोशिश करें।"
-
-  };
-
-
-  return (
-    messages[code] ||
-    error?.message ||
-    "कुछ गलती हो गई। फिर कोशिश करें।"
-  );
-
-}
-
-
-/* =====================================================
-   PHOTO GALLERY
-===================================================== */
-
-function openPhotoGallery(){
-
-  if(!requireLogin())
-    return;
-
-  const input =
-    document.getElementById(
-      "photoUpload"
-    );
-
-  input.click();
-
-}
-
-
-/* =====================================================
-   PHOTO UPLOAD
-===================================================== */
-
-function handlePhotoUpload(event){
-
-  const file =
-    event.target.files &&
-    event.target.files[0];
-
-
-  if(!file)
-    return;
-
-
-  if(!file.type.startsWith("image/")){
-
-    alert(
-      "कृपया केवल image/photo चुनें।"
-    );
-
-    return;
-
-  }
-
-
-  selectedPhoto =
-    file;
-
-
-  const reader =
-    new FileReader();
-
-
-  reader.onload =
-    function(e){
-
-      const preview =
-        document.getElementById(
-          "previewImage"
+        showToast(
+          "Bolo AI successfully install हो गया। 🎉"
         );
-
-      preview.src =
-        e.target.result;
-
-
-      document.getElementById(
-        "photoPreview"
-      ).style.display =
-        "block";
-
-    };
-
-
-  reader.readAsDataURL(file);
-
-}
-
-
-/* =====================================================
-   REMOVE PHOTO
-===================================================== */
-
-function removeSelectedPhoto(){
-
-  selectedPhoto =
-    null;
-
-
-  document.getElementById(
-    "photoUpload"
-  ).value =
-    "";
-
-
-  document.getElementById(
-    "previewImage"
-  ).src =
-    "";
-
-
-  document.getElementById(
-    "photoPreview"
-  ).style.display =
-    "none";
-
-}
-
-
-/* =====================================================
-   CHAT MESSAGE
-===================================================== */
-
-function addChatMessage(
-  text,
-  type,
-  imageUrl=null
-){
-
-  const box =
-    document.getElementById(
-      "chatMessages"
+      }
     );
 
 
-  const message =
-    document.createElement(
-      "div"
-    );
+    /* =========================================
+       OLD SERVICE WORKER CLEANUP
+       इससे पुराना cached page हटाने में मदद मिलेगी
+    ========================================= */
 
+    if ("serviceWorker" in navigator) {
 
-  message.className =
-    "message " + type;
+      window.addEventListener(
+        "load",
+        async () => {
 
+          try {
 
-  if(text){
+            const registrations =
+              await navigator.serviceWorker
+                .getRegistrations();
 
-    const bubble =
-      document.createElement(
-        "div"
-      );
+            for (const registration of registrations) {
 
+              await registration.unregister();
+            }
 
-    bubble.className =
-      "message-bubble";
+          } catch (error) {
 
-
-    bubble.textContent =
-      text;
-
-
-    message.appendChild(
-      bubble
-    );
-
-  }
-
-
-  if(imageUrl){
-
-    const img =
-      document.createElement(
-        "img"
-      );
-
-
-    img.className =
-      "message-image";
-
-
-    img.src =
-      imageUrl;
-
-
-    img.alt =
-      "Uploaded Photo";
-
-
-    message.appendChild(
-      img
-    );
-
-  }
-
-
-  box.appendChild(
-    message
-  );
-
-
-  box.scrollTop =
-    box.scrollHeight;
-
-
-  return message;
-
-}
-
-
-/* =====================================================
-   CHAT
-===================================================== */
-
-async function sendChat(){
-
-  if(!requireLogin())
-    return;
-
-
-  const input =
-    document.getElementById(
-      "chatInput"
-    );
-
-
-  const text =
-    input.value.trim();
-
-
-  if(!text && !selectedPhoto)
-    return;
-
-
-  let imageData =
-    null;
-
-
-  if(selectedPhoto){
-
-    try{
-
-      imageData =
-        await fileToDataURL(
-          selectedPhoto
-        );
-
-    }catch(error){
-
-      console.error(
-        "Photo conversion error:",
-        error
-      );
-
-    }
-
-  }
-
-
-  addChatMessage(
-    text ||
-    "इस फोटो के बारे में बताइए।",
-    "user",
-    imageData
-  );
-
-
-  input.value =
-    "";
-
-
-  const loadingBubble =
-    addChatMessage(
-      "AI सोच रहा है...",
-      "ai"
-    );
-
-
-  try{
-
-    const body = {
-
-      message:
-        text ||
-        "इस फोटो को देखकर मेरी मदद करें।"
-
-    };
-
-
-    /*
-      अगर backend image field support करता है
-      तो photo भी backend को भेजी जाएगी।
-    */
-
-    if(imageData){
-
-      body.image =
-        imageData;
-
-    }
-
-
-    const response =
-      await fetch(
-        API_BASE_URL +
-        "/api/chat",
-        {
-
-          method:"POST",
-
-          headers:{
-            "Content-Type":
-              "application/json"
-          },
-
-          body:
-            JSON.stringify(body)
+            console.log(
+              "Service Worker cleanup:",
+              error
+            );
+          }
 
         }
       );
-
-
-    if(!response.ok){
-
-      throw new Error(
-        "Server Error: " +
-        response.status
-      );
-
     }
 
 
-    const data =
-      await response.json();
+    /* =========================================
+       KEYBOARD
+    ========================================= */
 
+    document.addEventListener(
+      "keydown",
+      event => {
 
-    loadingBubble.textContent =
-      data.reply ||
-      data.response ||
-      data.message ||
-      "AI से response नहीं मिला।";
+        if (event.key === "Escape") {
 
-
-  }catch(error){
-
-    console.error(
-      "Chat error:",
-      error
-    );
-
-
-    loadingBubble.textContent =
-      "AI server से connection नहीं हो पाया।";
-
-  }
-
-
-  removeSelectedPhoto();
-
-}
-
-
-/* =====================================================
-   FILE TO DATA URL
-===================================================== */
-
-function fileToDataURL(file){
-
-  return new Promise(
-    (resolve,reject) => {
-
-      const reader =
-        new FileReader();
-
-
-      reader.onload =
-        () => resolve(
-          reader.result
-        );
-
-
-      reader.onerror =
-        () => reject(
-          reader.error
-        );
-
-
-      reader.readAsDataURL(file);
-
-    }
-  );
-
-}
-
-
-/* =====================================================
-   ENTER KEY
-===================================================== */
-
-document
-  .getElementById("chatInput")
-  .addEventListener(
-    "keydown",
-    function(e){
-
-      if(e.key === "Enter"){
-
-        e.preventDefault();
-
-        sendChat();
+          document
+            .querySelectorAll(".modal.active")
+            .forEach(modal => {
+              modal.classList.remove("active");
+            });
+        }
 
       }
-
-    }
-  );
-
-
-/* =====================================================
-   IMAGE GENERATOR
-===================================================== */
-
-async function generateImage(){
-
-  if(!requireLogin())
-    return;
-
-
-  const prompt =
-    document
-      .getElementById("imagePrompt")
-      .value
-      .trim();
-
-
-  const result =
-    document.getElementById(
-      "imageResult"
     );
 
-
-  if(!prompt){
-
-    result.style.display =
-      "block";
-
-    result.textContent =
-      "पहले image का prompt लिखें।";
-
-    return;
-
-  }
-
-
-  result.style.display =
-    "block";
-
-
-  result.innerHTML =
-    '<div class="loading">' +
-    'Image बन रही है...' +
-    '</div>';
-
-
-  try{
-
-    const response =
-      await fetch(
-        API_BASE_URL +
-        "/api/generate-image",
-        {
-
-          method:"POST",
-
-          headers:{
-            "Content-Type":
-              "application/json"
-          },
-
-          body:
-            JSON.stringify({
-              prompt:prompt
-            })
-
-        }
-      );
-
-
-    if(!response.ok){
-
-      throw new Error(
-        "Image server error: " +
-        response.status
-      );
-
-    }
-
-
-    const data =
-      await response.json();
-
-
-    if(data.imageUrl){
-
-      result.innerHTML =
-        '<img class="generated-image" src="' +
-        escapeAttribute(
-          data.imageUrl
-        ) +
-        '" alt="Generated Image">';
-
-    }
-
-    else if(data.image){
-
-      result.innerHTML =
-        '<img class="generated-image" src="' +
-        escapeAttribute(
-          data.image
-        ) +
-        '" alt="Generated Image">';
-
-    }
-
-    else{
-
-      result.textContent =
-        data.message ||
-        "Image generate नहीं हो पाई।";
-
-    }
-
-
-  }catch(error){
-
-    console.error(
-      "Image error:",
-      error
-    );
-
-
-    result.textContent =
-      "Image server से connection नहीं हुआ।";
-
-  }
-
-}
-
-
-/* =====================================================
-   SAFE ATTRIBUTE HELPER
-===================================================== */
-
-function escapeAttribute(value){
-
-  return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/"/g,"&quot;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;");
-
-}
-
-
-/* =====================================================
-   VOICE INPUT
-===================================================== */
-
-function startVoiceInput(){
-
-  if(!requireLogin())
-    return;
-
-
-  const SpeechRecognition =
-    window.SpeechRecognition ||
-    window.webkitSpeechRecognition;
-
-
-  if(!SpeechRecognition){
-
-    alert(
-      "आपके browser में voice input supported नहीं है।"
-    );
-
-    return;
-
-  }
-
-
-  const recognition =
-    new SpeechRecognition();
-
-
-  recognition.lang =
-    "hi-IN";
-
-
-  recognition.interimResults =
-    false;
-
-
-  recognition.maxAlternatives =
-    1;
-
-
-  try{
-
-    recognition.start();
-
-  }catch(error){
-
-    console.error(
-      error
-    );
-
-    return;
-
-  }
-
-
-  recognition.onresult =
-    function(event){
-
-      const text =
-        event
-          .results[0][0]
-          .transcript;
-
-
-      document.getElementById(
-        "chatInput"
-      ).value =
-        text;
-
-    };
-
-
-  recognition.onerror =
-    function(){
-
-      alert(
-        "Voice input में समस्या आई।"
-      );
-
-    };
-
-}
-
-
-/* =====================================================
-   AI TOOLS
-===================================================== */
-
-function useTool(type){
-
-  if(!requireLogin())
-    return;
-
-
-  const names = {
-
-    writing:
-      "एक अच्छा professional content लिखिए",
-
-    lyrics:
-      "एक नया गाना lyrics idea दीजिए",
-
-    youtube:
-      "YouTube के लिए SEO friendly title, description और hashtags बनाइए",
-
-    translation:
-      "इस content को दूसरी भाषा में translate कीजिए",
-
-    resume:
-      "एक professional resume का format बनाइए",
-
-    thumbnail:
-      "एक clickable YouTube thumbnail prompt बनाइए",
-
-    poster:
-      "एक professional poster design prompt बनाइए",
-
-    photo:
-      "एक realistic AI photo generation prompt बनाइए",
-
-    coding:
-      "मेरी coding problem को समझकर solution दीजिए"
-
-  };
-
-
-  document.getElementById(
-    "toolInput"
-  ).value =
-    names[type] || "";
-
-
-  document.getElementById(
-    "toolInput"
-  ).focus();
-
-
-  document.getElementById(
-    "toolInput"
-  ).scrollIntoView({
-
-    behavior:"smooth",
-
-    block:"center"
-
-  });
-
-}
-
-
-/* =====================================================
-   QUICK TOOL
-===================================================== */
-
-async function runQuickTool(){
-
-  if(!requireLogin())
-    return;
-
-
-  const input =
-    document
-      .getElementById("toolInput")
-      .value
-      .trim();
-
-
-  const result =
-    document.getElementById(
-      "toolResult"
-    );
-
-
-  if(!input){
-
-    result.style.display =
-      "block";
-
-    result.textContent =
-      "पहले अपना काम लिखें।";
-
-    return;
-
-  }
-
-
-  result.style.display =
-    "block";
-
-
-  result.textContent =
-    "AI तैयार कर रहा है...";
-
-
-  try{
-
-    const response =
-      await fetch(
-        API_BASE_URL +
-        "/api/chat",
-        {
-
-          method:"POST",
-
-          headers:{
-            "Content-Type":
-              "application/json"
-          },
-
-          body:
-            JSON.stringify({
-              message:input
-            })
-
-        }
-      );
-
-
-    if(!response.ok){
-
-      throw new Error(
-        "Server Error: " +
-        response.status
-      );
-
-    }
-
-
-    const data =
-      await response.json();
-
-
-    result.textContent =
-      data.reply ||
-      data.response ||
-      data.message ||
-      "Response नहीं मिला।";
-
-
-  }catch(error){
-
-    console.error(
-      "Quick tool error:",
-      error
-    );
-
-
-    result.textContent =
-      "AI server से connection नहीं हो पाया।";
-
-  }
-
-}
-
-
-/* =====================================================
-   PREMIUM
-===================================================== */
-
-function premiumComingSoon(){
-
-  if(!requireLogin())
-    return;
-
-
-  alert(
-    "Premium payment system अभी तैयार किया जा रहा है।"
-  );
-
-}
-
-
-/* =====================================================
-   ESC KEY
-===================================================== */
-
-document.addEventListener(
-  "keydown",
-  function(e){
-
-    if(e.key === "Escape"){
-
-      closeLogin();
-
-      closeSignup();
-
-      closeAccount();
-
-    }
-
-  }
-);
-
-
-/* =====================================================
-   START
-===================================================== */
-
-updateNavbar();
-
-console.log(
-  "Bolo AI Firebase App Loaded ✅"
-);
-
-</script>
+  </script>
 
 </body>
 </html>
