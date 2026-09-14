@@ -2,23 +2,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<meta name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover">
+
 <meta name="theme-color" content="#0b1026">
+
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Bolo AI">
-<link rel="manifest" href="./manifest.json">
-<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
-<link rel="apple-touch-icon" href="./icon-192.png">
-<title>Bolo AI - Smart AI Assistant</title>
+
+<!-- =========================
+     GOOGLE SEO
+========================= -->
+
+<title>Bolo AI – Smart AI Assistant | AI Chat, Writing, Voice & Image Generator</title>
+
+<meta name="description"
+content="Bolo AI is a smart AI assistant for AI chat, writing, translation, YouTube, resume making, voice AI, image generation and more. Use powerful AI tools from one simple website.">
+
+<meta name="keywords"
+content="Bolo AI, Bolo AI Assistant, AI Assistant, AI Chat, AI Chatbot, AI Writing, AI Writer, AI Translation, AI Image Generator, Voice AI, YouTube AI, Resume Maker, Thumbnail Generator, Free AI Tools">
+
+<meta name="author" content="Bolo AI">
+
+<meta name="robots"
+content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+<meta name="googlebot" content="index, follow">
+
+<link rel="canonical"
+      href="https://bolo-ai-five.vercel.app/">
+
+<!-- Search / Social -->
+
+<meta property="og:type" content="website">
+
+<meta property="og:url"
+      content="https://bolo-ai-five.vercel.app/">
+
+<meta property="og:title"
+      content="Bolo AI – Smart AI Assistant">
+
+<meta property="og:description"
+      content="Chat, write, translate, create images, use Voice AI and powerful AI tools with Bolo AI.">
+
+<meta property="og:image"
+      content="https://bolo-ai-five.vercel.app/icon-512.png">
+
+<meta property="og:site_name"
+      content="Bolo AI">
+
+<meta property="og:locale"
+      content="en_IN">
+
+<!-- Twitter / X -->
+
+<meta name="twitter:card"
+      content="summary_large_image">
+
+<meta name="twitter:title"
+      content="Bolo AI – Smart AI Assistant">
+
+<meta name="twitter:description"
+      content="Your smart AI assistant for chat, writing, translation, YouTube, voice and AI image generation.">
+
+<meta name="twitter:image"
+      content="https://bolo-ai-five.vercel.app/icon-512.png">
+
+<!-- App -->
+
+<meta name="application-name"
+      content="Bolo AI">
+
+<link rel="manifest"
+      href="./manifest.json">
+
+<link rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="./icon-192.png">
+
+<link rel="apple-touch-icon"
+      href="./icon-192.png">
+
+<!-- =========================
+     STRUCTURED DATA
+========================= -->
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"Bolo AI",
+  "url":"https://bolo-ai-five.vercel.app/",
+  "description":"Bolo AI is a smart AI assistant for chat, writing, translation, YouTube, resumes, voice AI and AI image generation.",
+  "applicationCategory":"ProductivityApplication",
+  "operatingSystem":"Web",
+  "browserRequirements":"Requires JavaScript",
+  "image":"https://bolo-ai-five.vercel.app/icon-512.png",
+  "offers":[
+    {
+      "@type":"Offer",
+      "name":"Bolo AI Free",
+      "price":"0",
+      "priceCurrency":"INR"
+    },
+    {
+      "@type":"Offer",
+      "name":"Bolo AI Premium",
+      "price":"149",
+      "priceCurrency":"INR"
+    }
+  ]
+}
+</script>
 
 <style>
+
 :root{
 --bg:#070b1c;
 --bg2:#0d1330;
---panel:rgba(16,23,51,.78);
+--panel:rgba(16,23,51,.82);
 --panel-solid:#101735;
 --panel2:#151d43;
 --text:#f5f7ff;
@@ -30,8 +138,17 @@
 --pink:#d946ef;
 --shadow:0 20px 60px rgba(0,0,0,.32);
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
 body{
 font-family:Inter,Arial,Helvetica,sans-serif;
 background:
@@ -42,20 +159,43 @@ color:var(--text);
 line-height:1.5;
 min-height:100vh;
 }
+
 body:before{
 content:"";
 position:fixed;
 inset:0;
 pointer-events:none;
 z-index:-1;
-background:linear-gradient(120deg,transparent 35%,rgba(139,92,246,.035),transparent 65%);
+background:linear-gradient(
+120deg,
+transparent 35%,
+rgba(139,92,246,.035),
+transparent 65%
+);
 }
-a{text-decoration:none;color:inherit}
-button,input,textarea{font:inherit}
-button{cursor:pointer}
-button:disabled{opacity:.6;cursor:not-allowed}
+
+a{
+text-decoration:none;
+color:inherit;
+}
+
+button,
+input,
+textarea{
+font:inherit;
+}
+
+button{
+cursor:pointer;
+}
+
+button:disabled{
+opacity:.6;
+cursor:not-allowed;
+}
 
 /* NAVBAR */
+
 .navbar{
 position:sticky;
 top:0;
@@ -64,6 +204,7 @@ background:rgba(7,11,28,.78);
 backdrop-filter:blur(18px);
 border-bottom:1px solid var(--line);
 }
+
 .nav-inner{
 max-width:1200px;
 margin:auto;
@@ -71,48 +212,78 @@ padding:13px 20px;
 display:flex;
 align-items:center;
 justify-content:space-between;
-gap:18px
+gap:18px;
 }
-.brand{display:flex;align-items:center;gap:10px}
+
+.brand{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
 .brand-logo{
 width:42px;
 height:42px;
 border-radius:13px;
 object-fit:cover;
-box-shadow:0 0 28px rgba(124,58,237,.35)
+box-shadow:0 0 28px rgba(124,58,237,.35);
 }
-.logo{font-size:24px;font-weight:900;letter-spacing:-.7px}
+
+.logo{
+font-size:24px;
+font-weight:900;
+letter-spacing:-.7px;
+}
+
 .logo span{
 background:linear-gradient(90deg,#d946ef,#22d3ee);
 -webkit-background-clip:text;
 background-clip:text;
-color:transparent
+color:transparent;
 }
+
 .nav-links{
 display:flex;
 gap:22px;
 align-items:center;
 color:#dce2f7;
-font-weight:600
+font-weight:600;
 }
-.nav-links a:hover,.footer-links a:hover{color:#b78cff}
-.nav-actions{display:flex;gap:8px;align-items:center}
-.nav-btn,.menu-btn{
+
+.nav-links a:hover,
+.footer-links a:hover{
+color:#b78cff;
+}
+
+.nav-actions{
+display:flex;
+gap:8px;
+align-items:center;
+}
+
+.nav-btn,
+.menu-btn{
 border:1px solid var(--line);
 background:rgba(255,255,255,.05);
 color:var(--text);
 padding:9px 15px;
 border-radius:11px;
-font-weight:700
+font-weight:700;
 }
+
 .nav-btn.primary{
 background:linear-gradient(135deg,var(--purple2),#a855f7);
 border-color:transparent;
-box-shadow:0 8px 25px rgba(124,58,237,.25)
+box-shadow:0 8px 25px rgba(124,58,237,.25);
 }
-.menu-btn{font-size:20px;padding:7px 12px}
+
+.menu-btn{
+font-size:20px;
+padding:7px 12px;
+}
 
 /* SIDE MENU */
+
 .side-menu{
 position:fixed;
 top:0;
@@ -124,44 +295,61 @@ z-index:2000;
 padding:22px;
 box-shadow:-10px 0 35px rgba(0,0,0,.4);
 transition:.3s;
-border-left:1px solid var(--line)
+border-left:1px solid var(--line);
 }
-.side-menu.show{right:0}
+
+.side-menu.show{
+right:0;
+}
+
 .side-menu-header{
 display:flex;
 justify-content:space-between;
 align-items:center;
-margin-bottom:25px
+margin-bottom:25px;
 }
-.close-menu,.modal-close{
+
+.close-menu,
+.modal-close{
 border:0;
 background:none;
 color:var(--text);
-font-size:28px
+font-size:28px;
 }
+
 .side-menu a{
 display:block;
 padding:13px 5px;
 border-bottom:1px solid var(--line);
-color:#dfe5fb
+color:#dfe5fb;
 }
-.side-login{margin-top:20px;width:100%}
+
+.side-login{
+margin-top:20px;
+width:100%;
+}
+
 .menu-overlay{
 display:none;
 position:fixed;
 inset:0;
 background:rgba(0,0,0,.72);
-z-index:1500
+z-index:1500;
 }
-.menu-overlay.show{display:block}
+
+.menu-overlay.show{
+display:block;
+}
 
 /* HERO */
+
 .hero{
 padding:78px 20px 65px;
 text-align:center;
 position:relative;
-overflow:hidden
+overflow:hidden;
 }
+
 .hero:after{
 content:"";
 position:absolute;
@@ -171,15 +359,21 @@ border-radius:50%;
 left:50%;
 top:10px;
 transform:translateX(-50%);
-background:radial-gradient(circle,rgba(124,58,237,.18),transparent 68%);
-pointer-events:none
+background:radial-gradient(
+circle,
+rgba(124,58,237,.18),
+transparent 68%
+);
+pointer-events:none;
 }
+
 .hero-content{
 max-width:900px;
 margin:auto;
 position:relative;
-z-index:1
+z-index:1;
 }
+
 .hero-badge{
 display:inline-flex;
 align-items:center;
@@ -190,43 +384,53 @@ color:#d8c7ff;
 padding:8px 14px;
 border-radius:30px;
 font-weight:800;
-margin-bottom:18px
+margin-bottom:18px;
 }
+
 .hero h1{
 font-size:52px;
 line-height:1.08;
 margin-bottom:18px;
-letter-spacing:-1.6px
+letter-spacing:-1.6px;
 }
+
 .hero h1 span{
 background:linear-gradient(90deg,#a78bfa,#22d3ee);
 -webkit-background-clip:text;
 background-clip:text;
-color:transparent
+color:transparent;
 }
+
 .hero p{
 max-width:720px;
 margin:auto;
 color:var(--muted);
-font-size:18px
+font-size:18px;
 }
 
 /* CHAT */
+
 .chat-area{
 max-width:920px;
 margin:-5px auto 60px;
-padding:0 20px
+padding:0 20px;
 }
+
 .chat-box{
-background:linear-gradient(180deg,rgba(18,25,57,.88),rgba(11,16,39,.92));
+background:linear-gradient(
+180deg,
+rgba(18,25,57,.88),
+rgba(11,16,39,.92)
+);
 border:1px solid var(--line);
 border-radius:22px;
 min-height:300px;
 max-height:600px;
 padding:18px;
 box-shadow:var(--shadow);
-overflow-y:auto
+overflow-y:auto;
 }
+
 .chat-message{
 max-width:82%;
 padding:12px 15px;
@@ -234,27 +438,31 @@ border-radius:15px;
 margin:9px 0;
 white-space:pre-wrap;
 word-break:break-word;
-border:1px solid transparent
+border:1px solid transparent;
 }
+
 .chat-message.user{
 margin-left:auto;
 background:linear-gradient(135deg,#7042e8,#8b5cf6);
 color:#fff;
-box-shadow:0 8px 22px rgba(109,61,245,.2)
+box-shadow:0 8px 22px rgba(109,61,245,.2);
 }
+
 .chat-message.ai{
 background:rgba(255,255,255,.055);
 border-color:var(--line);
-color:#edf1ff
+color:#edf1ff;
 }
 
 /* INPUT */
+
 .input-section{
 display:flex;
 gap:8px;
 margin-top:14px;
-align-items:stretch
+align-items:stretch;
 }
+
 .input-section textarea{
 flex:1;
 resize:none;
@@ -264,42 +472,51 @@ color:var(--text);
 border-radius:14px;
 padding:13px;
 min-height:54px;
-outline:none
+outline:none;
 }
+
 .input-section textarea::placeholder,
-.image-prompt::placeholder{color:#7f8aaa}
+.image-prompt::placeholder{
+color:#7f8aaa;
+}
+
 .input-section textarea:focus,
 .image-prompt:focus{
 border-color:rgba(139,92,246,.8);
-box-shadow:0 0 0 3px rgba(139,92,246,.1)
+box-shadow:0 0 0 3px rgba(139,92,246,.1);
 }
-.icon-btn,.send-btn{
+
+.icon-btn,
+.send-btn{
 height:54px;
-border:0;
 border-radius:14px;
 font-weight:800;
-padding:0 18px
+padding:0 18px;
 }
+
 .icon-btn{
 background:rgba(255,255,255,.07);
 color:#f2f5ff;
-border:1px solid var(--line)
+border:1px solid var(--line);
 }
-.icon-btn:hover{background:rgba(255,255,255,.12)}
+
 .send-btn{
 background:linear-gradient(135deg,#7042e8,#a855f7);
 color:#fff;
 min-width:88px;
-box-shadow:0 8px 25px rgba(109,61,245,.22)
+border:0;
+box-shadow:0 8px 25px rgba(109,61,245,.22);
 }
+
 .photo-btn{
 min-width:54px;
 width:54px;
 padding:0;
-font-size:21px
+font-size:21px;
 }
 
 /* PHOTO */
+
 .photo-preview-box{
 display:none;
 margin-top:10px;
@@ -308,16 +525,22 @@ border:1px solid var(--line);
 border-radius:15px;
 padding:10px;
 width:max-content;
-max-width:100%
+max-width:100%;
 }
-.photo-preview-wrap{position:relative;display:inline-block}
+
+.photo-preview-wrap{
+position:relative;
+display:inline-block;
+}
+
 .photo-preview{
 width:150px;
 height:150px;
 object-fit:cover;
 border-radius:12px;
-display:block
+display:block;
 }
+
 .remove-photo-btn{
 position:absolute;
 right:6px;
@@ -330,8 +553,9 @@ background:#050816dd;
 color:#fff;
 font-size:20px;
 line-height:30px;
-padding:0
+padding:0;
 }
+
 .photo-name{
 margin-top:7px;
 font-size:12px;
@@ -339,8 +563,9 @@ color:#aeb7d2;
 max-width:150px;
 overflow:hidden;
 text-overflow:ellipsis;
-white-space:nowrap
+white-space:nowrap;
 }
+
 .chat-user-image{
 max-width:280px;
 max-height:280px;
@@ -348,36 +573,55 @@ object-fit:contain;
 display:block;
 margin:8px 0 8px auto;
 border-radius:14px;
-border:1px solid var(--line)
+border:1px solid var(--line);
 }
 
 /* IMAGE GENERATOR */
+
 .image-generator{
 margin-top:18px;
-background:linear-gradient(145deg,rgba(21,29,67,.92),rgba(13,19,48,.92));
+background:linear-gradient(
+145deg,
+rgba(21,29,67,.92),
+rgba(13,19,48,.92)
+);
 border:1px solid rgba(139,92,246,.22);
 border-radius:20px;
 padding:20px;
-box-shadow:0 12px 35px rgba(0,0,0,.2)
+box-shadow:0 12px 35px rgba(0,0,0,.2);
 }
+
 .image-generator-header{
 display:flex;
 align-items:center;
 gap:12px;
-margin-bottom:15px
+margin-bottom:15px;
 }
+
 .image-generator-icon{
 width:46px;
 height:46px;
 border-radius:13px;
-background:linear-gradient(135deg,rgba(139,92,246,.22),rgba(34,211,238,.15));
+background:linear-gradient(
+135deg,
+rgba(139,92,246,.22),
+rgba(34,211,238,.15)
+);
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:24px
+font-size:24px;
 }
-.image-generator-header h3{font-size:20px}
-.image-generator-header p{color:var(--muted);font-size:13px}
+
+.image-generator-header h3{
+font-size:20px;
+}
+
+.image-generator-header p{
+color:var(--muted);
+font-size:13px;
+}
+
 .image-prompt{
 width:100%;
 min-height:85px;
@@ -387,13 +631,15 @@ background:#0b112b;
 color:var(--text);
 border-radius:13px;
 padding:13px;
-outline:none
+outline:none;
 }
+
 .image-generator-actions{
 display:flex;
 gap:9px;
-margin-top:10px
+margin-top:10px;
 }
+
 .generate-image-btn{
 flex:1;
 border:0;
@@ -401,42 +647,48 @@ border-radius:12px;
 background:linear-gradient(135deg,#7042e8,#a855f7);
 color:#fff;
 padding:12px 15px;
-font-weight:800
+font-weight:800;
 }
+
 .clear-image-btn{
 border:1px solid var(--line);
 border-radius:12px;
 background:rgba(255,255,255,.05);
 color:#fff;
-padding:12px 15px
+padding:12px 15px;
 }
+
 .image-status{
 margin-top:10px;
 color:#aeb7d2;
 font-size:14px;
-min-height:20px
+min-height:20px;
 }
+
 .generated-image-message{
 max-width:100%;
 background:rgba(255,255,255,.04);
 border:1px solid var(--line);
 border-radius:15px;
 padding:12px;
-margin:10px 0
+margin:10px 0;
 }
+
 .generated-image-message img{
 width:100%;
 max-width:700px;
 display:block;
 margin:auto;
-border-radius:12px
+border-radius:12px;
 }
+
 .generated-image-caption{
 margin-top:10px;
 font-size:14px;
 color:#c0c7db;
-word-break:break-word
+word-break:break-word;
 }
+
 .image-download-btn{
 margin-top:10px;
 border:0;
@@ -444,80 +696,120 @@ background:linear-gradient(135deg,#7042e8,#a855f7);
 color:#fff;
 border-radius:10px;
 padding:9px 13px;
-font-weight:800
+font-weight:800;
 }
 
-/* QUICK ACTIONS */
+/* QUICK */
+
 .quick-actions{
 display:flex;
 flex-wrap:wrap;
 gap:10px;
-margin-top:14px
+margin-top:14px;
 }
+
 .quick-btn{
 border:1px solid var(--line);
 background:rgba(255,255,255,.045);
 color:#dce2f7;
 border-radius:11px;
-padding:9px 13px
+padding:9px 13px;
 }
+
 .quick-btn:hover{
 border-color:rgba(139,92,246,.65);
 color:#cdb9ff;
-background:rgba(139,92,246,.08)
+background:rgba(139,92,246,.08);
 }
 
 /* SECTIONS */
-section:not(.hero){padding:70px 20px}
+
+section:not(.hero){
+padding:70px 20px;
+}
+
 .section-header{
 text-align:center;
 max-width:700px;
-margin:0 auto 35px
+margin:0 auto 35px;
 }
+
 .section-header h2{
 font-size:35px;
 margin-bottom:8px;
-letter-spacing:-.7px
+letter-spacing:-.7px;
 }
-.section-header p{color:var(--muted)}
+
+.section-header p{
+color:var(--muted);
+}
 
 /* TOOLS */
+
 .tools-grid{
 max-width:1100px;
 margin:auto;
 display:grid;
 grid-template-columns:repeat(3,1fr);
-gap:18px
+gap:18px;
 }
+
 .tool-card{
-background:linear-gradient(145deg,rgba(18,25,57,.9),rgba(12,17,40,.92));
+background:linear-gradient(
+145deg,
+rgba(18,25,57,.9),
+rgba(12,17,40,.92)
+);
 border:1px solid var(--line);
 border-radius:18px;
 padding:23px;
 box-shadow:0 10px 30px rgba(0,0,0,.18);
-transition:.25s
+transition:.25s;
 }
+
 .tool-card:hover{
 transform:translateY(-4px);
-border-color:rgba(139,92,246,.35)
+border-color:rgba(139,92,246,.35);
 }
-.tool-icon{font-size:32px;margin-bottom:12px}
-.tool-card h3{margin-bottom:7px}
-.tool-card p{color:var(--muted);margin-bottom:15px}
+
+.tool-icon{
+font-size:32px;
+margin-bottom:12px;
+}
+
+.tool-card h3{
+margin-bottom:7px;
+}
+
+.tool-card p{
+color:var(--muted);
+margin-bottom:15px;
+}
+
 .tool-btn{
 border:0;
 background:linear-gradient(135deg,#7042e8,#8b5cf6);
 color:#fff;
 padding:9px 14px;
 border-radius:10px;
-font-weight:800
+font-weight:800;
 }
 
 /* PREMIUM */
+
 .premium-section{
-background:linear-gradient(180deg,rgba(99,56,180,.10),rgba(34,211,238,.025))
+background:linear-gradient(
+180deg,
+rgba(99,56,180,.10),
+rgba(34,211,238,.025)
+);
 }
-.premium-container{max-width:1050px;margin:auto}
+
+.premium-container{
+max-width:1050px;
+margin:auto;
+}
+
 .premium-notice{
 background:rgba(255,196,77,.08);
 border:1px solid rgba(255,196,77,.18);
@@ -525,27 +817,34 @@ color:#f6d891;
 border-radius:12px;
 padding:12px 16px;
 text-align:center;
-margin-bottom:25px
+margin-bottom:25px;
 }
-.notice-badge{font-weight:800}
+
+.notice-badge{
+font-weight:800;
+}
+
 .pricing-cards{
 display:flex;
 justify-content:center;
 gap:22px;
-flex-wrap:wrap
+flex-wrap:wrap;
 }
+
 .pricing-card{
 background:rgba(16,23,53,.9);
 border:1px solid var(--line);
 border-radius:20px;
 padding:28px;
 width:340px;
-position:relative
+position:relative;
 }
+
 .featured-plan{
 border:2px solid rgba(139,92,246,.7);
-box-shadow:0 20px 50px rgba(109,61,245,.12)
+box-shadow:0 20px 50px rgba(109,61,245,.12);
 }
+
 .plan-badge{
 position:absolute;
 right:15px;
@@ -554,17 +853,34 @@ background:linear-gradient(135deg,#7042e8,#a855f7);
 color:#fff;
 padding:5px 9px;
 border-radius:20px;
-font-size:12px
+font-size:12px;
 }
-.plan-name{font-size:22px;font-weight:800}
-.plan-price{margin:15px 0;font-size:20px}
-.plan-price strong{font-size:38px}
-.plan-features{list-style:none;margin:20px 0}
+
+.plan-name{
+font-size:22px;
+font-weight:800;
+}
+
+.plan-price{
+margin:15px 0;
+font-size:20px;
+}
+
+.plan-price strong{
+font-size:38px;
+}
+
+.plan-features{
+list-style:none;
+margin:20px 0;
+}
+
 .plan-features li{
 padding:7px 0;
 border-bottom:1px solid var(--line);
-color:#dbe2f5
+color:#dbe2f5;
 }
+
 .plan-button{
 width:100%;
 padding:12px;
@@ -572,63 +888,80 @@ border:0;
 border-radius:11px;
 background:linear-gradient(135deg,#7042e8,#a855f7);
 color:#fff;
-font-weight:800
+font-weight:800;
 }
 
 /* ABOUT / CONTACT */
-.about-box,.contact-box{
+
+.about-box,
+.contact-box{
 max-width:850px;
 margin:auto;
 background:rgba(16,23,53,.82);
 padding:28px;
 border:1px solid var(--line);
-border-radius:18px
+border-radius:18px;
 }
+
 .about-box p{
 margin-bottom:12px;
-color:#c5ccde
+color:#c5ccde;
 }
+
 .contact-email{
 color:#b999ff;
-font-weight:800
+font-weight:800;
 }
-.contact-form{display:grid;gap:12px}
-.contact-form input,.contact-form textarea{
+
+.contact-form{
+display:grid;
+gap:12px;
+}
+
+.contact-form input,
+.contact-form textarea{
 width:100%;
 padding:12px;
 border:1px solid var(--line);
 background:#0b112b;
 color:#fff;
 border-radius:11px;
-outline:none
+outline:none;
 }
-.contact-form textarea{min-height:130px}
+
+.contact-form textarea{
+min-height:130px;
+}
+
 .contact-form button{
 padding:12px;
 border:0;
 border-radius:11px;
 background:linear-gradient(135deg,#7042e8,#a855f7);
 color:#fff;
-font-weight:800
+font-weight:800;
 }
 
 /* FOOTER */
+
 footer{
 background:#050711;
 color:#bfc6d8;
 text-align:center;
 padding:35px 20px;
-border-top:1px solid var(--line)
+border-top:1px solid var(--line);
 }
+
 .footer-links{
 display:flex;
 justify-content:center;
 flex-wrap:wrap;
 gap:18px;
-margin-bottom:15px
+margin-bottom:15px;
 }
 
-/* MODALS */
+/* MODAL */
+
 .modal{
 display:none;
 position:fixed;
@@ -637,9 +970,13 @@ background:rgba(0,0,0,.78);
 z-index:3000;
 align-items:center;
 justify-content:center;
-padding:20px
+padding:20px;
 }
-.modal.show{display:flex}
+
+.modal.show{
+display:flex;
+}
+
 .modal-box{
 background:#0e1533;
 width:min(430px,100%);
@@ -649,40 +986,56 @@ position:relative;
 max-height:90vh;
 overflow-y:auto;
 border:1px solid var(--line);
-box-shadow:var(--shadow)
+box-shadow:var(--shadow);
 }
-.modal-box h2{margin-bottom:18px}
+
+.modal-box h2{
+margin-bottom:18px;
+}
+
 .modal-close{
 position:absolute;
 right:15px;
-top:10px
+top:10px;
 }
-.auth-form{display:grid;gap:12px}
+
+.auth-form{
+display:grid;
+gap:12px;
+}
+
 .auth-form input{
 padding:12px;
 border:1px solid var(--line);
 background:#0a1028;
 color:#fff;
-border-radius:10px
+border-radius:10px;
 }
+
 .auth-form button{
 padding:12px;
 border:0;
 border-radius:10px;
 background:linear-gradient(135deg,#7042e8,#a855f7);
 color:#fff;
-font-weight:800
+font-weight:800;
 }
 
 /* THUMBNAIL */
-.thumbnail-form{display:grid;gap:10px}
+
+.thumbnail-form{
+display:grid;
+gap:10px;
+}
+
 .thumbnail-form input{
 padding:11px;
 border:1px solid var(--line);
 background:#0a1028;
 color:#fff;
-border-radius:9px
+border-radius:9px;
 }
+
 .thumbnail-canvas{
 height:230px;
 border-radius:12px;
@@ -694,21 +1047,25 @@ align-items:center;
 justify-content:center;
 text-align:center;
 padding:20px;
-color:#fff
+color:#fff;
 }
+
 .thumbnail-main-text{
 font-size:29px;
-font-weight:800
+font-weight:800;
 }
+
 .thumbnail-sub-text{
 font-size:15px;
-margin-top:8px
+margin-top:8px;
 }
+
 .thumb-buttons{
 display:flex;
 gap:8px;
-margin-top:12px
+margin-top:12px;
 }
+
 .thumb-buttons button{
 flex:1;
 padding:11px;
@@ -716,97 +1073,202 @@ border:0;
 border-radius:9px;
 background:linear-gradient(135deg,#7042e8,#a855f7);
 color:#fff;
-font-weight:800
+font-weight:800;
 }
 
 /* RESPONSIVE */
+
 @media(max-width:850px){
-.nav-links{display:none}
-.tools-grid{grid-template-columns:repeat(2,1fr)}
-.hero h1{font-size:40px}
+
+.nav-links{
+display:none;
 }
+
+.tools-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+.hero h1{
+font-size:40px;
+}
+
+}
+
 @media(max-width:550px){
-.nav-inner{padding:10px 12px}
-.brand-logo{width:38px;height:38px}
-.logo{font-size:21px}
-.nav-actions .nav-btn{display:none}
-.hero{padding:55px 15px}
-.hero h1{font-size:32px}
-.hero p{font-size:16px}
-.tools-grid{grid-template-columns:1fr}
-.chat-message{max-width:92%}
+
+.nav-inner{
+padding:10px 12px;
+}
+
+.brand-logo{
+width:38px;
+height:38px;
+}
+
+.logo{
+font-size:21px;
+}
+
+.nav-actions .nav-btn{
+display:none;
+}
+
+.hero{
+padding:55px 15px;
+}
+
+.hero h1{
+font-size:32px;
+}
+
+.hero p{
+font-size:16px;
+}
+
+.tools-grid{
+grid-template-columns:1fr;
+}
+
+.chat-message{
+max-width:92%;
+}
+
 .input-section{
 display:grid;
 grid-template-columns:52px 1fr 78px;
-gap:7px
+gap:7px;
 }
+
 .input-section textarea{
 grid-column:1/-1;
 grid-row:1;
-width:100%
+width:100%;
 }
+
 .photo-btn{
 grid-column:1;
 grid-row:2;
 width:100%;
-min-width:0
+min-width:0;
 }
+
 #micBtn{
 grid-column:2;
 grid-row:2;
-width:100%
+width:100%;
 }
+
 #sendBtn{
 grid-column:3;
 grid-row:2;
 width:100%;
 min-width:0;
-padding:0 8px
+padding:0 8px;
 }
-.pricing-card{width:100%}
-.image-generator-actions{flex-direction:column}
-.generate-image-btn,.clear-image-btn{width:100%}
+
+.pricing-card{
+width:100%;
 }
-@media(max-width:380px){
-.input-section{
-grid-template-columns:48px 1fr 68px
+
+.image-generator-actions{
+flex-direction:column;
 }
-.photo-btn{font-size:19px}
+
+.generate-image-btn,
+.clear-image-btn{
+width:100%;
 }
+
+}
+
 </style>
 </head>
 
 <body>
 
+<!-- =========================
+     NAVBAR
+========================= -->
+
 <nav class="navbar">
+
 <div class="nav-inner">
+
 <a href="#home" class="brand">
-<img class="brand-logo" src="./icon-192.png" alt="Bolo AI logo">
-<span class="logo">Bolo <span>AI</span></span>
+
+<img
+class="brand-logo"
+src="./icon-192.png"
+alt="Bolo AI logo"
+>
+
+<span class="logo">
+Bolo <span>AI</span>
+</span>
+
 </a>
 
 <div class="nav-links">
+
 <a href="#home">Home</a>
 <a href="#tools">AI Tools</a>
 <a href="#premium">Premium</a>
 <a href="#about">About</a>
 <a href="#contact">Contact</a>
+
 </div>
 
 <div class="nav-actions">
-<button class="nav-btn" onclick="openLogin()">Login</button>
-<button class="nav-btn primary" onclick="openSignup()">Sign Up</button>
-<button class="menu-btn" onclick="openMenu()">⋮</button>
+
+<button
+class="nav-btn"
+onclick="openLogin()"
+>
+Login
+</button>
+
+<button
+class="nav-btn primary"
+onclick="openSignup()"
+>
+Sign Up
+</button>
+
+<button
+class="menu-btn"
+onclick="openMenu()"
+>
+⋮
+</button>
+
 </div>
+
 </div>
+
 </nav>
 
-<div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+<div
+class="menu-overlay"
+id="menuOverlay"
+onclick="closeMenu()"
+></div>
 
-<aside class="side-menu" id="sideMenu">
+<aside
+class="side-menu"
+id="sideMenu"
+>
+
 <div class="side-menu-header">
+
 <b>Bolo AI</b>
-<button class="close-menu" onclick="closeMenu()">×</button>
+
+<button
+class="close-menu"
+onclick="closeMenu()"
+>
+×
+</button>
+
 </div>
 
 <a href="#home" onclick="closeMenu()">Home</a>
@@ -815,34 +1277,68 @@ grid-template-columns:48px 1fr 68px
 <a href="#about" onclick="closeMenu()">About</a>
 <a href="#contact" onclick="closeMenu()">Contact</a>
 
-<button class="nav-btn side-login" onclick="closeMenu();openLogin()">Login</button>
+<button
+class="nav-btn side-login"
+onclick="closeMenu();openLogin()"
+>
+Login
+</button>
+
 </aside>
 
-<section class="hero" id="home">
+<!-- =========================
+     HERO
+========================= -->
+
+<section
+class="hero"
+id="home"
+>
+
 <div class="hero-content">
 
-<div class="hero-badge">🤖 Smart AI Assistant</div>
+<div class="hero-badge">
+🤖 Smart AI Assistant
+</div>
 
-<h1>Just Say It, <span>Bolo AI</span> Will Do It!</h1>
+<h1>
+Just Say It,
+<span>Bolo AI</span>
+Will Do It!
+</h1>
 
 <p>
-Your smart AI assistant for writing, translation, YouTube,
-resumes, voice, image generation and more.
+Your smart AI assistant for writing, translation,
+YouTube, resumes, voice, image generation and more.
 Just tell Bolo AI what you need.
 </p>
 
 </div>
+
 </section>
+
+<!-- =========================
+     CHAT
+========================= -->
 
 <div class="chat-area">
 
-<div class="chat-box" id="chatBox">
+<div
+class="chat-box"
+id="chatBox"
+>
+
 <div class="chat-message ai">
 👋 Hello! I'm Bolo AI. Login करके मुझसे Chat शुरू करें.
 </div>
+
 </div>
 
-<div class="photo-preview-box" id="photoPreviewBox">
+<div
+class="photo-preview-box"
+id="photoPreviewBox"
+>
+
 <div class="photo-preview-wrap">
 
 <img
@@ -856,14 +1352,17 @@ alt="Selected photo"
 type="button"
 class="remove-photo-btn"
 id="removePhotoBtn"
-title="Remove Photo"
 >
 ×
 </button>
 
 </div>
 
-<div class="photo-name" id="photoName"></div>
+<div
+class="photo-name"
+id="photoName"
+></div>
+
 </div>
 
 <div class="input-section">
@@ -907,17 +1406,27 @@ Send
 
 </div>
 
-<div class="image-generator" id="imageGenerator">
+<!-- IMAGE GENERATOR -->
+
+<div
+class="image-generator"
+id="imageGenerator"
+>
 
 <div class="image-generator-header">
 
-<div class="image-generator-icon">🎨</div>
+<div class="image-generator-icon">
+🎨
+</div>
 
 <div>
+
 <h3>Bolo AI Image Generator</h3>
+
 <p>
 अपनी image का description लिखें और image generate करें.
 </p>
+
 </div>
 
 </div>
@@ -925,7 +1434,7 @@ Send
 <textarea
 id="boloImagePrompt"
 class="image-prompt"
-placeholder="Example: A cinematic realistic Indian sunset over mountains, beautiful sky, professional photography..."
+placeholder="Example: A cinematic realistic Indian sunset over mountains..."
 ></textarea>
 
 <div class="image-generator-actions">
@@ -955,33 +1464,56 @@ id="boloImageStatus"
 
 </div>
 
+<!-- QUICK ACTIONS -->
+
 <div class="quick-actions">
 
-<button class="quick-btn" data-action="Write an application">
+<button
+class="quick-btn"
+data-action="Write an application"
+>
 📝 Application
 </button>
 
-<button class="quick-btn" data-action="Write a WhatsApp message">
+<button
+class="quick-btn"
+data-action="Write a WhatsApp message"
+>
 💬 WhatsApp
 </button>
 
-<button class="quick-btn" data-action="Translate this text">
+<button
+class="quick-btn"
+data-action="Translate this text"
+>
 🌐 Translate
 </button>
 
-<button class="quick-btn" data-action="Create a professional resume">
+<button
+class="quick-btn"
+data-action="Create a professional resume"
+>
 📄 Resume
 </button>
 
-<button class="quick-btn" data-action="Help me with YouTube">
+<button
+class="quick-btn"
+data-action="Help me with YouTube"
+>
 ▶️ YouTube
 </button>
 
-<button class="quick-btn" data-action="Create social media content">
+<button
+class="quick-btn"
+data-action="Create social media content"
+>
 📱 Social Media
 </button>
 
-<button class="quick-btn" data-action="Help me create a thumbnail">
+<button
+class="quick-btn"
+data-action="Help me create a thumbnail"
+>
 🖼️ Thumbnail
 </button>
 
@@ -994,149 +1526,214 @@ onclick="focusImageGenerator()"
 </button>
 
 </div>
+
 </div>
+
+<!-- =========================
+     AI TOOLS
+========================= -->
 
 <section id="tools">
 
 <div class="section-header">
+
 <h2>AI Tools</h2>
+
 <p>
 Powerful AI tools to make your everyday work easier.
 </p>
+
 </div>
 
 <div class="tools-grid">
 
 <div class="tool-card">
+
 <div class="tool-icon">✍️</div>
+
 <h3>AI Writing</h3>
+
 <p>
 Write applications, messages, captions and professional content.
 </p>
+
 <button
 class="tool-btn"
 onclick="useTool('Help me write something professionally')"
 >
 Use Tool
 </button>
+
 </div>
 
 <div class="tool-card">
+
 <div class="tool-icon">🌐</div>
+
 <h3>Translation</h3>
+
 <p>
 Translate your text quickly between languages.
 </p>
+
 <button
 class="tool-btn"
 onclick="useTool('Translate this text')"
 >
 Use Tool
 </button>
+
 </div>
 
 <div class="tool-card">
+
 <div class="tool-icon">▶️</div>
+
 <h3>YouTube Assistant</h3>
+
 <p>
 Get help with titles, descriptions, scripts and ideas.
 </p>
+
 <button
 class="tool-btn"
 onclick="useTool('Help me with my YouTube video')"
 >
 Use Tool
 </button>
+
 </div>
 
 <div class="tool-card">
+
 <div class="tool-icon">📄</div>
+
 <h3>Resume Maker</h3>
+
 <p>
 Create professional resume content easily.
 </p>
+
 <button
 class="tool-btn"
 onclick="useTool('Help me create a professional resume')"
 >
 Use Tool
 </button>
+
 </div>
 
 <div class="tool-card">
+
 <div class="tool-icon">🎙️</div>
+
 <h3>Voice AI</h3>
+
 <p>
 Speak naturally and let Bolo AI understand you.
 </p>
+
 <button
 class="tool-btn"
 onclick="activateMicrophone()"
 >
 Start Voice
 </button>
+
 </div>
 
 <div class="tool-card">
+
 <div class="tool-icon">🎨</div>
+
 <h3>AI Image Generator</h3>
+
 <p>
 Create AI images from your own text description.
 </p>
+
 <button
 class="tool-btn"
 onclick="focusImageGenerator()"
 >
 Create Image
 </button>
+
 </div>
 
 <div class="tool-card">
+
 <div class="tool-icon">🖼️</div>
+
 <h3>Thumbnail Generator</h3>
+
 <p>
 Create a quick thumbnail preview for your video.
 </p>
+
 <button
 class="tool-btn"
 onclick="openThumbnailGenerator()"
 >
 Create
 </button>
+
 </div>
 
 </div>
+
 </section>
 
-<section class="premium-section" id="premium">
+<!-- =========================
+     PREMIUM
+========================= -->
+
+<section
+class="premium-section"
+id="premium"
+>
 
 <div class="premium-container">
 
 <div class="section-header">
+
 <h2>Premium</h2>
-<p>Unlock more powerful Bolo AI features.</p>
+
+<p>
+Unlock more powerful Bolo AI features.
+</p>
+
 </div>
 
 <div class="premium-notice">
-<span class="notice-badge">🔥 50% OFF</span>
+
+<span class="notice-badge">
+🔥 50% OFF
+</span>
+
 Premium currently ₹149/month.
+
 </div>
 
 <div class="pricing-cards">
 
 <div class="pricing-card">
 
-<div class="plan-name">Free</div>
+<div class="plan-name">
+Free
+</div>
 
 <div class="plan-price">
 <strong>₹0</strong>/month
 </div>
 
 <ul class="plan-features">
+
 <li>✓ Basic AI requests</li>
 <li>✓ Basic AI writing</li>
 <li>✓ Basic translation</li>
 <li>✓ Basic tools</li>
+
 </ul>
 
 <button
@@ -1150,16 +1747,24 @@ Current Plan
 
 <div class="pricing-card featured-plan">
 
-<div class="plan-badge">50% OFF</div>
+<div class="plan-badge">
+50% OFF
+</div>
 
-<div class="plan-name">Premium</div>
+<div class="plan-name">
+Premium
+</div>
 
 <div class="plan-price">
+
 <del>₹299</del>
+
 <strong>₹149</strong>/month
+
 </div>
 
 <ul class="plan-features">
+
 <li>✓ More AI requests</li>
 <li>✓ Advanced AI writing</li>
 <li>✓ Advanced translation</li>
@@ -1171,6 +1776,7 @@ Current Plan
 <li>✓ PDF tools</li>
 <li>✓ Ad-free experience</li>
 <li>✓ Premium-only features</li>
+
 </ul>
 
 <button
@@ -1181,15 +1787,27 @@ Get Premium — ₹149/month
 </button>
 
 </div>
+
 </div>
+
 </div>
+
 </section>
+
+<!-- =========================
+     ABOUT
+========================= -->
 
 <section id="about">
 
 <div class="section-header">
+
 <h2>About Bolo AI</h2>
-<p>Your simple AI assistant.</p>
+
+<p>
+Your simple AI assistant.
+</p>
+
 </div>
 
 <div class="about-box">
@@ -1215,18 +1833,31 @@ Sabrojalam8454@gmail.com
 </p>
 
 </div>
+
 </section>
+
+<!-- =========================
+     CONTACT
+========================= -->
 
 <section id="contact">
 
 <div class="section-header">
+
 <h2>Contact</h2>
-<p>Have a question? Send us a message.</p>
+
+<p>
+Have a question? Send us a message.
+</p>
+
 </div>
 
 <div class="contact-box">
 
-<form class="contact-form" id="contactForm">
+<form
+class="contact-form"
+id="contactForm"
+>
 
 <input
 id="contactName"
@@ -1252,8 +1883,14 @@ Send Message
 </button>
 
 </form>
+
 </div>
+
 </section>
+
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
 
@@ -1287,9 +1924,14 @@ Terms
 
 </footer>
 
-<!-- LOGIN -->
+<!-- =========================
+     LOGIN
+========================= -->
 
-<div class="modal" id="loginModal">
+<div
+class="modal"
+id="loginModal"
+>
 
 <div class="modal-box">
 
@@ -1300,9 +1942,14 @@ onclick="closeLogin()"
 ×
 </button>
 
-<h2>Login to Bolo AI</h2>
+<h2>
+Login to Bolo AI
+</h2>
 
-<form class="auth-form" id="loginForm">
+<form
+class="auth-form"
+id="loginForm"
+>
 
 <input
 id="loginEmail"
@@ -1324,7 +1971,9 @@ Login
 
 </form>
 
-<p style="margin-top:14px;text-align:center">
+<p
+style="margin-top:14px;text-align:center"
+>
 
 Don't have an account?
 
@@ -1339,11 +1988,17 @@ Sign Up
 </p>
 
 </div>
+
 </div>
 
-<!-- SIGNUP -->
+<!-- =========================
+     SIGNUP
+========================= -->
 
-<div class="modal" id="signupModal">
+<div
+class="modal"
+id="signupModal"
+>
 
 <div class="modal-box">
 
@@ -1354,9 +2009,14 @@ onclick="closeSignup()"
 ×
 </button>
 
-<h2>Create Account</h2>
+<h2>
+Create Account
+</h2>
 
-<form class="auth-form" id="signupForm">
+<form
+class="auth-form"
+id="signupForm"
+>
 
 <input
 id="signupName"
@@ -1384,7 +2044,9 @@ Sign Up
 
 </form>
 
-<p style="margin-top:14px;text-align:center">
+<p
+style="margin-top:14px;text-align:center"
+>
 
 Already have an account?
 
@@ -1399,11 +2061,17 @@ Login
 </p>
 
 </div>
+
 </div>
 
-<!-- THUMBNAIL -->
+<!-- =========================
+     THUMBNAIL
+========================= -->
 
-<div class="modal" id="thumbnailModal">
+<div
+class="modal"
+id="thumbnailModal"
+>
 
 <div class="modal-box">
 
@@ -1414,7 +2082,9 @@ onclick="closeThumbnailGenerator()"
 ×
 </button>
 
-<h2>🖼️ Thumbnail Generator</h2>
+<h2>
+🖼️ Thumbnail Generator
+</h2>
 
 <div class="thumbnail-form">
 
@@ -1482,25 +2152,42 @@ Close
 </div>
 
 </div>
+
 </div>
 
 <script>
 
+/* =========================
+   BOLO AI BACKEND
+========================= */
+
 const API_BASE_URL =
 "https://bolo-ai-backend-cfft.onrender.com";
 
-const $ = id => document.getElementById(id);
+const $ =
+id => document.getElementById(id);
 
-window.history.scrollRestoration = "manual";
+window.history.scrollRestoration =
+"manual";
 
-window.addEventListener("load",()=>{
+/* =========================
+   PAGE / PWA
+========================= */
 
-if(location.hash)
+window.addEventListener(
+"load",
+()=>{
+
+if(location.hash){
+
 history.replaceState(
 null,
 "",
-location.pathname+location.search
+location.pathname+
+location.search
 );
+
+}
 
 window.scrollTo(0,0);
 
@@ -1513,57 +2200,80 @@ if("serviceWorker" in navigator){
 
 navigator.serviceWorker
 .register("./sw.js")
-.catch(()=>{});
+.catch(
+error =>
+console.log(
+"Service Worker:",
+error
+)
+);
 
 }
 
-});
+}
+);
 
-/* MENU */
+/* =========================
+   MENU
+========================= */
 
 function openMenu(){
 
-$("sideMenu").classList.add("show");
-$("menuOverlay").classList.add("show");
+$("sideMenu")
+.classList.add("show");
+
+$("menuOverlay")
+.classList.add("show");
 
 }
 
 function closeMenu(){
 
-$("sideMenu").classList.remove("show");
-$("menuOverlay").classList.remove("show");
+$("sideMenu")
+.classList.remove("show");
+
+$("menuOverlay")
+.classList.remove("show");
 
 }
 
-/* LOGIN */
+/* =========================
+   LOGIN / SIGNUP MODALS
+========================= */
 
 function openLogin(){
 
-$("loginModal").classList.add("show");
+$("loginModal")
+.classList.add("show");
 
 }
 
 function closeLogin(){
 
-$("loginModal").classList.remove("show");
+$("loginModal")
+.classList.remove("show");
 
 }
 
 function openSignup(){
 
-$("signupModal").classList.add("show");
+$("signupModal")
+.classList.add("show");
 
 }
 
 function closeSignup(){
 
-$("signupModal").classList.remove("show");
+$("signupModal")
+.classList.remove("show");
 
 }
 
 function isLoggedIn(){
 
-return localStorage.getItem("boloLoggedIn")==="true";
+return localStorage.getItem(
+"boloLoggedIn"
+)==="true";
 
 }
 
@@ -1581,22 +2291,40 @@ return true;
 
 }
 
-/* SIGNUP */
+/* =========================
+   SIGNUP
+========================= */
 
-$("signupForm").addEventListener(
+$("signupForm")
+.addEventListener(
 "submit",
 e=>{
 
 e.preventDefault();
 
 const name =
-$("signupName").value.trim();
+$("signupName")
+.value
+.trim();
 
 const email =
-$("signupEmail").value.trim();
+$("signupEmail")
+.value
+.trim();
 
 const password =
-$("signupPassword").value;
+$("signupPassword")
+.value;
+
+if(password.length < 6){
+
+alert(
+"Password कम से कम 6 characters का होना चाहिए।"
+);
+
+return;
+
+}
 
 localStorage.setItem(
 "boloUserName",
@@ -1624,26 +2352,39 @@ alert(
 "Account created successfully! You are now logged in."
 );
 
-});
+}
+);
 
-/* LOGIN */
+/* =========================
+   LOGIN
+========================= */
 
-$("loginForm").addEventListener(
+$("loginForm")
+.addEventListener(
 "submit",
 e=>{
 
 e.preventDefault();
 
 const email =
-$("loginEmail").value.trim();
+$("loginEmail")
+.value
+.trim();
 
 const password =
-$("loginPassword").value;
+$("loginPassword")
+.value;
 
 if(
-email === localStorage.getItem("boloUserEmail")
+email ===
+localStorage.getItem(
+"boloUserEmail"
+)
 &&
-password === localStorage.getItem("boloUserPassword")
+password ===
+localStorage.getItem(
+"boloUserPassword"
+)
 ){
 
 localStorage.setItem(
@@ -1666,32 +2407,48 @@ alert(
 
 }
 
-});
+}
+);
 
-/* CHAT */
+/* =========================
+   CHAT MESSAGE
+========================= */
 
-function addChatMessage(text,type){
+function addChatMessage(
+text,
+type
+){
 
 const d =
-document.createElement("div");
+document.createElement(
+"div"
+);
 
 d.className =
 "chat-message "+type;
 
-d.textContent = text;
+d.textContent =
+text;
 
-$("chatBox").appendChild(d);
+$("chatBox")
+.appendChild(d);
 
-$("chatBox").scrollTop =
-$("chatBox").scrollHeight;
+$("chatBox")
+.scrollTop =
+$("chatBox")
+.scrollHeight;
 
 }
 
-/* PHOTO */
+/* =========================
+   PHOTO
+========================= */
 
-let selectedPhoto = null;
+let selectedPhoto =
+null;
 
-$("photoBtn").addEventListener(
+$("photoBtn")
+.addEventListener(
 "click",
 ()=>{
 
@@ -1700,18 +2457,25 @@ return;
 
 $("photoInput").click();
 
-});
+}
+);
 
-$("photoInput").addEventListener(
+$("photoInput")
+.addEventListener(
 "change",
 function(){
 
-const file = this.files[0];
+const file =
+this.files[0];
 
 if(!file)
 return;
 
-if(!file.type.startsWith("image/")){
+if(
+!file.type.startsWith(
+"image/"
+)
+){
 
 alert(
 "कृपया सिर्फ image/photo चुनें।"
@@ -1723,7 +2487,10 @@ return;
 
 }
 
-if(file.size > 10*1024*1024){
+if(
+file.size >
+10*1024*1024
+){
 
 alert(
 "Photo 10 MB से छोटी होनी चाहिए।"
@@ -1735,45 +2502,63 @@ return;
 
 }
 
-selectedPhoto = file;
+selectedPhoto =
+file;
 
 const reader =
 new FileReader();
 
-reader.onload = e => {
+reader.onload =
+e=>{
 
-$("photoPreview").src =
+$("photoPreview")
+.src =
 e.target.result;
 
-$("photoName").textContent =
+$("photoName")
+.textContent =
 file.name;
 
-$("photoPreviewBox").style.display =
+$("photoPreviewBox")
+.style.display =
 "block";
 
 };
 
-reader.readAsDataURL(file);
+reader.readAsDataURL(
+file
+);
 
-});
+}
+);
 
-$("removePhotoBtn").addEventListener(
+$("removePhotoBtn")
+.addEventListener(
 "click",
 ()=>{
 
-selectedPhoto = null;
+selectedPhoto =
+null;
 
-$("photoInput").value="";
+$("photoInput")
+.value="";
 
-$("photoPreview").src="";
+$("photoPreview")
+.src="";
 
-$("photoName").textContent="";
+$("photoName")
+.textContent="";
 
-$("photoPreviewBox").style.display="none";
+$("photoPreviewBox")
+.style.display =
+"none";
 
-});
+}
+);
 
-function fileToBase64(file){
+function fileToBase64(
+file
+){
 
 return new Promise(
 (resolve,reject)=>{
@@ -1782,31 +2567,43 @@ const reader =
 new FileReader();
 
 reader.onload =
-()=>resolve(reader.result);
+()=>resolve(
+reader.result
+);
 
 reader.onerror =
 ()=>reject(
-new Error("Image read failed")
+new Error(
+"Image read failed"
+)
 );
 
-reader.readAsDataURL(file);
+reader.readAsDataURL(
+file
+);
 
-});
+}
+);
 
 }
 
-async function showUserPhoto(file){
-
-const reader =
-new FileReader();
+function showUserPhoto(
+file
+){
 
 return new Promise(
 (resolve,reject)=>{
 
-reader.onload = e => {
+const reader =
+new FileReader();
+
+reader.onload =
+e=>{
 
 const img =
-document.createElement("img");
+document.createElement(
+"img"
+);
 
 img.className =
 "chat-user-image";
@@ -1817,24 +2614,33 @@ e.target.result;
 img.alt =
 "Uploaded photo";
 
-$("chatBox").appendChild(img);
+$("chatBox")
+.appendChild(img);
 
-$("chatBox").scrollTop =
-$("chatBox").scrollHeight;
+$("chatBox")
+.scrollTop =
+$("chatBox")
+.scrollHeight;
 
 resolve();
 
 };
 
-reader.onerror = reject;
+reader.onerror =
+reject;
 
-reader.readAsDataURL(file);
+reader.readAsDataURL(
+file
+);
 
-});
+}
+);
 
 }
 
-/* CHAT + PHOTO */
+/* =========================
+   SEND CHAT
+========================= */
 
 async function send(){
 
@@ -1847,22 +2653,31 @@ $("inputText");
 const text =
 input.value.trim();
 
-if(!text && !selectedPhoto)
+if(
+!text &&
+!selectedPhoto
+)
 return;
 
 const photoToSend =
 selectedPhoto;
 
-if(text)
+if(text){
+
 addChatMessage(
 text,
 "user"
 );
 
-if(photoToSend)
+}
+
+if(photoToSend){
+
 await showUserPhoto(
 photoToSend
 );
+
+}
 
 input.value="";
 
@@ -1876,19 +2691,27 @@ photoToSend
 );
 
 const loadingMessage =
-$("chatBox").lastElementChild;
+$("chatBox")
+.lastElementChild;
 
 try{
 
-let imageBase64 = null;
+let imageBase64 =
+null;
 
-if(photoToSend)
+if(photoToSend){
+
 imageBase64 =
-await fileToBase64(photoToSend);
+await fileToBase64(
+photoToSend
+);
+
+}
 
 const response =
 await fetch(
-API_BASE_URL+"/api/chat",
+API_BASE_URL+
+"/api/chat",
 {
 method:"POST",
 headers:{
@@ -1896,8 +2719,11 @@ headers:{
 "application/json"
 },
 body:JSON.stringify({
+
 message:text,
+
 image:imageBase64
+
 })
 }
 );
@@ -1907,7 +2733,10 @@ await response.json();
 
 loadingMessage.remove();
 
-if(!response.ok || !data.ok){
+if(
+!response.ok ||
+!data.ok
+){
 
 addChatMessage(
 data.error ||
@@ -1928,7 +2757,9 @@ reply,
 "ai"
 );
 
-speakText(reply);
+speakText(
+reply
+);
 
 }
 catch(error){
@@ -1947,30 +2778,36 @@ addChatMessage(
 
 }
 
-selectedPhoto = null;
+selectedPhoto =
+null;
 
-$("photoInput").value="";
+$("photoInput")
+.value="";
 
-$("photoPreview").src="";
+$("photoPreview")
+.src="";
 
-$("photoName").textContent="";
+$("photoName")
+.textContent="";
 
-$("photoPreviewBox").style.display="none";
+$("photoPreviewBox")
+.style.display="none";
 
 }
 
-$("sendBtn").addEventListener(
+$("sendBtn")
+.addEventListener(
 "click",
 send
 );
 
-$("inputText").addEventListener(
+$("inputText")
+.addEventListener(
 "keydown",
 e=>{
 
 if(
-e.key==="Enter"
-&&
+e.key==="Enter" &&
 !e.shiftKey
 ){
 
@@ -1980,9 +2817,12 @@ send();
 
 }
 
-});
+}
+);
 
-/* IMAGE GENERATOR */
+/* =========================
+   IMAGE GENERATOR
+========================= */
 
 async function generateImage(){
 
@@ -2012,13 +2852,14 @@ return;
 
 }
 
-button.disabled=true;
+button.disabled =
+true;
 
 button.textContent =
 "⏳ Generating...";
 
 status.textContent =
-"🎨 Bolo AI image बना रहा है... थोड़ा इंतज़ार करें।";
+"🎨 Bolo AI image बना रहा है...";
 
 addChatMessage(
 "🎨 Image request: "+prompt,
@@ -2029,7 +2870,8 @@ try{
 
 const response =
 await fetch(
-API_BASE_URL+"/api/generate-image",
+API_BASE_URL+
+"/api/generate-image",
 {
 method:"POST",
 headers:{
@@ -2037,7 +2879,7 @@ headers:{
 "application/json"
 },
 body:JSON.stringify({
-prompt
+prompt:prompt
 })
 }
 );
@@ -2045,7 +2887,10 @@ prompt
 const data =
 await response.json();
 
-if(!response.ok || !data.ok){
+if(
+!response.ok ||
+!data.ok
+){
 
 status.textContent =
 "❌ "+
@@ -2068,11 +2913,6 @@ if(!data.image){
 
 status.textContent =
 "❌ Server से image नहीं मिली।";
-
-addChatMessage(
-"Server से image नहीं मिली।",
-"ai"
-);
 
 return;
 
@@ -2105,7 +2945,8 @@ addChatMessage(
 }
 finally{
 
-button.disabled=false;
+button.disabled =
+false;
 
 button.textContent =
 "🎨 Generate Image";
@@ -2120,13 +2961,17 @@ prompt
 ){
 
 const wrapper =
-document.createElement("div");
+document.createElement(
+"div"
+);
 
 wrapper.className =
 "generated-image-message";
 
 const image =
-document.createElement("img");
+document.createElement(
+"img"
+);
 
 image.src =
 imageData;
@@ -2135,7 +2980,9 @@ image.alt =
 prompt;
 
 const caption =
-document.createElement("div");
+document.createElement(
+"div"
+);
 
 caption.className =
 "generated-image-caption";
@@ -2144,7 +2991,9 @@ caption.textContent =
 "🎨 "+prompt;
 
 const downloadButton =
-document.createElement("button");
+document.createElement(
+"button"
+);
 
 downloadButton.className =
 "image-download-btn";
@@ -2157,7 +3006,9 @@ downloadButton.addEventListener(
 ()=>{
 
 const link =
-document.createElement("a");
+document.createElement(
+"a"
+);
 
 link.href =
 imageData;
@@ -2165,26 +3016,38 @@ imageData;
 link.download =
 "bolo-ai-image.png";
 
-document.body.appendChild(link);
+document.body.appendChild(
+link
+);
 
 link.click();
 
 link.remove();
 
-});
+}
+);
 
-wrapper.appendChild(image);
+wrapper.appendChild(
+image
+);
 
-wrapper.appendChild(caption);
+wrapper.appendChild(
+caption
+);
 
-wrapper.appendChild(downloadButton);
+wrapper.appendChild(
+downloadButton
+);
 
-$("chatBox").appendChild(
+$("chatBox")
+.appendChild(
 wrapper
 );
 
-$("chatBox").scrollTop =
-$("chatBox").scrollHeight;
+$("chatBox")
+.scrollTop =
+$("chatBox")
+.scrollHeight;
 
 }
 
@@ -2193,19 +3056,14 @@ function focusImageGenerator(){
 if(!requireLogin())
 return;
 
-const generator =
-$("imageGenerator");
-
-const prompt =
-$("boloImagePrompt");
-
-generator.scrollIntoView({
+$("imageGenerator")
+.scrollIntoView({
 behavior:"smooth",
 block:"center"
 });
 
 setTimeout(
-()=>prompt.focus(),
+()=>$("boloImagePrompt").focus(),
 500
 );
 
@@ -2223,8 +3081,7 @@ $("boloImagePrompt")
 e=>{
 
 if(
-e.key==="Enter"
-&&
+e.key==="Enter" &&
 e.ctrlKey
 ){
 
@@ -2234,26 +3091,35 @@ generateImage();
 
 }
 
-});
+}
+);
 
 $("boloClearImageBtn")
 .addEventListener(
 "click",
 ()=>{
 
-$("boloImagePrompt").value="";
+$("boloImagePrompt")
+.value="";
 
-$("boloImageStatus").textContent="";
+$("boloImageStatus")
+.textContent="";
 
-$("boloImagePrompt").focus();
+$("boloImagePrompt")
+.focus();
 
-});
+}
+);
 
-/* VOICE */
+/* =========================
+   VOICE AI
+========================= */
 
-let recognition = null;
+let recognition =
+null;
 
-let isListening = false;
+let isListening =
+false;
 
 function setupVoice(){
 
@@ -2267,52 +3133,67 @@ return null;
 const r =
 new SpeechRecognition();
 
-r.lang="hi-IN";
+r.lang =
+"hi-IN";
 
-r.interimResults=false;
+r.interimResults =
+false;
 
-r.continuous=false;
+r.continuous =
+false;
 
-r.onstart=()=>{
+r.onstart =
+()=>{
 
-isListening=true;
+isListening =
+true;
 
-$("micBtn").textContent =
+$("micBtn")
+.textContent =
 "🔴 Listening...";
 
 };
 
-r.onresult=event=>{
+r.onresult =
+event=>{
 
 const transcript =
-event.results[0][0].transcript;
+event.results[0][0]
+.transcript;
 
-$("inputText").value =
+$("inputText")
+.value =
 transcript;
 
-$("micBtn").textContent =
+$("micBtn")
+.textContent =
 "🎙️ Mic";
 
-isListening=false;
+isListening =
+false;
 
 send();
 
 };
 
-r.onerror=event=>{
+r.onerror =
+event=>{
 
 console.error(
-"Speech recognition error:",
+"Speech recognition:",
 event.error
 );
 
-isListening=false;
+isListening =
+false;
 
-$("micBtn").textContent =
+$("micBtn")
+.textContent =
 "🎙️ Mic";
 
 if(
-event.error==="not-allowed"
+event.error ===
+"not-allowed"
 ){
 
 alert(
@@ -2330,11 +3211,14 @@ alert(
 
 };
 
-r.onend=()=>{
+r.onend =
+()=>{
 
-isListening=false;
+isListening =
+false;
 
-$("micBtn").textContent =
+$("micBtn")
+.textContent =
 "🎙️ Mic";
 
 };
@@ -2378,24 +3262,37 @@ console.error(error);
 
 }
 
-$("micBtn").addEventListener(
+$("micBtn")
+.addEventListener(
 "click",
 activateMicrophone
 );
 
-function speakText(text){
+/* =========================
+   TEXT TO SPEECH
+========================= */
 
-if(!("speechSynthesis" in window))
+function speakText(
+text
+){
+
+if(
+!("speechSynthesis" in window)
+)
 return;
 
 speechSynthesis.cancel();
 
 const utterance =
-new SpeechSynthesisUtterance(text);
+new SpeechSynthesisUtterance(
+text
+);
 
-utterance.lang="hi-IN";
+utterance.lang =
+"hi-IN";
 
-utterance.rate=.95;
+utterance.rate =
+.95;
 
 speechSynthesis.speak(
 utterance
@@ -2403,32 +3300,36 @@ utterance
 
 }
 
-/* TOOLS */
+/* =========================
+   TOOLS
+========================= */
 
-function useTool(text){
+function useTool(
+text
+){
 
 if(!requireLogin())
 return;
 
-$("inputText").value =
+$("inputText")
+.value =
 text;
 
-$("inputText").focus();
+$("inputText")
+.focus();
 
-window.scrollTo({
-top:
-$("chatBox").getBoundingClientRect().top
-+
-window.scrollY
--
-120,
-behavior:"smooth"
+$("chatBox")
+.scrollIntoView({
+behavior:"smooth",
+block:"center"
 });
 
 }
 
 document
-.querySelectorAll(".quick-btn")
+.querySelectorAll(
+".quick-btn"
+)
 .forEach(
 button =>
 button.addEventListener(
@@ -2442,23 +3343,33 @@ if(action)
 useTool(action);
 
 }
-)
 );
 
-/* PREMIUM */
+/* =========================
+   PREMIUM
+========================= */
 
 function handlePremiumClick(){
 
 if(!requireLogin())
 return;
 
+/*
+  IMPORTANT:
+  Real payment must be connected
+  through a secure payment gateway
+  and server-side verification.
+*/
+
 alert(
-"Premium payment system is being prepared. You will be able to purchase Premium soon."
+"Premium payment system अभी setup किया जा रहा है। Payment gateway connect होने के बाद ₹149/month Premium activate होगा."
 );
 
 }
 
-/* THUMBNAIL */
+/* =========================
+   THUMBNAIL
+========================= */
 
 function openThumbnailGenerator(){
 
@@ -2480,16 +3391,23 @@ $("thumbnailModal")
 function generateThumbnail(){
 
 const title =
-$("thumbTitle").value.trim();
+$("thumbTitle")
+.value
+.trim();
 
 const channel =
-$("thumbChannel").value.trim();
+$("thumbChannel")
+.value
+.trim();
 
 const text =
-$("thumbText").value.trim();
+$("thumbText")
+.value
+.trim();
 
 const color =
-$("thumbColor").value;
+$("thumbColor")
+.value;
 
 $("thumbnailCanvas")
 .style.background =
@@ -2515,28 +3433,42 @@ addChatMessage(
 
 function downloadThumbnail(){
 
+/*
+  Canvas export can be added
+  in a future upgrade.
+*/
+
 alert(
-"Thumbnail download feature is coming in the next upgrade."
+"Thumbnail download feature अभी upgrade में जोड़ा जाएगा।"
 );
 
 }
 
-/* CONTACT */
+/* =========================
+   CONTACT
+========================= */
 
-$("contactForm").addEventListener(
+$("contactForm")
+.addEventListener(
 "submit",
 e=>{
 
 e.preventDefault();
 
 const name =
-$("contactName").value.trim();
+$("contactName")
+.value
+.trim();
 
 const email =
-$("contactEmail").value.trim();
+$("contactEmail")
+.value
+.trim();
 
 const message =
-$("contactMessage").value.trim();
+$("contactMessage")
+.value
+.trim();
 
 const subject =
 encodeURIComponent(
@@ -2551,25 +3483,35 @@ encodeURIComponent(
 );
 
 location.href =
-"mailto:Sabrojalam8454@gmail.com?subject="+
+"mailto:Sabrojalam8454@gmail.com"+
+"?subject="+
 subject+
 "&body="+
 body;
 
-});
+}
+);
 
-/* MODALS */
+/* =========================
+   MODAL CLOSE
+========================= */
 
 document
-.querySelectorAll(".modal")
+.querySelectorAll(
+".modal"
+)
 .forEach(
 modal =>
 modal.addEventListener(
 "click",
 e=>{
 
-if(e.target===modal)
-modal.classList.remove("show");
+if(
+e.target === modal
+)
+modal.classList.remove(
+"show"
+);
 
 }
 )
@@ -2579,19 +3521,17 @@ document.addEventListener(
 "keydown",
 e=>{
 
-if(e.key==="Escape"){
+if(e.key === "Escape"){
 
 closeMenu();
-
 closeLogin();
-
 closeSignup();
-
 closeThumbnailGenerator();
 
 }
 
-});
+}
+);
 
 </script>
 
