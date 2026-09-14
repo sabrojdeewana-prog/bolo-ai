@@ -1,9 +1,25 @@
 {
   "name": "Bolo AI",
   "short_name": "Bolo AI",
-  "start_url": "index.html",
+  "description": "आपका अपना AI Assistant",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "theme_color": "#7c3aed",
-  "background_color": "#070914",
-  "icons": []
+  "orientation": "portrait",
+  "theme_color": "#09051a",
+  "background_color": "#09051a",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
 }
