@@ -14,10 +14,10 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-<title>Bolo AI – भोजपुरी कलाकारों का अपना AI Studio</title>
+<title>Bolo AI – आपका अपना AI Assistant</title>
 
 <meta name="description"
-      content="Bolo AI - भोजपुरी कलाकारों का अपना AI Studio">
+      content="Bolo AI - Chat, Writing, Coding, Images, Voice, YouTube, Thumbnail और Poster बनाने वाला AI Assistant">
 
 <style>
 
@@ -263,10 +263,11 @@ a{
 .message{
   margin-bottom:15px;
   display:flex;
+  flex-direction:column;
 }
 
 .message.user{
-  justify-content:flex-end;
+  align-items:flex-end;
 }
 
 .message-bubble{
@@ -285,11 +286,21 @@ a{
   background:#7057ff;
 }
 
+.message-image{
+  max-width:250px;
+  max-height:250px;
+  object-fit:cover;
+  border-radius:14px;
+  margin-top:8px;
+  border:1px solid rgba(255,255,255,.12);
+}
+
 .chat-input-area{
   padding:15px;
   border-top:1px solid rgba(255,255,255,.08);
   display:flex;
   gap:8px;
+  align-items:center;
 }
 
 .chat-input{
@@ -304,13 +315,63 @@ a{
 }
 
 .chat-send,
-.mic-btn{
+.mic-btn,
+.photo-btn{
   width:48px;
+  height:48px;
+  flex-shrink:0;
   border:0;
   border-radius:12px;
   color:#fff;
   background:#7057ff;
   font-size:18px;
+}
+
+.photo-btn{
+  background:#292f52;
+}
+
+.photo-btn:hover,
+.mic-btn:hover,
+.chat-send:hover{
+  opacity:.88;
+}
+
+.photo-upload{
+  display:none;
+}
+
+.photo-preview{
+  display:none;
+  padding:10px 15px;
+  border-top:1px solid rgba(255,255,255,.08);
+  background:#0c1127;
+}
+
+.photo-preview-inner{
+  position:relative;
+  display:inline-block;
+}
+
+.photo-preview img{
+  width:90px;
+  height:90px;
+  object-fit:cover;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.15);
+}
+
+.remove-photo{
+  position:absolute;
+  right:-7px;
+  top:-7px;
+  width:25px;
+  height:25px;
+  border:0;
+  border-radius:50%;
+  background:#ff4d6d;
+  color:#fff;
+  font-weight:800;
 }
 
 
@@ -330,6 +391,7 @@ a{
   border-radius:17px;
   padding:22px;
   transition:.2s;
+  cursor:pointer;
 }
 
 .card:hover{
@@ -399,6 +461,12 @@ a{
   border:1px solid rgba(255,255,255,.08);
   white-space:pre-wrap;
   line-height:1.6;
+}
+
+.generated-image{
+  width:100%;
+  border-radius:12px;
+  display:block;
 }
 
 
@@ -731,8 +799,10 @@ footer{
   }
 
   .chat-send,
-  .mic-btn{
+  .mic-btn,
+  .photo-btn{
     width:42px;
+    height:42px;
   }
 
   .message-bubble{
@@ -813,7 +883,7 @@ footer{
 <section class="hero">
 
   <div class="badge">
-    🤖 भोजपुरी कलाकारों का अपना AI Studio
+    🤖 आपका अपना AI Assistant
   </div>
 
   <h1>
@@ -822,8 +892,9 @@ footer{
   </h1>
 
   <p>
-    Chat, writing, lyrics, YouTube content, image generation,
-    voice tools और thumbnail creation — सब एक जगह।
+    Chat, Writing, Coding, YouTube Content, Thumbnail Creation,
+    Poster Design, Photo Generation, Voice Tools और बहुत कुछ —
+    सब एक जगह।
   </p>
 
   <div class="hero-buttons">
@@ -859,7 +930,7 @@ footer{
   </h2>
 
   <p class="section-subtitle">
-    सवाल पूछिए, आइडिया लीजिए और AI से काम कराइए।
+    आप जो पूछें, Bolo AI उसी के अनुसार आपकी मदद करेगा।
   </p>
 
   <div class="chat-card">
@@ -876,6 +947,7 @@ footer{
 
     </div>
 
+
     <div
       id="chatMessages"
       class="chat-messages">
@@ -890,7 +962,54 @@ footer{
 
     </div>
 
+
+    <!-- PHOTO PREVIEW -->
+
+    <div
+      id="photoPreview"
+      class="photo-preview">
+
+      <div class="photo-preview-inner">
+
+        <img
+          id="previewImage"
+          src=""
+          alt="Selected Photo">
+
+        <button
+          class="remove-photo"
+          onclick="removeSelectedPhoto()">
+          ×
+        </button>
+
+      </div>
+
+    </div>
+
+
     <div class="chat-input-area">
+
+
+      <!-- PHOTO UPLOAD -->
+
+      <input
+        id="photoUpload"
+        class="photo-upload"
+        type="file"
+        accept="image/*"
+        onchange="handlePhotoUpload(event)">
+
+
+      <button
+        class="photo-btn"
+        type="button"
+        onclick="openPhotoGallery()"
+        title="Photo Upload">
+        📷
+      </button>
+
+
+      <!-- VOICE -->
 
       <button
         class="mic-btn"
@@ -899,12 +1018,14 @@ footer{
         🎤
       </button>
 
+
       <input
         id="chatInput"
         class="chat-input"
         type="text"
         placeholder="यहाँ अपना सवाल लिखें..."
         autocomplete="off">
+
 
       <button
         class="chat-send"
@@ -939,7 +1060,7 @@ footer{
     <textarea
       id="imagePrompt"
       class="textarea"
-      placeholder="उदाहरण: भोजपुरी गाँव का सुंदर sunset scene..."></textarea>
+      placeholder="उदाहरण: एक सुंदर cinematic sunset landscape..."></textarea>
 
     <button
       class="generate-btn"
@@ -971,10 +1092,11 @@ footer{
   </h2>
 
   <p class="section-subtitle">
-    कलाकारों और creators के लिए useful tools।
+    अलग-अलग कामों के लिए AI tools।
   </p>
 
   <div class="grid">
+
 
     <div
       class="card"
@@ -1008,7 +1130,7 @@ footer{
       </h3>
 
       <p>
-        भोजपुरी और दूसरी भाषाओं में lyrics ideas।
+        गाने के lyrics और creative ideas बनाइए।
       </p>
 
     </div>
@@ -1080,11 +1202,68 @@ footer{
       </div>
 
       <h3>
-        Thumbnail
+        Thumbnail Maker
       </h3>
 
       <p>
-        YouTube thumbnail ideas और prompts।
+        YouTube thumbnail ideas और prompts बनाइए।
+      </p>
+
+    </div>
+
+
+    <div
+      class="card"
+      onclick="useTool('poster')">
+
+      <div class="card-icon">
+        🎨
+      </div>
+
+      <h3>
+        Poster Maker
+      </h3>
+
+      <p>
+        Poster design ideas और creative prompts बनाइए।
+      </p>
+
+    </div>
+
+
+    <div
+      class="card"
+      onclick="useTool('photo')">
+
+      <div class="card-icon">
+        📸
+      </div>
+
+      <h3>
+        Photo Creator
+      </h3>
+
+      <p>
+        Photo generation और editing ideas बनाइए।
+      </p>
+
+    </div>
+
+
+    <div
+      class="card"
+      onclick="useTool('coding')">
+
+      <div class="card-icon">
+        💻
+      </div>
+
+      <h3>
+        Coding
+      </h3>
+
+      <p>
+        Code लिखने, समझने और सुधारने में मदद।
       </p>
 
     </div>
@@ -1105,12 +1284,16 @@ footer{
     🧠 Quick AI Creator
   </h2>
 
+  <p class="section-subtitle">
+    बस बताइए क्या बनाना है।
+  </p>
+
   <div class="generator">
 
     <input
       id="toolInput"
       class="input"
-      placeholder="क्या बनाना है? जैसे: भोजपुरी गाने का SEO title">
+      placeholder="क्या बनाना है? जैसे: YouTube का SEO title">
 
     <button
       class="generate-btn"
@@ -1144,6 +1327,7 @@ footer{
   </p>
 
   <div class="premium">
+
 
     <div class="plan">
 
@@ -1209,16 +1393,15 @@ footer{
   </h2>
 
   <p class="section-subtitle">
-    भोजपुरी कलाकारों, singers और creators के लिए बनाया गया AI Studio।
+    एक ऐसा AI Assistant जो आपके अलग-अलग कामों में मदद करता है।
   </p>
 
   <div class="card">
 
     <p>
-      Bolo AI का उद्देश्य creators को content बनाने,
-      lyrics लिखने, YouTube content तैयार करने,
-      images और thumbnails बनाने जैसे काम आसान तरीके से
-      एक ही जगह उपलब्ध कराना है।
+      Bolo AI का उद्देश्य Chat, Writing, Coding, YouTube Content,
+      Image Generation, Photo Creation, Thumbnail, Poster और
+      Voice जैसे कामों को एक ही जगह आसान बनाना है।
     </p>
 
   </div>
@@ -1232,7 +1415,7 @@ footer{
 ========================= -->
 
 <footer>
-  © 2026 Bolo AI — भोजपुरी कलाकारों का अपना AI Studio
+  © 2026 Bolo AI — आपका अपना AI Assistant
 </footer>
 
 
@@ -1517,7 +1700,7 @@ footer{
 const firebaseConfig = {
 
   apiKey:
-    "AIzaSyAAztA2xqtWWWKYzzL9A0UTbk6Pw1-FC8",
+    "AIzaSyAAztA2xqtWWWKYzzvL9A0UTbk6Pw1-FC8",
 
   authDomain:
     "bolo-ai-c429f.firebaseapp.com",
@@ -1588,6 +1771,8 @@ const API_BASE_URL =
 let currentUser = null;
 
 let currentUserData = null;
+
+let selectedPhoto = null;
 
 
 /* =====================================================
@@ -1799,10 +1984,6 @@ async function saveUserProfile(user){
         : "password";
 
 
-    /* =========================
-       NEW USER
-    ========================= */
-
     if(!snap.exists){
 
       await ref.set({
@@ -1844,11 +2025,6 @@ async function saveUserProfile(user){
 
     }
 
-
-    /* =========================
-       EXISTING USER
-    ========================= */
-
     else{
 
       const oldData =
@@ -1888,10 +2064,6 @@ async function saveUserProfile(user){
     }
 
 
-    /* =========================
-       LOAD UPDATED PROFILE
-    ========================= */
-
     const updated =
       await ref.get();
 
@@ -1908,12 +2080,6 @@ async function saveUserProfile(user){
       error
     );
 
-    /*
-      Firebase Authentication
-      still works even if Firestore
-      has a temporary problem.
-    */
-
   }
 
 }
@@ -1928,7 +2094,6 @@ auth.onAuthStateChanged(
 
     currentUser =
       user || null;
-
 
     if(user){
 
@@ -2010,7 +2175,6 @@ function updateNavbar(){
       );
 
   }
-
 
   else{
 
@@ -2127,12 +2291,15 @@ async function googleLogin(){
 
 
   const loginButtons = [
+
     document.getElementById(
       "googleLoginBtn"
     ),
+
     document.getElementById(
       "googleSignupBtn"
     )
+
   ];
 
 
@@ -2182,11 +2349,6 @@ async function googleLogin(){
     );
 
 
-    /*
-      Popup blocked होने पर
-      redirect login try होगा.
-    */
-
     if(
       error.code ===
         "auth/popup-blocked" ||
@@ -2220,7 +2382,6 @@ async function googleLogin(){
 
     }
 
-
     else if(
       error.code !==
       "auth/popup-closed-by-user"
@@ -2239,7 +2400,6 @@ async function googleLogin(){
     }
 
   }
-
 
   finally{
 
@@ -2330,27 +2490,21 @@ document
 
       const name =
         document
-          .getElementById(
-            "signupName"
-          )
+          .getElementById("signupName")
           .value
           .trim();
 
 
       const email =
         document
-          .getElementById(
-            "signupEmail"
-          )
+          .getElementById("signupEmail")
           .value
           .trim();
 
 
       const password =
         document
-          .getElementById(
-            "signupPassword"
-          )
+          .getElementById("signupPassword")
           .value;
 
 
@@ -2450,18 +2604,14 @@ document
 
       const email =
         document
-          .getElementById(
-            "loginEmail"
-          )
+          .getElementById("loginEmail")
           .value
           .trim();
 
 
       const password =
         document
-          .getElementById(
-            "loginPassword"
-          )
+          .getElementById("loginPassword")
           .value;
 
 
@@ -2542,9 +2692,7 @@ async function forgotPassword(){
 
   const email =
     document
-      .getElementById(
-        "loginEmail"
-      )
+      .getElementById("loginEmail")
       .value
       .trim();
 
@@ -2699,12 +2847,121 @@ function getAuthError(error){
 
 
 /* =====================================================
-   CHAT
+   PHOTO GALLERY
+===================================================== */
+
+function openPhotoGallery(){
+
+  if(!requireLogin())
+    return;
+
+  const input =
+    document.getElementById(
+      "photoUpload"
+    );
+
+  input.click();
+
+}
+
+
+/* =====================================================
+   PHOTO UPLOAD
+===================================================== */
+
+function handlePhotoUpload(event){
+
+  const file =
+    event.target.files &&
+    event.target.files[0];
+
+
+  if(!file)
+    return;
+
+
+  if(!file.type.startsWith("image/")){
+
+    alert(
+      "कृपया केवल image/photo चुनें।"
+    );
+
+    return;
+
+  }
+
+
+  selectedPhoto =
+    file;
+
+
+  const reader =
+    new FileReader();
+
+
+  reader.onload =
+    function(e){
+
+      const preview =
+        document.getElementById(
+          "previewImage"
+        );
+
+      preview.src =
+        e.target.result;
+
+
+      document.getElementById(
+        "photoPreview"
+      ).style.display =
+        "block";
+
+    };
+
+
+  reader.readAsDataURL(file);
+
+}
+
+
+/* =====================================================
+   REMOVE PHOTO
+===================================================== */
+
+function removeSelectedPhoto(){
+
+  selectedPhoto =
+    null;
+
+
+  document.getElementById(
+    "photoUpload"
+  ).value =
+    "";
+
+
+  document.getElementById(
+    "previewImage"
+  ).src =
+    "";
+
+
+  document.getElementById(
+    "photoPreview"
+  ).style.display =
+    "none";
+
+}
+
+
+/* =====================================================
+   CHAT MESSAGE
 ===================================================== */
 
 function addChatMessage(
   text,
-  type
+  type,
+  imageUrl=null
 ){
 
   const box =
@@ -2723,23 +2980,54 @@ function addChatMessage(
     "message " + type;
 
 
-  const bubble =
-    document.createElement(
-      "div"
+  if(text){
+
+    const bubble =
+      document.createElement(
+        "div"
+      );
+
+
+    bubble.className =
+      "message-bubble";
+
+
+    bubble.textContent =
+      text;
+
+
+    message.appendChild(
+      bubble
     );
 
-
-  bubble.className =
-    "message-bubble";
+  }
 
 
-  bubble.textContent =
-    text;
+  if(imageUrl){
+
+    const img =
+      document.createElement(
+        "img"
+      );
 
 
-  message.appendChild(
-    bubble
-  );
+    img.className =
+      "message-image";
+
+
+    img.src =
+      imageUrl;
+
+
+    img.alt =
+      "Uploaded Photo";
+
+
+    message.appendChild(
+      img
+    );
+
+  }
 
 
   box.appendChild(
@@ -2751,10 +3039,14 @@ function addChatMessage(
     box.scrollHeight;
 
 
-  return bubble;
+  return message;
 
 }
 
+
+/* =====================================================
+   CHAT
+===================================================== */
 
 async function sendChat(){
 
@@ -2772,17 +3064,45 @@ async function sendChat(){
     input.value.trim();
 
 
-  if(!text)
+  if(!text && !selectedPhoto)
     return;
 
 
+  let imageData =
+    null;
+
+
+  if(selectedPhoto){
+
+    try{
+
+      imageData =
+        await fileToDataURL(
+          selectedPhoto
+        );
+
+    }catch(error){
+
+      console.error(
+        "Photo conversion error:",
+        error
+      );
+
+    }
+
+  }
+
+
   addChatMessage(
-    text,
-    "user"
+    text ||
+    "इस फोटो के बारे में बताइए।",
+    "user",
+    imageData
   );
 
 
-  input.value = "";
+  input.value =
+    "";
 
 
   const loadingBubble =
@@ -2794,11 +3114,34 @@ async function sendChat(){
 
   try{
 
+    const body = {
+
+      message:
+        text ||
+        "इस फोटो को देखकर मेरी मदद करें।"
+
+    };
+
+
+    /*
+      अगर backend image field support करता है
+      तो photo भी backend को भेजी जाएगी।
+    */
+
+    if(imageData){
+
+      body.image =
+        imageData;
+
+    }
+
+
     const response =
       await fetch(
         API_BASE_URL +
         "/api/chat",
         {
+
           method:"POST",
 
           headers:{
@@ -2806,9 +3149,8 @@ async function sendChat(){
               "application/json"
           },
 
-          body:JSON.stringify({
-            message:text
-          })
+          body:
+            JSON.stringify(body)
 
         }
       );
@@ -2848,8 +3190,48 @@ async function sendChat(){
 
   }
 
+
+  removeSelectedPhoto();
+
 }
 
+
+/* =====================================================
+   FILE TO DATA URL
+===================================================== */
+
+function fileToDataURL(file){
+
+  return new Promise(
+    (resolve,reject) => {
+
+      const reader =
+        new FileReader();
+
+
+      reader.onload =
+        () => resolve(
+          reader.result
+        );
+
+
+      reader.onerror =
+        () => reject(
+          reader.error
+        );
+
+
+      reader.readAsDataURL(file);
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   ENTER KEY
+===================================================== */
 
 document
   .getElementById("chatInput")
@@ -2881,9 +3263,7 @@ async function generateImage(){
 
   const prompt =
     document
-      .getElementById(
-        "imagePrompt"
-      )
+      .getElementById("imagePrompt")
       .value
       .trim();
 
@@ -2932,9 +3312,10 @@ async function generateImage(){
               "application/json"
           },
 
-          body:JSON.stringify({
-            prompt:prompt
-          })
+          body:
+            JSON.stringify({
+              prompt:prompt
+            })
 
         }
       );
@@ -2957,22 +3338,22 @@ async function generateImage(){
     if(data.imageUrl){
 
       result.innerHTML =
-        '<img src="' +
+        '<img class="generated-image" src="' +
         escapeAttribute(
           data.imageUrl
         ) +
-        '" style="width:100%;border-radius:12px;" alt="Generated Image">';
+        '" alt="Generated Image">';
 
     }
 
     else if(data.image){
 
       result.innerHTML =
-        '<img src="' +
+        '<img class="generated-image" src="' +
         escapeAttribute(
           data.image
         ) +
-          '" style="width:100%;border-radius:12px;" alt="Generated Image">';
+        '" alt="Generated Image">';
 
     }
 
@@ -3115,22 +3496,31 @@ function useTool(type){
   const names = {
 
     writing:
-      "एक अच्छा भोजपुरी creator content लिखिए",
+      "एक अच्छा professional content लिखिए",
 
     lyrics:
-      "एक नया भोजपुरी गाना का lyrics idea दीजिए",
+      "एक नया गाना lyrics idea दीजिए",
 
     youtube:
-      "भोजपुरी गाना के लिए SEO friendly YouTube title description और hashtags बनाइए",
+      "YouTube के लिए SEO friendly title, description और hashtags बनाइए",
 
     translation:
       "इस content को दूसरी भाषा में translate कीजिए",
 
     resume:
-      "एक professional artist resume का format बनाइए",
+      "एक professional resume का format बनाइए",
 
     thumbnail:
-      "भोजपुरी गाने के लिए एक clickable YouTube thumbnail prompt बनाइए"
+      "एक clickable YouTube thumbnail prompt बनाइए",
+
+    poster:
+      "एक professional poster design prompt बनाइए",
+
+    photo:
+      "एक realistic AI photo generation prompt बनाइए",
+
+    coding:
+      "मेरी coding problem को समझकर solution दीजिए"
 
   };
 
@@ -3149,12 +3539,19 @@ function useTool(type){
   document.getElementById(
     "toolInput"
   ).scrollIntoView({
+
     behavior:"smooth",
+
     block:"center"
+
   });
 
 }
 
+
+/* =====================================================
+   QUICK TOOL
+===================================================== */
 
 async function runQuickTool(){
 
@@ -3164,9 +3561,7 @@ async function runQuickTool(){
 
   const input =
     document
-      .getElementById(
-        "toolInput"
-      )
+      .getElementById("toolInput")
       .value
       .trim();
 
@@ -3213,9 +3608,10 @@ async function runQuickTool(){
               "application/json"
           },
 
-          body:JSON.stringify({
-            message:input
-          })
+          body:
+            JSON.stringify({
+              message:input
+            })
 
         }
       );
@@ -3269,7 +3665,7 @@ function premiumComingSoon(){
 
 
   alert(
-    "Premium payment system अभी तैयार किया जा रहा है। जल्द ही यहाँ payment और premium activation जोड़ा जा सकता है।"
+    "Premium payment system अभी तैयार किया जा रहा है।"
   );
 
 }
@@ -3308,7 +3704,6 @@ console.log(
 );
 
 </script>
-
 
 </body>
 </html>
