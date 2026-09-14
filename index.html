@@ -230,7 +230,7 @@ footer{margin-top:35px;border-top:1px solid #e5e7eb;padding:25px 0;text-align:ce
 <div class="container">
 
 <h2 class="section-title">Bolo AI Chat</h2>
-<p class="section-subtitle">Ask anything and get an intelligent response.</p>
+<p class="section-subtitle">Login first to chat with Bolo AI.</p>
 
 <div class="chat-card">
 
@@ -248,7 +248,7 @@ footer{margin-top:35px;border-top:1px solid #e5e7eb;padding:25px 0;text-align:ce
 <div class="empty-chat" id="emptyChat">
 <img src="/icon-192.png" alt="Bolo AI">
 <strong>How can I help you today?</strong>
-<span>Ask a question, upload a photo or use your voice.</span>
+<span>Login to your account to start chatting.</span>
 </div>
 </div>
 
@@ -261,7 +261,7 @@ footer{margin-top:35px;border-top:1px solid #e5e7eb;padding:25px 0;text-align:ce
 <button class="remove-photo" type="button" onclick="removePhoto()">×</button>
 </div>
 
-<textarea id="chatInput" placeholder="Message Bolo AI..." rows="1"></textarea>
+<textarea id="chatInput" placeholder="Login first to chat with Bolo AI..." rows="1"></textarea>
 
 <div class="composer-bottom">
 
@@ -521,6 +521,7 @@ footer{margin-top:35px;border-top:1px solid #e5e7eb;padding:25px 0;text-align:ce
 <div class="toast" id="toast"></div>
 
 <script>
+
 const BACKEND_URL="https://bolo-ai-backend-cfft.onrender.com";
 
 const firebaseConfig={
@@ -533,76 +534,118 @@ appId:"1:168156718:web:086f58868044daef9146a5",
 measurementId:"G-0Q60GF4EPN"
 };
 
-function $(id){return document.getElementById(id)}
+function $(id){
+return document.getElementById(id);
+}
 
 function showToast(message){
+
 const toast=$("toast");
+
 toast.textContent=message;
 toast.classList.add("show");
+
 clearTimeout(window.__toastTimer);
-window.__toastTimer=setTimeout(()=>toast.classList.remove("show"),2600);
+
+window.__toastTimer=setTimeout(
+()=>toast.classList.remove("show"),
+2600
+);
+
 }
 
 /* FIREBASE */
+
 let firebaseReady=false;
 let currentUser=null;
 let authMode="login";
 
 try{
+
 if(typeof firebase!=="undefined"){
+
 firebase.initializeApp(firebaseConfig);
+
 firebaseReady=true;
 
 firebase.auth().onAuthStateChanged(user=>{
+
 currentUser=user||null;
+
 updateAuthUI();
+
 });
+
 }
+
 }catch(error){
+
 console.error("Firebase error:",error);
+
 }
 
 function updateAuthUI(){
+
 const button=$("authNavBtn");
+
 if(!button)return;
 
 if(currentUser){
+
 button.textContent="Account";
 button.onclick=openAccount;
+
+$("chatInput").placeholder="Message Bolo AI...";
+
 }else{
+
 button.textContent="Login";
 button.onclick=openAuth;
+
+$("chatInput").placeholder="Login first to chat with Bolo AI...";
+
 }
+
 }
 
 function openAuth(){
+
 $("authModal").classList.add("show");
+
 }
 
 function closeModal(id){
+
 $(id).classList.remove("show");
+
 }
 
 function switchAuthMode(event){
+
 if(event)event.preventDefault();
 
 authMode=authMode==="login"?"signup":"login";
 
 if(authMode==="login"){
+
 $("authTitle").textContent="Login to Bolo AI";
 $("authSubtitle").textContent="Access your Bolo AI account.";
 $("authName").style.display="none";
 $("authMainBtn").textContent="Login";
 $("forgotLink").style.display="block";
 $("switchAuth").textContent="Create an account";
+
 }else{
+
 $("authTitle").textContent="Create your Bolo AI account";
 $("authSubtitle").textContent="Create a free account.";
 $("authName").style.display="block";
 $("authMainBtn").textContent="Sign Up";
 $("forgotLink").style.display="none";
 $("switchAuth").textContent="Already have an account? Login";
+
 }
+
 }
 
 $("authName").style.display="none";
@@ -610,8 +653,11 @@ $("authName").style.display="none";
 async function submitAuth(){
 
 if(!firebaseReady){
+
 showToast("Firebase is not available right now.");
+
 return;
+
 }
 
 const email=$("authEmail").value.trim();
@@ -619,31 +665,54 @@ const password=$("authPassword").value;
 const name=$("authName").value.trim();
 
 if(!email||!password){
+
 showToast("Enter your email and password.");
+
 return;
+
 }
 
 try{
 
 if(authMode==="login"){
 
-await firebase.auth().signInWithEmailAndPassword(email,password);
+await firebase
+.auth()
+.signInWithEmailAndPassword(
+email,
+password
+);
+
 showToast("Login successful.");
 
 }else{
 
 if(!name){
+
 showToast("Enter your name.");
+
 return;
+
 }
 
-const result=await firebase.auth().createUserWithEmailAndPassword(email,password);
+const result=
+await firebase
+.auth()
+.createUserWithEmailAndPassword(
+email,
+password
+);
 
 if(result.user){
-await result.user.updateProfile({displayName:name});
+
+await result.user.updateProfile({
+displayName:name
+});
+
 }
 
 showToast("Account created successfully.");
+
 }
 
 closeModal("authModal");
@@ -651,33 +720,50 @@ closeModal("authModal");
 }catch(error){
 
 console.error(error);
-showToast(error.message||"Authentication failed.");
+
+showToast(
+error.message||
+"Authentication failed."
+);
 
 }
+
 }
 
 async function googleLogin(){
 
 if(!firebaseReady){
+
 showToast("Firebase is not available right now.");
+
 return;
+
 }
 
 try{
 
-const provider=new firebase.auth.GoogleAuthProvider();
+const provider=
+new firebase.auth.GoogleAuthProvider();
 
-await firebase.auth().signInWithPopup(provider);
+await firebase
+.auth()
+.signInWithPopup(provider);
 
 closeModal("authModal");
+
 showToast("Google login successful.");
 
 }catch(error){
 
 console.error(error);
-showToast(error.message||"Google login failed.");
+
+showToast(
+error.message||
+"Google login failed."
+);
 
 }
+
 }
 
 async function forgotPassword(event){
@@ -689,37 +775,59 @@ if(!firebaseReady)return;
 const email=$("authEmail").value.trim();
 
 if(!email){
+
 showToast("Enter your email first.");
+
 return;
+
 }
 
 try{
 
-await firebase.auth().sendPasswordResetEmail(email);
+await firebase
+.auth()
+.sendPasswordResetEmail(email);
+
 showToast("Password reset email sent.");
 
 }catch(error){
 
 console.error(error);
-showToast(error.message||"Could not send reset email.");
+
+showToast(
+error.message||
+"Could not send reset email."
+);
 
 }
+
 }
 
 function openAccount(){
 
 if(!currentUser){
+
 openAuth();
+
 return;
+
 }
 
 $("accountInfo").innerHTML=
-"<strong>"+escapeHtml(currentUser.displayName||"Bolo AI User")+"</strong>"+
+"<strong>"+
+escapeHtml(
+currentUser.displayName||
+"Bolo AI User"
+)+
+"</strong>"+
 "<br><span style='color:#6b7280'>"+
-escapeHtml(currentUser.email||"")+
+escapeHtml(
+currentUser.email||""
+)+
 "</span>";
 
 $("accountModal").classList.add("show");
+
 }
 
 async function logoutUser(){
@@ -729,118 +837,136 @@ if(!firebaseReady)return;
 try{
 
 await firebase.auth().signOut();
+
 closeModal("accountModal");
+
 showToast("Logged out successfully.");
 
 }catch(error){
+
 console.error(error);
+
 }
+
 }
 
 function escapeHtml(text){
+
 return String(text)
 .replaceAll("&","&amp;")
 .replaceAll("<","&lt;")
 .replaceAll(">","&gt;")
 .replaceAll('"',"&quot;")
 .replaceAll("'","&#039;");
+
 }
 
 /* CHAT */
+
 let selectedPhoto=null;
 let recognition=null;
 
-function addMessage(text,role,photo){
-
-const empty=$("emptyChat");
-if(empty)empty.remove();
-
-const row=document.createElement("div");
-row.className="message-row "+role;
-
-const box=document.createElement("div");
-box.className="message "+role;
-
-if(text){
-const textDiv=document.createElement("div");
-textDiv.textContent=text;
-box.appendChild(textDiv);
-}
-
-if(photo){
-const img=document.createElement("img");
-img.className="message-photo";
-img.src=photo;
-img.alt="Uploaded photo";
-box.appendChild(img);
-}
-
-if(role==="assistant"&&text){
-
-const tools=document.createElement("div");
-tools.className="message-tools";
-
-const listen=document.createElement("button");
-listen.type="button";
-listen.textContent="🔊 Listen";
-listen.onclick=()=>speakText(text);
-
-const stop=document.createElement("button");
-stop.type="button";
-stop.textContent="⏹ Stop";
-stop.onclick=stopSpeaking;
-
-tools.appendChild(listen);
-tools.appendChild(stop);
-box.appendChild(tools);
-}
-
-row.appendChild(box);
-$("chatMessages").appendChild(row);
-$("chatMessages").scrollTop=$("chatMessages").scrollHeight;
-}
+/*
+IMPORTANT:
+Chat is available ONLY after Firebase login.
+*/
 
 async function sendChat(){
 
+/* LOGIN CHECK */
+
+if(!currentUser){
+
+showToast(
+"Please login first to chat with Bolo AI."
+);
+
+openAuth();
+
+return;
+
+}
+
 const input=$("chatInput");
+
 const text=input.value.trim();
 
 if(!text&&!selectedPhoto){
-showToast("Type a message or upload a photo.");
+
+showToast(
+"Type a message or upload a photo."
+);
+
 return;
+
 }
 
 const photo=selectedPhoto;
 
-addMessage(text||"Please analyse this photo.","user",photo);
+addMessage(
+text||"Please analyse this photo.",
+"user",
+photo
+);
 
 input.value="";
-$("chatStatus").textContent="Bolo AI is thinking…";
+
+$("chatStatus").textContent=
+"Bolo AI is thinking…";
+
 $("sendBtn").disabled=true;
 
 try{
 
-const response=await fetch(BACKEND_URL+"/api/chat",{
+const response=
+await fetch(
+BACKEND_URL+"/api/chat",
+{
 method:"POST",
-headers:{"Content-Type":"application/json"},
+headers:{
+"Content-Type":"application/json"
+},
 body:JSON.stringify({
-message:text||"Analyse this image.",
-image:photo
-})
-});
 
-const data=await response.json();
+message:
+text||
+"Analyse this image.",
+
+image:photo
+
+})
+}
+);
+
+const data=
+await response.json();
 
 if(!response.ok){
-throw new Error(data.error||"Request failed");
+
+throw new Error(
+data.error||
+"Request failed"
+);
+
 }
 
-const reply=data.reply||data.message||"I could not generate a reply.";
+const reply=
+data.reply||
+data.message||
+"I could not generate a reply.";
 
-addMessage(reply,"assistant");
+addMessage(
+reply,
+"assistant"
+);
 
 if(voiceReplyEnabled){
-setTimeout(()=>speakText(reply),180);
+
+setTimeout(
+()=>speakText(reply),
+180
+);
+
 }
 
 }catch(error){
@@ -855,112 +981,297 @@ addMessage(
 }finally{
 
 $("chatStatus").textContent="";
+
 $("sendBtn").disabled=false;
+
 removePhoto();
 
 }
+
+}
+
+function addMessage(
+text,
+role,
+photo
+){
+
+const empty=$("emptyChat");
+
+if(empty)empty.remove();
+
+const row=
+document.createElement("div");
+
+row.className=
+"message-row "+role;
+
+if(role==="user"){
+row.style.justifyContent="flex-end";
+}
+
+const box=
+document.createElement("div");
+
+box.className=
+"message "+role;
+
+if(text){
+
+const textDiv=
+document.createElement("div");
+
+textDiv.textContent=text;
+
+box.appendChild(textDiv);
+
+}
+
+if(photo){
+
+const img=
+document.createElement("img");
+
+img.className="message-photo";
+
+img.src=photo;
+
+img.alt="Uploaded photo";
+
+box.appendChild(img);
+
+}
+
+if(role==="assistant"&&text){
+
+const tools=
+document.createElement("div");
+
+tools.className="message-tools";
+
+const listen=
+document.createElement("button");
+
+listen.type="button";
+
+listen.textContent="🔊 Listen";
+
+listen.onclick=
+()=>speakText(text);
+
+const stop=
+document.createElement("button");
+
+stop.type="button";
+
+stop.textContent="⏹ Stop";
+
+stop.onclick=stopSpeaking;
+
+tools.appendChild(listen);
+
+tools.appendChild(stop);
+
+box.appendChild(tools);
+
+}
+
+row.appendChild(box);
+
+$("chatMessages").appendChild(row);
+
+$("chatMessages").scrollTop=
+$("chatMessages").scrollHeight;
+
 }
 
 /* PHOTO */
+
 function handlePhoto(event){
 
-const file=event.target.files&&event.target.files[0];
+const file=
+event.target.files&&
+event.target.files[0];
 
 if(!file)return;
 
 if(file.size>10*1024*1024){
-showToast("Please choose an image under 10 MB.");
+
+showToast(
+"Please choose an image under 10 MB."
+);
+
 return;
+
 }
 
 if(!file.type.startsWith("image/")){
-showToast("Please choose an image file.");
+
+showToast(
+"Please choose an image file."
+);
+
 return;
+
 }
 
-const reader=new FileReader();
+const reader=
+new FileReader();
 
 reader.onload=function(){
 
 selectedPhoto=reader.result;
-$("previewImage").src=selectedPhoto;
-$("photoPreview").style.display="block";
+
+$("previewImage").src=
+selectedPhoto;
+
+$("photoPreview").style.display=
+"block";
+
 showToast("Photo ready.");
 
 };
 
 reader.readAsDataURL(file);
+
 }
 
 function removePhoto(){
 
 selectedPhoto=null;
-$("photoPreview").style.display="none";
+
+$("photoPreview").style.display=
+"none";
+
 $("previewImage").src="";
+
 $("photoInput").value="";
+
 }
 
 /* VOICE INPUT */
+
 function startVoice(){
 
-const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+/*
+Voice chat also requires login.
+*/
+
+if(!currentUser){
+
+showToast(
+"Please login first to use voice chat."
+);
+
+openAuth();
+
+return;
+
+}
+
+const SpeechRecognition=
+window.SpeechRecognition||
+window.webkitSpeechRecognition;
 
 if(!SpeechRecognition){
-showToast("Voice input is not supported in this browser.");
+
+showToast(
+"Voice input is not supported in this browser."
+);
+
 return;
+
 }
 
 if(recognition){
+
 recognition.stop();
+
 recognition=null;
+
 return;
+
 }
 
-recognition=new SpeechRecognition();
+recognition=
+new SpeechRecognition();
+
 recognition.lang="en-IN";
+
 recognition.interimResults=true;
+
 recognition.continuous=false;
 
 recognition.onstart=function(){
-$("chatStatus").textContent="Listening…";
+
+$("chatStatus").textContent=
+"Listening…";
+
 $("micBtn").textContent="⏹️";
+
 };
 
 recognition.onresult=function(event){
 
 let transcript="";
 
-for(const result of event.results){
-transcript+=result[0].transcript;
+for(
+const result of event.results
+){
+
+transcript+=
+result[0].transcript;
+
 }
 
-$("chatInput").value=transcript;
+$("chatInput").value=
+transcript;
+
 };
 
 recognition.onerror=function(){
-showToast("Microphone input could not be started.");
+
+showToast(
+"Microphone input could not be started."
+);
+
 };
 
 recognition.onend=function(){
+
 $("chatStatus").textContent="";
+
 $("micBtn").textContent="🎙️";
+
 recognition=null;
+
 };
 
 try{
+
 recognition.start();
+
 }catch(error){
+
 console.error(error);
+
 }
+
 }
 
 /* VOICE REPLY */
-let voiceReplyEnabled=localStorage.getItem("boloVoiceReply")==="on";
+
+let voiceReplyEnabled=
+localStorage.getItem(
+"boloVoiceReply"
+)==="on";
+
 let currentlySpeaking=false;
 
 function updateVoiceReplyUI(){
 
 const button=$("voiceReplyBtn");
+
 if(!button)return;
 
 const icon=$("voiceIcon");
@@ -971,185 +1282,334 @@ const control=$("voiceControl");
 if(voiceReplyEnabled){
 
 button.textContent="🔊 ON";
+
 button.classList.add("active");
+
 icon.textContent="🔊";
-title.textContent="Voice Reply On";
-status.textContent=currentlySpeaking?"Bolo AI is speaking…":"AI replies will speak automatically";
+
+title.textContent=
+"Voice Reply On";
+
+status.textContent=
+currentlySpeaking?
+"Bolo AI is speaking…":
+"AI replies will speak automatically";
 
 }else{
 
 button.textContent="🔇 OFF";
+
 button.classList.remove("active");
+
 icon.textContent="🔇";
-title.textContent="Voice Reply Off";
-status.textContent="Tap to speak AI replies";
+
+title.textContent=
+"Voice Reply Off";
+
+status.textContent=
+"Tap to speak AI replies";
 
 }
 
 if(control){
-control.classList.toggle("speaking",currentlySpeaking);
+
+control.classList.toggle(
+"speaking",
+currentlySpeaking
+);
+
 }
+
 }
 
 function toggleVoiceReply(){
 
-voiceReplyEnabled=!voiceReplyEnabled;
+/* Voice reply can be used only after login */
+
+if(!currentUser){
+
+showToast(
+"Please login first to use voice reply."
+);
+
+openAuth();
+
+return;
+
+}
+
+voiceReplyEnabled=
+!voiceReplyEnabled;
 
 localStorage.setItem(
 "boloVoiceReply",
-voiceReplyEnabled?"on":"off"
+voiceReplyEnabled?
+"on":
+"off"
 );
 
 updateVoiceReplyUI();
 
 if(voiceReplyEnabled){
 
-showToast("Voice replies are ON.");
-speakText("Voice replies are now on.");
+showToast(
+"Voice replies are ON."
+);
+
+speakText(
+"Voice replies are now on."
+);
 
 }else{
 
 stopSpeaking();
-showToast("Voice replies are OFF.");
+
+showToast(
+"Voice replies are OFF."
+);
 
 }
+
 }
 
 function getVoiceLanguage(text){
-return /[\u0900-\u097F]/.test(text)?"hi-IN":"en-IN";
+
+return /[\u0900-\u097F]/.test(text)?
+"hi-IN":
+"en-IN";
+
 }
 
 function getBestVoice(language){
 
-if(!window.speechSynthesis)return null;
+if(!window.speechSynthesis)
+return null;
 
-const voices=window.speechSynthesis.getVoices();
+const voices=
+window.speechSynthesis.getVoices();
 
-if(!voices.length)return null;
+if(!voices.length)
+return null;
 
-const exact=voices.find(
-voice=>voice.lang&&voice.lang.toLowerCase()===language.toLowerCase()
+const exact=
+voices.find(
+voice=>
+voice.lang&&
+voice.lang.toLowerCase()===
+language.toLowerCase()
 );
 
 if(exact)return exact;
 
-const prefix=language.split("-")[0].toLowerCase();
+const prefix=
+language.split("-")[0].toLowerCase();
 
 return voices.find(
-voice=>voice.lang&&voice.lang.toLowerCase().startsWith(prefix)
+voice=>
+voice.lang&&
+voice.lang.toLowerCase()
+.startsWith(prefix)
 )||voices[0];
+
 }
 
 function speakText(text){
 
-if(!text||!window.speechSynthesis){
-showToast("Speech is not supported in this browser.");
+if(!text||
+!window.speechSynthesis){
+
+showToast(
+"Speech is not supported in this browser."
+);
+
 return;
+
 }
 
 stopSpeaking();
 
-const utterance=new SpeechSynthesisUtterance(text);
-const language=getVoiceLanguage(text);
+const utterance=
+new SpeechSynthesisUtterance(text);
+
+const language=
+getVoiceLanguage(text);
 
 utterance.lang=language;
 
-const voice=getBestVoice(language);
-if(voice)utterance.voice=voice;
+const voice=
+getBestVoice(language);
+
+if(voice)
+utterance.voice=voice;
 
 utterance.rate=.96;
 utterance.pitch=1;
 utterance.volume=1;
 
 utterance.onstart=function(){
+
 currentlySpeaking=true;
+
 updateVoiceReplyUI();
+
 };
 
 utterance.onend=function(){
+
 currentlySpeaking=false;
+
 updateVoiceReplyUI();
+
 };
 
 utterance.onerror=function(){
+
 currentlySpeaking=false;
+
 updateVoiceReplyUI();
+
 };
 
-window.speechSynthesis.speak(utterance);
+window.speechSynthesis.speak(
+utterance
+);
+
 }
 
 function stopSpeaking(){
 
 if(window.speechSynthesis){
+
 window.speechSynthesis.cancel();
+
 }
 
 currentlySpeaking=false;
+
 updateVoiceReplyUI();
+
 }
 
 if(window.speechSynthesis){
+
 window.speechSynthesis.addEventListener(
 "voiceschanged",
 updateVoiceReplyUI
 );
+
 }
 
 updateVoiceReplyUI();
 
 /* IMAGE GENERATOR */
+
 async function generateImage(){
 
-const prompt=$("imagePrompt").value.trim();
+/*
+Image generation also requires login.
+*/
 
-if(!prompt){
-showToast("Describe the image first.");
+if(!currentUser){
+
+showToast(
+"Please login first to create AI images."
+);
+
+openAuth();
+
 return;
+
 }
 
-const button=$("generateBtn");
+const prompt=
+$("imagePrompt").value.trim();
+
+if(!prompt){
+
+showToast(
+"Describe the image first."
+);
+
+return;
+
+}
+
+const button=
+$("generateBtn");
 
 button.disabled=true;
-button.textContent="Creating…";
 
-$("generatedResult").innerHTML='<div class="loading">Creating your image…</div>';
+button.textContent=
+"Creating…";
+
+$("generatedResult").innerHTML=
+'<div class="loading">Creating your image…</div>';
 
 try{
 
-const response=await fetch(BACKEND_URL+"/api/generate-image",{
+const response=
+await fetch(
+BACKEND_URL+"/api/generate-image",
+{
 method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({prompt})
-});
+headers:{
+"Content-Type":
+"application/json"
+},
+body:JSON.stringify({
+prompt
+})
+}
+);
 
-const data=await response.json();
+const data=
+await response.json();
 
 if(!response.ok){
-throw new Error(data.error||"Image generation failed");
+
+throw new Error(
+data.error||
+"Image generation failed"
+);
+
 }
 
-const image=data.image||data.imageUrl||data.url;
+const image=
+data.image||
+data.imageUrl||
+data.url;
 
 if(!image){
-throw new Error("No image returned.");
+
+throw new Error(
+"No image returned."
+);
+
 }
 
 $("generatedResult").innerHTML="";
 
-const imageElement=document.createElement("img");
-imageElement.src=image;
-imageElement.alt="Generated by Bolo AI";
+const imageElement=
+document.createElement("img");
 
-$("generatedResult").appendChild(imageElement);
+imageElement.src=image;
+
+imageElement.alt=
+"Generated by Bolo AI";
+
+$("generatedResult")
+.appendChild(imageElement);
 
 addMessage(
-"I created this image from your prompt: "+prompt,
+"I created this image from your prompt: "+
+prompt,
 "assistant",
 image
 );
 
-showToast("Image created successfully.");
+showToast(
+"Image created successfully."
+);
 
 }catch(error){
 
@@ -1161,118 +1621,197 @@ $("generatedResult").innerHTML=
 }finally{
 
 button.disabled=false;
+
 button.textContent="Create";
 
 }
+
 }
 
 /* QUICK PROMPTS */
+
 function usePrompt(prompt){
 
+if(!currentUser){
+
+showToast(
+"Please login first to use Bolo AI."
+);
+
+openAuth();
+
+return;
+
+}
+
 $("chatInput").value=prompt;
+
 $("chatInput").focus();
 
-document.getElementById("chat").scrollIntoView({
+document
+.getElementById("chat")
+.scrollIntoView({
 behavior:"smooth"
 });
+
 }
 
 /* THEME */
-let savedTheme=localStorage.getItem("boloTheme")||"light";
+
+let savedTheme=
+localStorage.getItem("boloTheme")||
+"light";
 
 function applyTheme(){
 
 if(savedTheme==="dark"){
 
 document.body.classList.add("dark");
+
 $("themeBtn").textContent="☀️";
 
 }else{
 
 document.body.classList.remove("dark");
+
 $("themeBtn").textContent="🌙";
 
 }
+
 }
 
 function toggleTheme(){
 
-savedTheme=savedTheme==="dark"?"light":"dark";
+savedTheme=
+savedTheme==="dark"?
+"light":
+"dark";
 
-localStorage.setItem("boloTheme",savedTheme);
+localStorage.setItem(
+"boloTheme",
+savedTheme
+);
 
 applyTheme();
+
 }
 
 applyTheme();
 
 /* MOCK PREMIUM */
+
 function startMockPayment(){
 
-showToast("Premium payment testing mode — no real payment is being charged.");
+showToast(
+"Premium payment testing mode — no real payment is being charged."
+);
 
 setTimeout(function(){
 
-const confirmed=confirm(
-"Bolo AI Premium\n\n₹249 → ₹149/month offer\n\nThis is a testing payment flow only. No real money will be charged.\n\nContinue?"
+const confirmed=
+confirm(
+"Bolo AI Premium\n\n"+
+"₹249 → ₹149/month offer\n\n"+
+"This is a testing payment flow only. "+
+"No real money will be charged.\n\n"+
+"Continue?"
 );
 
 if(confirmed){
 
-localStorage.setItem("boloPremiumTest","active");
+localStorage.setItem(
+"boloPremiumTest",
+"active"
+);
 
-showToast("Premium testing mode activated.");
+showToast(
+"Premium testing mode activated."
+);
 
 }
 
 },200);
+
 }
 
 /* KEYBOARD */
-$("chatInput").addEventListener("keydown",function(event){
 
-if(event.key==="Enter"&&!event.shiftKey){
+$("chatInput").addEventListener(
+"keydown",
+function(event){
+
+if(
+event.key==="Enter"&&
+!event.shiftKey
+){
 
 event.preventDefault();
+
 sendChat();
 
 }
 
 });
 
-$("chatInput").addEventListener("input",function(){
+$("chatInput").addEventListener(
+"input",
+function(){
 
 this.style.height="auto";
-this.style.height=Math.min(this.scrollHeight,150)+"px";
+
+this.style.height=
+Math.min(
+this.scrollHeight,
+150
+)+"px";
 
 });
 
 /* PWA */
+
 let deferredInstallPrompt=null;
 
-window.addEventListener("beforeinstallprompt",function(event){
+window.addEventListener(
+"beforeinstallprompt",
+function(event){
 
 event.preventDefault();
+
 deferredInstallPrompt=event;
 
 });
 
-window.addEventListener("appinstalled",function(){
+window.addEventListener(
+"appinstalled",
+function(){
 
 deferredInstallPrompt=null;
 
-showToast("Bolo AI installed successfully.");
+showToast(
+"Bolo AI installed successfully."
+);
 
 });
 
 /* SERVICE WORKER */
+
 if("serviceWorker" in navigator){
 
-window.addEventListener("load",function(){
+window.addEventListener(
+"load",
+function(){
 
-navigator.serviceWorker.register("/sw.js?v=20260914-4")
+navigator.serviceWorker
+.register(
+"/sw.js?v=20260914-4"
+)
 .catch(function(error){
-console.warn("Service worker:",error);
+
+console.warn(
+"Service worker:",
+error
+);
+
 });
 
 });
@@ -1280,9 +1819,13 @@ console.warn("Service worker:",error);
 }
 
 /* STARTUP */
-window.addEventListener("load",function(){
+
+window.addEventListener(
+"load",
+function(){
 
 updateVoiceReplyUI();
+
 updateAuthUI();
 
 });
