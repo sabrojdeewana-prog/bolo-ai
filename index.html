@@ -128,8 +128,14 @@
       border: none;
     }
 
+    /* INSTALL BUTTON
+       पहले display:none था।
+       अब button हमेशा दिखाई देगा।
+    */
     .install-btn {
-      display: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       background: linear-gradient(135deg,#7c3aed,#4f46e5);
       border: none;
       box-shadow: 0 8px 25px rgba(79,70,229,.25);
@@ -860,25 +866,43 @@
           src="/icon-192.png"
           class="brand-icon"
           alt="Bolo AI"
-          onerror="this.style.display='none'"
         >
         <div class="brand-text">Bolo <span>AI</span></div>
       </a>
 
       <div class="nav-actions" id="loggedOutActions">
-        <button class="install-btn" id="installBtn" onclick="installApp()">
+
+        <button
+          class="install-btn"
+          id="installBtn"
+          onclick="installApp()"
+        >
           📲 Install
         </button>
-        <button class="nav-btn" onclick="openModal('loginModal')">
+
+        <button
+          class="nav-btn"
+          onclick="openModal('loginModal')"
+        >
           Login
         </button>
-        <button class="nav-btn signup-btn" onclick="openModal('signupModal')">
+
+        <button
+          class="nav-btn signup-btn"
+          onclick="openModal('signupModal')"
+        >
           Sign Up
         </button>
+
       </div>
 
       <div class="account-box" id="loggedInActions">
-        <button class="install-btn" id="installBtnLogged" onclick="installApp()">
+
+        <button
+          class="install-btn"
+          id="installBtnLogged"
+          onclick="installApp()"
+        >
           📲 Install
         </button>
 
@@ -889,9 +913,13 @@
           alt="Account"
         >
 
-        <button class="nav-btn" onclick="openAccount()">
+        <button
+          class="nav-btn"
+          onclick="openAccount()"
+        >
           Account
         </button>
+
       </div>
 
     </div>
@@ -920,13 +948,21 @@
         </p>
 
         <div class="hero-buttons">
-          <button class="primary-btn" onclick="scrollToChat()">
+
+          <button
+            class="primary-btn"
+            onclick="scrollToChat()"
+          >
             ✨ AI शुरू करें
           </button>
 
-          <button class="secondary-btn" onclick="scrollToTools()">
+          <button
+            class="secondary-btn"
+            onclick="scrollToTools()"
+          >
             🛠️ AI Tools देखें
           </button>
+
         </div>
 
       </div>
@@ -935,9 +971,13 @@
 
     <!-- CHAT -->
     <section id="chatSection">
+
       <div class="container">
 
-        <h2 class="section-title">Bolo AI Chat</h2>
+        <h2 class="section-title">
+          Bolo AI Chat
+        </h2>
+
         <p class="section-subtitle">
           अपने सवाल या काम सीधे Bolo AI को बताइए
         </p>
@@ -945,27 +985,59 @@
         <div class="chat-card">
 
           <div class="chat-header">
-            <div class="chat-title">🤖 Bolo AI</div>
-            <div class="online">● Online</div>
+
+            <div class="chat-title">
+              🤖 Bolo AI
+            </div>
+
+            <div class="online">
+              ● Online
+            </div>
+
           </div>
 
-          <div class="chat-messages" id="chatMessages">
+          <div
+            class="chat-messages"
+            id="chatMessages"
+          >
 
             <div class="message ai">
+
               <div class="message-bubble">
+
                 नमस्ते! 👋 मैं Bolo AI हूँ।<br><br>
-                आप मुझसे सवाल पूछ सकते हैं, content लिखवा सकते हैं,
-                ideas ले सकते हैं या किसी भी creative काम में मदद ले सकते हैं।
+
+                आप मुझसे सवाल पूछ सकते हैं,
+                content लिखवा सकते हैं,
+                ideas ले सकते हैं या किसी भी
+                creative काम में मदद ले सकते हैं।
+
               </div>
+
             </div>
 
           </div>
 
           <div class="chat-input-area">
 
-            <div class="photo-preview" id="photoPreview">
-              <img id="previewImage" src="" alt="Selected photo">
-              <button class="remove-photo" onclick="removePhoto()">×</button>
+            <div
+              class="photo-preview"
+              id="photoPreview"
+            >
+
+              <img
+                id="previewImage"
+                src=""
+                alt="Selected photo"
+              >
+
+              <button
+                class="remove-photo"
+                onclick="removePhoto()"
+              >
+                ×
+              </button>
+
             </div>
 
             <div class="chat-input-row">
@@ -1021,14 +1093,18 @@
         </div>
 
       </div>
+
     </section>
 
 
     <!-- IMAGE GENERATOR -->
     <section id="imageSection">
+
       <div class="container">
 
-        <h2 class="section-title">🎨 AI Image Generator</h2>
+        <h2 class="section-title">
+          🎨 AI Image Generator
+        </h2>
 
         <p class="section-subtitle">
           अपनी imagination को image में बदलें
@@ -1042,6 +1118,7 @@
           ></textarea>
 
           <div class="generator-actions">
+
             <button
               class="primary-btn"
               onclick="generateImage()"
@@ -1049,21 +1126,29 @@
             >
               ✨ Generate Image
             </button>
+
           </div>
 
-          <div class="generated-image" id="generatedImage"></div>
+          <div
+            class="generated-image"
+            id="generatedImage"
+          ></div>
 
         </div>
 
       </div>
+
     </section>
 
 
     <!-- TOOLS -->
     <section id="toolsSection">
+
       <div class="container">
 
-        <h2 class="section-title">🛠️ AI Tools</h2>
+        <h2 class="section-title">
+          🛠️ AI Tools
+        </h2>
 
         <p class="section-subtitle">
           अपने काम के लिए सही AI tool चुनें
@@ -1071,71 +1156,120 @@
 
         <div class="tools-grid">
 
-          <div class="tool-card" onclick="useTool('writing')">
+          <div
+            class="tool-card"
+            onclick="useTool('writing')"
+          >
             <div class="tool-icon">✍️</div>
             <h3>AI Writing</h3>
-            <p>Professional content, captions और articles लिखें।</p>
+            <p>
+              Professional content, captions और articles लिखें।
+            </p>
           </div>
 
-          <div class="tool-card" onclick="useTool('lyrics')">
+          <div
+            class="tool-card"
+            onclick="useTool('lyrics')"
+          >
             <div class="tool-icon">🎵</div>
             <h3>Lyrics</h3>
-            <p>नए songs और lyrics के ideas तैयार करें।</p>
+            <p>
+              नए songs और lyrics के ideas तैयार करें।
+            </p>
           </div>
 
-          <div class="tool-card" onclick="useTool('youtube')">
+          <div
+            class="tool-card"
+            onclick="useTool('youtube')"
+          >
             <div class="tool-icon">▶️</div>
             <h3>YouTube Content</h3>
-            <p>Title, description, tags और content ideas बनाएं।</p>
+            <p>
+              Title, description, tags और content ideas बनाएं।
+            </p>
           </div>
 
-          <div class="tool-card" onclick="useTool('translation')">
+          <div
+            class="tool-card"
+            onclick="useTool('translation')"
+          >
             <div class="tool-icon">🌐</div>
             <h3>Translation</h3>
-            <p>Content को अलग-अलग languages में translate करें।</p>
+            <p>
+              Content को अलग-अलग languages में translate करें।
+            </p>
           </div>
 
-          <div class="tool-card" onclick="useTool('resume')">
+          <div
+            class="tool-card"
+            onclick="useTool('resume')"
+          >
             <div class="tool-icon">📄</div>
             <h3>Resume</h3>
-            <p>Professional resume और CV तैयार करें।</p>
+            <p>
+              Professional resume और CV तैयार करें।
+            </p>
           </div>
 
-          <div class="tool-card" onclick="useTool('thumbnail')">
+          <div
+            class="tool-card"
+            onclick="useTool('thumbnail')"
+          >
             <div class="tool-icon">🖼️</div>
             <h3>Thumbnail Maker</h3>
-            <p>Clickable YouTube thumbnail ideas और prompts बनाएं।</p>
+            <p>
+              Clickable YouTube thumbnail ideas और prompts बनाएं।
+            </p>
           </div>
 
-          <div class="tool-card" onclick="useTool('poster')">
+          <div
+            class="tool-card"
+            onclick="useTool('poster')"
+          >
             <div class="tool-icon">🎨</div>
             <h3>Poster Maker</h3>
-            <p>Professional poster design ideas तैयार करें।</p>
+            <p>
+              Professional poster design ideas तैयार करें।
+            </p>
           </div>
 
-          <div class="tool-card" onclick="useTool('photo')">
+          <div
+            class="tool-card"
+            onclick="useTool('photo')"
+          >
             <div class="tool-icon">📸</div>
             <h3>Photo Creator</h3>
-            <p>Realistic AI photo generation prompts बनाएं।</p>
+            <p>
+              Realistic AI photo generation prompts बनाएं।
+            </p>
           </div>
 
-          <div class="tool-card" onclick="useTool('coding')">
+          <div
+            class="tool-card"
+            onclick="useTool('coding')"
+          >
             <div class="tool-icon">💻</div>
             <h3>Coding</h3>
-            <p>Coding problems समझें और solutions पाएं।</p>
+            <p>
+              Coding problems समझें और solutions पाएं।
+            </p>
           </div>
 
         </div>
 
       </div>
+
     </section>
 
 
     <!-- QUICK AI -->
     <section>
+
       <div class="container">
 
-        <h2 class="section-title">⚡ Quick AI</h2>
+        <h2 class="section-title">
+          ⚡ Quick AI
+        </h2>
 
         <p class="section-subtitle">
           एक click में काम शुरू करें
@@ -1143,33 +1277,49 @@
 
         <div class="quick-grid">
 
-          <button class="quick-btn" onclick="quickPrompt('एक professional YouTube title और description बनाइए')">
+          <button
+            class="quick-btn"
+            onclick="quickPrompt('एक professional YouTube title और description बनाइए')"
+          >
             ▶️ YouTube
           </button>
 
-          <button class="quick-btn" onclick="quickPrompt('एक नया song lyrics idea दीजिए')">
+          <button
+            class="quick-btn"
+            onclick="quickPrompt('एक नया song lyrics idea दीजिए')"
+          >
             🎵 Lyrics
           </button>
 
-          <button class="quick-btn" onclick="quickPrompt('एक professional social media caption लिखिए')">
+          <button
+            class="quick-btn"
+            onclick="quickPrompt('एक professional social media caption लिखिए')"
+          >
             ✍️ Caption
           </button>
 
-          <button class="quick-btn" onclick="quickPrompt('एक realistic AI image का detailed prompt बनाइए')">
+          <button
+            class="quick-btn"
+            onclick="quickPrompt('एक realistic AI image का detailed prompt बनाइए')"
+          >
             🎨 Image
           </button>
 
         </div>
 
       </div>
+
     </section>
 
 
     <!-- PRICING -->
     <section>
+
       <div class="container">
 
-        <h2 class="section-title">💎 Plans</h2>
+        <h2 class="section-title">
+          💎 Plans
+        </h2>
 
         <p class="section-subtitle">
           अभी Bolo AI को आसान तरीके से इस्तेमाल करें
@@ -1178,8 +1328,12 @@
         <div class="pricing-grid">
 
           <div class="price-card">
+
             <h3>Free</h3>
-            <div class="price">₹0</div>
+
+            <div class="price">
+              ₹0
+            </div>
 
             <ul>
               <li>✓ AI Chat</li>
@@ -1189,14 +1343,22 @@
               <li>✓ Basic AI Features</li>
             </ul>
 
-            <button class="secondary-btn" style="width:100%;margin-top:20px;">
+            <button
+              class="secondary-btn"
+              style="width:100%;margin-top:20px;"
+            >
               Current Plan
             </button>
+
           </div>
 
           <div class="price-card featured">
+
             <h3>Premium</h3>
-            <div class="price">₹149</div>
+
+            <div class="price">
+              ₹149
+            </div>
 
             <ul>
               <li>✓ More AI usage</li>
@@ -1213,19 +1375,24 @@
             >
               Get Premium
             </button>
+
           </div>
 
         </div>
 
       </div>
+
     </section>
 
 
     <!-- ABOUT -->
     <section>
+
       <div class="container">
 
-        <h2 class="section-title">ℹ️ Bolo AI के बारे में</h2>
+        <h2 class="section-title">
+          ℹ️ Bolo AI के बारे में
+        </h2>
 
         <div class="about-card">
 
@@ -1240,69 +1407,116 @@
         </div>
 
       </div>
+
     </section>
 
   </main>
 
 
+  <!-- FOOTER -->
   <footer>
+
     <div class="container">
+
       <strong>Bolo AI</strong>
+
       <br><br>
+
       आपका अपना AI Assistant
+
       <br><br>
+
       © 2026 Bolo AI. All rights reserved.
+
     </div>
+
   </footer>
 
 
   <!-- LOGIN MODAL -->
-  <div class="modal" id="loginModal" onclick="closeModalOutside(event,'loginModal')">
+  <div
+    class="modal"
+    id="loginModal"
+    onclick="closeModalOutside(event,'loginModal')"
+  >
 
     <div class="modal-box">
 
-      <button class="close-modal" onclick="closeModal('loginModal')">×</button>
+      <button
+        class="close-modal"
+        onclick="closeModal('loginModal')"
+      >
+        ×
+      </button>
 
-      <div class="modal-title">Welcome Back 👋</div>
-      <div class="modal-subtitle">अपने Bolo AI account में login करें</div>
+      <div class="modal-title">
+        Welcome Back 👋
+      </div>
 
-      <div class="error-msg" id="loginError"></div>
+      <div class="modal-subtitle">
+        अपने Bolo AI account में login करें
+      </div>
+
+      <div
+        class="error-msg"
+        id="loginError"
+      ></div>
 
       <div class="form-group">
+
         <label>Email</label>
+
         <input
           id="loginEmail"
           class="form-input"
           type="email"
           placeholder="you@example.com"
         >
+
       </div>
 
       <div class="form-group">
+
         <label>Password</label>
+
         <input
           id="loginPassword"
           class="form-input"
           type="password"
           placeholder="Password"
         >
+
       </div>
 
-      <button class="full-btn" onclick="emailLogin()">
+      <button
+        class="full-btn"
+        onclick="emailLogin()"
+      >
         Login
       </button>
 
-      <span class="modal-link" onclick="forgotPassword()">
+      <span
+        class="modal-link"
+        onclick="forgotPassword()"
+      >
         Forgot Password?
       </span>
 
-      <div class="divider">OR</div>
+      <div class="divider">
+        OR
+      </div>
 
-      <button class="google-btn" onclick="googleLogin()">
+      <button
+        class="google-btn"
+        onclick="googleLogin()"
+      >
         🔵 Continue with Google
       </button>
 
-      <span class="modal-link" onclick="switchModal('loginModal','signupModal')">
+      <span
+        class="modal-link"
+        onclick="switchModal('loginModal','signupModal')"
+      >
         नया account बनाएं
       </span>
 
@@ -1312,58 +1526,95 @@
 
 
   <!-- SIGNUP MODAL -->
-  <div class="modal" id="signupModal" onclick="closeModalOutside(event,'signupModal')">
+  <div
+    class="modal"
+    id="signupModal"
+    onclick="closeModalOutside(event,'signupModal')"
+  >
 
     <div class="modal-box">
 
-      <button class="close-modal" onclick="closeModal('signupModal')">×</button>
+      <button
+        class="close-modal"
+        onclick="closeModal('signupModal')"
+      >
+        ×
+      </button>
 
-      <div class="modal-title">Create Account 🚀</div>
-      <div class="modal-subtitle">अपना Bolo AI account बनाएं</div>
+      <div class="modal-title">
+        Create Account 🚀
+      </div>
 
-      <div class="error-msg" id="signupError"></div>
+      <div class="modal-subtitle">
+        अपना Bolo AI account बनाएं
+      </div>
+
+      <div
+        class="error-msg"
+        id="signupError"
+      ></div>
 
       <div class="form-group">
+
         <label>Name</label>
+
         <input
           id="signupName"
           class="form-input"
           type="text"
           placeholder="आपका नाम"
         >
+
       </div>
 
       <div class="form-group">
+
         <label>Email</label>
+
         <input
           id="signupEmail"
           class="form-input"
           type="email"
           placeholder="you@example.com"
         >
+
       </div>
 
       <div class="form-group">
+
         <label>Password</label>
+
         <input
           id="signupPassword"
           class="form-input"
           type="password"
           placeholder="कम से कम 6 characters"
         >
+
       </div>
 
-      <button class="full-btn" onclick="emailSignup()">
+      <button
+        class="full-btn"
+        onclick="emailSignup()"
+      >
         Create Account
       </button>
 
-      <div class="divider">OR</div>
+      <div class="divider">
+        OR
+      </div>
 
-      <button class="google-btn" onclick="googleLogin()">
+      <button
+        class="google-btn"
+        onclick="googleLogin()"
+      >
         🔵 Sign up with Google
       </button>
 
-      <span class="modal-link" onclick="switchModal('signupModal','loginModal')">
+      <span
+        class="modal-link"
+        onclick="switchModal('signupModal','loginModal')"
+      >
         पहले से account है? Login करें
       </span>
 
@@ -1373,11 +1624,20 @@
 
 
   <!-- ACCOUNT MODAL -->
-  <div class="modal" id="accountModal" onclick="closeModalOutside(event,'accountModal')">
+  <div
+    class="modal"
+    id="accountModal"
+    onclick="closeModalOutside(event,'accountModal')"
+  >
 
     <div class="modal-box">
 
-      <button class="close-modal" onclick="closeModal('accountModal')">×</button>
+      <button
+        class="close-modal"
+        onclick="closeModal('accountModal')"
+      >
+        ×
+      </button>
 
       <div class="account-profile">
 
@@ -1388,26 +1648,44 @@
           alt="Profile"
         >
 
-        <h2 id="accountName">Bolo AI User</h2>
-        <div class="account-email" id="accountEmail"></div>
+        <h2 id="accountName">
+          Bolo AI User
+        </h2>
+
+        <div
+          class="account-email"
+          id="accountEmail"
+        ></div>
 
       </div>
 
       <div class="account-info">
 
         <div class="info-box">
-          <strong id="accountRole">User</strong>
-          <span>Role</span>
+          <strong id="accountRole">
+            User
+          </strong>
+          <span>
+            Role
+          </span>
         </div>
 
         <div class="info-box">
-          <strong id="accountPlan">Free</strong>
-          <span>Plan</span>
+          <strong id="accountPlan">
+            Free
+          </strong>
+          <span>
+            Plan
+          </span>
         </div>
 
         <div class="info-box">
-          <strong id="accountCredits">10</strong>
-          <span>Credits</span>
+          <strong id="accountCredits">
+            10
+          </strong>
+          <span>
+            Credits
+          </span>
         </div>
 
       </div>
@@ -1425,10 +1703,14 @@
   </div>
 
 
-  <div class="toast" id="toast"></div>
+  <div
+    class="toast"
+    id="toast"
+  ></div>
 
 
   <script>
+
     /* =========================================
        FIREBASE
     ========================================= */
@@ -1480,9 +1762,11 @@
 
     function showToast(message) {
 
-      const toast = document.getElementById("toast");
+      const toast =
+        document.getElementById("toast");
 
       toast.textContent = message;
+
       toast.classList.add("show");
 
       setTimeout(() => {
@@ -1496,11 +1780,15 @@
     ========================================= */
 
     function openModal(id) {
-      document.getElementById(id).classList.add("active");
+      document
+        .getElementById(id)
+        .classList.add("active");
     }
 
     function closeModal(id) {
-      document.getElementById(id).classList.remove("active");
+      document
+        .getElementById(id)
+        .classList.remove("active");
     }
 
     function switchModal(from,to) {
@@ -1509,18 +1797,23 @@
     }
 
     function closeModalOutside(event,id) {
+
       if (event.target.id === id) {
         closeModal(id);
       }
     }
 
     function openAccount() {
+
       if (!currentUser) {
+
         openModal("loginModal");
+
         return;
       }
 
       updateAccountUI(currentUser);
+
       openModal("accountModal");
     }
 
@@ -1531,9 +1824,13 @@
 
     function firebaseError(error) {
 
-      const code = error && error.code ? error.code : "";
+      const code =
+        error && error.code
+          ? error.code
+          : "";
 
       const errors = {
+
         "auth/invalid-email":
           "Email address सही नहीं है।",
 
@@ -1563,15 +1860,21 @@
 
         "auth/network-request-failed":
           "Internet connection check करें।"
+
       };
 
-      return errors[code] || error.message || "कुछ गलत हो गया।";
+      return (
+        errors[code] ||
+        error.message ||
+        "कुछ गलत हो गया।"
+      );
     }
 
 
     function showError(id,message) {
 
-      const el = document.getElementById(id);
+      const el =
+        document.getElementById(id);
 
       if (!el) return;
 
@@ -1579,9 +1882,11 @@
       el.style.display = "block";
     }
 
+
     function hideError(id) {
 
-      const el = document.getElementById(id);
+      const el =
+        document.getElementById(id);
 
       if (el) {
         el.style.display = "none";
@@ -1599,8 +1904,12 @@
 
       try {
 
-        const ref = db.collection("users").doc(user.uid);
-        const snap = await ref.get();
+        const ref =
+          db.collection("users")
+            .doc(user.uid);
+
+        const snap =
+          await ref.get();
 
         const provider =
           user.providerData &&
@@ -1611,27 +1920,66 @@
         if (!snap.exists) {
 
           await ref.set({
+
             uid: user.uid,
-            displayName: user.displayName || "Bolo AI User",
-            email: user.email || "",
-            photoURL: user.photoURL || "",
+
+            displayName:
+              user.displayName ||
+              "Bolo AI User",
+
+            email:
+              user.email ||
+              "",
+
+            photoURL:
+              user.photoURL ||
+              "",
+
             provider: provider,
+
             role: "user",
+
             plan: "free",
+
             credits: 10,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-            lastLoginAt: firebase.firestore.FieldValue.serverTimestamp()
+
+            createdAt:
+              firebase.firestore
+                .FieldValue
+                .serverTimestamp(),
+
+            lastLoginAt:
+              firebase.firestore
+                .FieldValue
+                .serverTimestamp()
+
           });
 
         } else {
 
           await ref.set({
+
             uid: user.uid,
-            displayName: user.displayName || "Bolo AI User",
-            email: user.email || "",
-            photoURL: user.photoURL || "",
+
+            displayName:
+              user.displayName ||
+              "Bolo AI User",
+
+            email:
+              user.email ||
+              "",
+
+            photoURL:
+              user.photoURL ||
+              "",
+
             provider: provider,
-            lastLoginAt: firebase.firestore.FieldValue.serverTimestamp()
+
+            lastLoginAt:
+              firebase.firestore
+                .FieldValue
+                .serverTimestamp()
+
           }, {
             merge: true
           });
@@ -1639,7 +1987,11 @@
         }
 
       } catch (error) {
-        console.log("Profile save:", error);
+
+        console.log(
+          "Profile save:",
+          error
+        );
       }
     }
 
@@ -1651,20 +2003,31 @@
     async function updateAccountUI(user) {
 
       const loggedOut =
-        document.getElementById("loggedOutActions");
+        document.getElementById(
+          "loggedOutActions"
+        );
 
       const loggedIn =
-        document.getElementById("loggedInActions");
+        document.getElementById(
+          "loggedInActions"
+        );
 
       if (!user) {
 
-        loggedOut.style.display = "flex";
-        loggedIn.style.display = "none";
+        loggedOut.style.display =
+          "flex";
+
+        loggedIn.style.display =
+          "none";
+
         return;
       }
 
-      loggedOut.style.display = "none";
-      loggedIn.style.display = "flex";
+      loggedOut.style.display =
+        "none";
+
+      loggedIn.style.display =
+        "flex";
 
       const name =
         user.displayName ||
@@ -1677,10 +2040,21 @@
         encodeURIComponent(name) +
         "&background=7c3aed&color=fff";
 
-      document.getElementById("navAvatar").src = avatar;
-      document.getElementById("accountAvatar").src = avatar;
-      document.getElementById("accountName").textContent = name;
-      document.getElementById("accountEmail").textContent =
+      document.getElementById(
+        "navAvatar"
+      ).src = avatar;
+
+      document.getElementById(
+        "accountAvatar"
+      ).src = avatar;
+
+      document.getElementById(
+        "accountName"
+      ).textContent = name;
+
+      document.getElementById(
+        "accountEmail"
+      ).textContent =
         user.email || "";
 
       try {
@@ -1692,22 +2066,27 @@
 
         if (snap.exists) {
 
-          const data = snap.data();
+          const data =
+            snap.data();
 
-          document.getElementById("accountRole")
-            .textContent =
+          document.getElementById(
+            "accountRole"
+          ).textContent =
             data.role || "user";
 
-          document.getElementById("accountPlan")
-            .textContent =
+          document.getElementById(
+            "accountPlan"
+          ).textContent =
             data.plan || "free";
 
-          document.getElementById("accountCredits")
-            .textContent =
+          document.getElementById(
+            "accountCredits"
+          ).textContent =
             data.credits ?? 10;
         }
 
       } catch (error) {
+
         console.log(error);
       }
     }
@@ -1717,21 +2096,25 @@
        AUTH STATE
     ========================================= */
 
-    auth.onAuthStateChanged(async user => {
+    auth.onAuthStateChanged(
+      async user => {
 
-      currentUser = user;
+        currentUser = user;
 
-      if (user) {
+        if (user) {
 
-        await saveUserProfile(user);
-        await updateAccountUI(user);
+          await saveUserProfile(user);
 
-      } else {
+          await updateAccountUI(user);
 
-        updateAccountUI(null);
+        } else {
+
+          updateAccountUI(null);
+
+        }
+
       }
-
-    });
+    );
 
 
     /* =========================================
@@ -1741,6 +2124,7 @@
     async function googleLogin() {
 
       hideError("loginError");
+
       hideError("signupError");
 
       const provider =
@@ -1752,39 +2136,57 @@
 
       try {
 
-        await auth.signInWithPopup(provider);
+        await auth.signInWithPopup(
+          provider
+        );
 
         closeModal("loginModal");
+
         closeModal("signupModal");
 
-        showToast("Google से login सफल हुआ। 🎉");
+        showToast(
+          "Google से login सफल हुआ। 🎉"
+        );
 
       } catch (error) {
 
         if (
-          error.code === "auth/popup-blocked" ||
-          error.code === "auth/operation-not-supported-in-this-environment"
+          error.code ===
+            "auth/popup-blocked" ||
+          error.code ===
+            "auth/operation-not-supported-in-this-environment"
         ) {
 
           try {
 
-            await auth.signInWithRedirect(provider);
+            await auth.signInWithRedirect(
+              provider
+            );
 
           } catch (redirectError) {
 
             showError(
               "loginError",
-              firebaseError(redirectError)
+              firebaseError(
+                redirectError
+              )
             );
-
           }
 
         } else {
 
-          const message = firebaseError(error);
+          const message =
+            firebaseError(error);
 
-          showError("loginError",message);
-          showError("signupError",message);
+          showError(
+            "loginError",
+            message
+          );
+
+          showError(
+            "signupError",
+            message
+          );
         }
       }
     }
@@ -1797,15 +2199,28 @@
     auth.getRedirectResult()
       .then(result => {
 
-        if (result && result.user) {
-          showToast("Google login सफल हुआ। 🎉");
+        if (
+          result &&
+          result.user
+        ) {
+
+          showToast(
+            "Google login सफल हुआ। 🎉"
+          );
         }
 
       })
       .catch(error => {
 
-        if (error && error.code) {
-          console.log("Redirect:", firebaseError(error));
+        if (
+          error &&
+          error.code
+        ) {
+
+          console.log(
+            "Redirect:",
+            firebaseError(error)
+          );
         }
 
       });
@@ -1820,32 +2235,47 @@
       hideError("signupError");
 
       const name =
-        document.getElementById("signupName")
-          .value.trim();
+        document.getElementById(
+          "signupName"
+        ).value.trim();
 
       const email =
-        document.getElementById("signupEmail")
-          .value.trim();
+        document.getElementById(
+          "signupEmail"
+        ).value.trim();
 
       const password =
-        document.getElementById("signupPassword")
-          .value;
+        document.getElementById(
+          "signupPassword"
+        ).value;
 
       if (!name) {
-        showError("signupError","अपना नाम लिखें।");
+
+        showError(
+          "signupError",
+          "अपना नाम लिखें।"
+        );
+
         return;
       }
 
       if (!email) {
-        showError("signupError","Email लिखें।");
+
+        showError(
+          "signupError",
+          "Email लिखें।"
+        );
+
         return;
       }
 
       if (password.length < 6) {
+
         showError(
           "signupError",
           "Password कम से कम 6 characters का रखें।"
         );
+
         return;
       }
 
@@ -1861,11 +2291,15 @@
           displayName: name
         });
 
-        await saveUserProfile(auth.currentUser);
+        await saveUserProfile(
+          auth.currentUser
+        );
 
         closeModal("signupModal");
 
-        showToast("Account successfully बनाया गया। 🎉");
+        showToast(
+          "Account successfully बनाया गया। 🎉"
+        );
 
       } catch (error) {
 
@@ -1886,12 +2320,14 @@
       hideError("loginError");
 
       const email =
-        document.getElementById("loginEmail")
-          .value.trim();
+        document.getElementById(
+          "loginEmail"
+        ).value.trim();
 
       const password =
-        document.getElementById("loginPassword")
-          .value;
+        document.getElementById(
+          "loginPassword"
+        ).value;
 
       if (!email || !password) {
 
@@ -1912,7 +2348,9 @@
 
         closeModal("loginModal");
 
-        showToast("Login सफल हुआ। 👋");
+        showToast(
+          "Login सफल हुआ। 👋"
+        );
 
       } catch (error) {
 
@@ -1931,8 +2369,9 @@
     async function forgotPassword() {
 
       const email =
-        document.getElementById("loginEmail")
-          .value.trim();
+        document.getElementById(
+          "loginEmail"
+        ).value.trim();
 
       if (!email) {
 
@@ -1946,7 +2385,9 @@
 
       try {
 
-        await auth.sendPasswordResetEmail(email);
+        await auth.sendPasswordResetEmail(
+          email
+        );
 
         showToast(
           "Password reset email भेज दिया गया। 📧"
@@ -1974,11 +2415,15 @@
 
         closeModal("accountModal");
 
-        showToast("Logout हो गया।");
+        showToast(
+          "Logout हो गया।"
+        );
 
       } catch (error) {
 
-        showToast(firebaseError(error));
+        showToast(
+          firebaseError(error)
+        );
       }
     }
 
@@ -2012,7 +2457,9 @@
 
       if (!requireLogin()) return;
 
-      document.getElementById("photoUpload").click();
+      document
+        .getElementById("photoUpload")
+        .click();
     }
 
 
@@ -2024,25 +2471,36 @@
 
       if (!file) return;
 
-      if (!file.type.startsWith("image/")) {
+      if (
+        !file.type.startsWith("image/")
+      ) {
 
-        showToast("कृपया image file चुनें।");
+        showToast(
+          "कृपया image file चुनें।"
+        );
+
         return;
       }
 
-      const reader = new FileReader();
+      const reader =
+        new FileReader();
 
-      reader.onload = function(e) {
+      reader.onload =
+        function(e) {
 
-        selectedPhotoData = e.target.result;
+          selectedPhotoData =
+            e.target.result;
 
-        document.getElementById("previewImage").src =
-          selectedPhotoData;
+          document.getElementById(
+            "previewImage"
+          ).src =
+            selectedPhotoData;
 
-        document.getElementById("photoPreview")
-          .style.display = "block";
-
-      };
+          document.getElementById(
+            "photoPreview"
+          ).style.display =
+            "block";
+        };
 
       reader.readAsDataURL(file);
     }
@@ -2052,10 +2510,17 @@
 
       selectedPhotoData = null;
 
-      document.getElementById("photoUpload").value = "";
-      document.getElementById("previewImage").src = "";
-      document.getElementById("photoPreview")
-        .style.display = "none";
+      document.getElementById(
+        "photoUpload"
+      ).value = "";
+
+      document.getElementById(
+        "previewImage"
+      ).src = "";
+
+      document.getElementById(
+        "photoPreview"
+      ).style.display = "none";
     }
 
 
@@ -2063,41 +2528,64 @@
        CHAT UI
     ========================================= */
 
-    function addMessage(text,type,image=null) {
+    function addMessage(
+      text,
+      type,
+      image = null
+    ) {
 
       const box =
-        document.getElementById("chatMessages");
+        document.getElementById(
+          "chatMessages"
+        );
 
       const message =
-        document.createElement("div");
+        document.createElement(
+          "div"
+        );
 
       message.className =
         "message " + type;
 
       const bubble =
-        document.createElement("div");
+        document.createElement(
+          "div"
+        );
 
       bubble.className =
         "message-bubble";
 
-      bubble.textContent = text || "";
+      bubble.textContent =
+        text || "";
 
       if (image) {
 
         const img =
-          document.createElement("img");
+          document.createElement(
+            "img"
+          );
 
         img.src = image;
-        img.className = "message-image";
-        img.alt = "Uploaded image";
+
+        img.className =
+          "message-image";
+
+        img.alt =
+          "Uploaded image";
 
         bubble.appendChild(img);
       }
 
-      message.appendChild(bubble);
-      box.appendChild(message);
+      message.appendChild(
+        bubble
+      );
 
-      box.scrollTop = box.scrollHeight;
+      box.appendChild(
+        message
+      );
+
+      box.scrollTop =
+        box.scrollHeight;
     }
 
 
@@ -2110,18 +2598,26 @@
       if (!requireLogin()) return;
 
       const input =
-        document.getElementById("chatInput");
+        document.getElementById(
+          "chatInput"
+        );
 
       const text =
         input.value.trim();
 
-      if (!text && !selectedPhotoData) return;
+      if (
+        !text &&
+        !selectedPhotoData
+      ) {
+        return;
+      }
 
       const imageToShow =
         selectedPhotoData;
 
       addMessage(
-        text || "Photo uploaded",
+        text ||
+        "Photo uploaded",
         "user",
         imageToShow
       );
@@ -2139,7 +2635,9 @@
       );
 
       const messages =
-        document.getElementById("chatMessages");
+        document.getElementById(
+          "chatMessages"
+        );
 
       const loadingMessage =
         messages.lastElementChild;
@@ -2147,31 +2645,35 @@
       try {
 
         const body = {
+
           message:
             text ||
             "इस photo के बारे में बताइए।"
-        };
 
-        /*
-          Existing backend endpoint को सुरक्षित रखा गया है।
-          Backend का current chat API message स्वीकार करता है।
-        */
+        };
 
         const response =
           await fetch(
-            BACKEND_URL + "/api/chat",
+            BACKEND_URL +
+            "/api/chat",
             {
               method: "POST",
+
               headers: {
-                "Content-Type": "application/json"
+                "Content-Type":
+                  "application/json"
               },
-              body: JSON.stringify(body)
+
+              body:
+                JSON.stringify(body)
             }
           );
 
         if (!response.ok) {
+
           throw new Error(
-            "Server error: " + response.status
+            "Server error: " +
+            response.status
           );
         }
 
@@ -2185,7 +2687,9 @@
           data.text ||
           data.answer;
 
-        if (typeof reply !== "string") {
+        if (
+          typeof reply !== "string"
+        ) {
 
           reply =
             JSON.stringify(
@@ -2198,7 +2702,8 @@
         loadingMessage.remove();
 
         addMessage(
-          reply || "AI से response नहीं मिला।",
+          reply ||
+          "AI से response नहीं मिला।",
           "ai"
         );
 
@@ -2213,6 +2718,7 @@
           photoWasSelected &&
           !text
         ) {
+
           message +=
             " Photo upload दिख रहा है, लेकिन photo को AI से समझने के लिए backend में vision support भी चाहिए।";
         }
@@ -2222,7 +2728,10 @@
           "ai"
         );
 
-        console.log("Chat error:",error);
+        console.log(
+          "Chat error:",
+          error
+        );
       }
     }
 
@@ -2251,37 +2760,58 @@
       const recognition =
         new SpeechRecognition();
 
-      recognition.lang = "hi-IN";
-      recognition.interimResults = false;
-      recognition.continuous = false;
+      recognition.lang =
+        "hi-IN";
+
+      recognition.interimResults =
+        false;
+
+      recognition.continuous =
+        false;
 
       const voiceBtn =
-        document.getElementById("voiceBtn");
+        document.getElementById(
+          "voiceBtn"
+        );
 
-      voiceBtn.textContent = "🔴";
+      voiceBtn.textContent =
+        "🔴";
 
       recognition.start();
 
-      recognition.onresult = function(event) {
+      recognition.onresult =
+        function(event) {
 
-        const transcript =
-          event.results[0][0].transcript;
+          const transcript =
+            event.results[0][0]
+              .transcript;
 
-        document.getElementById("chatInput")
-          .value +=
-          (document.getElementById("chatInput").value
-            ? " "
-            : "") +
-          transcript;
-      };
+          const input =
+            document.getElementById(
+              "chatInput"
+            );
 
-      recognition.onerror = function() {
-        showToast("Voice input में समस्या हुई।");
-      };
+          input.value +=
+            (input.value
+              ? " "
+              : "") +
+            transcript;
+        };
 
-      recognition.onend = function() {
-        voiceBtn.textContent = "🎤";
-      };
+      recognition.onerror =
+        function() {
+
+          showToast(
+            "Voice input में समस्या हुई।"
+          );
+        };
+
+      recognition.onend =
+        function() {
+
+          voiceBtn.textContent =
+            "🎤";
+        };
     }
 
 
@@ -2294,8 +2824,9 @@
       if (!requireLogin()) return;
 
       const prompt =
-        document.getElementById("imagePrompt")
-          .value.trim();
+        document.getElementById(
+          "imagePrompt"
+        ).value.trim();
 
       if (!prompt) {
 
@@ -2307,13 +2838,21 @@
       }
 
       const btn =
-        document.getElementById("generateImageBtn");
+        document.getElementById(
+          "generateImageBtn"
+        );
 
       const output =
-        document.getElementById("generatedImage");
+        document.getElementById(
+          "generatedImage"
+        );
 
-      btn.classList.add("loading");
-      btn.textContent = "Generating...";
+      btn.classList.add(
+        "loading"
+      );
+
+      btn.textContent =
+        "Generating...";
 
       output.innerHTML =
         "<p style='color:#aaa5bd;padding:20px'>✨ Image generate हो रही है...</p>";
@@ -2322,21 +2861,28 @@
 
         const response =
           await fetch(
-            BACKEND_URL + "/api/generate-image",
+            BACKEND_URL +
+            "/api/generate-image",
             {
               method: "POST",
+
               headers: {
-                "Content-Type": "application/json"
+                "Content-Type":
+                  "application/json"
               },
-              body: JSON.stringify({
-                prompt: prompt
-              })
+
+              body:
+                JSON.stringify({
+                  prompt: prompt
+                })
             }
           );
 
         if (!response.ok) {
+
           throw new Error(
-            "Server error: " + response.status
+            "Server error: " +
+            response.status
           );
         }
 
@@ -2349,19 +2895,28 @@
           data.url;
 
         if (!imageUrl) {
+
           throw new Error(
             "Image URL नहीं मिला।"
           );
         }
 
         const img =
-          document.createElement("img");
+          document.createElement(
+            "img"
+          );
 
-        img.src = imageUrl;
-        img.alt = "Generated AI image";
+        img.src =
+          imageUrl;
+
+        img.alt =
+          "Generated AI image";
 
         output.innerHTML = "";
-        output.appendChild(img);
+
+        output.appendChild(
+          img
+        );
 
         showToast(
           "Image तैयार है। 🎨"
@@ -2379,7 +2934,10 @@
 
       } finally {
 
-        btn.classList.remove("loading");
+        btn.classList.remove(
+          "loading"
+        );
+
         btn.textContent =
           "✨ Generate Image";
       }
@@ -2418,6 +2976,7 @@
 
       coding:
         "मेरी coding problem को समझकर solution दीजिए"
+
     };
 
 
@@ -2428,14 +2987,19 @@
       const prompt =
         toolPrompts[type];
 
-      document.getElementById("chatInput")
-        .value = prompt;
+      document.getElementById(
+        "chatInput"
+      ).value =
+        prompt;
 
       scrollToChat();
 
       setTimeout(() => {
-        document.getElementById("chatInput")
-          .focus();
+
+        document.getElementById(
+          "chatInput"
+        ).focus();
+
       },300);
     }
 
@@ -2444,14 +3008,19 @@
 
       if (!requireLogin()) return;
 
-      document.getElementById("chatInput")
-        .value = prompt;
+      document.getElementById(
+        "chatInput"
+      ).value =
+        prompt;
 
       scrollToChat();
 
       setTimeout(() => {
-        document.getElementById("chatInput")
-          .focus();
+
+        document.getElementById(
+          "chatInput"
+        ).focus();
+
       },300);
     }
 
@@ -2462,15 +3031,22 @@
 
     function scrollToChat() {
 
-      document.getElementById("chatSection")
+      document
+        .getElementById(
+          "chatSection"
+        )
         .scrollIntoView({
           behavior: "smooth"
         });
     }
 
+
     function scrollToTools() {
 
-      document.getElementById("toolsSection")
+      document
+        .getElementById(
+          "toolsSection"
+        )
         .scrollIntoView({
           behavior: "smooth"
         });
@@ -2487,9 +3063,11 @@
 
         event.preventDefault();
 
-        deferredInstallPrompt = event;
+        deferredInstallPrompt =
+          event;
 
         showInstallButtons();
+
       }
     );
 
@@ -2497,14 +3075,24 @@
     function showInstallButtons() {
 
       const buttons = [
-        document.getElementById("installBtn"),
-        document.getElementById("installBtnLogged")
+
+        document.getElementById(
+          "installBtn"
+        ),
+
+        document.getElementById(
+          "installBtnLogged"
+        )
+
       ];
 
       buttons.forEach(button => {
 
         if (button) {
-          button.style.display = "inline-flex";
+
+          button.style.display =
+            "inline-flex";
+
         }
 
       });
@@ -2514,14 +3102,24 @@
     function hideInstallButtons() {
 
       const buttons = [
-        document.getElementById("installBtn"),
-        document.getElementById("installBtnLogged")
+
+        document.getElementById(
+          "installBtn"
+        ),
+
+        document.getElementById(
+          "installBtnLogged"
+        )
+
       ];
 
       buttons.forEach(button => {
 
         if (button) {
-          button.style.display = "none";
+
+          button.style.display =
+            "none";
+
         }
 
       });
@@ -2544,10 +3142,16 @@
         await deferredInstallPrompt.prompt();
 
         const result =
-          await deferredInstallPrompt.userChoice;
+          await deferredInstallPrompt
+            .userChoice;
 
-        if (result.outcome === "accepted") {
+        if (
+          result.outcome ===
+          "accepted"
+        ) {
+
           hideInstallButtons();
+
         }
 
       } catch (error) {
@@ -2559,7 +3163,8 @@
 
       }
 
-      deferredInstallPrompt = null;
+      deferredInstallPrompt =
+        null;
     }
 
 
@@ -2567,49 +3172,52 @@
       "appinstalled",
       () => {
 
-        deferredInstallPrompt = null;
+        deferredInstallPrompt =
+          null;
 
         hideInstallButtons();
 
         showToast(
           "Bolo AI successfully install हो गया। 🎉"
         );
+
       }
     );
 
 
     /* =========================================
-       OLD SERVICE WORKER CLEANUP
-       इससे पुराना cached page हटाने में मदद मिलेगी
+       SERVICE WORKER
+       पुराने Service Worker को unregister
+       करने के बजाय अब सही तरीके से register करें।
     ========================================= */
 
     if ("serviceWorker" in navigator) {
 
       window.addEventListener(
         "load",
-        async () => {
+        () => {
 
-          try {
+          navigator.serviceWorker
+            .register("/sw.js")
+            .then(() => {
 
-            const registrations =
-              await navigator.serviceWorker
-                .getRegistrations();
+              console.log(
+                "Bolo AI Service Worker registered"
+              );
 
-            for (const registration of registrations) {
+            })
+            .catch(error => {
 
-              await registration.unregister();
-            }
+              console.log(
+                "Service Worker error:",
+                error
+              );
 
-          } catch (error) {
-
-            console.log(
-              "Service Worker cleanup:",
-              error
-            );
-          }
+            });
 
         }
       );
+
     }
 
 
@@ -2624,10 +3232,17 @@
         if (event.key === "Escape") {
 
           document
-            .querySelectorAll(".modal.active")
+            .querySelectorAll(
+              ".modal.active"
+            )
             .forEach(modal => {
-              modal.classList.remove("active");
+
+              modal.classList.remove(
+                "active"
+              );
+
             });
+
         }
 
       }
