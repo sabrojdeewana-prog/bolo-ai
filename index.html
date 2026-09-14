@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -42,8 +43,16 @@
     body{
       font-family:Arial,Helvetica,sans-serif;
       background:
-        radial-gradient(circle at 15% 10%,rgba(124,58,237,.20),transparent 28%),
-        radial-gradient(circle at 85% 20%,rgba(59,130,246,.15),transparent 28%),
+        radial-gradient(
+          circle at 15% 10%,
+          rgba(124,58,237,.20),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 85% 20%,
+          rgba(59,130,246,.15),
+          transparent 28%
+        ),
         #09051a;
       color:#fff;
       min-height:100vh;
@@ -73,6 +82,7 @@
       width:min(1180px,calc(100% - 30px));
       margin:auto;
     }
+
 
     /* =========================
        NAVBAR
@@ -142,8 +152,13 @@
       border:none;
     }
 
+    /*
+      Install is hidden until browser says
+      the app can actually be installed.
+    */
+
     .install-btn{
-      display:inline-flex;
+      display:none;
       align-items:center;
       justify-content:center;
       background:linear-gradient(135deg,#7c3aed,#4f46e5);
@@ -165,7 +180,10 @@
       border:2px solid rgba(167,139,250,.6);
     }
 
-    /* THREE DOT */
+
+    /* =========================
+       THREE DOT MENU
+    ========================= */
 
     .menu-wrap{
       position:relative;
@@ -191,7 +209,7 @@
       position:absolute;
       right:0;
       top:52px;
-      width:220px;
+      width:230px;
       padding:8px;
       border-radius:16px;
       background:#17102f;
@@ -219,7 +237,10 @@
       background:rgba(124,58,237,.16);
     }
 
-    /* HERO */
+
+    /* =========================
+       HERO
+    ========================= */
 
     .hero{
       padding:80px 0 55px;
@@ -245,7 +266,12 @@
     }
 
     .gradient-text{
-      background:linear-gradient(90deg,#a78bfa,#60a5fa,#c084fc);
+      background:linear-gradient(
+        90deg,
+        #a78bfa,
+        #60a5fa,
+        #c084fc
+      );
       -webkit-background-clip:text;
       background-clip:text;
       color:transparent;
@@ -282,6 +308,11 @@
       box-shadow:0 12px 35px rgba(79,70,229,.28);
     }
 
+    .primary-btn:hover{
+      transform:translateY(-1px);
+      box-shadow:0 15px 40px rgba(79,70,229,.38);
+    }
+
     .secondary-btn{
       background:rgba(255,255,255,.06);
       color:#fff;
@@ -305,7 +336,10 @@
       margin-bottom:30px;
     }
 
-    /* CHAT */
+
+    /* =========================
+       CHAT
+    ========================= */
 
     .chat-card{
       max-width:900px;
@@ -460,7 +494,10 @@
       font-size:18px;
     }
 
-    /* IMAGE GENERATOR */
+
+    /* =========================
+       IMAGE GENERATOR
+    ========================= */
 
     .generator{
       max-width:900px;
@@ -500,7 +537,10 @@
       border:1px solid rgba(255,255,255,.1);
     }
 
-    /* TOOLS */
+
+    /* =========================
+       TOOLS
+    ========================= */
 
     .tools-grid{
       display:grid;
@@ -539,7 +579,10 @@
       line-height:1.5;
     }
 
-    /* QUICK */
+
+    /* =========================
+       QUICK AI
+    ========================= */
 
     .quick-grid{
       display:grid;
@@ -560,13 +603,16 @@
       background:rgba(124,58,237,.15);
     }
 
-    /* PRICING */
+
+    /* =========================
+       PRICING
+    ========================= */
 
     .pricing-grid{
       display:grid;
       grid-template-columns:repeat(2,1fr);
       gap:18px;
-      max-width:800px;
+      max-width:850px;
       margin:auto;
     }
 
@@ -575,25 +621,56 @@
       border-radius:22px;
       background:rgba(20,13,45,.72);
       border:1px solid rgba(255,255,255,.08);
+      position:relative;
+      overflow:hidden;
     }
 
     .price-card.featured{
-      border-color:rgba(139,92,246,.5);
+      border-color:rgba(139,92,246,.55);
+      box-shadow:
+        0 20px 70px rgba(124,58,237,.14);
+    }
+
+    .premium-badge{
+      display:inline-block;
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(124,58,237,.15);
+      color:#c4b5fd;
+      border:1px solid rgba(167,139,250,.2);
+      font-size:11px;
+      font-weight:900;
+      margin-top:8px;
     }
 
     .price{
       font-size:36px;
       font-weight:900;
-      margin:15px 0;
+      margin:15px 0 5px;
     }
 
     .price-card ul{
       list-style:none;
       color:#bbb5ca;
       line-height:2;
+      margin-top:8px;
     }
 
-    /* ABOUT */
+    .save-badge{
+      display:inline-block;
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(34,197,94,.12);
+      color:#86efac;
+      font-size:12px;
+      font-weight:800;
+      margin:5px 0 10px;
+    }
+
+
+    /* =========================
+       ABOUT
+    ========================= */
 
     .about-card{
       max-width:900px;
@@ -610,17 +687,32 @@
       line-height:1.8;
     }
 
-    /* FOOTER */
+
+    /* =========================
+       FOOTER
+    ========================= */
 
     footer{
       margin-top:40px;
       border-top:1px solid rgba(255,255,255,.07);
-      padding:30px 0;
+      padding:35px 0;
       text-align:center;
       color:#8f899f;
+      line-height:1.5;
     }
 
-    /* MODALS */
+    footer strong{
+      color:#fff;
+    }
+
+    footer a{
+      color:#a78bfa;
+    }
+
+
+    /* =========================
+       MODALS
+    ========================= */
 
     .modal{
       display:none;
@@ -771,7 +863,10 @@
       color:#86efac;
     }
 
-    /* ACCOUNT */
+
+    /* =========================
+       ACCOUNT
+    ========================= */
 
     .account-profile{
       text-align:center;
@@ -816,7 +911,10 @@
       font-size:11px;
     }
 
-    /* TOAST */
+
+    /* =========================
+       TOAST
+    ========================= */
 
     .toast{
       position:fixed;
@@ -845,7 +943,10 @@
       pointer-events:none;
     }
 
-    /* MOBILE */
+
+    /* =========================
+       MOBILE
+    ========================= */
 
     @media(max-width:850px){
 
@@ -858,6 +959,7 @@
       }
 
     }
+
 
     @media(max-width:600px){
 
@@ -947,7 +1049,9 @@
   </style>
 </head>
 
+
 <body>
+
 
   <!-- =========================
        NAVBAR
@@ -1001,7 +1105,8 @@
           Sign Up
         </button>
 
-        <!-- THREE DOT MENU -->
+
+        <!-- THREE DOT -->
 
         <div class="menu-wrap">
 
@@ -1073,6 +1178,7 @@
         >
           Account
         </button>
+
 
         <div class="menu-wrap">
 
@@ -1228,6 +1334,7 @@
 
           <div class="chat-input-area">
 
+
             <!-- PHOTO PREVIEW -->
 
             <div
@@ -1253,7 +1360,8 @@
 
             <div class="chat-input-row">
 
-              <!-- REAL FILE INPUT -->
+
+              <!-- FILE INPUT -->
 
               <input
                 id="photoUpload"
@@ -1264,7 +1372,7 @@
               >
 
 
-              <!-- PHOTO BUTTON -->
+              <!-- PHOTO -->
 
               <button
                 class="icon-btn"
@@ -1277,7 +1385,7 @@
               </button>
 
 
-              <!-- VOICE BUTTON -->
+              <!-- VOICE -->
 
               <button
                 class="icon-btn"
@@ -1291,7 +1399,7 @@
               </button>
 
 
-              <!-- CHAT INPUT -->
+              <!-- INPUT -->
 
               <input
                 id="chatInput"
@@ -1389,6 +1497,7 @@
         </p>
 
         <div class="tools-grid">
+
 
           <div
             class="tool-card"
@@ -1497,6 +1606,7 @@
             </p>
           </div>
 
+
         </div>
 
       </div>
@@ -1558,7 +1668,7 @@
 
 
     <!-- =========================
-         PRICING
+         PREMIUM PLANS
     ========================== -->
 
     <section>
@@ -1575,9 +1685,14 @@
 
         <div class="pricing-grid">
 
+
+          <!-- FREE -->
+
           <div class="price-card">
 
-            <h3>Free</h3>
+            <h3>
+              Free
+            </h3>
 
             <div class="price">
               ₹0
@@ -1601,28 +1716,67 @@
           </div>
 
 
+          <!-- PREMIUM -->
+
           <div class="price-card featured">
 
-            <h3>Premium</h3>
+            <h3>
+              Premium 💎
+            </h3>
+
+            <div class="premium-badge">
+              BEST VALUE
+            </div>
 
             <div class="price">
+
+              <span
+                style="
+                  font-size:16px;
+                  color:#8f899f;
+                  text-decoration:line-through;
+                  margin-right:5px;
+                "
+              >
+                ₹249
+              </span>
+
               ₹149
+
+              <span
+                style="
+                  font-size:14px;
+                  color:#aaa5bd;
+                "
+              >
+                /month
+              </span>
+
+            </div>
+
+            <div class="save-badge">
+              SAVE ₹100
             </div>
 
             <ul>
-              <li>✓ More AI usage</li>
-              <li>✓ Advanced features</li>
-              <li>✓ Priority tools</li>
-              <li>✓ Creative generation</li>
-              <li>✓ Premium experience</li>
+              <li>✓ Faster AI responses</li>
+              <li>✓ Higher AI usage</li>
+              <li>✓ AI photo understanding</li>
+              <li>✓ AI image generation</li>
+              <li>✓ Advanced AI writing</li>
+              <li>✓ Lyrics & song writing</li>
+              <li>✓ YouTube content tools</li>
+              <li>✓ Advanced AI tools</li>
+              <li>✓ Voice input</li>
+              <li>✓ Priority access to new features</li>
             </ul>
 
             <button
               class="primary-btn"
               style="width:100%;margin-top:20px;"
-              onclick="showToast('Premium payment feature will be available soon.')"
+              onclick="showToast('Premium payment will be available soon.')"
             >
-              Get Premium
+              💎 Get Premium — ₹149/month
             </button>
 
           </div>
@@ -1678,6 +1832,17 @@
       <br><br>
 
       Your Own AI Assistant
+
+      <br><br>
+
+      Created by <strong>Sabroj Babu</strong>
+
+      <br><br>
+
+      Contact:
+      <a href="mailto:Sabrojalam8454@gmail.com">
+        Sabrojalam8454@gmail.com
+      </a>
 
       <br><br>
 
@@ -1995,6 +2160,7 @@
 
   <script>
 
+
     /* =========================================
        FIREBASE CONFIG
     ========================================= */
@@ -2021,6 +2187,7 @@
 
       measurementId:
         "G-0Q60GF4EPN"
+
     };
 
 
@@ -2130,22 +2297,63 @@
 
       event.stopPropagation();
 
-      const menus =
-        document.querySelectorAll(
-          ".dropdown-menu"
+      const wrap =
+        event.currentTarget.closest(
+          ".menu-wrap"
         );
 
-      menus.forEach(menu => {
+      const menu =
+        wrap
+          ? wrap.querySelector(
+              ".dropdown-menu"
+            )
+          : null;
+
+
+      document
+        .querySelectorAll(
+          ".dropdown-menu"
+        )
+        .forEach(item => {
+
+          if(item !== menu){
+
+            item.classList.remove(
+              "show"
+            );
+
+          }
+
+        });
+
+
+      if(menu){
 
         menu.classList.toggle(
           "show"
         );
 
-      });
+      }
 
-      document.body.classList.add(
-        "menu-open"
-      );
+
+      const anyOpen =
+        document.querySelector(
+          ".dropdown-menu.show"
+        );
+
+      if(anyOpen){
+
+        document.body.classList.add(
+          "menu-open"
+        );
+
+      }else{
+
+        document.body.classList.remove(
+          "menu-open"
+        );
+
+      }
 
     }
 
@@ -2295,6 +2503,7 @@
           ? error.code
           : "";
 
+
       const errors = {
 
         "auth/invalid-email":
@@ -2337,6 +2546,7 @@
           "An account already exists with this email using another login method."
 
       };
+
 
       return(
         errors[code] ||
@@ -2401,8 +2611,10 @@
           db.collection("users")
             .doc(user.uid);
 
+
         const snap =
           await ref.get();
+
 
         const provider =
           user.providerData &&
@@ -3033,6 +3245,8 @@
           "accountModal"
         );
 
+        closeMenu();
+
         showToast(
           "You have been logged out."
         );
@@ -3081,10 +3295,12 @@
 
       if(!requireLogin()) return;
 
+
       const input =
         document.getElementById(
           "photoUpload"
         );
+
 
       if(input){
 
@@ -3095,7 +3311,161 @@
     }
 
 
-    function handlePhotoUpload(
+    /*
+      Compress photo before sending it to backend.
+      This prevents large phone photos from exceeding
+      the request size.
+    */
+
+    function compressImage(
+      file
+    ){
+
+      return new Promise(
+        (resolve,reject) => {
+
+          const reader =
+            new FileReader();
+
+
+          reader.onload =
+            function(event){
+
+              const img =
+                new Image();
+
+
+              img.onload =
+                function(){
+
+                  const maxDimension =
+                    1600;
+
+
+                  let width =
+                    img.width;
+
+                  let height =
+                    img.height;
+
+
+                  if(
+                    width >
+                    maxDimension ||
+                    height >
+                    maxDimension
+                  ){
+
+                    if(width > height){
+
+                      height =
+                        Math.round(
+                          height *
+                          maxDimension /
+                          width
+                        );
+
+                      width =
+                        maxDimension;
+
+                    }else{
+
+                      width =
+                        Math.round(
+                          width *
+                          maxDimension /
+                          height
+                        );
+
+                      height =
+                        maxDimension;
+
+                    }
+
+                  }
+
+
+                  const canvas =
+                    document.createElement(
+                      "canvas"
+                    );
+
+
+                  canvas.width =
+                    width;
+
+                  canvas.height =
+                    height;
+
+
+                  const ctx =
+                    canvas.getContext(
+                      "2d"
+                    );
+
+
+                  ctx.drawImage(
+                    img,
+                    0,
+                    0,
+                    width,
+                    height
+                  );
+
+
+                  const result =
+                    canvas.toDataURL(
+                      "image/jpeg",
+                      0.82
+                    );
+
+
+                  resolve(result);
+
+                };
+
+
+              img.onerror =
+                function(){
+
+                  reject(
+                    new Error(
+                      "Unable to load image."
+                    )
+                  );
+
+                };
+
+
+              img.src =
+                event.target.result;
+
+            };
+
+
+          reader.onerror =
+            function(){
+
+              reject(
+                new Error(
+                  "Unable to read image."
+                )
+              );
+
+            };
+
+
+          reader.readAsDataURL(
+            file
+          );
+
+        }
+      );
+
+    }
+
+
+    async function handlePhotoUpload(
       event
     ){
 
@@ -3137,49 +3507,50 @@
       }
 
 
-      const reader =
-        new FileReader();
+      try{
+
+        showToast(
+          "Preparing photo for AI analysis... 📷"
+        );
 
 
-      reader.onload =
-        function(e){
-
-          selectedPhotoData =
-            e.target.result;
-
-
-          document.getElementById(
-            "previewImage"
-          ).src =
-            selectedPhotoData;
-
-
-          document.getElementById(
-            "photoPreview"
-          ).style.display =
-            "block";
-
-
-          showToast(
-            "Photo selected successfully. 📷"
+        selectedPhotoData =
+          await compressImage(
+            file
           );
 
-        };
+
+        document.getElementById(
+          "previewImage"
+        ).src =
+          selectedPhotoData;
 
 
-      reader.onerror =
-        function(){
-
-          showToast(
-            "Unable to read this photo."
-          );
-
-        };
+        document.getElementById(
+          "photoPreview"
+        ).style.display =
+          "block";
 
 
-      reader.readAsDataURL(
-        file
-      );
+        showToast(
+          "Photo ready for AI analysis. 📷"
+        );
+
+      }catch(error){
+
+        selectedPhotoData =
+          null;
+
+        showToast(
+          "Unable to prepare this photo."
+        );
+
+        console.log(
+          "Photo compression error:",
+          error
+        );
+
+      }
 
     }
 
@@ -3331,8 +3702,17 @@
       }
 
 
-      const imageToShow =
+      /*
+        IMPORTANT:
+        Save image BEFORE removePhoto().
+      */
+
+      const imageToSend =
         selectedPhotoData;
+
+
+      const imageToShow =
+        imageToSend;
 
 
       addMessage(
@@ -3348,7 +3728,7 @@
 
 
       const photoWasSelected =
-        !!selectedPhotoData;
+        !!imageToSend;
 
 
       removePhoto();
@@ -3372,11 +3752,18 @@
 
       try{
 
+        /*
+          Send both text AND image.
+        */
+
         const body = {
 
           message:
             text ||
-            "Please tell me about this photo."
+            "Please analyse this photo and tell me what you can see. Describe the visible objects, people, scene, text, colours and important details.",
+
+          image:
+            imageToSend || null
 
         };
 
@@ -3406,9 +3793,28 @@
 
         if(!response.ok){
 
+          let errorText =
+            "";
+
+
+          try{
+
+            errorText =
+              await response.text();
+
+          }catch(e){
+
+            errorText =
+              "";
+
+          }
+
+
           throw new Error(
             "Server error: " +
-            response.status
+            response.status +
+            " " +
+            errorText
           );
 
         }
@@ -3461,12 +3867,11 @@
 
 
         if(
-          photoWasSelected &&
-          !text
+          photoWasSelected
         ){
 
           message +=
-            " Photo upload is working, but your backend needs vision support to analyse the photo.";
+            " Bolo AI could not analyse the photo this time. Please try again.";
 
         }
 
@@ -3538,7 +3943,18 @@
         "🔴";
 
 
-      recognition.start();
+      try{
+
+        recognition.start();
+
+      }catch(error){
+
+        voiceBtn.textContent =
+          "🎤";
+
+        return;
+
+      }
 
 
       recognition.onresult =
@@ -3783,6 +4199,11 @@
     };
 
 
+    /*
+      Tool card disappears immediately after
+      the selected tool is used.
+    */
+
     function useTool(type){
 
       if(!requireLogin()) return;
@@ -3792,10 +4213,45 @@
         toolPrompts[type];
 
 
-      document.getElementById(
-        "chatInput"
-      ).value =
-        prompt;
+      const input =
+        document.getElementById(
+          "chatInput"
+        );
+
+
+      if(input){
+
+        input.value =
+          prompt;
+
+      }
+
+
+      const cards =
+        document.querySelectorAll(
+          ".tool-card"
+        );
+
+
+      cards.forEach(card => {
+
+        const onclickValue =
+          card.getAttribute(
+            "onclick"
+          );
+
+
+        if(
+          onclickValue ===
+          `useTool('${type}')`
+        ){
+
+          card.style.display =
+            "none";
+
+        }
+
+      });
 
 
       scrollToChat();
@@ -3803,9 +4259,17 @@
 
       setTimeout(() => {
 
-        document.getElementById(
-          "chatInput"
-        ).focus();
+        const chatInput =
+          document.getElementById(
+            "chatInput"
+          );
+
+
+        if(chatInput){
+
+          chatInput.focus();
+
+        }
 
       },300);
 
@@ -3819,9 +4283,13 @@
       if(!requireLogin()) return;
 
 
-      document.getElementById(
-        "chatInput"
-      ).value =
+      const input =
+        document.getElementById(
+          "chatInput"
+        );
+
+
+      input.value =
         prompt;
 
 
@@ -3830,9 +4298,7 @@
 
       setTimeout(() => {
 
-        document.getElementById(
-          "chatInput"
-        ).focus();
+        input.focus();
 
       },300);
 
@@ -3845,44 +4311,76 @@
 
     function scrollToChat(){
 
-      document.getElementById(
-        "chatSection"
-      ).scrollIntoView({
-        behavior:"smooth"
-      });
+      const section =
+        document.getElementById(
+          "chatSection"
+        );
+
+
+      if(section){
+
+        section.scrollIntoView({
+          behavior:"smooth"
+        });
+
+      }
 
     }
 
 
     function scrollToImage(){
 
-      document.getElementById(
-        "imageSection"
-      ).scrollIntoView({
-        behavior:"smooth"
-      });
+      const section =
+        document.getElementById(
+          "imageSection"
+        );
+
+
+      if(section){
+
+        section.scrollIntoView({
+          behavior:"smooth"
+        });
+
+      }
 
     }
 
 
     function scrollToTools(){
 
-      document.getElementById(
-        "toolsSection"
-      ).scrollIntoView({
-        behavior:"smooth"
-      });
+      const section =
+        document.getElementById(
+          "toolsSection"
+        );
+
+
+      if(section){
+
+        section.scrollIntoView({
+          behavior:"smooth"
+        });
+
+      }
 
     }
 
 
     function scrollToAbout(){
 
-      document.getElementById(
-        "aboutSection"
-      ).scrollIntoView({
-        behavior:"smooth"
-      });
+      const section =
+        document.getElementById(
+          "aboutSection"
+        );
+
+
+      if(section){
+
+        section.scrollIntoView({
+          behavior:"smooth"
+        });
+
+      }
 
     }
 
@@ -3891,22 +4389,39 @@
        PWA INSTALL
     ========================================= */
 
-    window.addEventListener(
-      "beforeinstallprompt",
-      event => {
+    function isAppInstalled(){
 
-        event.preventDefault();
+      return(
 
-        deferredInstallPrompt =
-          event;
+        window.matchMedia(
+          "(display-mode: standalone)"
+        ).matches
 
-        showInstallButtons();
+        ||
 
-      }
-    );
+        window.navigator.standalone === true
+
+        ||
+
+        document.referrer.startsWith(
+          "android-app://"
+        )
+
+      );
+
+    }
 
 
     function showInstallButtons(){
+
+      if(isAppInstalled()){
+
+        hideInstallButtons();
+
+        return;
+
+      }
+
 
       const buttons = [
 
@@ -3968,7 +4483,61 @@
     }
 
 
+    function updateInstallVisibility(){
+
+      if(isAppInstalled()){
+
+        hideInstallButtons();
+
+      }
+
+    }
+
+
+    window.addEventListener(
+      "load",
+      updateInstallVisibility
+    );
+
+
+    window.addEventListener(
+      "beforeinstallprompt",
+      event => {
+
+        event.preventDefault();
+
+        deferredInstallPrompt =
+          event;
+
+
+        if(
+          !isAppInstalled()
+        ){
+
+          showInstallButtons();
+
+        }else{
+
+          hideInstallButtons();
+
+        }
+
+      }
+    );
+
+
     async function installApp(){
+
+      if(
+        isAppInstalled()
+      ){
+
+        hideInstallButtons();
+
+        return;
+
+      }
+
 
       if(!deferredInstallPrompt){
 
@@ -4103,6 +4672,7 @@
 
       }
     );
+
 
   </script>
 
