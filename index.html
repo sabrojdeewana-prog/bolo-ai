@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -166,8 +165,163 @@ footer{margin-top:35px;border-top:1px solid #e5e7eb;padding:25px 0;text-align:ce
 .account-info{padding:14px;background:#f8fafc;border-radius:14px;margin:14px 0}
 .dark .account-info{background:#0f172a}
 
-.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);background:#111827;color:#fff;padding:11px 16px;border-radius:12px;opacity:0;pointer-events:none;transition:.25s;z-index:5000;font-size:13px}
-.toast.show{opacity:1;transform:translate(-50%,0)}
+/* CHAT HISTORY */
+
+.history-modal-box{
+width:min(700px,100%);
+max-height:min(760px,90vh);
+display:flex;
+flex-direction:column;
+}
+
+.history-header{
+padding-right:35px;
+}
+
+.history-header p{
+color:#6b7280;
+font-size:13px;
+margin-top:5px;
+}
+
+.dark .history-header p{
+color:#9ca3af;
+}
+
+.history-list{
+margin-top:18px;
+overflow-y:auto;
+max-height:560px;
+padding-right:3px;
+}
+
+.history-empty{
+padding:35px 15px;
+text-align:center;
+color:#6b7280;
+}
+
+.dark .history-empty{
+color:#9ca3af;
+}
+
+.history-item{
+width:100%;
+border:1px solid #e5e7eb;
+background:#f8fafc;
+border-radius:15px;
+padding:14px;
+margin-bottom:10px;
+text-align:left;
+transition:.2s;
+}
+
+.history-item:hover{
+border-color:#9ca3af;
+transform:translateY(-1px);
+}
+
+.dark .history-item{
+background:#0f172a;
+border-color:#263244;
+}
+
+.dark .history-item:hover{
+border-color:#4b5563;
+}
+
+.history-item-title{
+font-weight:800;
+font-size:14px;
+color:#111827;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+padding-right:5px;
+}
+
+.dark .history-item-title{
+color:#fff;
+}
+
+.history-item-meta{
+margin-top:5px;
+font-size:12px;
+color:#6b7280;
+}
+
+.dark .history-item-meta{
+color:#9ca3af;
+}
+
+.history-loading{
+padding:25px;
+text-align:center;
+color:#6b7280;
+}
+
+.history-delete{
+float:right;
+border:0;
+background:transparent;
+font-size:15px;
+padding:2px 4px;
+}
+
+.history-view{
+margin-top:18px;
+max-height:500px;
+overflow-y:auto;
+padding-right:3px;
+}
+
+.history-back{
+border:1px solid #d1d5db;
+background:#fff;
+color:#111827;
+border-radius:10px;
+padding:8px 12px;
+font-weight:700;
+margin-bottom:12px;
+}
+
+.dark .history-back{
+background:#1f2937;
+color:#fff;
+border-color:#374151;
+}
+
+.history-conversation-message{
+border-radius:14px;
+padding:12px 13px;
+margin-bottom:10px;
+white-space:pre-wrap;
+overflow-wrap:anywhere;
+}
+
+.history-conversation-message.user{
+background:#111827;
+color:#fff;
+margin-left:35px;
+}
+
+.history-conversation-message.assistant{
+background:#f1f5f9;
+color:#111827;
+margin-right:35px;
+}
+
+.dark .history-conversation-message.assistant{
+background:#1f2937;
+color:#f3f4f6;
+}
+
+.history-role{
+font-size:11px;
+font-weight:800;
+opacity:.7;
+margin-bottom:4px;
+}
 
 .install-btn{display:none}
 
@@ -191,6 +345,8 @@ footer{margin-top:35px;border-top:1px solid #e5e7eb;padding:25px 0;text-align:ce
 .voice-reply-btn{min-width:76px}
 .generator-row{flex-direction:column}
 .generator button{width:100%}
+.history-conversation-message.user{margin-left:10px}
+.history-conversation-message.assistant{margin-right:10px}
 }
 </style>
 </head>
@@ -209,8 +365,16 @@ footer{margin-top:35px;border-top:1px solid #e5e7eb;padding:25px 0;text-align:ce
 
 <div class="nav-actions">
 <button class="nav-btn" id="themeBtn" type="button" onclick="toggleTheme()">🌙</button>
+
+<button class="nav-btn" id="historyNavBtn" type="button" onclick="openHistory()">
+📜 History
+</button>
+
 <button class="nav-btn" id="authNavBtn" type="button" onclick="openAuth()">Login</button>
-<button class="nav-btn primary" type="button" onclick="document.getElementById('premium').scrollIntoView()">Premium</button>
+
+<button class="nav-btn primary" type="button" onclick="document.getElementById('premium').scrollIntoView()">
+Premium
+</button>
 </div>
 
 </div>
@@ -518,6 +682,31 @@ footer{margin-top:35px;border-top:1px solid #e5e7eb;padding:25px 0;text-align:ce
 </div>
 </div>
 
+<!-- CHAT HISTORY MODAL -->
+<div class="modal" id="historyModal">
+<div class="modal-box history-modal-box">
+
+<button class="modal-close" onclick="closeModal('historyModal')" type="button">×</button>
+
+<div class="history-header" id="historyHeader">
+
+<h2>📜 Chat History</h2>
+
+<p>Your saved Bolo AI conversations.</p>
+
+</div>
+
+<div class="history-list" id="historyList">
+
+<div class="history-loading">
+Loading chat history...
+</div>
+
+</div>
+
+</div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -560,17 +749,31 @@ let firebaseReady=false;
 let currentUser=null;
 let authMode="login";
 
+/* CHAT HISTORY STATE */
+
+let db=null;
+let currentChatId=null;
+
 try{
 
 if(typeof firebase!=="undefined"){
 
 firebase.initializeApp(firebaseConfig);
 
+db=firebase.firestore();
+
 firebaseReady=true;
 
 firebase.auth().onAuthStateChanged(user=>{
 
 currentUser=user||null;
+
+/*
+Start a fresh conversation when account state changes.
+Old conversations remain safely stored in Firestore.
+*/
+
+currentChatId=null;
 
 updateAuthUI();
 
@@ -838,7 +1041,11 @@ try{
 
 await firebase.auth().signOut();
 
+currentChatId=null;
+
 closeModal("accountModal");
+
+closeModal("historyModal");
 
 showToast("Logged out successfully.");
 
@@ -858,6 +1065,536 @@ return String(text)
 .replaceAll(">","&gt;")
 .replaceAll('"',"&quot;")
 .replaceAll("'","&#039;");
+
+}
+
+/* =========================================================
+   CHAT HISTORY
+   ========================================================= */
+
+function getChatsCollection(){
+
+if(!db||!currentUser){
+
+return null;
+
+}
+
+return db
+.collection("users")
+.doc(currentUser.uid)
+.collection("chats");
+
+}
+
+async function createChatHistory(firstMessage,hasPhoto){
+
+if(!currentUser||!db)return null;
+
+try{
+
+const chats=getChatsCollection();
+
+if(!chats)return null;
+
+const chatRef=chats.doc();
+
+const cleanTitle=
+(firstMessage||"Photo conversation")
+.trim()
+.substring(0,80);
+
+await chatRef.set({
+
+title:
+cleanTitle||
+"Photo conversation",
+
+createdAt:
+firebase.firestore.FieldValue.serverTimestamp(),
+
+updatedAt:
+firebase.firestore.FieldValue.serverTimestamp()
+
+});
+
+currentChatId=chatRef.id;
+
+/*
+Save the first user message in the messages subcollection.
+We intentionally do not save the Base64 photo.
+*/
+
+await chatRef
+.collection("messages")
+.add({
+
+role:"user",
+
+text:
+firstMessage||
+"Photo uploaded for analysis.",
+
+hasPhoto:!!hasPhoto,
+
+createdAt:
+firebase.firestore.FieldValue.serverTimestamp()
+
+});
+
+return chatRef.id;
+
+}catch(error){
+
+console.error(
+"Could not create chat history:",
+error
+);
+
+return null;
+
+}
+
+}
+
+async function saveChatMessage(
+chatId,
+role,
+text,
+hasPhoto
+){
+
+if(!currentUser||!db||!chatId)return;
+
+try{
+
+const chatRef=
+getChatsCollection()
+.doc(chatId);
+
+await chatRef
+.collection("messages")
+.add({
+
+role:role,
+
+text:String(text||""),
+
+hasPhoto:!!hasPhoto,
+
+createdAt:
+firebase.firestore.FieldValue.serverTimestamp()
+
+});
+
+await chatRef.update({
+
+updatedAt:
+firebase.firestore.FieldValue.serverTimestamp()
+
+});
+
+}catch(error){
+
+console.error(
+"Could not save chat message:",
+error
+);
+
+}
+
+}
+
+async function openHistory(){
+
+if(!currentUser){
+
+showToast(
+"Please login first to view chat history."
+);
+
+openAuth();
+
+return;
+
+}
+
+$("historyModal").classList.add("show");
+
+showHistoryList();
+
+}
+
+async function showHistoryList(){
+
+const list=$("historyList");
+
+list.innerHTML=
+'<div class="history-loading">Loading chat history...</div>';
+
+try{
+
+const chats=
+getChatsCollection();
+
+if(!chats){
+
+list.innerHTML=
+'<div class="history-empty">Please login to view your history.</div>';
+
+return;
+
+}
+
+const snapshot=
+await chats
+.orderBy("updatedAt","desc")
+.limit(50)
+.get();
+
+if(snapshot.empty){
+
+list.innerHTML=
+'<div class="history-empty">No chat history yet.<br>Start chatting with Bolo AI.</div>';
+
+return;
+
+}
+
+list.innerHTML="";
+
+snapshot.forEach(doc=>{
+
+const data=doc.data()||{};
+
+const item=
+document.createElement("div");
+
+item.className="history-item";
+
+const title=
+document.createElement("div");
+
+title.className=
+"history-item-title";
+
+title.textContent=
+data.title||
+"Untitled conversation";
+
+const meta=
+document.createElement("div");
+
+meta.className=
+"history-item-meta";
+
+const date=
+data.updatedAt&&
+typeof data.updatedAt.toDate==="function"
+?
+data.updatedAt.toDate()
+:
+null;
+
+meta.textContent=
+date
+?
+"Last updated: "+formatHistoryDate(date)
+:
+"Recent conversation";
+
+const deleteButton=
+document.createElement("button");
+
+deleteButton.className="history-delete";
+
+deleteButton.type="button";
+
+deleteButton.textContent="🗑️";
+
+deleteButton.title="Delete conversation";
+
+deleteButton.onclick=
+async function(event){
+
+event.stopPropagation();
+
+await deleteChatHistory(doc.id);
+
+};
+
+item.appendChild(deleteButton);
+
+item.appendChild(title);
+
+item.appendChild(meta);
+
+item.onclick=
+function(){
+
+openHistoryConversation(doc.id);
+
+};
+
+list.appendChild(item);
+
+});
+
+}catch(error){
+
+console.error(
+"Could not load history:",
+error
+);
+
+list.innerHTML=
+'<div class="history-empty">Could not load chat history right now.</div>';
+
+}
+
+}
+
+function formatHistoryDate(date){
+
+try{
+
+return date.toLocaleString(
+undefined,
+{
+year:"numeric",
+month:"short",
+day:"numeric",
+hour:"numeric",
+minute:"2-digit"
+}
+);
+
+}catch(error){
+
+return String(date);
+
+}
+
+}
+
+async function openHistoryConversation(chatId){
+
+if(!currentUser||!db)return;
+
+const list=$("historyList");
+
+list.innerHTML=
+'<div class="history-loading">Opening conversation...</div>';
+
+try{
+
+const chatRef=
+getChatsCollection()
+.doc(chatId);
+
+const chatDoc=
+await chatRef.get();
+
+if(!chatDoc.exists){
+
+showToast("This conversation no longer exists.");
+
+showHistoryList();
+
+return;
+
+}
+
+const data=chatDoc.data()||{};
+
+const snapshot=
+await chatRef
+.collection("messages")
+.orderBy("createdAt","asc")
+.get();
+
+list.innerHTML="";
+
+const backButton=
+document.createElement("button");
+
+backButton.className="history-back";
+
+backButton.type="button";
+
+backButton.textContent="← Back to History";
+
+backButton.onclick=
+function(){
+
+showHistoryList();
+
+};
+
+list.appendChild(backButton);
+
+const heading=
+document.createElement("h3");
+
+heading.style.marginBottom="12px";
+
+heading.textContent=
+data.title||
+"Conversation";
+
+list.appendChild(heading);
+
+const conversation=
+document.createElement("div");
+
+conversation.className=
+"history-view";
+
+if(snapshot.empty){
+
+conversation.innerHTML=
+'<div class="history-empty">No messages found.</div>';
+
+}else{
+
+snapshot.forEach(messageDoc=>{
+
+const messageData=
+messageDoc.data()||{};
+
+const message=
+document.createElement("div");
+
+message.className=
+"history-conversation-message "+
+(
+messageData.role==="user"
+?
+"user":
+"assistant"
+);
+
+const role=
+document.createElement("div");
+
+role.className="history-role";
+
+role.textContent=
+messageData.role==="user"
+?
+"You":
+"Bolo AI";
+
+message.appendChild(role);
+
+const text=
+document.createElement("div");
+
+text.textContent=
+messageData.text||
+"";
+
+message.appendChild(text);
+
+if(messageData.hasPhoto){
+
+const photoNote=
+document.createElement("div");
+
+photoNote.style.marginTop="7px";
+
+photoNote.style.fontSize="12px";
+
+photoNote.style.opacity=".75";
+
+photoNote.textContent=
+"🖼️ Photo was included in this message.";
+
+message.appendChild(photoNote);
+
+}
+
+conversation.appendChild(message);
+
+});
+
+}
+
+list.appendChild(conversation);
+
+}catch(error){
+
+console.error(
+"Could not open conversation:",
+error
+);
+
+list.innerHTML=
+'<div class="history-empty">Could not open this conversation.</div>';
+
+}
+
+}
+
+async function deleteChatHistory(chatId){
+
+if(!currentUser||!db)return;
+
+const confirmed=
+confirm(
+"Delete this chat history?\n\nThis action cannot be undone."
+);
+
+if(!confirmed)return;
+
+try{
+
+const chatRef=
+getChatsCollection()
+.doc(chatId);
+
+const messagesSnapshot=
+await chatRef
+.collection("messages")
+.get();
+
+const batch=
+db.batch();
+
+messagesSnapshot.forEach(doc=>{
+
+batch.delete(doc.ref);
+
+});
+
+batch.delete(chatRef);
+
+await batch.commit();
+
+if(currentChatId===chatId){
+
+currentChatId=null;
+
+}
+
+showToast(
+"Chat history deleted."
+);
+
+showHistoryList();
+
+}catch(error){
+
+console.error(
+"Could not delete chat:",
+error
+);
+
+showToast(
+"Could not delete this chat."
+);
+
+}
 
 }
 
@@ -916,6 +1653,43 @@ $("chatStatus").textContent=
 
 $("sendBtn").disabled=true;
 
+/*
+Create history only when the conversation gets its first message.
+*/
+
+let chatId=currentChatId;
+
+try{
+
+if(!chatId){
+
+chatId=
+await createChatHistory(
+text,
+!!photo
+);
+
+}else{
+
+await saveChatMessage(
+chatId,
+"user",
+text||
+"Please analyse this photo.",
+!!photo
+);
+
+}
+
+}catch(error){
+
+console.error(
+"History save error:",
+error
+);
+
+}
+
 try{
 
 const response=
@@ -960,6 +1734,21 @@ reply,
 "assistant"
 );
 
+/*
+Save AI reply to the same conversation.
+*/
+
+if(chatId){
+
+await saveChatMessage(
+chatId,
+"assistant",
+reply,
+false
+);
+
+}
+
 if(voiceReplyEnabled){
 
 setTimeout(
@@ -977,6 +1766,10 @@ addMessage(
 "Sorry, I could not connect to Bolo AI right now. Please check your Render backend.",
 "assistant"
 );
+
+/*
+Do not save the connection error as an AI response.
+*/
 
 }finally{
 
