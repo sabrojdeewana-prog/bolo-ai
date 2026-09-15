@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -981,6 +980,271 @@ background:#0f172a
 }
 
 
+/* =========================
+   PROFILE
+========================= */
+
+.profile-modal-box{
+width:min(460px,100%);
+text-align:center
+}
+
+.profile-avatar-lg{
+width:96px;
+height:96px;
+border-radius:50%;
+object-fit:cover;
+display:block;
+margin:8px auto 14px;
+border:3px solid #e5e7eb;
+box-shadow:0 8px 25px rgba(0,0,0,.12);
+background:#f8fafc
+}
+
+.profile-name{
+font-size:22px;
+font-weight:900
+}
+
+.profile-email{
+font-size:14px;
+color:#6b7280;
+margin-top:5px;
+word-break:break-word
+}
+
+.dark .profile-email{
+color:#9ca3af
+}
+
+.profile-role{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+margin-top:12px;
+padding:6px 12px;
+border-radius:999px;
+background:#eef2ff;
+color:#3730a3;
+font-size:12px;
+font-weight:800
+}
+
+.dark .profile-role{
+background:#172554;
+color:#bfdbfe
+}
+
+
+/* =========================
+   SETTINGS
+========================= */
+
+.settings-modal-box{
+width:min(500px,100%);
+max-height:90vh;
+overflow-y:auto
+}
+
+.settings-profile{
+display:flex;
+align-items:center;
+gap:12px;
+padding:14px;
+background:#f8fafc;
+border-radius:15px;
+margin:15px 0 18px
+}
+
+.dark .settings-profile{
+background:#0f172a
+}
+
+.settings-profile img{
+width:58px;
+height:58px;
+border-radius:50%;
+object-fit:cover;
+border:2px solid #e5e7eb;
+flex:none
+}
+
+.settings-profile-name{
+font-weight:900;
+font-size:16px
+}
+
+.settings-profile-email{
+font-size:12px;
+color:#6b7280;
+margin-top:3px;
+word-break:break-word
+}
+
+.dark .settings-profile-email{
+color:#9ca3af
+}
+
+.settings-label{
+display:block;
+font-size:13px;
+font-weight:800;
+margin-top:13px;
+margin-bottom:6px
+}
+
+.settings-help{
+font-size:12px;
+color:#6b7280;
+margin-top:5px
+}
+
+.dark .settings-help{
+color:#9ca3af
+}
+
+.settings-input,
+.settings-select{
+width:100%;
+padding:11px 12px;
+border:1px solid #d1d5db;
+border-radius:11px;
+outline:none;
+background:#fff;
+color:#111827
+}
+
+.dark .settings-input,
+.dark .settings-select{
+background:#0f172a;
+color:#fff;
+border-color:#374151
+}
+
+.settings-toggle{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+padding:13px;
+margin-top:12px;
+border:1px solid #e5e7eb;
+border-radius:13px;
+background:#f8fafc
+}
+
+.dark .settings-toggle{
+background:#0f172a;
+border-color:#263244
+}
+
+.settings-toggle-text strong{
+display:block;
+font-size:14px
+}
+
+.settings-toggle-text span{
+display:block;
+font-size:12px;
+color:#6b7280;
+margin-top:2px
+}
+
+.dark .settings-toggle-text span{
+color:#9ca3af
+}
+
+.settings-toggle input{
+width:19px;
+height:19px;
+accent-color:#111827
+}
+
+.dark .settings-toggle input{
+accent-color:#fff
+}
+
+
+/* =========================
+   ADMIN PROFILE
+========================= */
+
+.admin-profile-card{
+display:flex;
+align-items:center;
+gap:13px;
+padding:14px;
+margin:0 0 18px;
+background:#f8fafc;
+border:1px solid #e5e7eb;
+border-radius:16px
+}
+
+.dark .admin-profile-card{
+background:#0f172a;
+border-color:#263244
+}
+
+.admin-profile-photo{
+width:60px;
+height:60px;
+border-radius:50%;
+object-fit:cover;
+border:2px solid #e5e7eb;
+background:#fff;
+flex:none
+}
+
+.admin-profile-name{
+font-size:17px;
+font-weight:900
+}
+
+.admin-profile-email{
+font-size:12px;
+color:#6b7280;
+margin-top:2px;
+word-break:break-word
+}
+
+.dark .admin-profile-email{
+color:#9ca3af
+}
+
+.admin-profile-role{
+display:inline-flex;
+margin-top:5px;
+padding:4px 8px;
+border-radius:999px;
+background:#eef2ff;
+color:#3730a3;
+font-size:10px;
+font-weight:800
+}
+
+.dark .admin-profile-role{
+background:#172554;
+color:#bfdbfe
+}
+
+.admin-user-wrap{
+display:flex;
+align-items:center;
+gap:10px;
+min-width:190px
+}
+
+.admin-user-photo{
+width:42px;
+height:42px;
+border-radius:50%;
+object-fit:cover;
+border:1px solid #e5e7eb;
+background:#fff;
+flex:none
+}
+
+
 /* CHAT HISTORY */
 
 .history-modal-box{
@@ -1455,6 +1719,10 @@ right:0;
 width:205px
 }
 
+.admin-profile-card{
+align-items:flex-start
+}
+
 }
 
 </style>
@@ -1540,9 +1808,9 @@ id="navMenu"
 
 <button
 type="button"
-onclick="openAccount();closeNavMenu()"
+onclick="openProfile();closeNavMenu()"
 >
-👤 My Account
+👤 My Profile
 </button>
 
 
@@ -2597,6 +2865,201 @@ Logout
 </div>
 
 
+<!-- PROFILE MODAL -->
+
+<div
+class="modal"
+id="profileModal"
+>
+
+<div class="modal-box profile-modal-box">
+
+<button
+class="modal-close"
+onclick="closeModal('profileModal')"
+type="button"
+>
+×
+</button>
+
+
+<img
+id="profilePhoto"
+class="profile-avatar-lg"
+src="/icon-192.png"
+alt="Profile photo"
+>
+
+
+<div
+id="profileName"
+class="profile-name"
+>
+Bolo AI User
+</div>
+
+
+<div
+id="profileEmail"
+class="profile-email"
+>
+-
+</div>
+
+
+<div
+id="profileRole"
+class="profile-role"
+>
+👤 Bolo AI User
+</div>
+
+</div>
+
+</div>
+
+
+<!-- SETTINGS MODAL -->
+
+<div
+class="modal"
+id="settingsModal"
+>
+
+<div class="modal-box settings-modal-box">
+
+<button
+class="modal-close"
+onclick="closeModal('settingsModal')"
+type="button"
+>
+×
+</button>
+
+
+<h2>
+⚙️ Settings
+</h2>
+
+<p style="color:#6b7280;font-size:13px;margin-top:5px">
+Manage your Bolo AI profile and preferences.
+</p>
+
+
+<div class="settings-profile">
+
+<img
+id="settingsProfilePhoto"
+src="/icon-192.png"
+alt="Profile"
+>
+
+<div>
+
+<div
+id="settingsProfileName"
+class="settings-profile-name"
+>
+Bolo AI User
+</div>
+
+<div
+id="settingsProfileEmail"
+class="settings-profile-email"
+>
+-
+</div>
+
+</div>
+
+</div>
+
+
+<label
+class="settings-label"
+for="settingsName"
+>
+Your Name
+</label>
+
+<input
+class="settings-input"
+id="settingsName"
+type="text"
+placeholder="Enter your name"
+>
+
+
+<label
+class="settings-label"
+for="settingsPhoto"
+>
+Profile Photo URL
+</label>
+
+<input
+class="settings-input"
+id="settingsPhoto"
+type="url"
+placeholder="https://example.com/photo.jpg"
+>
+
+<div class="settings-help">
+Google account users already get their Google profile photo automatically.
+</div>
+
+
+<label
+class="settings-label"
+for="settingsTheme"
+>
+Theme
+</label>
+
+<select
+class="settings-select"
+id="settingsTheme"
+>
+<option value="light">☀️ Light</option>
+<option value="dark">🌙 Dark</option>
+</select>
+
+
+<div class="settings-toggle">
+
+<div class="settings-toggle-text">
+
+<strong>
+🔊 Voice Replies
+</strong>
+
+<span>
+Automatically speak Bolo AI replies.
+</span>
+
+</div>
+
+<input
+type="checkbox"
+id="settingsVoice"
+>
+
+</div>
+
+
+<button
+class="auth-main-btn"
+type="button"
+onclick="saveSettings()"
+>
+Save Settings
+</button>
+
+</div>
+
+</div>
+
+
 <!-- CHAT HISTORY MODAL -->
 
 <div
@@ -2674,6 +3137,44 @@ type="button"
 <p>
 Manage users, activity and Bolo AI statistics.
 </p>
+
+</div>
+
+
+<!-- ADMIN PROFILE -->
+
+<div class="admin-profile-card">
+
+<img
+id="adminProfilePhoto"
+class="admin-profile-photo"
+src="/icon-192.png"
+alt="Admin profile"
+>
+
+<div>
+
+<div
+id="adminProfileName"
+class="admin-profile-name"
+>
+Sabroj Babu
+</div>
+
+<div
+id="adminProfileEmail"
+class="admin-profile-email"
+>
+Sabrojalam8454@gmail.com
+</div>
+
+<div
+class="admin-profile-role"
+>
+🛡️ Administrator
+</div>
+
+</div>
 
 </div>
 
@@ -2855,7 +3356,7 @@ const ADMIN_EMAIL=
 const firebaseConfig={
 
 apiKey:
-"AIzaSyAAztA2xqtWWWKYzzvL9A0UTbk6Pw1-FC8",
+"AIzaSyAAztA2xqtWWWKYzzlV9A0UTbk6Pw1-FC8",
 
 authDomain:
 "bolo-ai-c429f.firebaseapp.com",
@@ -2950,6 +3451,12 @@ currentChatId=null;
 
 updateAuthUI();
 
+updateProfileUI();
+
+updateSettingsUI();
+
+updateAdminProfile();
+
 updateAdminAfterLogin();
 
 }
@@ -3002,6 +3509,8 @@ $("chatInput").placeholder=
 "Login first to chat with Bolo AI...";
 
 }
+
+updateAdminMenu();
 
 }
 
@@ -3326,6 +3835,350 @@ error.message||
 
 
 /* =========================================================
+   PROFILE
+========================================================= */
+
+function getUserPhoto(user){
+
+if(
+user&&
+user.photoURL&&
+String(user.photoURL).trim()
+){
+
+return user.photoURL;
+
+}
+
+return "/icon-192.png";
+
+}
+
+
+function updateProfileUI(){
+
+if(!currentUser)
+return;
+
+
+const name=
+currentUser.displayName||
+"Bolo AI User";
+
+const email=
+currentUser.email||
+"";
+
+
+const photo=
+getUserPhoto(
+currentUser
+);
+
+
+const profilePhoto=
+$("profilePhoto");
+
+if(profilePhoto)
+profilePhoto.src=
+photo;
+
+
+const profileName=
+$("profileName");
+
+if(profileName)
+profileName.textContent=
+name;
+
+
+const profileEmail=
+$("profileEmail");
+
+if(profileEmail)
+profileEmail.textContent=
+email;
+
+
+const profileRole=
+$("profileRole");
+
+if(profileRole){
+
+profileRole.textContent=
+isAdmin()
+?
+"🛡️ Administrator"
+:
+"👤 Bolo AI User";
+
+}
+
+}
+
+
+function openProfile(){
+
+if(!currentUser){
+
+openAuth();
+
+return;
+
+}
+
+
+updateProfileUI();
+
+
+$("profileModal")
+.classList
+.add("show");
+
+}
+
+
+function updateSettingsUI(){
+
+if(!currentUser)
+return;
+
+
+const name=
+currentUser.displayName||
+"Bolo AI User";
+
+const email=
+currentUser.email||
+"";
+
+const photo=
+getUserPhoto(
+currentUser
+);
+
+
+const profilePhoto=
+$("settingsProfilePhoto");
+
+if(profilePhoto)
+profilePhoto.src=
+photo;
+
+
+const profileName=
+$("settingsProfileName");
+
+if(profileName)
+profileName.textContent=
+name;
+
+
+const profileEmail=
+$("settingsProfileEmail");
+
+if(profileEmail)
+profileEmail.textContent=
+email;
+
+
+const nameInput=
+$("settingsName");
+
+if(nameInput)
+nameInput.value=
+name;
+
+
+const photoInput=
+$("settingsPhoto");
+
+if(photoInput)
+photoInput.value=
+currentUser.photoURL||
+"";
+
+
+const themeSelect=
+$("settingsTheme");
+
+if(themeSelect)
+themeSelect.value=
+savedTheme;
+
+
+const voiceCheck=
+$("settingsVoice");
+
+if(voiceCheck)
+voiceCheck.checked=
+voiceReplyEnabled;
+
+}
+
+
+function openSettings(){
+
+if(!currentUser){
+
+showToast(
+"Please login first to open Settings."
+);
+
+openAuth();
+
+return;
+
+}
+
+
+updateSettingsUI();
+
+
+$("settingsModal")
+.classList
+.add("show");
+
+}
+
+
+async function saveSettings(){
+
+if(!currentUser){
+
+showToast(
+"Please login first."
+);
+
+return;
+
+}
+
+
+const name=
+$("settingsName")
+.value
+.trim();
+
+const photoURL=
+$("settingsPhoto")
+.value
+.trim();
+
+const theme=
+$("settingsTheme")
+.value;
+
+const voice=
+$("settingsVoice")
+.checked;
+
+
+if(!name){
+
+showToast(
+"Please enter your name."
+);
+
+return;
+
+}
+
+
+if(
+photoURL&&
+!/^https?:\/\//i.test(
+photoURL
+)
+){
+
+showToast(
+"Profile photo must be a valid http/https URL."
+);
+
+return;
+
+}
+
+
+try{
+
+
+await currentUser.updateProfile({
+
+displayName:name,
+
+photoURL:
+photoURL||
+null
+
+});
+
+
+savedTheme=
+theme==="dark"
+?
+"dark":
+"light";
+
+
+localStorage.setItem(
+"boloTheme",
+savedTheme
+);
+
+
+voiceReplyEnabled=
+voice;
+
+
+localStorage.setItem(
+"boloVoiceReply",
+voiceReplyEnabled
+?
+"on":
+"off"
+);
+
+
+applyTheme();
+
+updateVoiceReplyUI();
+
+updateProfileUI();
+
+updateSettingsUI();
+
+updateAdminProfile();
+
+
+await trackUserActivity();
+
+
+showToast(
+"Settings saved successfully."
+);
+
+
+}catch(error){
+
+console.error(
+"Settings update error:",
+error
+);
+
+
+showToast(
+error.message||
+"Could not save Settings."
+);
+
+}
+
+}
+
+
+/* =========================================================
    ACCOUNT
 ========================================================= */
 
@@ -3340,19 +4193,44 @@ return;
 }
 
 
+const photo=
+getUserPhoto(
+currentUser
+);
+
+
 $("accountInfo").innerHTML=
-"<strong>"+
-escapeHtml(
+`
+<div style="display:flex;align-items:center;gap:12px">
+
+<img
+src="${escapeHtml(photo)}"
+alt="Profile"
+style="width:58px;height:58px;border-radius:50%;object-fit:cover;border:2px solid #e5e7eb;background:#fff;flex:none"
+>
+
+<div>
+
+<strong>
+${escapeHtml(
 currentUser.displayName||
 "Bolo AI User"
-)+
-"</strong>"+
-"<br><span style='color:#6b7280'>"+
-escapeHtml(
+)}
+</strong>
+
+<br>
+
+<span style="color:#6b7280">
+${escapeHtml(
 currentUser.email||
 ""
-)+
-"</span>";
+)}
+</span>
+
+</div>
+
+</div>
+`;
 
 
 $("accountModal")
@@ -3380,6 +4258,14 @@ currentChatId=null;
 
 closeModal(
 "accountModal"
+);
+
+closeModal(
+"profileModal"
+);
+
+closeModal(
+"settingsModal"
 );
 
 closeModal(
@@ -3495,15 +4381,6 @@ closeNavMenu();
 }
 
 });
-
-
-function openSettings(){
-
-showToast(
-"Settings are coming soon."
-);
-
-}
 
 
 /* =========================================================
@@ -4413,8 +5290,6 @@ reply,
 "assistant"
 );
 
-
-/* NEW ADMIN ANALYTICS */
 
 trackAIMessage();
 
@@ -5435,6 +6310,9 @@ savedTheme
 
 applyTheme();
 
+if(currentUser)
+updateSettingsUI();
+
 }
 
 
@@ -5634,6 +6512,65 @@ adminButton.style.display=
 }
 
 
+function updateAdminProfile(){
+
+const photoElement=
+$("adminProfilePhoto");
+
+const nameElement=
+$("adminProfileName");
+
+const emailElement=
+$("adminProfileEmail");
+
+
+if(!currentUser){
+
+if(photoElement)
+photoElement.src=
+"/icon-192.png";
+
+if(nameElement)
+nameElement.textContent=
+"Sabroj Babu";
+
+if(emailElement)
+emailElement.textContent=
+ADMIN_EMAIL;
+
+return;
+
+}
+
+
+if(photoElement){
+
+photoElement.src=
+getUserPhoto(
+currentUser
+);
+
+}
+
+if(nameElement){
+
+nameElement.textContent=
+currentUser.displayName||
+"Sabroj Babu";
+
+}
+
+if(emailElement){
+
+emailElement.textContent=
+currentUser.email||
+ADMIN_EMAIL;
+
+}
+
+}
+
+
 async function getFirebaseToken(){
 
 if(!currentUser){
@@ -5707,6 +6644,9 @@ return;
 }
 
 
+updateAdminProfile();
+
+
 $("adminModal")
 .classList
 .add("show");
@@ -5774,6 +6714,9 @@ showToast(
 return;
 
 }
+
+
+updateAdminProfile();
 
 
 const status=
@@ -5926,8 +6869,24 @@ document.createElement(
 );
 
 
+const userPhoto=
+user.photoURL||
+"/icon-192.png";
+
+
 userCell.innerHTML=
 `
+<div class="admin-user-wrap">
+
+<img
+class="admin-user-photo"
+src="${escapeHtml(userPhoto)}"
+alt="User profile"
+onerror="this.src='/icon-192.png'"
+>
+
+<div>
+
 <div class="admin-user-name">
 ${escapeHtml(
 user.name||
@@ -5940,6 +6899,10 @@ ${escapeHtml(
 user.email||
 ""
 )}
+</div>
+
+</div>
+
 </div>
 `;
 
@@ -6355,6 +7318,12 @@ function updateAdminAfterLogin(){
 
 updateAdminMenu();
 
+updateProfileUI();
+
+updateSettingsUI();
+
+updateAdminProfile();
+
 
 if(currentUser){
 
@@ -6382,6 +7351,12 @@ function(){
 updateVoiceReplyUI();
 
 updateAuthUI();
+
+updateProfileUI();
+
+updateSettingsUI();
+
+updateAdminProfile();
 
 updateAdminMenu();
 
