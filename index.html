@@ -37,6 +37,190 @@ a{color:inherit;text-decoration:none}
 .nav-btn.primary{background:#111827;color:#fff;border-color:#111827}
 .dark .nav-btn.primary{background:#fff;color:#111827}
 
+/* TOP PROFILE BUTTON */
+.top-profile-btn{
+display:none;
+align-items:center;
+gap:8px;
+border:1px solid #e5e7eb;
+background:#fff;
+color:#111827;
+border-radius:12px;
+padding:6px 10px 6px 6px;
+font-weight:800;
+max-width:180px;
+}
+
+.top-profile-btn.show{
+display:flex;
+}
+
+.dark .top-profile-btn{
+background:#111827;
+border-color:#263244;
+color:#fff;
+}
+
+.top-profile-btn img{
+width:32px;
+height:32px;
+border-radius:50%;
+object-fit:cover;
+border:1px solid #e5e7eb;
+background:#f3f4f6;
+}
+
+.top-profile-name{
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+max-width:105px;
+}
+
+/* THREE DOT BUTTON */
+.three-dot-btn{
+width:42px;
+height:42px;
+display:grid;
+place-items:center;
+border:1px solid #e5e7eb;
+background:#fff;
+color:#111827;
+border-radius:12px;
+font-size:24px;
+font-weight:900;
+line-height:1;
+}
+
+.dark .three-dot-btn{
+background:#111827;
+border-color:#263244;
+color:#fff;
+}
+
+/* THREE DOT MENU */
+.corner-menu{
+display:none;
+position:fixed;
+top:72px;
+right:14px;
+z-index:4500;
+width:min(285px,calc(100vw - 28px));
+background:#fff;
+border:1px solid #e5e7eb;
+border-radius:18px;
+box-shadow:0 20px 55px rgba(0,0,0,.18);
+padding:9px;
+animation:menuIn .16s ease;
+}
+
+.corner-menu.show{
+display:block;
+}
+
+.dark .corner-menu{
+background:#111827;
+border-color:#263244;
+box-shadow:0 20px 55px rgba(0,0,0,.45);
+}
+
+@keyframes menuIn{
+from{
+opacity:0;
+transform:translateY(-7px) scale(.98);
+}
+to{
+opacity:1;
+transform:translateY(0) scale(1);
+}
+}
+
+.menu-profile-head{
+display:flex;
+align-items:center;
+gap:11px;
+padding:11px;
+border-radius:14px;
+background:#f8fafc;
+margin-bottom:7px;
+}
+
+.dark .menu-profile-head{
+background:#0f172a;
+}
+
+.menu-profile-head img{
+width:46px;
+height:46px;
+border-radius:50%;
+object-fit:cover;
+border:2px solid #e5e7eb;
+flex:none;
+}
+
+.menu-profile-name{
+font-weight:900;
+font-size:14px;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+}
+
+.menu-profile-email{
+font-size:11px;
+color:#6b7280;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+margin-top:2px;
+}
+
+.dark .menu-profile-email{
+color:#9ca3af;
+}
+
+.menu-item{
+width:100%;
+display:flex;
+align-items:center;
+gap:11px;
+border:0;
+background:transparent;
+color:#111827;
+padding:11px 12px;
+border-radius:12px;
+font-weight:800;
+text-align:left;
+}
+
+.menu-item:hover{
+background:#f1f5f9;
+}
+
+.dark .menu-item{
+color:#f3f4f6;
+}
+
+.dark .menu-item:hover{
+background:#1f2937;
+}
+
+.menu-item.danger{
+color:#dc2626;
+}
+
+.menu-divider{
+height:1px;
+background:#e5e7eb;
+margin:7px 3px;
+}
+
+.dark .menu-divider{
+background:#263244;
+}
+
+/* HERO */
+
 .hero{padding:58px 0 35px;text-align:center}
 .hero-badge{display:inline-flex;padding:7px 12px;border-radius:999px;background:#eef2ff;color:#3730a3;font-size:13px;font-weight:800;margin-bottom:15px}
 .dark .hero-badge{background:#172554;color:#bfdbfe}
@@ -153,9 +337,9 @@ footer{margin-top:35px;border-top:1px solid #e5e7eb;padding:25px 0;text-align:ce
 
 .modal{display:none;position:fixed;inset:0;z-index:3000;background:rgba(0,0,0,.55);align-items:center;justify-content:center;padding:18px}
 .modal.show{display:flex}
-.modal-box{width:min(430px,100%);background:#fff;border-radius:22px;padding:22px;position:relative}
+.modal-box{width:min(430px,100%);background:#fff;border-radius:22px;padding:22px;position:relative;max-height:92vh;overflow-y:auto}
 .dark .modal-box{background:#111827;color:#fff}
-.modal-close{position:absolute;right:15px;top:12px;border:0;background:transparent;font-size:22px}
+.modal-close{position:absolute;right:15px;top:12px;border:0;background:transparent;font-size:22px;color:inherit}
 .auth-input{width:100%;margin-top:10px;padding:12px;border:1px solid #d1d5db;border-radius:12px;outline:none}
 .dark .auth-input{background:#0f172a;color:#fff;border-color:#374151}
 .auth-main-btn{width:100%;margin-top:12px;border:0;border-radius:12px;background:#111827;color:#fff;padding:12px;font-weight:800}
@@ -165,6 +349,407 @@ footer{margin-top:35px;border-top:1px solid #e5e7eb;padding:25px 0;text-align:ce
 .auth-link{display:block;text-align:center;margin-top:11px;color:#4f46e5;font-size:13px;font-weight:700}
 .account-info{padding:14px;background:#f8fafc;border-radius:14px;margin:14px 0}
 .dark .account-info{background:#0f172a}
+
+/* PROFILE */
+
+.profile-modal-box{
+width:min(450px,100%);
+text-align:center;
+}
+
+.profile-avatar-lg{
+width:96px;
+height:96px;
+border-radius:50%;
+object-fit:cover;
+display:block;
+margin:12px auto 14px;
+border:3px solid #eef2ff;
+background:#f3f4f6;
+box-shadow:0 10px 30px rgba(0,0,0,.12);
+}
+
+.profile-name{
+font-size:22px;
+font-weight:900;
+}
+
+.profile-email{
+margin-top:5px;
+font-size:14px;
+color:#6b7280;
+word-break:break-word;
+}
+
+.dark .profile-email{
+color:#9ca3af;
+}
+
+.profile-role{
+display:inline-flex;
+margin-top:12px;
+padding:6px 12px;
+border-radius:999px;
+background:#eef2ff;
+color:#3730a3;
+font-size:12px;
+font-weight:900;
+}
+
+.dark .profile-role{
+background:#172554;
+color:#bfdbfe;
+}
+
+/* SETTINGS */
+
+.settings-profile{
+display:flex;
+align-items:center;
+gap:12px;
+padding:13px;
+background:#f8fafc;
+border-radius:15px;
+margin:15px 0;
+}
+
+.dark .settings-profile{
+background:#0f172a;
+}
+
+.settings-profile img{
+width:58px;
+height:58px;
+border-radius:50%;
+object-fit:cover;
+border:2px solid #e5e7eb;
+}
+
+.settings-profile-name{
+font-weight:900;
+}
+
+.settings-profile-email{
+font-size:12px;
+color:#6b7280;
+margin-top:2px;
+word-break:break-word;
+}
+
+.dark .settings-profile-email{
+color:#9ca3af;
+}
+
+.settings-label{
+display:block;
+font-size:13px;
+font-weight:900;
+margin-top:13px;
+margin-bottom:6px;
+}
+
+.settings-help{
+font-size:11px;
+color:#6b7280;
+margin-top:4px;
+}
+
+.dark .settings-help{
+color:#9ca3af;
+}
+
+.settings-input,
+.settings-select{
+width:100%;
+padding:11px 12px;
+border:1px solid #d1d5db;
+border-radius:12px;
+outline:none;
+background:#fff;
+color:#111827;
+}
+
+.dark .settings-input,
+.dark .settings-select{
+background:#0f172a;
+border-color:#374151;
+color:#fff;
+}
+
+.settings-toggle{
+display:flex;
+align-items:center;
+gap:9px;
+margin-top:14px;
+font-size:13px;
+font-weight:800;
+}
+
+/* ADMIN DASHBOARD */
+
+.admin-modal-box{
+width:min(1050px,100%);
+max-height:94vh;
+overflow-y:auto;
+}
+
+.admin-header{
+padding-right:42px;
+}
+
+.admin-header p{
+color:#6b7280;
+font-size:13px;
+margin-top:5px;
+}
+
+.dark .admin-header p{
+color:#9ca3af;
+}
+
+.admin-profile-card{
+display:flex;
+align-items:center;
+gap:13px;
+padding:15px;
+margin:16px 0;
+background:#f8fafc;
+border:1px solid #e5e7eb;
+border-radius:17px;
+}
+
+.dark .admin-profile-card{
+background:#0f172a;
+border-color:#263244;
+}
+
+.admin-profile-photo{
+width:64px;
+height:64px;
+border-radius:50%;
+object-fit:cover;
+border:2px solid #e5e7eb;
+background:#fff;
+flex:none;
+}
+
+.admin-profile-name{
+font-size:17px;
+font-weight:900;
+}
+
+.admin-profile-email{
+font-size:12px;
+color:#6b7280;
+margin-top:2px;
+word-break:break-word;
+}
+
+.dark .admin-profile-email{
+color:#9ca3af;
+}
+
+.admin-role-badge{
+display:inline-flex;
+margin-top:6px;
+padding:5px 9px;
+border-radius:999px;
+background:#ecfdf5;
+color:#047857;
+font-size:11px;
+font-weight:900;
+}
+
+.admin-stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:12px;
+margin:15px 0 18px;
+}
+
+.admin-stat{
+background:#f8fafc;
+border:1px solid #e5e7eb;
+border-radius:16px;
+padding:15px;
+}
+
+.dark .admin-stat{
+background:#0f172a;
+border-color:#263244;
+}
+
+.admin-stat-icon{
+font-size:22px;
+}
+
+.admin-stat-label{
+font-size:12px;
+color:#6b7280;
+margin-top:7px;
+}
+
+.dark .admin-stat-label{
+color:#9ca3af;
+}
+
+.admin-stat-value{
+font-size:27px;
+font-weight:900;
+margin-top:2px;
+}
+
+.admin-toolbar{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+margin:5px 0 12px;
+}
+
+.admin-toolbar h3{
+font-size:18px;
+}
+
+.admin-refresh{
+border:1px solid #d1d5db;
+background:#fff;
+color:#111827;
+border-radius:10px;
+padding:8px 11px;
+font-weight:800;
+}
+
+.dark .admin-refresh{
+background:#1f2937;
+border-color:#374151;
+color:#fff;
+}
+
+.admin-table-wrap{
+overflow-x:auto;
+border:1px solid #e5e7eb;
+border-radius:16px;
+}
+
+.dark .admin-table-wrap{
+border-color:#263244;
+}
+
+.admin-table{
+width:100%;
+border-collapse:collapse;
+min-width:720px;
+}
+
+.admin-table th,
+.admin-table td{
+padding:11px 12px;
+border-bottom:1px solid #e5e7eb;
+text-align:left;
+font-size:12px;
+vertical-align:middle;
+}
+
+.dark .admin-table th,
+.dark .admin-table td{
+border-color:#263244;
+}
+
+.admin-table th{
+background:#f8fafc;
+font-weight:900;
+font-size:11px;
+text-transform:uppercase;
+letter-spacing:.3px;
+}
+
+.dark .admin-table th{
+background:#0f172a;
+}
+
+.admin-table tr:last-child td{
+border-bottom:0;
+}
+
+.admin-user-wrap{
+display:flex;
+align-items:center;
+gap:9px;
+min-width:190px;
+}
+
+.admin-user-photo{
+width:40px;
+height:40px;
+border-radius:50%;
+object-fit:cover;
+border:1px solid #e5e7eb;
+background:#fff;
+flex:none;
+}
+
+.admin-user-name{
+font-weight:900;
+font-size:13px;
+}
+
+.admin-user-email{
+font-size:11px;
+color:#6b7280;
+margin-top:2px;
+word-break:break-word;
+}
+
+.dark .admin-user-email{
+color:#9ca3af;
+}
+
+.admin-badge{
+display:inline-flex;
+padding:4px 8px;
+border-radius:999px;
+background:#eef2ff;
+color:#3730a3;
+font-size:10px;
+font-weight:900;
+}
+
+.admin-delete-btn{
+border:1px solid #fecaca;
+background:#fef2f2;
+color:#dc2626;
+border-radius:9px;
+padding:6px 8px;
+font-weight:800;
+font-size:11px;
+}
+
+.dark .admin-delete-btn{
+background:#450a0a;
+border-color:#7f1d1d;
+color:#fecaca;
+}
+
+.admin-empty{
+padding:30px;
+text-align:center;
+color:#6b7280;
+}
+
+.dark .admin-empty{
+color:#9ca3af;
+}
+
+.admin-loading{
+padding:25px;
+text-align:center;
+color:#6b7280;
+}
+
+.dark .admin-loading{
+color:#9ca3af;
+}
 
 /* CHAT HISTORY */
 
@@ -326,11 +911,38 @@ margin-bottom:4px;
 
 .install-btn{display:none}
 
+/* TOAST */
+
+.toast{
+position:fixed;
+left:50%;
+bottom:22px;
+transform:translate(-50%,20px);
+background:#111827;
+color:#fff;
+padding:11px 15px;
+border-radius:12px;
+font-size:13px;
+font-weight:700;
+z-index:6000;
+opacity:0;
+pointer-events:none;
+transition:.2s;
+max-width:calc(100% - 30px);
+text-align:center;
+}
+
+.toast.show{
+opacity:1;
+transform:translate(-50%,0);
+}
+
 @media(max-width:800px){
 .quick-grid,.tools-grid{grid-template-columns:repeat(2,1fr)}
 .features-grid,.pricing-grid{grid-template-columns:1fr}
 .hero{padding-top:42px}
 .message{max-width:90%}
+.admin-stats{grid-template-columns:repeat(2,1fr)}
 }
 
 @media(max-width:520px){
@@ -348,6 +960,26 @@ margin-bottom:4px;
 .generator button{width:100%}
 .history-conversation-message.user{margin-left:10px}
 .history-conversation-message.assistant{margin-right:10px}
+.top-profile-btn{
+max-width:125px;
+}
+.top-profile-name{
+max-width:70px;
+}
+.admin-stats{
+grid-template-columns:1fr 1fr;
+gap:8px;
+}
+.admin-stat{
+padding:12px;
+}
+.admin-stat-value{
+font-size:22px;
+}
+.corner-menu{
+right:9px;
+top:67px;
+}
 }
 </style>
 </head>
@@ -365,21 +997,88 @@ margin-bottom:4px;
 </a>
 
 <div class="nav-actions">
+
 <button class="nav-btn" id="themeBtn" type="button" onclick="toggleTheme()">🌙</button>
 
 <button class="nav-btn" id="historyNavBtn" type="button" onclick="openHistory()">
 📜 History
 </button>
 
-<button class="nav-btn" id="authNavBtn" type="button" onclick="openAuth()">Login</button>
+<button class="nav-btn" id="authNavBtn" type="button" onclick="openAuth">
+Login
+</button>
+
+<button class="top-profile-btn" id="topProfileBtn" type="button" onclick="openProfile()">
+<img id="topProfilePhoto" src="/icon-192.png" alt="Profile">
+<span class="top-profile-name" id="topProfileName">Profile</span>
+</button>
 
 <button class="nav-btn primary" type="button" onclick="document.getElementById('premium').scrollIntoView()">
 Premium
 </button>
+
+<button
+class="three-dot-btn"
+id="threeDotBtn"
+type="button"
+aria-label="Open menu"
+onclick="toggleCornerMenu()"
+>
+⋮
+</button>
+
 </div>
 
 </div>
 </header>
+
+<!-- THREE DOT MENU -->
+
+<div class="corner-menu" id="cornerMenu">
+
+<div class="menu-profile-head">
+
+<img id="menuProfilePhoto" src="/icon-192.png" alt="Profile">
+
+<div style="min-width:0">
+
+<div class="menu-profile-name" id="menuProfileName">
+Not logged in
+</div>
+
+<div class="menu-profile-email" id="menuProfileEmail">
+Login to Bolo AI
+</div>
+
+</div>
+
+</div>
+
+<button class="menu-item" type="button" onclick="menuProfileAction()">
+👤 <span>Profile</span>
+</button>
+
+<button class="menu-item" type="button" onclick="openSettingsFromMenu()">
+⚙️ <span>Settings</span>
+</button>
+
+<button
+class="menu-item"
+id="adminMenuItem"
+type="button"
+style="display:none"
+onclick="openAdminDashboardFromMenu()"
+>
+🛡️ <span>Admin Dashboard</span>
+</button>
+
+<div class="menu-divider"></div>
+
+<button class="menu-item danger" type="button" onclick="logoutFromMenu()">
+🚪 <span>Logout</span>
+</button>
+
+</div>
 
 <main id="home">
 
@@ -642,6 +1341,7 @@ Premium
 </footer>
 
 <!-- AUTH MODAL -->
+
 <div class="modal" id="authModal">
 <div class="modal-box">
 
@@ -669,6 +1369,7 @@ Premium
 </div>
 
 <!-- ACCOUNT MODAL -->
+
 <div class="modal" id="accountModal">
 <div class="modal-box">
 
@@ -683,7 +1384,264 @@ Premium
 </div>
 </div>
 
+<!-- PROFILE MODAL -->
+
+<div class="modal" id="profileModal">
+<div class="modal-box profile-modal-box">
+
+<button class="modal-close" onclick="closeModal('profileModal')" type="button">×</button>
+
+<img
+id="profilePhoto"
+class="profile-avatar-lg"
+src="/icon-192.png"
+alt="Profile"
+>
+
+<div id="profileName" class="profile-name">
+Bolo AI User
+</div>
+
+<div id="profileEmail" class="profile-email">
+Not logged in
+</div>
+
+<div id="profileRole" class="profile-role">
+Bolo AI User
+</div>
+
+<button
+class="auth-main-btn"
+type="button"
+onclick="openSettingsFromProfile()"
+>
+⚙️ Edit Settings
+</button>
+
+</div>
+</div>
+
+<!-- SETTINGS MODAL -->
+
+<div class="modal" id="settingsModal">
+<div class="modal-box">
+
+<button class="modal-close" onclick="closeModal('settingsModal')" type="button">×</button>
+
+<h2>⚙️ Settings</h2>
+
+<p style="color:#6b7280;font-size:13px;margin-top:5px">
+Manage your Bolo AI profile and preferences.
+</p>
+
+<div class="settings-profile">
+
+<img id="settingsProfilePhoto" src="/icon-192.png" alt="Profile">
+
+<div style="min-width:0">
+<div class="settings-profile-name" id="settingsProfileName">
+Bolo AI User
+</div>
+
+<div class="settings-profile-email" id="settingsProfileEmail">
+Not logged in
+</div>
+</div>
+
+</div>
+
+<label class="settings-label" for="settingsName">
+Display Name
+</label>
+
+<input
+class="settings-input"
+id="settingsName"
+type="text"
+placeholder="Your name"
+>
+
+<label class="settings-label" for="settingsPhoto">
+Profile Photo URL
+</label>
+
+<input
+class="settings-input"
+id="settingsPhoto"
+type="url"
+placeholder="https://..."
+>
+
+<div class="settings-help">
+Google login users already get their Google profile photo automatically.
+</div>
+
+<label class="settings-label" for="settingsTheme">
+Theme
+</label>
+
+<select class="settings-select" id="settingsTheme">
+<option value="light">Light</option>
+<option value="dark">Dark</option>
+</select>
+
+<label class="settings-toggle">
+<input type="checkbox" id="settingsVoice">
+Enable automatic AI voice replies
+</label>
+
+<button
+class="auth-main-btn"
+type="button"
+onclick="saveSettings()"
+>
+💾 Save Settings
+</button>
+
+</div>
+</div>
+
+<!-- ADMIN DASHBOARD -->
+
+<div class="modal" id="adminModal">
+
+<div class="modal-box admin-modal-box">
+
+<button
+class="modal-close"
+onclick="closeModal('adminModal')"
+type="button"
+>
+×
+</button>
+
+<div class="admin-header">
+
+<h2>🛡️ Bolo AI Admin Dashboard</h2>
+
+<p>
+Manage users, view activity and monitor your Bolo AI application.
+</p>
+
+</div>
+
+<!-- ADMIN PROFILE -->
+
+<div class="admin-profile-card">
+
+<img
+id="adminProfilePhoto"
+class="admin-profile-photo"
+src="/icon-192.png"
+alt="Admin"
+>
+
+<div style="min-width:0">
+
+<div
+id="adminProfileName"
+class="admin-profile-name"
+>
+Sabroj Babu
+</div>
+
+<div
+id="adminProfileEmail"
+class="admin-profile-email"
+>
+Sabrojalam8454@gmail.com
+</div>
+
+<div class="admin-role-badge">
+🛡️ Administrator
+</div>
+
+</div>
+
+</div>
+
+<!-- STATS -->
+
+<div class="admin-stats">
+
+<div class="admin-stat">
+<div class="admin-stat-icon">👥</div>
+<div class="admin-stat-label">Total Users</div>
+<div class="admin-stat-value" id="adminTotalUsers">—</div>
+</div>
+
+<div class="admin-stat">
+<div class="admin-stat-icon">🆕</div>
+<div class="admin-stat-label">Today's Users</div>
+<div class="admin-stat-value" id="adminTodayUsers">—</div>
+</div>
+
+<div class="admin-stat">
+<div class="admin-stat-icon">🟢</div>
+<div class="admin-stat-label">Active Users</div>
+<div class="admin-stat-value" id="adminActiveUsers">—</div>
+</div>
+
+<div class="admin-stat">
+<div class="admin-stat-icon">💬</div>
+<div class="admin-stat-label">AI Messages</div>
+<div class="admin-stat-value" id="adminTotalMessages">—</div>
+</div>
+
+</div>
+
+<div class="admin-toolbar">
+
+<h3>👥 Users</h3>
+
+<button
+class="admin-refresh"
+type="button"
+onclick="loadAdminDashboard()"
+>
+🔄 Refresh
+</button>
+
+</div>
+
+<div class="admin-table-wrap">
+
+<table class="admin-table">
+
+<thead>
+
+<tr>
+<th>User</th>
+<th>Role</th>
+<th>Last Seen</th>
+<th>Logins</th>
+<th>Action</th>
+</tr>
+
+</thead>
+
+<tbody id="adminUsersBody">
+
+<tr>
+<td colspan="5">
+<div class="admin-loading">
+Loading users...
+</div>
+</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
 <!-- CHAT HISTORY MODAL -->
+
 <div class="modal" id="historyModal">
 <div class="modal-box history-modal-box">
 
@@ -714,8 +1672,10 @@ Loading chat history...
 
 const BACKEND_URL="https://bolo-ai-backend-cfft.onrender.com";
 
+const ADMIN_EMAIL="Sabrojalam8454@gmail.com";
+
 const firebaseConfig={
-apiKey:"AIzaSyAAztA2xqtWWWKYzzvL9A0UTbk6Pw1-FC8",
+apiKey:"AIzaSyAAztA2xqtWWWKYzzl9V9A0UTbk6Pw1-FC8",
 authDomain:"bolo-ai-c429f.firebaseapp.com",
 projectId:"bolo-ai-c429f",
 storageBucket:"bolo-ai-c429f.firebasestorage.app",
@@ -732,7 +1692,10 @@ function showToast(message){
 
 const toast=$("toast");
 
+if(!toast)return;
+
 toast.textContent=message;
+
 toast.classList.add("show");
 
 clearTimeout(window.__toastTimer);
@@ -744,7 +1707,9 @@ window.__toastTimer=setTimeout(
 
 }
 
-/* FIREBASE */
+/* =========================================================
+   FIREBASE
+   ========================================================= */
 
 let firebaseReady=false;
 let currentUser=null;
@@ -754,6 +1719,10 @@ let authMode="login";
 
 let db=null;
 let currentChatId=null;
+
+/* ADMIN / ACTIVITY */
+
+let heartbeatTimer=null;
 
 try{
 
@@ -765,18 +1734,29 @@ db=firebase.firestore();
 
 firebaseReady=true;
 
-firebase.auth().onAuthStateChanged(user=>{
+firebase.auth().onAuthStateChanged(async user=>{
 
 currentUser=user||null;
-
-/*
-Start a fresh conversation when account state changes.
-Old conversations remain safely stored in Firestore.
-*/
 
 currentChatId=null;
 
 updateAuthUI();
+
+updateProfileUI();
+
+updateAdminMenu();
+
+if(currentUser){
+
+await trackUserActivity();
+
+startUserHeartbeat();
+
+}else{
+
+stopUserHeartbeat();
+
+}
 
 });
 
@@ -786,7 +1766,15 @@ updateAuthUI();
 
 console.error("Firebase error:",error);
 
+showToast(
+"Firebase could not start. Please check Firebase configuration."
+);
+
 }
+
+/* =========================================================
+   AUTH UI
+   ========================================================= */
 
 function updateAuthUI(){
 
@@ -797,22 +1785,1174 @@ if(!button)return;
 if(currentUser){
 
 button.textContent="Account";
+
 button.onclick=openAccount;
 
 $("chatInput").placeholder="Message Bolo AI...";
 
+if($("topProfileBtn")){
+
+$("topProfileBtn").classList.add("show");
+
+}
+
 }else{
 
 button.textContent="Login";
+
 button.onclick=openAuth;
 
 $("chatInput").placeholder="Login first to chat with Bolo AI...";
 
+if($("topProfileBtn")){
+
+$("topProfileBtn").classList.remove("show");
+
 }
 
 }
+
+updateProfileUI();
+
+}
+
+function updateProfileUI(){
+
+const fallback="/icon-192.png";
+
+const name=
+currentUser&&
+currentUser.displayName
+?
+currentUser.displayName
+:
+"Bolo AI User";
+
+const email=
+currentUser&&
+currentUser.email
+?
+currentUser.email
+:
+"Not logged in";
+
+const photo=
+currentUser&&
+currentUser.photoURL
+?
+currentUser.photoURL
+:
+fallback;
+
+/* TOP PROFILE */
+
+const topPhoto=$("topProfilePhoto");
+
+const topName=$("topProfileName");
+
+if(topPhoto)topPhoto.src=photo;
+
+if(topName)topName.textContent=
+currentUser?
+name:
+"Profile";
+
+/* MENU PROFILE */
+
+const menuPhoto=$("menuProfilePhoto");
+
+const menuName=$("menuProfileName");
+
+const menuEmail=$("menuProfileEmail");
+
+if(menuPhoto)menuPhoto.src=photo;
+
+if(menuName)menuName.textContent=
+currentUser?
+name:
+"Not logged in";
+
+if(menuEmail)menuEmail.textContent=
+currentUser?
+email:
+"Login to Bolo AI";
+
+/* PROFILE MODAL */
+
+if($("profilePhoto")){
+
+$("profilePhoto").src=photo;
+
+}
+
+if($("profileName")){
+
+$("profileName").textContent=name;
+
+}
+
+if($("profileEmail")){
+
+$("profileEmail").textContent=email;
+
+}
+
+if($("profileRole")){
+
+$("profileRole").textContent=
+currentUser&&isAdmin()
+?
+"🛡️ Administrator":
+"Bolo AI User";
+
+}
+
+/* SETTINGS */
+
+if($("settingsProfilePhoto")){
+
+$("settingsProfilePhoto").src=photo;
+
+}
+
+if($("settingsProfileName")){
+
+$("settingsProfileName").textContent=name;
+
+}
+
+if($("settingsProfileEmail")){
+
+$("settingsProfileEmail").textContent=email;
+
+}
+
+/* ACCOUNT */
+
+if($("accountInfo")){
+
+if(currentUser){
+
+$("accountInfo").innerHTML=
+
+'<div style="display:flex;align-items:center;gap:12px">'+
+
+'<img src="'+
+escapeHtml(photo)+
+'" style="width:58px;height:58px;border-radius:50%;object-fit:cover;border:2px solid #e5e7eb;background:#fff">'+
+
+'<div style="min-width:0">'+
+
+'<strong>'+
+escapeHtml(name)+
+'</strong>'+
+
+'<br><span style="color:#6b7280;word-break:break-word">'+
+escapeHtml(email)+
+'</span>'+
+
+'</div>'+
+
+'</div>';
+
+}else{
+
+$("accountInfo").textContent="Not logged in.";
+
+}
+
+}
+
+updateAdminProfile();
+
+}
+
+/* =========================================================
+   THREE DOT MENU
+   ========================================================= */
+
+function toggleCornerMenu(){
+
+const menu=$("cornerMenu");
+
+if(!menu)return;
+
+menu.classList.toggle("show");
+
+}
+
+function closeCornerMenu(){
+
+const menu=$("cornerMenu");
+
+if(menu){
+
+menu.classList.remove("show");
+
+}
+
+}
+
+function menuProfileAction(){
+
+closeCornerMenu();
+
+if(currentUser){
+
+openProfile();
+
+}else{
+
+openAuth();
+
+}
+
+}
+
+function openSettingsFromMenu(){
+
+closeCornerMenu();
+
+if(!currentUser){
+
+showToast("Please login first to open Settings.");
+
+openAuth();
+
+return;
+
+}
+
+openSettings();
+
+}
+
+function openAdminDashboardFromMenu(){
+
+closeCornerMenu();
+
+openAdminDashboard();
+
+}
+
+function logoutFromMenu(){
+
+closeCornerMenu();
+
+logoutUser();
+
+}
+
+document.addEventListener(
+"click",
+function(event){
+
+const menu=$("cornerMenu");
+
+const button=$("threeDotBtn");
+
+if(
+menu&&
+menu.classList.contains("show")&&
+!menu.contains(event.target)&&
+button&&
+!button.contains(event.target)
+){
+
+closeCornerMenu();
+
+}
+
+});
+
+/* =========================================================
+   PROFILE
+   ========================================================= */
+
+function openProfile(){
+
+if(!currentUser){
+
+openAuth();
+
+return;
+
+}
+
+updateProfileUI();
+
+$("profileModal").classList.add("show");
+
+}
+
+function openSettingsFromProfile(){
+
+closeModal("profileModal");
+
+openSettings();
+
+}
+
+/* =========================================================
+   SETTINGS
+   ========================================================= */
+
+function openSettings(){
+
+if(!currentUser){
+
+showToast("Please login first to open Settings.");
+
+openAuth();
+
+return;
+
+}
+
+updateProfileUI();
+
+$("settingsName").value=
+currentUser.displayName||"";
+
+$("settingsPhoto").value=
+currentUser.photoURL||"";
+
+$("settingsTheme").value=
+savedTheme||"light";
+
+$("settingsVoice").checked=
+voiceReplyEnabled;
+
+$("settingsModal").classList.add("show");
+
+}
+
+async function saveSettings(){
+
+if(!currentUser){
+
+showToast("Please login first.");
+
+return;
+
+}
+
+const name=
+$("settingsName").value.trim();
+
+const photo=
+$("settingsPhoto").value.trim();
+
+const theme=
+$("settingsTheme").value;
+
+const voice=
+$("settingsVoice").checked;
+
+if(!name){
+
+showToast("Please enter your name.");
+
+return;
+
+}
+
+try{
+
+const profileData={
+displayName:name
+};
+
+if(photo){
+
+profileData.photoURL=photo;
+
+}
+
+await currentUser.updateProfile(profileData);
+
+savedTheme=
+theme==="dark"?
+"dark":
+"light";
+
+localStorage.setItem(
+"boloTheme",
+savedTheme
+);
+
+applyTheme();
+
+voiceReplyEnabled=voice;
+
+localStorage.setItem(
+"boloVoiceReply",
+voice?
+"on":
+"off"
+);
+
+updateVoiceReplyUI();
+
+await trackUserActivity();
+
+updateProfileUI();
+
+closeModal("settingsModal");
+
+showToast("Settings saved successfully.");
+
+}catch(error){
+
+console.error(
+"Settings error:",
+error
+);
+
+showToast(
+error.message||
+"Could not save settings."
+);
+
+}
+
+}
+
+/* =========================================================
+   ADMIN
+   ========================================================= */
+
+function isAdmin(){
+
+return !!(
+currentUser&&
+currentUser.email&&
+currentUser.email.toLowerCase()===
+ADMIN_EMAIL.toLowerCase()
+);
+
+}
+
+function updateAdminMenu(){
+
+const adminButton=$("adminMenuItem");
+
+if(!adminButton)return;
+
+adminButton.style.display=
+isAdmin()?
+"flex":
+"none";
+
+updateAdminProfile();
+
+}
+
+function updateAdminProfile(){
+
+if(!isAdmin()){
+
+if($("adminProfileName")){
+
+$("adminProfileName").textContent=
+currentUser?
+(
+currentUser.displayName||
+"Bolo AI User"
+):
+"Sabroj Babu";
+
+}
+
+if($("adminProfileEmail")){
+
+$("adminProfileEmail").textContent=
+currentUser&&currentUser.email
+?
+currentUser.email
+:
+ADMIN_EMAIL;
+
+}
+
+if($("adminProfilePhoto")){
+
+$("adminProfilePhoto").src=
+currentUser&&currentUser.photoURL
+?
+currentUser.photoURL
+:
+"/icon-192.png";
+
+}
+
+return;
+
+}
+
+const name=
+currentUser.displayName||
+"Sabroj Babu";
+
+const email=
+currentUser.email||
+ADMIN_EMAIL;
+
+const photo=
+currentUser.photoURL||
+"/icon-192.png";
+
+if($("adminProfileName")){
+
+$("adminProfileName").textContent=name;
+
+}
+
+if($("adminProfileEmail")){
+
+$("adminProfileEmail").textContent=email;
+
+}
+
+if($("adminProfilePhoto")){
+
+$("adminProfilePhoto").src=photo;
+
+}
+
+}
+
+async function getFirebaseToken(){
+
+if(!currentUser){
+
+throw new Error(
+"Please login first."
+);
+
+}
+
+return await currentUser.getIdToken();
+
+}
+
+async function adminFetch(path,options={}){
+
+const token=
+await getFirebaseToken();
+
+const headers={
+...(options.headers||{}),
+Authorization:"Bearer "+token
+};
+
+if(
+options.body&&
+!headers["Content-Type"]
+){
+
+headers["Content-Type"]=
+"application/json";
+
+}
+
+const response=
+await fetch(
+BACKEND_URL+path,
+{
+...options,
+headers
+}
+);
+
+let data=null;
+
+try{
+
+data=await response.json();
+
+}catch(error){
+
+data={};
+
+}
+
+if(!response.ok){
+
+throw new Error(
+data.error||
+data.message||
+"Admin request failed."
+);
+
+}
+
+return data;
+
+}
+
+async function openAdminDashboard(){
+
+if(!currentUser){
+
+showToast(
+"Please login as admin first."
+);
+
+openAuth();
+
+return;
+
+}
+
+if(!isAdmin()){
+
+showToast(
+"Admin access is only available to the administrator."
+);
+
+return;
+
+}
+
+updateAdminProfile();
+
+$("adminModal").classList.add("show");
+
+await loadAdminDashboard();
+
+}
+
+async function loadAdminDashboard(){
+
+if(!isAdmin())return;
+
+$("adminTotalUsers").textContent="…";
+$("adminTodayUsers").textContent="…";
+$("adminActiveUsers").textContent="…";
+$("adminTotalMessages").textContent="…";
+
+$("adminUsersBody").innerHTML=
+'<tr><td colspan="5"><div class="admin-loading">Loading users...</div></td></tr>';
+
+try{
+
+const result=
+await adminFetch("/api/admin/stats");
+
+const stats=
+result.stats||
+result.data||
+result||
+{};
+
+$("adminTotalUsers").textContent=
+formatNumber(
+stats.totalUsers||
+0
+);
+
+$("adminTodayUsers").textContent=
+formatNumber(
+stats.todayUsers||
+0
+);
+
+$("adminActiveUsers").textContent=
+formatNumber(
+stats.activeUsers||
+0
+);
+
+$("adminTotalMessages").textContent=
+formatNumber(
+stats.totalMessages||
+0
+);
+
+}catch(error){
+
+console.error(
+"Admin stats error:",
+error
+);
+
+$("adminTotalUsers").textContent="—";
+$("adminTodayUsers").textContent="—";
+$("adminActiveUsers").textContent="—";
+$("adminTotalMessages").textContent="—";
+
+showToast(
+"Could not load dashboard statistics."
+);
+
+}
+
+try{
+
+const result=
+await adminFetch("/api/admin/users");
+
+const users=
+Array.isArray(result)
+?
+result:
+(
+Array.isArray(result.users)
+?
+result.users:
+[]
+);
+
+renderAdminUsers(users);
+
+}catch(error){
+
+console.error(
+"Admin users error:",
+error
+);
+
+$("adminUsersBody").innerHTML=
+'<tr><td colspan="5"><div class="admin-empty">Could not load users right now.</div></td></tr>';
+
+}
+
+}
+
+function formatNumber(value){
+
+const number=
+Number(value||0);
+
+return Number.isFinite(number)
+?
+number.toLocaleString("en-IN"):
+"0";
+
+}
+
+function renderAdminUsers(users){
+
+const body=
+$("adminUsersBody");
+
+if(!body)return;
+
+if(!users.length){
+
+body.innerHTML=
+'<tr><td colspan="5"><div class="admin-empty">No users found yet.</div></td></tr>';
+
+return;
+
+}
+
+body.innerHTML="";
+
+users.forEach(user=>{
+
+const uid=
+user.uid||
+user.id||
+"";
+
+const name=
+user.name||
+user.displayName||
+"Bolo AI User";
+
+const email=
+user.email||
+"";
+
+const photo=
+user.photoURL||
+"/icon-192.png";
+
+const role=
+user.role||
+(
+email.toLowerCase()===
+ADMIN_EMAIL.toLowerCase()
+?
+"admin":
+"user"
+);
+
+const lastSeen=
+formatAdminDate(
+user.lastSeenAt||
+user.lastLoginAt||
+user.updatedAt
+);
+
+const logins=
+user.loginCount||
+0;
+
+const row=
+document.createElement("tr");
+
+const userCell=
+document.createElement("td");
+
+userCell.innerHTML=
+
+'<div class="admin-user-wrap">'+
+
+'<img class="admin-user-photo" src="'+
+escapeHtml(photo)+
+'" alt="User">'+
+
+'<div style="min-width:0">'+
+
+'<div class="admin-user-name">'+
+escapeHtml(name)+
+'</div>'+
+
+'<div class="admin-user-email">'+
+escapeHtml(email)+'</div>'+
+
+'</div>'+
+
+'</div>';
+
+const roleCell=
+document.createElement("td");
+
+roleCell.innerHTML=
+'<span class="admin-badge">'+
+(
+role==="admin"?
+"🛡️ Admin":
+"User"
+)+
+'</span>';
+
+const seenCell=
+document.createElement("td");
+
+seenCell.textContent=
+lastSeen;
+
+const loginCell=
+document.createElement("td");
+
+loginCell.textContent=
+String(logins);
+
+const actionCell=
+document.createElement("td");
+
+if(
+email.toLowerCase()===
+ADMIN_EMAIL.toLowerCase()||
+uid===currentUser.uid
+){
+
+actionCell.innerHTML=
+'<span style="font-size:11px;color:#6b7280;font-weight:700">Admin</span>';
+
+}else{
+
+const deleteButton=
+document.createElement("button");
+
+deleteButton.className=
+"admin-delete-btn";
+
+deleteButton.type="button";
+
+deleteButton.textContent=
+"Delete";
+
+deleteButton.onclick=
+function(){
+
+deleteAdminUser(uid,name);
+
+};
+
+actionCell.appendChild(deleteButton);
+
+}
+
+row.appendChild(userCell);
+row.appendChild(roleCell);
+row.appendChild(seenCell);
+row.appendChild(loginCell);
+row.appendChild(actionCell);
+
+body.appendChild(row);
+
+});
+
+}
+
+function formatAdminDate(value){
+
+if(!value)return"Never";
+
+let date=null;
+
+try{
+
+if(
+value&&
+typeof value.toDate==="function"
+){
+
+date=value.toDate();
+
+}else if(
+typeof value==="string"||
+typeof value==="number"
+){
+
+date=new Date(value);
+
+}
+
+}catch(error){
+
+date=null;
+
+}
+
+if(
+!date||
+Number.isNaN(date.getTime())
+){
+
+return"Recent";
+
+}
+
+return date.toLocaleString(
+"en-IN",
+{
+day:"2-digit",
+month:"short",
+year:"numeric",
+hour:"2-digit",
+minute:"2-digit"
+}
+);
+
+}
+
+async function deleteAdminUser(uid,name){
+
+if(!isAdmin()){
+
+showToast("Admin access required.");
+
+return;
+
+}
+
+if(!uid){
+
+showToast("User ID not found.");
+
+return;
+
+}
+
+if(uid===currentUser.uid){
+
+showToast("You cannot delete your own admin account.");
+
+return;
+
+}
+
+const confirmed=
+confirm(
+"Delete this user?\n\n"+
+(name||"Bolo AI User")+
+"\n\nThis will remove the user's Bolo AI profile and Firebase account."
+);
+
+if(!confirmed)return;
+
+try{
+
+await adminFetch(
+"/api/admin/users/"+encodeURIComponent(uid),
+{
+method:"DELETE"
+}
+);
+
+showToast("User deleted successfully.");
+
+await loadAdminDashboard();
+
+}catch(error){
+
+console.error(
+"Delete user error:",
+error
+);
+
+showToast(
+error.message||
+"Could not delete user."
+);
+
+}
+
+}
+
+/* =========================================================
+   USER ACTIVITY
+   ========================================================= */
+
+async function trackUserActivity(){
+
+if(!currentUser)return;
+
+try{
+
+const token=
+await currentUser.getIdToken();
+
+await fetch(
+BACKEND_URL+"/api/user/activity",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json",
+Authorization:"Bearer "+token
+},
+body:JSON.stringify({
+
+name:
+currentUser.displayName||
+"Bolo AI User",
+
+email:
+currentUser.email||
+"",
+
+photoURL:
+currentUser.photoURL||
+""
+
+})
+}
+);
+
+}catch(error){
+
+console.warn(
+"User activity tracking:",
+error
+);
+
+}
+
+}
+
+function startUserHeartbeat(){
+
+stopUserHeartbeat();
+
+if(!currentUser)return;
+
+heartbeatTimer=
+setInterval(
+sendUserHeartbeat,
+5*60*1000
+);
+
+sendUserHeartbeat();
+
+}
+
+function stopUserHeartbeat(){
+
+if(heartbeatTimer){
+
+clearInterval(
+heartbeatTimer
+);
+
+heartbeatTimer=null;
+
+}
+
+}
+
+async function sendUserHeartbeat(){
+
+if(!currentUser)return;
+
+try{
+
+const token=
+await currentUser.getIdToken();
+
+await fetch(
+BACKEND_URL+"/api/user/heartbeat",
+{
+method:"POST",
+headers:{
+Authorization:"Bearer "+token
+}
+}
+);
+
+}catch(error){
+
+console.warn(
+"Heartbeat:",
+error
+);
+
+}
+
+}
+
+async function trackAIMessage(){
+
+if(!currentUser)return;
+
+try{
+
+const token=
+await currentUser.getIdToken();
+
+await fetch(
+BACKEND_URL+"/api/analytics/message",
+{
+method:"POST",
+headers:{
+Authorization:"Bearer "+token
+}
+}
+);
+
+}catch(error){
+
+console.warn(
+"AI message analytics:",
+error
+);
+
+}
+
+}
+
+/* =========================================================
+   AUTH
+   ========================================================= */
 
 function openAuth(){
+
+closeCornerMenu();
 
 $("authModal").classList.add("show");
 
@@ -820,7 +2960,13 @@ $("authModal").classList.add("show");
 
 function closeModal(id){
 
-$(id).classList.remove("show");
+const element=$(id);
+
+if(element){
+
+element.classList.remove("show");
+
+}
 
 }
 
@@ -828,7 +2974,10 @@ function switchAuthMode(event){
 
 if(event)event.preventDefault();
 
-authMode=authMode==="login"?"signup":"login";
+authMode=
+authMode==="login"?
+"signup":
+"login";
 
 if(authMode==="login"){
 
@@ -1017,18 +3166,7 @@ return;
 
 }
 
-$("accountInfo").innerHTML=
-"<strong>"+
-escapeHtml(
-currentUser.displayName||
-"Bolo AI User"
-)+
-"</strong>"+
-"<br><span style='color:#6b7280'>"+
-escapeHtml(
-currentUser.email||""
-)+
-"</span>";
+updateProfileUI();
 
 $("accountModal").classList.add("show");
 
@@ -1045,8 +3183,10 @@ await firebase.auth().signOut();
 currentChatId=null;
 
 closeModal("accountModal");
-
+closeModal("profileModal");
+closeModal("settingsModal");
 closeModal("historyModal");
+closeModal("adminModal");
 
 showToast("Logged out successfully.");
 
@@ -1120,11 +3260,6 @@ firebase.firestore.FieldValue.serverTimestamp()
 });
 
 currentChatId=chatRef.id;
-
-/*
-Save the first user message in the messages subcollection.
-We intentionally do not save the Base64 photo.
-*/
 
 await chatRef
 .collection("messages")
@@ -1599,19 +3734,14 @@ showToast(
 
 }
 
-/* CHAT */
+/* =========================================================
+   CHAT
+   ========================================================= */
 
 let selectedPhoto=null;
 let recognition=null;
 
-/*
-IMPORTANT:
-Chat is available ONLY after Firebase login.
-*/
-
 async function sendChat(){
-
-/* LOGIN CHECK */
 
 if(!currentUser){
 
@@ -1653,10 +3783,6 @@ $("chatStatus").textContent=
 "Bolo AI is thinking…";
 
 $("sendBtn").disabled=true;
-
-/*
-Create history only when the conversation gets its first message.
-*/
 
 let chatId=currentChatId;
 
@@ -1735,10 +3861,6 @@ reply,
 "assistant"
 );
 
-/*
-Save AI reply to the same conversation.
-*/
-
 if(chatId){
 
 await saveChatMessage(
@@ -1749,6 +3871,10 @@ false
 );
 
 }
+
+/* COUNT AI MESSAGE */
+
+trackAIMessage();
 
 if(voiceReplyEnabled){
 
@@ -1767,10 +3893,6 @@ addMessage(
 "Sorry, I could not connect to Bolo AI right now. Please check your Render backend.",
 "assistant"
 );
-
-/*
-Do not save the connection error as an AI response.
-*/
 
 }finally{
 
@@ -1879,7 +4001,9 @@ $("chatMessages").scrollHeight;
 
 }
 
-/* PHOTO */
+/* =========================================================
+   PHOTO
+   ========================================================= */
 
 function handlePhoto(event){
 
@@ -1943,13 +4067,11 @@ $("photoInput").value="";
 
 }
 
-/* VOICE INPUT */
+/* =========================================================
+   VOICE INPUT
+   ========================================================= */
 
 function startVoice(){
-
-/*
-Voice chat also requires login.
-*/
 
 if(!currentUser){
 
@@ -2053,7 +4175,9 @@ console.error(error);
 
 }
 
-/* VOICE REPLY */
+/* =========================================================
+   VOICE REPLY
+   ========================================================= */
 
 let voiceReplyEnabled=
 localStorage.getItem(
@@ -2117,8 +4241,6 @@ currentlySpeaking
 }
 
 function toggleVoiceReply(){
-
-/* Voice reply can be used only after login */
 
 if(!currentUser){
 
@@ -2295,13 +4417,11 @@ updateVoiceReplyUI
 
 updateVoiceReplyUI();
 
-/* IMAGE GENERATOR */
+/* =========================================================
+   IMAGE GENERATOR
+   ========================================================= */
 
 async function generateImage(){
-
-/*
-Image generation also requires login.
-*/
 
 if(!currentUser){
 
@@ -2401,6 +4521,8 @@ prompt,
 image
 );
 
+trackAIMessage();
+
 showToast(
 "Image created successfully."
 );
@@ -2422,7 +4544,9 @@ button.textContent="Create";
 
 }
 
-/* QUICK PROMPTS */
+/* =========================================================
+   QUICK PROMPTS
+   ========================================================= */
 
 function usePrompt(prompt){
 
@@ -2450,7 +4574,9 @@ behavior:"smooth"
 
 }
 
-/* THEME */
+/* =========================================================
+   THEME
+   ========================================================= */
 
 let savedTheme=
 localStorage.getItem("boloTheme")||
@@ -2492,7 +4618,9 @@ applyTheme();
 
 applyTheme();
 
-/* MOCK PREMIUM */
+/* =========================================================
+   MOCK PREMIUM
+   ========================================================= */
 
 function startMockPayment(){
 
@@ -2528,7 +4656,9 @@ showToast(
 
 }
 
-/* KEYBOARD */
+/* =========================================================
+   KEYBOARD
+   ========================================================= */
 
 $("chatInput").addEventListener(
 "keydown",
@@ -2561,7 +4691,9 @@ this.scrollHeight,
 
 });
 
-/* PWA */
+/* =========================================================
+   PWA
+   ========================================================= */
 
 let deferredInstallPrompt=null;
 
@@ -2587,7 +4719,9 @@ showToast(
 
 });
 
-/* SERVICE WORKER */
+/* =========================================================
+   SERVICE WORKER
+   ========================================================= */
 
 if("serviceWorker" in navigator){
 
@@ -2612,7 +4746,9 @@ error
 
 }
 
-/* STARTUP */
+/* =========================================================
+   STARTUP
+   ========================================================= */
 
 window.addEventListener(
 "load",
@@ -2622,8 +4758,11 @@ updateVoiceReplyUI();
 
 updateAuthUI();
 
-});
+updateProfileUI();
 
+updateAdminMenu();
+
+});
 </script>
 
 </body>
