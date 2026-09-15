@@ -5,346 +5,442 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#6d28d9">
-<meta name="description" content="Bolo AI — your own AI assistant for chat, photos, voice, images, writing, lyrics, YouTube and more.">
+<meta name="description" content="Bolo AI — Your Own AI Assistant">
 <link rel="manifest" href="/manifest.json">
+
 <title>Bolo AI — Your Own AI Assistant</title>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
 
 body{
   font-family:Inter,Arial,sans-serif;
-  background:radial-gradient(circle at top left,#26104b,#0b0712 38%,#050409 100%);
+  min-height:100vh;
+  background:radial-gradient(circle at top left,#28104d,#0b0712 40%,#050409 100%);
   color:#fff;
-  min-height:100vh
-}
-
-button,input,textarea{font:inherit}
-button{cursor:pointer}
-a{color:inherit;text-decoration:none}
-
-:root{
-  --card:#15101f;
-  --card2:#1c1528;
-  --line:rgba(255,255,255,.09);
-  --muted:#aaa4b6;
-  --brand:#7c3aed;
-  --brand2:#4f46e5
 }
 
 body.light{
-  background:#f5f3fa;
-  color:#15121d;
-  --card:#fff;
-  --card2:#f2eef9;
-  --line:rgba(20,10,40,.12);
-  --muted:#665f70
+  background:#f4f2f8;
+  color:#17131d;
 }
 
-body.light .nav,
-body.light .card,
-body.light .chat-card,
-body.light .generator,
-body.light .tool,
-body.light .modalbox{
-  background:rgba(255,255,255,.9)
+button,
+input,
+textarea,
+select{
+  font:inherit;
 }
 
-body.light textarea,
-body.light input{
-  background:#f7f5fb;
-  color:#111
+button{
+  cursor:pointer;
 }
 
-.nav{
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar{
   position:sticky;
   top:0;
   z-index:1000;
-  background:rgba(7,5,12,.84);
+  background:rgba(8,5,13,.86);
   backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--line)
+  border-bottom:1px solid rgba(255,255,255,.08);
 }
 
-.navin{
-  max-width:1200px;
+body.light .navbar{
+  background:rgba(255,255,255,.9);
+  border-color:#ddd8e5;
+}
+
+.container{
+  width:min(1200px,calc(100% - 28px));
   margin:auto;
-  padding:11px 16px;
+}
+
+.nav-inner{
+  min-height:68px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:12px
+  gap:12px;
 }
 
-.logo{
+.brand{
   display:flex;
   align-items:center;
-  gap:9px;
-  font-size:20px;
-  font-weight:900
-}
-
-.logo b{
-  width:38px;
-  height:38px;
-  display:grid;
-  place-items:center;
-  border-radius:12px;
-  background:linear-gradient(135deg,#8b5cf6,#4f46e5)
-}
-
-.actions{
-  display:flex;
-  align-items:center;
-  gap:7px
-}
-
-.btn,.icon{
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.06);
-  color:inherit;
-  border-radius:11px;
-  padding:9px 13px;
-  font-weight:750
-}
-
-.primary{
-  border:0;
-  background:linear-gradient(135deg,var(--brand),var(--brand2));
-  color:#fff;
-  box-shadow:0 8px 24px rgba(79,70,229,.22)
-}
-
-.icon{
-  width:42px;
-  height:42px;
-  padding:0;
-  display:grid;
-  place-items:center;
-  font-size:18px
-}
-
-.menu{
-  position:relative
-}
-
-.drop{
-  position:absolute;
-  right:0;
-  top:49px;
-  width:240px;
-  background:#17111f;
-  border:1px solid var(--line);
-  border-radius:15px;
-  padding:7px;
-  display:none;
-  box-shadow:0 25px 70px #0008
-}
-
-.drop.show{
-  display:block
-}
-
-.drop button{
-  display:block;
-  width:100%;
-  text-align:left;
-  background:none;
-  border:0;
-  color:#eee;
-  padding:11px;
-  border-radius:9px
-}
-
-.drop button:hover{
-  background:#ffffff10
-}
-
-.hero{
-  max-width:1200px;
-  margin:auto;
-  text-align:center;
-  padding:75px 18px 55px
-}
-
-.badge{
-  display:inline-block;
-  padding:8px 13px;
-  border-radius:999px;
-  background:#7c3aed22;
-  border:1px solid #a78bfa44;
-  color:#d8c9ff;
-  font-weight:800;
-  font-size:13px
-}
-
-.hero h1{
-  font-size:clamp(42px,8vw,78px);
-  line-height:1;
-  margin-top:18px;
-  letter-spacing:-3px
-}
-
-.grad{
-  background:linear-gradient(90deg,#c084fc,#818cf8,#60a5fa);
-  background-clip:text;
-  -webkit-background-clip:text;
-  color:transparent
-}
-
-.hero p{
-  max-width:760px;
-  margin:22px auto;
-  color:var(--muted);
-  font-size:18px;
-  line-height:1.65
-}
-
-.heroBtns{
-  display:flex;
-  justify-content:center;
   gap:10px;
-  flex-wrap:wrap
+  font-size:21px;
+  font-weight:900;
 }
 
-.section{
-  max-width:1200px;
-  margin:auto;
-  padding:55px 18px
-}
-
-.title{
-  text-align:center;
-  margin-bottom:28px
-}
-
-.title h2{
-  font-size:32px;
-  margin-bottom:8px
-}
-
-.title p{
-  color:var(--muted)
-}
-
-.chat-card{
-  max-width:900px;
-  margin:auto;
-  background:rgba(20,14,30,.82);
-  border:1px solid var(--line);
-  border-radius:22px;
-  overflow:hidden;
-  box-shadow:0 25px 90px #0004
-}
-
-.chat-head{
-  padding:16px 18px;
-  border-bottom:1px solid var(--line);
-  display:flex;
-  align-items:center;
-  gap:11px
-}
-
-.avatar{
+.brand-logo{
   width:42px;
   height:42px;
   border-radius:13px;
   display:grid;
   place-items:center;
-  background:linear-gradient(135deg,var(--brand),var(--brand2))
+  background:linear-gradient(135deg,#7c3aed,#4f46e5);
+  font-size:24px;
+  box-shadow:0 8px 24px rgba(92,52,220,.25);
+}
+
+.nav-actions{
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.nav-btn{
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.06);
+  color:#fff;
+  border-radius:13px;
+  padding:10px 14px;
+  font-weight:800;
+}
+
+body.light .nav-btn{
+  color:#17131d;
+  background:#fff;
+  border-color:#ddd8e5;
+}
+
+.nav-btn.primary{
+  border:0;
+  background:linear-gradient(135deg,#7c3aed,#4f46e5);
+  color:#fff;
+}
+
+.menu-btn{
+  width:46px;
+  height:46px;
+  padding:0;
+  font-size:28px;
+  line-height:1;
+  display:grid;
+  place-items:center;
+}
+
+/* =========================
+   3 DOT MENU
+========================= */
+
+.nav-menu{
+  position:absolute;
+  top:56px;
+  right:0;
+  width:260px;
+  background:#18111f;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:17px;
+  padding:8px;
+  box-shadow:0 25px 70px rgba(0,0,0,.5);
+  display:none;
+}
+
+.nav-menu.show{
+  display:block;
+}
+
+body.light .nav-menu{
+  background:#fff;
+  border-color:#ddd8e5;
+  box-shadow:0 20px 50px rgba(0,0,0,.15);
+}
+
+.nav-menu button{
+  width:100%;
+  border:0;
+  background:transparent;
+  color:#fff;
+  text-align:left;
+  padding:13px 12px;
+  border-radius:11px;
+  font-weight:750;
+}
+
+body.light .nav-menu button{
+  color:#17131d;
+}
+
+.nav-menu button:hover{
+  background:rgba(124,58,237,.12);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  max-width:1200px;
+  margin:auto;
+  padding:75px 18px 55px;
+  text-align:center;
+}
+
+.badge{
+  display:inline-block;
+  padding:8px 14px;
+  border-radius:999px;
+  background:#7c3aed20;
+  border:1px solid #a78bfa45;
+  color:#d9ccff;
+  font-size:13px;
+  font-weight:800;
+}
+
+.hero h1{
+  margin-top:18px;
+  font-size:clamp(43px,8vw,78px);
+  line-height:1;
+  letter-spacing:-3px;
+}
+
+.gradient{
+  background:linear-gradient(90deg,#c084fc,#818cf8,#60a5fa);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.hero p{
+  max-width:760px;
+  margin:22px auto;
+  color:#aaa4b6;
+  line-height:1.65;
+  font-size:18px;
+}
+
+.hero-buttons{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+/* =========================
+   GENERAL
+========================= */
+
+.section{
+  max-width:1200px;
+  margin:auto;
+  padding:55px 18px;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:28px;
+}
+
+.section-title h2{
+  font-size:32px;
+  margin-bottom:8px;
+}
+
+.section-title p{
+  color:#aaa4b6;
+}
+
+.card,
+.tool,
+.price,
+.generator{
+  background:rgba(20,14,30,.78);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;
+  padding:20px;
+}
+
+body.light .card,
+body.light .tool,
+body.light .price,
+body.light .generator{
+  background:#fff;
+  color:#17131d;
+  border-color:#e1dce8;
+}
+
+.features,
+.tools,
+.quick,
+.plans{
+  display:grid;
+  gap:14px;
+}
+
+.features{
+  grid-template-columns:repeat(3,1fr);
+}
+
+.tools{
+  grid-template-columns:repeat(3,1fr);
+}
+
+.quick{
+  grid-template-columns:repeat(4,1fr);
+}
+
+.plans{
+  grid-template-columns:repeat(2,1fr);
+  max-width:900px;
+  margin:auto;
+}
+
+.card .feature-icon{
+  font-size:28px;
+  margin-bottom:10px;
+}
+
+.card p,
+.tool span{
+  color:#aaa4b6;
+  line-height:1.55;
+}
+
+/* =========================
+   CHAT
+========================= */
+
+.chat-card{
+  max-width:920px;
+  margin:auto;
+  overflow:hidden;
+  border-radius:24px;
+  background:#fff;
+  border:1px solid #e2dde8;
+  box-shadow:0 25px 80px rgba(0,0,0,.16);
+}
+
+.chat-head{
+  min-height:76px;
+  padding:15px 18px;
+  display:flex;
+  align-items:center;
+  gap:11px;
+  background:#fff;
+  border-bottom:1px solid #e7e2ea;
+  color:#17131d;
+}
+
+.chat-avatar{
+  width:46px;
+  height:46px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,#7c3aed,#4f46e5);
+  font-size:25px;
 }
 
 .chat-head small{
   display:block;
-  color:#8f889d;
-  margin-top:2px
+  color:#8b8494;
+  margin-top:2px;
 }
 
-/* =========================================
-   CLEAN CHAT AREA
-   Black/dark chat box removed
-   ========================================= */
-
+/* IMPORTANT:
+   No dark chat box */
 .messages{
   height:470px;
-  overflow:auto;
-  padding:18px;
-  background:#ffffff !important;
-  color:#171717 !important
+  overflow-y:auto;
+  padding:20px;
+  background:#fff !important;
+  color:#171717 !important;
 }
 
 .msg{
   display:flex;
-  margin-bottom:14px
+  margin-bottom:15px;
 }
 
 .msg.user{
-  justify-content:flex-end
+  justify-content:flex-end;
 }
 
 .bubble{
   max-width:82%;
-  padding:12px 14px;
-  border-radius:16px;
-  line-height:1.55;
-  white-space:pre-wrap;
-  word-break:break-word;
-  background:#ffffff !important;
+  padding:12px 15px;
+  border-radius:18px;
+  background:#fff !important;
   color:#171717 !important;
-  border:1px solid #e7e3ec !important;
-  box-shadow:none !important
+  border:0 !important;
+  box-shadow:none !important;
+  line-height:1.6;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
 }
 
-.user .bubble{
+.msg.user .bubble{
   background:#f1eff5 !important;
   color:#171717 !important;
-  border:1px solid #e1dce8 !important
 }
 
 .bubble img{
-  max-width:250px;
-  max-height:280px;
-  border-radius:12px;
   display:block;
-  margin-top:8px
+  max-width:270px;
+  max-height:320px;
+  object-fit:cover;
+  border-radius:13px;
+  margin-top:9px;
 }
 
-.bubbleActions{
+.bubble-actions{
   display:flex;
   gap:6px;
-  margin-top:8px
+  margin-top:8px;
 }
 
-.mini{
-  font-size:12px;
+.mini-btn{
   border:1px solid #ded9e5;
-  background:#f5f3f8;
+  background:#f7f5f9;
   color:#333;
   border-radius:8px;
-  padding:5px 8px
+  padding:5px 8px;
+  font-size:12px;
 }
 
-.inputArea{
+.chat-input-area{
   padding:14px;
-  border-top:1px solid var(--line);
-  background:#ffffff
+  background:#fff;
+  border-top:1px solid #e7e2ea;
 }
 
 .preview{
   display:none;
   position:relative;
   width:max-content;
-  margin-bottom:9px
+  margin-bottom:9px;
 }
 
 .preview img{
-  width:82px;
-  height:82px;
+  width:84px;
+  height:84px;
   object-fit:cover;
-  border-radius:12px
+  border-radius:12px;
 }
 
-.remove{
+.remove-photo{
   position:absolute;
   right:-7px;
   top:-7px;
@@ -353,452 +449,686 @@ body.light input{
   border:0;
   border-radius:50%;
   background:#ef4444;
-  color:#fff
+  color:#fff;
 }
 
 .composer{
   display:flex;
   align-items:flex-end;
-  gap:7px
+  gap:7px;
 }
 
 .composer textarea{
   flex:1;
-  min-height:48px;
+  min-height:50px;
   max-height:150px;
   resize:none;
-  border-radius:14px;
-  border:1px solid #ddd7e7;
-  background:#f7f5fb;
-  color:#171717;
   padding:13px;
-  outline:0
+  border-radius:15px;
+  border:1px solid #ddd7e7;
+  background:#f8f6fa;
+  color:#171717;
+  outline:none;
 }
 
 .composer textarea:focus{
-  border-color:#8b5cf6
+  border-color:#8b5cf6;
 }
 
-.photo,.mic{
-  width:48px;
-  height:48px;
+.circle-btn{
+  width:50px;
+  height:50px;
   border:0;
-  border-radius:13px;
+  border-radius:14px;
   background:#21182d;
   color:#fff;
-  font-size:19px
+  font-size:19px;
 }
 
-.send{
-  height:48px;
-  padding:0 16px;
+.send-btn{
+  height:50px;
+  padding:0 18px;
   border:0;
-  border-radius:13px;
-  background:linear-gradient(135deg,var(--brand),var(--brand2));
+  border-radius:14px;
+  background:linear-gradient(135deg,#7c3aed,#4f46e5);
   color:#fff;
-  font-weight:900
+  font-weight:900;
 }
 
 .status{
+  min-height:17px;
+  margin-top:7px;
+  color:#8b8494;
   font-size:12px;
-  color:#8e8798;
-  margin-top:8px;
-  min-height:16px
 }
 
-.features,.tools,.quick,.plans{
-  display:grid;
-  gap:14px
-}
-
-.features{
-  grid-template-columns:repeat(3,1fr)
-}
-
-.tools{
-  grid-template-columns:repeat(3,1fr)
-}
-
-.quick{
-  grid-template-columns:repeat(4,1fr)
-}
-
-.plans{
-  grid-template-columns:repeat(2,1fr);
-  max-width:900px;
-  margin:auto
-}
-
-.card,.tool,.price,.generator{
-  background:rgba(20,14,30,.76);
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:20px
-}
-
-.card:hover,.tool:hover{
-  transform:translateY(-2px);
-  border-color:#8b5cf655
-}
-
-.card .ico{
-  font-size:28px;
-  margin-bottom:12px
-}
-
-.card p,.tool span{
-  color:var(--muted);
-  line-height:1.55
-}
-
-.tool{
-  cursor:pointer
-}
-
-.tool strong{
-  display:block;
-  margin-bottom:6px
-}
-
-.quick button{
-  padding:16px;
-  border:1px solid var(--line);
-  border-radius:14px;
-  background:var(--card);
-  color:inherit;
-  font-weight:800
-}
-
-.generator{
-  max-width:900px;
-  margin:auto
-}
+/* =========================
+   IMAGE GENERATOR
+========================= */
 
 .generator textarea{
   width:100%;
-  min-height:110px;
-  border:1px solid var(--line);
-  border-radius:13px;
-  background:#0c0912;
-  color:#fff;
+  min-height:115px;
   padding:14px;
+  border-radius:13px;
+  border:1px solid rgba(255,255,255,.1);
+  background:#0d0912;
+  color:#fff;
   resize:vertical;
-  outline:0
 }
 
-.genRow{
+.gen-row{
   display:flex;
   gap:9px;
   margin-top:10px;
-  flex-wrap:wrap
+  flex-wrap:wrap;
 }
 
-.genResult{
-  margin-top:16px;
-  min-height:20px
+.gen-result{
+  margin-top:17px;
 }
 
-.genResult img{
+.gen-result img{
   width:100%;
   max-height:650px;
   object-fit:contain;
   border-radius:15px;
-  background:#08060c
 }
 
-.loading{
-  padding:18px;
-  text-align:center;
-  color:#cfc8db
+/* =========================
+   BUTTONS
+========================= */
+
+.btn{
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.06);
+  color:inherit;
+  border-radius:12px;
+  padding:10px 14px;
+  font-weight:800;
 }
 
-.price h3{
-  font-size:23px
+.btn.primary{
+  border:0;
+  color:#fff;
+  background:linear-gradient(135deg,#7c3aed,#4f46e5);
 }
 
-.price .amount{
-  font-size:42px;
-  font-weight:900;
-  margin:14px 0
+.quick button{
+  border:1px solid rgba(255,255,255,.09);
+  background:var(--card,#17111f);
+  color:inherit;
+  border-radius:14px;
+  padding:16px;
+  font-weight:800;
 }
 
-.price ul{
-  list-style:none
-}
-
-.price li{
-  padding:7px 0;
-  color:#c9c2d2
-}
-
-.featured{
-  border-color:#8b5cf6
-}
-
-.about{
-  max-width:900px;
-  margin:auto
-}
-
-.about .card{
-  margin-bottom:12px
-}
-
-.policy h3{
-  margin-bottom:7px
-}
-
-.policy p{
-  color:var(--muted);
-  line-height:1.6
-}
-
-footer{
-  text-align:center;
-  padding:45px 18px;
-  border-top:1px solid var(--line);
-  color:#81798d
-}
-
-.footerlinks{
-  display:flex;
-  justify-content:center;
-  gap:15px;
-  flex-wrap:wrap;
-  margin-top:12px
-}
+/* =========================
+   MODALS
+========================= */
 
 .modal{
   position:fixed;
   inset:0;
-  background:#000b;
-  backdrop-filter:blur(8px);
   z-index:3000;
   display:none;
   align-items:center;
   justify-content:center;
-  padding:18px
+  padding:16px;
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(8px);
 }
 
 .modal.show{
-  display:flex
+  display:flex;
 }
 
-.modalbox{
+.modal-box{
   width:100%;
-  max-width:430px;
-  background:#17111f;
-  border:1px solid var(--line);
-  border-radius:20px;
-  padding:23px
+  max-width:470px;
+  max-height:92vh;
+  overflow:auto;
+  background:#18111f;
+  color:#fff;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:21px;
+  padding:22px;
+  box-shadow:0 30px 90px rgba(0,0,0,.5);
 }
 
-.modalbox input{
+.modal-box.wide{
+  max-width:1000px;
+}
+
+body.light .modal-box{
+  background:#fff;
+  color:#17131d;
+  border-color:#ddd8e5;
+}
+
+.close-btn{
+  float:right;
+  width:34px;
+  height:34px;
+  border:0;
+  background:transparent;
+  color:#aaa;
+  font-size:24px;
+}
+
+.form-input,
+.form-select{
   width:100%;
-  padding:13px;
+  padding:12px;
   margin:7px 0;
   border-radius:11px;
-  border:1px solid var(--line);
-  background:#0b0811;
-  color:#fff
+  border:1px solid rgba(255,255,255,.1);
+  background:#0c0912;
+  color:#fff;
+  outline:none;
 }
 
-.close{
-  float:right;
-  border:0;
-  background:none;
-  color:#aaa;
-  font-size:22px
+body.light .form-input,
+body.light .form-select{
+  background:#f7f5fb;
+  color:#17131d;
+  border-color:#ddd8e5;
 }
+
+/* =========================
+   PROFILE
+========================= */
+
+.profile-center{
+  text-align:center;
+}
+
+.profile-photo{
+  width:96px;
+  height:96px;
+  border-radius:50%;
+  object-fit:cover;
+  border:4px solid #7c3aed;
+  margin:10px auto 13px;
+  display:block;
+  background:#eee;
+}
+
+.role-badge{
+  display:inline-block;
+  margin-top:7px;
+  padding:5px 10px;
+  border-radius:999px;
+  background:#7c3aed18;
+  color:#8b5cf6;
+  font-size:12px;
+  font-weight:800;
+}
+
+/* =========================
+   SETTINGS
+========================= */
+
+.setting-row{
+  margin-top:14px;
+}
+
+.setting-row label{
+  display:block;
+  font-size:13px;
+  font-weight:800;
+  margin-bottom:5px;
+}
+
+.toggle-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px;
+  border-radius:12px;
+  background:rgba(124,58,237,.08);
+}
+
+/* =========================
+   ADMIN
+========================= */
+
+.admin-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.admin-profile{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:15px 0;
+  padding:13px;
+  border-radius:15px;
+  background:rgba(124,58,237,.08);
+}
+
+.admin-profile img{
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  object-fit:cover;
+}
+
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin:15px 0;
+}
+
+.stat-card{
+  padding:17px;
+  border-radius:15px;
+  background:linear-gradient(135deg,#7c3aed16,#4f46e516);
+  border:1px solid #7c3aed22;
+}
+
+.stat-card small{
+  color:#999;
+}
+
+.stat-card strong{
+  display:block;
+  font-size:28px;
+  margin-top:5px;
+}
+
+.users-table-wrap{
+  overflow:auto;
+  border:1px solid rgba(128,128,128,.15);
+  border-radius:14px;
+}
+
+.users-table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:720px;
+}
+
+.users-table th,
+.users-table td{
+  padding:11px;
+  border-bottom:1px solid rgba(128,128,128,.12);
+  text-align:left;
+  font-size:13px;
+}
+
+.user-cell{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.user-cell img{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  object-fit:cover;
+  background:#ddd;
+}
+
+.delete-user{
+  border:0;
+  background:#ef4444;
+  color:#fff;
+  border-radius:8px;
+  padding:6px 9px;
+  font-size:12px;
+}
+
+/* =========================
+   TOAST
+========================= */
 
 .toast{
   position:fixed;
-  z-index:5000;
-  bottom:22px;
   left:50%;
+  bottom:22px;
+  z-index:6000;
   transform:translate(-50%,130px);
-  transition:.25s;
-  background:#21182d;
-  border:1px solid var(--line);
   padding:12px 16px;
   border-radius:12px;
-  box-shadow:0 15px 50px #0008
+  background:#21182d;
+  color:#fff;
+  border:1px solid rgba(255,255,255,.1);
+  transition:.25s;
+  box-shadow:0 20px 60px rgba(0,0,0,.4);
 }
 
 .toast.show{
-  transform:translate(-50%,0)
+  transform:translate(-50%,0);
 }
 
-@media(max-width:800px){
-  .features,.tools{
-    grid-template-columns:repeat(2,1fr)
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:850px){
+  .features,
+  .tools{
+    grid-template-columns:repeat(2,1fr);
   }
 
   .quick{
-    grid-template-columns:repeat(2,1fr)
+    grid-template-columns:repeat(2,1fr);
   }
 
-  .plans{
-    grid-template-columns:1fr
+  .stats-grid{
+    grid-template-columns:repeat(2,1fr);
   }
 }
 
-@media(max-width:560px){
-  .actions .hideMob{
-    display:none
+@media(max-width:600px){
+
+  .container{
+    width:min(100% - 18px,1200px);
   }
 
-  .logo{
-    font-size:17px
+  .nav-btn.hide-mobile{
+    display:none;
   }
 
-  .logo b{
-    width:34px;
-    height:34px
+  .brand{
+    font-size:18px;
+  }
+
+  .brand-logo{
+    width:38px;
+    height:38px;
   }
 
   .hero{
-    padding-top:55px
+    padding-top:55px;
   }
 
   .hero h1{
-    letter-spacing:-2px
+    letter-spacing:-2px;
   }
 
   .hero p{
-    font-size:16px
+    font-size:16px;
   }
 
-  .features,.tools{
-    grid-template-columns:1fr
+  .features,
+  .tools{
+    grid-template-columns:1fr;
   }
 
   .bubble{
-    max-width:90%
+    max-width:90%;
   }
 
   .messages{
-    height:400px
+    height:400px;
   }
 
   .composer{
-    gap:5px
+    gap:5px;
   }
 
-  .photo,.mic{
-    width:43px
+  .circle-btn{
+    width:43px;
   }
 
-  .send{
-    padding:0 12px
+  .send-btn{
+    padding:0 13px;
+  }
+
+  .stats-grid{
+    grid-template-columns:1fr 1fr;
   }
 }
 </style>
-
-<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
 </head>
 
 <body>
 
-<nav class="nav">
-  <div class="navin">
+<!-- =========================
+     NAVBAR
+========================= -->
 
-    <a class="logo" href="#home">
-      <b>🤖</b>Bolo AI
+<header class="navbar">
+  <div class="container nav-inner">
+
+    <a href="#home" class="brand">
+      <span class="brand-logo">🤖</span>
+      <span>Bolo AI</span>
     </a>
 
-    <div class="actions">
+    <div class="nav-actions">
 
-      <button id="installBtn" class="btn hideMob" style="display:none" onclick="installApp()">
-        📲 Install
+      <button
+        id="themeBtn"
+        class="nav-btn hide-mobile"
+        type="button"
+        onclick="toggleTheme()"
+      >
+        🌙
       </button>
 
-      <button id="loginBtn" class="btn hideMob" onclick="openLogin()">
+      <button
+        id="historyNavBtn"
+        class="nav-btn hide-mobile"
+        type="button"
+        onclick="openHistory()"
+      >
+        📜 History
+      </button>
+
+      <button
+        id="authNavBtn"
+        class="nav-btn"
+        type="button"
+        onclick="openLogin()"
+      >
         Login
       </button>
 
-      <button id="signupBtn" class="btn primary hideMob" onclick="openSignup()">
-        Sign Up
-      </button>
-
-      <button id="accountBtn" class="btn primary" style="display:none" onclick="openAccount()">
+      <button
+        id="accountNavBtn"
+        class="nav-btn primary"
+        type="button"
+        style="display:none"
+        onclick="openProfile()"
+      >
         Account
       </button>
 
-      <div class="menu">
-        <button class="icon" onclick="toggleMenu()">⋮</button>
+      <button
+        class="nav-btn primary hide-mobile"
+        type="button"
+        onclick="testPremium()"
+      >
+        Premium
+      </button>
 
-        <div id="drop" class="drop">
-          <button onclick="go('chat')">💬 AI Chat</button>
-          <button onclick="go('generator')">🎨 AI Image Generator</button>
-          <button onclick="go('tools')">🛠️ AI Tools</button>
-          <button onclick="go('plans')">💎 Premium</button>
-          <button onclick="go('about')">ℹ️ About</button>
-          <button onclick="exportChat()">📥 Export Chat</button>
-          <button onclick="toggleTheme()">🌙/☀️ Theme</button>
-          <button onclick="clearChat()">🧹 Clear Chat</button>
-          <button id="logoutBtn" style="display:none" onclick="logout()">🚪 Logout</button>
+      <!-- Professional vertical 3-dot menu -->
+      <div class="nav-actions">
+        <button
+          id="menuBtn"
+          class="nav-btn menu-btn"
+          type="button"
+          aria-label="Open menu"
+          onclick="toggleNavMenu(event)"
+        >
+          ⋮
+        </button>
+
+        <div id="navMenu" class="nav-menu">
+
+          <button
+            type="button"
+            onclick="openProfile();closeNavMenu()"
+          >
+            👤 Profile
+          </button>
+
+          <button
+            type="button"
+            onclick="openSettings();closeNavMenu()"
+          >
+            ⚙️ Settings
+          </button>
+
+          <button
+            id="adminMenuBtn"
+            type="button"
+            style="display:none"
+            onclick="openAdminDashboard();closeNavMenu()"
+          >
+            🛡️ Admin Dashboard
+          </button>
+
+          <button
+            type="button"
+            onclick="openHistory();closeNavMenu()"
+          >
+            📜 Chat History
+          </button>
+
+          <button
+            type="button"
+            onclick="toggleTheme();closeNavMenu()"
+          >
+            🌙 Theme
+          </button>
+
+          <button
+            type="button"
+            onclick="exportChat();closeNavMenu()"
+          >
+            📥 Export Chat
+          </button>
+
+          <button
+            type="button"
+            onclick="clearChat();closeNavMenu()"
+          >
+            🧹 Clear Chat
+          </button>
+
+          <button
+            id="menuLogoutBtn"
+            type="button"
+            style="display:none"
+            onclick="logout();closeNavMenu()"
+          >
+            🚪 Logout
+          </button>
+
         </div>
       </div>
 
     </div>
   </div>
-</nav>
+</header>
+
+<!-- =========================
+     HERO
+========================= -->
 
 <section id="home" class="hero">
-  <span class="badge">✨ Your Own AI Assistant</span>
+
+  <span class="badge">
+    ✨ Your Own AI Assistant
+  </span>
 
   <h1>
-    Meet <span class="grad">Bolo AI</span>
+    Meet <span class="gradient">Bolo AI</span>
   </h1>
 
   <p>
-    Chat, analyse photos, speak naturally, create images, write lyrics,
-    build YouTube content, translate, code and use powerful AI tools —
-    all in one place.
+    Chat, analyse photos, speak naturally, create images,
+    write lyrics, build YouTube content, translate,
+    code and use powerful AI tools — all in one place.
   </p>
 
-  <div class="heroBtns">
-    <button class="btn primary" onclick="go('chat')">
+  <div class="hero-buttons">
+
+    <button
+      class="btn primary"
+      onclick="goTo('chat')"
+    >
       💬 Start Chatting
     </button>
 
-    <button class="btn" onclick="go('tools')">
+    <button
+      class="btn"
+      onclick="goTo('tools')"
+    >
       🛠️ Explore AI Tools
     </button>
 
-    <button class="btn" onclick="go('generator')">
+    <button
+      class="btn"
+      onclick="goTo('generator')"
+    >
       🎨 Create Image
     </button>
+
   </div>
 </section>
 
+<!-- =========================
+     CHAT
+========================= -->
+
 <section id="chat" class="section">
 
-  <div class="title">
+  <div class="section-title">
     <h2>💬 Chat with Bolo AI</h2>
-    <p>Ask anything, upload a photo or use your voice.</p>
+    <p>
+      Ask anything, upload a photo or use your voice.
+    </p>
   </div>
 
   <div class="chat-card">
 
     <div class="chat-head">
-      <div class="avatar">🤖</div>
+
+      <div class="chat-avatar">
+        🤖
+      </div>
 
       <div>
         <strong>Bolo AI</strong>
         <small>Smart AI Assistant</small>
       </div>
+
     </div>
 
-    <div id="messages" class="messages"></div>
+    <div
+      id="messages"
+      class="messages"
+    ></div>
 
-    <div class="inputArea">
+    <div class="chat-input-area">
 
-      <div id="preview" class="preview">
-        <img id="previewImg">
-        <button class="remove" onclick="removePhoto()">×</button>
+      <div
+        id="preview"
+        class="preview"
+      >
+        <img
+          id="previewImg"
+          alt="Selected photo"
+        >
+
+        <button
+          class="remove-photo"
+          type="button"
+          onclick="removePhoto()"
+        >
+          ×
+        </button>
       </div>
 
       <div class="composer">
@@ -812,7 +1142,8 @@ footer{
         >
 
         <button
-          class="photo"
+          class="circle-btn"
+          type="button"
           title="Upload photo"
           onclick="document.getElementById('file').click()"
         >
@@ -822,12 +1153,13 @@ footer{
         <textarea
           id="input"
           placeholder="Type your message..."
-          onkeydown="keySend(event)"
+          onkeydown="handleEnter(event)"
         ></textarea>
 
         <button
           id="mic"
-          class="mic"
+          class="circle-btn"
+          type="button"
           title="Voice input"
           onclick="startVoice()"
         >
@@ -836,7 +1168,8 @@ footer{
 
         <button
           id="send"
-          class="send"
+          class="send-btn"
+          type="button"
           onclick="sendChat()"
         >
           Send
@@ -844,15 +1177,23 @@ footer{
 
       </div>
 
-      <div id="status" class="status"></div>
+      <div
+        id="status"
+        class="status"
+      ></div>
 
     </div>
+
   </div>
 </section>
 
+<!-- =========================
+     FEATURES
+========================= -->
+
 <section class="section">
 
-  <div class="title">
+  <div class="section-title">
     <h2>Everything in One AI</h2>
     <p>Useful features made simple.</p>
   </div>
@@ -860,37 +1201,37 @@ footer{
   <div class="features">
 
     <div class="card">
-      <div class="ico">💬</div>
+      <div class="feature-icon">💬</div>
       <h3>AI Chat</h3>
       <p>Ask questions and get helpful AI answers.</p>
     </div>
 
     <div class="card">
-      <div class="ico">🖼️</div>
+      <div class="feature-icon">🖼️</div>
       <h3>Photo Understanding</h3>
       <p>Upload a photo and ask Bolo AI to analyse it.</p>
     </div>
 
     <div class="card">
-      <div class="ico">🎙️</div>
+      <div class="feature-icon">🎙️</div>
       <h3>Voice Input</h3>
       <p>Speak naturally and turn your voice into text.</p>
     </div>
 
     <div class="card">
-      <div class="ico">🔊</div>
+      <div class="feature-icon">🔊</div>
       <h3>AI Voice Reply</h3>
       <p>Listen to Bolo AI answers aloud.</p>
     </div>
 
     <div class="card">
-      <div class="ico">🎨</div>
+      <div class="feature-icon">🎨</div>
       <h3>AI Images</h3>
       <p>Create images from your ideas and prompts.</p>
     </div>
 
     <div class="card">
-      <div class="ico">✍️</div>
+      <div class="feature-icon">✍️</div>
       <h3>Creative Tools</h3>
       <p>Writing, lyrics, YouTube, translation, coding and more.</p>
     </div>
@@ -898,9 +1239,13 @@ footer{
   </div>
 </section>
 
+<!-- =========================
+     AI TOOLS
+========================= -->
+
 <section id="tools" class="section">
 
-  <div class="title">
+  <div class="section-title">
     <h2>🛠️ AI Tools</h2>
     <p>Choose a tool and Bolo AI will prepare a smart prompt.</p>
   </div>
@@ -970,9 +1315,13 @@ footer{
   </div>
 </section>
 
+<!-- =========================
+     IMAGE GENERATOR
+========================= -->
+
 <section id="generator" class="section">
 
-  <div class="title">
+  <div class="section-title">
     <h2>🎨 AI Image Generator</h2>
     <p>Describe the image you want Bolo AI to create.</p>
   </div>
@@ -984,7 +1333,7 @@ footer{
       placeholder="Example: A cinematic sunset over the mountains, ultra detailed, dramatic lighting..."
     ></textarea>
 
-    <div class="genRow">
+    <div class="gen-row">
 
       <button
         id="genBtn"
@@ -996,44 +1345,55 @@ footer{
 
       <button
         class="btn"
-        onclick="useExamplePrompt()"
+        onclick="exampleImagePrompt()"
       >
         💡 Example
       </button>
 
     </div>
 
-    <div id="genResult" class="genResult"></div>
+    <div
+      id="genResult"
+      class="gen-result"
+    ></div>
 
   </div>
 </section>
 
+<!-- =========================
+     QUICK AI
+========================= -->
+
 <section class="section">
 
-  <div class="title">
+  <div class="section-title">
     <h2>⚡ Quick AI</h2>
     <p>Start common tasks instantly.</p>
   </div>
 
   <div class="quick">
 
-    <button onclick="quick('YouTube')">▶️ YouTube</button>
-    <button onclick="quick('Lyrics')">🎵 Lyrics</button>
-    <button onclick="quick('Caption')">📱 Caption</button>
-    <button onclick="quick('Image')">🎨 Image</button>
-    <button onclick="quick('Email')">✉️ Email</button>
-    <button onclick="quick('Ideas')">💡 Ideas</button>
-    <button onclick="quick('Study')">📚 Study</button>
-    <button onclick="quick('Code')">💻 Code</button>
+    <button onclick="quickPrompt('YouTube')">▶️ YouTube</button>
+    <button onclick="quickPrompt('Lyrics')">🎵 Lyrics</button>
+    <button onclick="quickPrompt('Caption')">📱 Caption</button>
+    <button onclick="quickPrompt('Image')">🎨 Image</button>
+    <button onclick="quickPrompt('Email')">✉️ Email</button>
+    <button onclick="quickPrompt('Ideas')">💡 Ideas</button>
+    <button onclick="quickPrompt('Study')">📚 Study</button>
+    <button onclick="quickPrompt('Code')">💻 Code</button>
 
   </div>
 </section>
 
+<!-- =========================
+     PREMIUM
+========================= -->
+
 <section id="plans" class="section">
 
-  <div class="title">
+  <div class="section-title">
     <h2>💎 Premium Plans</h2>
-    <p>Try the Premium experience with the current test checkout.</p>
+    <p>Current Premium test flow.</p>
   </div>
 
   <div class="plans">
@@ -1042,52 +1402,41 @@ footer{
 
       <h3>Free</h3>
 
-      <div class="amount">₹0</div>
+      <h2 style="font-size:42px;margin:14px 0">
+        ₹0
+      </h2>
 
-      <ul>
-        <li>✓ AI Chat</li>
-        <li>✓ Basic AI tools</li>
-        <li>✓ Voice input</li>
-        <li>✓ Photo upload</li>
-        <li>✓ Basic image generation</li>
-      </ul>
-
-      <button
-        class="btn"
-        style="margin-top:16px"
-      >
-        Current Plan
-      </button>
+      <p>✓ AI Chat</p>
+      <p>✓ Basic AI tools</p>
+      <p>✓ Voice input</p>
+      <p>✓ Photo upload</p>
+      <p>✓ Basic image generation</p>
 
     </div>
 
-    <div class="price featured">
+    <div class="price">
 
       <h3>Premium 💎</h3>
 
-      <div class="amount">
-        <s style="font-size:18px;color:#8d8498">₹249</s>
+      <h2 style="font-size:42px;margin:14px 0">
         ₹149
-        <small style="font-size:15px"> /month</small>
-      </div>
+        <small style="font-size:15px">/month</small>
+      </h2>
 
-      <ul>
-        <li>✓ Faster AI responses</li>
-        <li>✓ Higher AI usage</li>
-        <li>✓ AI photo understanding</li>
-        <li>✓ AI image generation</li>
-        <li>✓ Advanced AI writing</li>
-        <li>✓ Lyrics & song writing</li>
-        <li>✓ YouTube content tools</li>
-        <li>✓ Priority access to new features</li>
-      </ul>
+      <p>✓ Faster AI responses</p>
+      <p>✓ Higher AI usage</p>
+      <p>✓ AI photo understanding</p>
+      <p>✓ AI image generation</p>
+      <p>✓ Advanced writing</p>
+      <p>✓ Lyrics & song writing</p>
+      <p>✓ YouTube tools</p>
 
       <button
         class="btn primary"
-        style="margin-top:16px"
+        style="margin-top:15px"
         onclick="testPremium()"
       >
-        💎 Get Premium — ₹149/month
+        💎 Get Premium
       </button>
 
     </div>
@@ -1095,97 +1444,59 @@ footer{
   </div>
 </section>
 
-<section id="about" class="section about">
+<!-- =========================
+     ABOUT
+========================= -->
 
-  <div class="title">
+<section class="section">
+
+  <div class="section-title">
     <h2>ℹ️ About Bolo AI</h2>
     <p>Simple, useful and creative AI tools in one place.</p>
   </div>
 
   <div class="card">
+
     <h2>🤖 Bolo AI</h2>
 
-    <h3 style="margin:8px 0">
-      Your Own AI Assistant
-    </h3>
-
-    <p>
-      Bolo AI is your own smart AI assistant for chatting,
-      content creation, photo understanding, voice input,
-      image generation and everyday AI tools.
+    <p style="margin-top:10px">
+      Your Own AI Assistant.
     </p>
 
-    <p style="margin-top:12px">
-      ✨ Created by Sabroj Babu with a focus on making AI simple and useful.
+    <p style="margin-top:10px">
+      Created by Sabroj Babu.
     </p>
 
-    <p style="margin-top:12px">
-      ✉️
-      <a href="mailto:Sabrojalam8454@gmail.com">
-        Sabrojalam8454@gmail.com
-      </a>
+    <p style="margin-top:10px">
+      ✉️ Sabrojalam8454@gmail.com
     </p>
+
   </div>
-
-  <div class="card policy">
-    <h3>🔒 Privacy Policy</h3>
-    <p>
-      We use account information to provide authentication and app features.
-      Please avoid uploading sensitive or confidential information.
-    </p>
-  </div>
-
-  <div class="card policy">
-    <h3>📜 Terms & Conditions</h3>
-    <p>
-      Use Bolo AI responsibly and only for lawful purposes.
-      AI responses may be inaccurate, so verify important information
-      before relying on them.
-    </p>
-  </div>
-
-  <div class="card policy">
-    <h3>🛡️ Content Policy</h3>
-    <p>
-      Do not use Bolo AI for illegal, harmful, abusive, deceptive
-      or rights-infringing content. Upload only content that you have
-      permission to use.
-    </p>
-  </div>
-
-  <div class="card policy">
-    <h3>🤖 AI Usage Policy</h3>
-    <p>
-      AI-generated answers and images are automated and may contain mistakes.
-      Review AI output before publishing, sharing or using them for important decisions.
-    </p>
-  </div>
-
 </section>
 
-<footer>
+<!-- =========================
+     FOOTER
+========================= -->
 
+<footer style="text-align:center;padding:45px 18px;color:#888">
   <strong>© 2026 Bolo AI</strong>
-
-  <div>
-    Created by Sabroj Babu
-  </div>
-
-  <div class="footerlinks">
-    <a href="#about">Privacy</a>
-    <a href="#about">Terms</a>
-    <a href="#about">Content Policy</a>
-    <a href="mailto:Sabrojalam8454@gmail.com">Contact</a>
-  </div>
-
+  <div style="margin-top:6px">Created by Sabroj Babu</div>
 </footer>
 
-<div id="authModal" class="modal">
+<!-- =========================
+     AUTH MODAL
+========================= -->
 
-  <div class="modalbox">
+<div
+  id="authModal"
+  class="modal"
+  onclick="modalBackgroundClose(event,'authModal')"
+>
+
+  <div class="modal-box">
 
     <button
-      class="close"
+      class="close-btn"
       onclick="closeModal('authModal')"
     >
       ×
@@ -1193,18 +1504,20 @@ footer{
 
     <h2 id="authTitle">Login</h2>
 
-    <p style="color:#aaa;margin:8px 0 14px">
+    <p style="color:#999;margin:8px 0 15px">
       Access your Bolo AI account.
     </p>
 
     <input
       id="email"
+      class="form-input"
       type="email"
       placeholder="Email"
     >
 
     <input
       id="password"
+      class="form-input"
       type="password"
       placeholder="Password"
     >
@@ -1213,7 +1526,7 @@ footer{
       id="authAction"
       class="btn primary"
       style="width:100%;margin-top:7px"
-      onclick="authAction()"
+      onclick="submitAuth()"
     >
       Login
     </button>
@@ -1236,315 +1549,1799 @@ footer{
 
     <p
       id="authSwitch"
-      style="margin-top:13px;color:#aaa"
+      style="margin-top:13px;color:#999"
     ></p>
 
   </div>
 </div>
 
-<div id="accountModal" class="modal">
+<!-- =========================
+     PROFILE MODAL
+========================= -->
 
-  <div class="modalbox">
+<div
+  id="profileModal"
+  class="modal"
+  onclick="modalBackgroundClose(event,'profileModal')"
+>
+
+  <div class="modal-box">
 
     <button
-      class="close"
-      onclick="closeModal('accountModal')"
+      class="close-btn"
+      onclick="closeModal('profileModal')"
     >
       ×
     </button>
 
-    <h2>👤 My Account</h2>
+    <div class="profile-center">
 
-    <p
-      id="accountInfo"
-      style="color:#aaa;margin:12px 0"
-    ></p>
+      <img
+        id="profilePhoto"
+        class="profile-photo"
+        src="/icon-192.png"
+        onerror="this.src='/icon-192.png'"
+        alt="Profile"
+      >
+
+      <h2 id="profileName">
+        Bolo AI User
+      </h2>
+
+      <p
+        id="profileEmail"
+        style="color:#999;margin-top:5px"
+      >
+        Not logged in
+      </p>
+
+      <span
+        id="profileRoleBadge"
+        class="role-badge"
+      >
+        User
+      </span>
+
+      <button
+        class="btn"
+        style="width:100%;margin-top:20px"
+        onclick="openSettings();closeModal('profileModal')"
+      >
+        ⚙️ Open Settings
+      </button>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- =========================
+     SETTINGS MODAL
+========================= -->
+
+<div
+  id="settingsModal"
+  class="modal"
+  onclick="modalBackgroundClose(event,'settingsModal')"
+>
+
+  <div class="modal-box">
+
+    <button
+      class="close-btn"
+      onclick="closeModal('settingsModal')"
+    >
+      ×
+    </button>
+
+    <h2>⚙️ Settings</h2>
+
+    <p style="color:#999;margin:7px 0 15px">
+      Manage your Bolo AI profile and preferences.
+    </p>
+
+    <div class="setting-row">
+
+      <label>
+        Name
+      </label>
+
+      <input
+        id="settingsName"
+        class="form-input"
+        type="text"
+        placeholder="Your name"
+      >
+
+    </div>
+
+    <div class="setting-row">
+
+      <label>
+        Profile Photo URL
+      </label>
+
+      <input
+        id="settingsPhoto"
+        class="form-input"
+        type="url"
+        placeholder="https://..."
+      >
+
+    </div>
+
+    <div class="setting-row">
+
+      <label>
+        Theme
+      </label>
+
+      <select
+        id="settingsTheme"
+        class="form-select"
+      >
+        <option value="dark">Dark</option>
+        <option value="light">Light</option>
+      </select>
+
+    </div>
+
+    <div class="setting-row toggle-row">
+
+      <span>
+        🔊 Voice reply
+      </span>
+
+      <input
+        id="settingsVoice"
+        type="checkbox"
+      >
+
+    </div>
 
     <button
       class="btn primary"
-      style="width:100%"
+      style="width:100%;margin-top:17px"
+      onclick="saveSettings()"
+    >
+      💾 Save Settings
+    </button>
+
+    <button
+      class="btn"
+      style="width:100%;margin-top:8px"
       onclick="logout()"
     >
-      Logout
+      🚪 Logout
     </button>
 
   </div>
 </div>
 
-<div id="toast" class="toast"></div>
+<!-- =========================
+     HISTORY MODAL
+========================= -->
+
+<div
+  id="historyModal"
+  class="modal"
+  onclick="modalBackgroundClose(event,'historyModal')"
+>
+
+  <div class="modal-box wide">
+
+    <button
+      class="close-btn"
+      onclick="closeModal('historyModal')"
+    >
+      ×
+    </button>
+
+    <h2>📜 Chat History</h2>
+
+    <p
+      id="historyStatus"
+      style="color:#999;margin:8px 0 15px"
+    >
+      Your conversations.
+    </p>
+
+    <div id="historyList"></div>
+
+  </div>
+</div>
+
+<!-- =========================
+     ADMIN DASHBOARD
+========================= -->
+
+<div
+  id="adminModal"
+  class="modal"
+  onclick="modalBackgroundClose(event,'adminModal')"
+>
+
+  <div class="modal-box wide">
+
+    <button
+      class="close-btn"
+      onclick="closeModal('adminModal')"
+    >
+      ×
+    </button>
+
+    <div class="admin-header">
+
+      <div>
+        <h2>🛡️ Admin Dashboard</h2>
+        <p style="color:#999;margin-top:5px">
+          Bolo AI administration
+        </p>
+      </div>
+
+      <button
+        class="btn"
+        onclick="loadAdminDashboard()"
+      >
+        🔄 Refresh
+      </button>
+
+    </div>
+
+    <div class="admin-profile">
+
+      <img
+        id="adminPhoto"
+        src="/icon-192.png"
+        onerror="this.src='/icon-192.png'"
+        alt="Admin"
+      >
+
+      <div>
+
+        <strong id="adminName">
+          Sabroj Babu
+        </strong>
+
+        <div
+          id="adminEmail"
+          style="color:#999;font-size:13px"
+        >
+          Sabrojalam8454@gmail.com
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="stats-grid">
+
+      <div class="stat-card">
+        <small>Total Users</small>
+        <strong id="statTotalUsers">0</strong>
+      </div>
+
+      <div class="stat-card">
+        <small>Today Users</small>
+        <strong id="statTodayUsers">0</strong>
+      </div>
+
+      <div class="stat-card">
+        <small>Active Users</small>
+        <strong id="statActiveUsers">0</strong>
+      </div>
+
+      <div class="stat-card">
+        <small>AI Messages</small>
+        <strong id="statMessages">0</strong>
+      </div>
+
+    </div>
+
+    <h3 style="margin:18px 0 10px">
+      👥 Users
+    </h3>
+
+    <div class="users-table-wrap">
+
+      <table class="users-table">
+
+        <thead>
+
+          <tr>
+            <th>User</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Messages</th>
+            <th>Last Seen</th>
+            <th>Action</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="usersTableBody">
+
+          <tr>
+            <td colspan="6">
+              Loading...
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+</div>
+
+<div
+  id="toast"
+  class="toast"
+></div>
 
 <script>
+/* =========================================================
+   BOLO AI CONFIG
+========================================================= */
 
-const BACKEND_URL="https://bolo-ai-backend-cfft.onrender.com";
+const BACKEND_URL =
+  "https://bolo-ai-backend-cfft.onrender.com";
 
-const firebaseConfig={
-  apiKey:"AIzaSyAAztA2xqtWWWKYzzvL9A0UTbk6Pw1-FC8",
+const ADMIN_EMAIL =
+  "Sabrojalam8454@gmail.com";
+
+const firebaseConfig = {
+  apiKey:"AIzaSyAAztA2xqtWWWKYzzlV9A0UTbk6Pw1-FC8",
   authDomain:"bolo-ai-c429f.firebaseapp.com",
   projectId:"bolo-ai-c429f",
   storageBucket:"bolo-ai-c429f.firebasestorage.app",
   messagingSenderId:"168156718400",
-  appId:"1:168156718400:web:086f58868044daef9146a5",
+  appId:"1:168156718:web:086f58868044daef9146a5",
   measurementId:"G-0Q60GF4EPN"
 };
 
-let auth=null,
-    currentUser=null,
-    selectedPhoto=null,
-    recognition=null,
-    deferredPrompt=null;
+/* =========================================================
+   FIREBASE
+========================================================= */
+
+let auth = null;
+let db = null;
+let currentUser = null;
+let currentChatId = null;
+let selectedPhoto = null;
+let recognition = null;
+let deferredPrompt = null;
+let heartbeatTimer = null;
+
+let voiceReplyEnabled =
+  localStorage.getItem("boloVoiceReply") !== "false";
 
 try{
-  firebase.initializeApp(firebaseConfig);
-  auth=firebase.auth();
 
-  auth.onAuthStateChanged(user=>{
-    currentUser=user;
+  firebase.initializeApp(firebaseConfig);
+
+  auth = firebase.auth();
+
+  db = firebase.firestore();
+
+  auth.onAuthStateChanged(async user => {
+
+    currentUser = user || null;
+
     updateAuthUI();
+    updateProfileUI();
+
+    if(currentUser){
+
+      await trackUserActivity();
+
+      startHeartbeat();
+
+    }else{
+
+      stopHeartbeat();
+
+    }
+
   });
 
-}catch(e){
-  console.warn(e);
+}catch(error){
+
+  console.error("Firebase:",error);
+
 }
 
-const $=id=>document.getElementById(id);
+/* =========================================================
+   HELPERS
+========================================================= */
 
-function toast(t){
-  $("toast").textContent=t;
-  $("toast").classList.add("show");
+function $(id){
+  return document.getElementById(id);
+}
+
+function showToast(message){
+
+  const t = $("toast");
+
+  t.textContent = message;
+
+  t.classList.add("show");
 
   setTimeout(()=>{
-    $("toast").classList.remove("show");
+    t.classList.remove("show");
   },2600);
 }
 
-function go(id){
-  document
-    .getElementById(id)
-    ?.scrollIntoView({behavior:"smooth"});
+function goTo(id){
 
-  $("drop").classList.remove("show");
-}
+  const el = $(id);
 
-function toggleMenu(){
-  $("drop").classList.toggle("show");
-}
-
-document.addEventListener("click",e=>{
-  if(!e.target.closest(".menu")){
-    $("drop").classList.remove("show");
+  if(el){
+    el.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
   }
+
+}
+
+function closeModal(id){
+
+  const el = $(id);
+
+  if(el){
+    el.classList.remove("show");
+  }
+
+}
+
+function modalBackgroundClose(event,id){
+
+  if(event.target.id === id){
+    closeModal(id);
+  }
+
+}
+
+/* =========================================================
+   3 DOT MENU
+========================================================= */
+
+function toggleNavMenu(event){
+
+  if(event){
+    event.stopPropagation();
+  }
+
+  $("navMenu").classList.toggle("show");
+}
+
+function closeNavMenu(){
+
+  $("navMenu").classList.remove("show");
+}
+
+document.addEventListener("click",event=>{
+
+  const menu = $("navMenu");
+  const button = $("menuBtn");
+
+  if(
+    menu &&
+    menu.classList.contains("show") &&
+    !menu.contains(event.target) &&
+    event.target !== button
+  ){
+
+    closeNavMenu();
+
+  }
+
 });
 
-function addMessage(text,who="assistant",image=null){
+/* =========================================================
+   AUTH UI
+========================================================= */
 
-  const wrap=document.createElement("div");
-  wrap.className="msg "+who;
+function isAdmin(){
 
-  const b=document.createElement("div");
-  b.className="bubble";
+  return !!currentUser &&
+    String(currentUser.email || "").toLowerCase()
+    === ADMIN_EMAIL.toLowerCase();
 
-  b.textContent=text;
-
-  if(image){
-    const im=document.createElement("img");
-    im.src=image;
-    b.appendChild(im);
-  }
-
-  if(who==="assistant"&&text){
-
-    const acts=document.createElement("div");
-    acts.className="bubbleActions";
-
-    const copy=document.createElement("button");
-    copy.className="mini";
-    copy.textContent="Copy";
-
-    copy.onclick=()=>{
-      navigator.clipboard?.writeText(text);
-      toast("Copied");
-    };
-
-    const speak=document.createElement("button");
-    speak.className="mini";
-    speak.textContent="🔊 Speak";
-
-    speak.onclick=()=>{
-      speakText(text);
-    };
-
-    acts.append(copy,speak);
-    b.appendChild(acts);
-  }
-
-  wrap.appendChild(b);
-
-  $("messages").appendChild(wrap);
-
-  $("messages").scrollTop=$("messages").scrollHeight;
-
-  saveChat();
 }
 
-function saveChat(){
-  localStorage.setItem(
-    "boloChat",
-    $("messages").innerHTML
-  );
+function updateAuthUI(){
+
+  const logged = !!currentUser;
+
+  $("authNavBtn").style.display =
+    logged ? "none" : "";
+
+  $("accountNavBtn").style.display =
+    logged ? "" : "none";
+
+  $("adminMenuBtn").style.display =
+    isAdmin() ? "block" : "none";
+
+  $("menuLogoutBtn").style.display =
+    logged ? "block" : "none";
+
 }
 
-function loadChat(){
+function updateProfileUI(){
 
-  const x=localStorage.getItem("boloChat");
+  if(!currentUser){
 
-  $("messages").innerHTML=x||"";
+    $("profileName").textContent =
+      "Bolo AI User";
 
-  if(!$("messages").children.length){
+    $("profileEmail").textContent =
+      "Not logged in";
 
-    addMessage(
-      "Hello! 👋 I am Bolo AI.\n\nAsk me anything, upload a photo, or use the microphone to talk."
-    );
-  }
-}
+    $("profileRoleBadge").textContent =
+      "User";
 
-function clearChat(){
-
-  if(confirm("Clear this chat?")){
-
-    localStorage.removeItem("boloChat");
-
-    loadChat();
-
-    toast("Chat cleared");
-  }
-}
-
-function keySend(e){
-
-  if(e.key==="Enter"&&!e.shiftKey){
-
-    e.preventDefault();
-
-    sendChat();
-  }
-}
-
-async function sendChat(){
-
-  const input=$("input");
-  const text=input.value.trim();
-
-  if(!text&&!selectedPhoto)return;
-
-  addMessage(
-    text||"Please analyse this photo.",
-    "user",
-    selectedPhoto
-  );
-
-  input.value="";
-
-  $("status").textContent="Bolo AI is thinking…";
-  $("send").disabled=true;
-
-  try{
-
-    const r=await fetch(
-      BACKEND_URL+"/api/chat",
-      {
-        method:"POST",
-        headers:{
-          "Content-Type":"application/json"
-        },
-        body:JSON.stringify({
-          message:text||"Analyse this image.",
-          image:selectedPhoto
-        })
-      }
-    );
-
-    const data=await r.json();
-
-    if(!r.ok){
-      throw new Error(
-        data.error||"Request failed"
-      );
-    }
-
-    addMessage(
-      data.reply||
-      data.message||
-      "I could not generate a reply."
-    );
-
-    speakText(data.reply||"");
-
-  }catch(e){
-
-    addMessage(
-      "Sorry, I could not connect to Bolo AI right now. Please check the backend and try again."
-    );
-
-    console.error(e);
-
-  }finally{
-
-    $("status").textContent="";
-    $("send").disabled=false;
-
-    removePhoto();
-  }
-}
-
-function handlePhoto(e){
-
-  const f=e.target.files?.[0];
-
-  if(!f)return;
-
-  if(f.size>10*1024*1024){
-
-    toast("Please choose an image under 10 MB.");
+    $("profilePhoto").src =
+      "/icon-192.png";
 
     return;
   }
 
-  const reader=new FileReader();
+  $("profileName").textContent =
+    currentUser.displayName ||
+    "Bolo AI User";
+
+  $("profileEmail").textContent =
+    currentUser.email || "";
+
+  $("profileRoleBadge").textContent =
+    isAdmin() ? "Admin" : "User";
+
+  $("profilePhoto").src =
+    currentUser.photoURL ||
+    "/icon-192.png";
+
+  $("adminName").textContent =
+    currentUser.displayName ||
+    "Sabroj Babu";
+
+  $("adminEmail").textContent =
+    currentUser.email ||
+    ADMIN_EMAIL;
+
+  $("adminPhoto").src =
+    currentUser.photoURL ||
+    "/icon-192.png";
+}
+
+/* =========================================================
+   AUTH
+========================================================= */
+
+function openLogin(){
+
+  if(currentUser){
+
+    openProfile();
+
+    return;
+  }
+
+  setAuthMode("login");
+
+  $("authModal").classList.add("show");
+
+}
+
+function openSignup(){
+
+  setAuthMode("signup");
+
+  $("authModal").classList.add("show");
+
+}
+
+function setAuthMode(mode){
+
+  $("authTitle").textContent =
+    mode === "login"
+      ? "Login"
+      : "Create Account";
+
+  $("authAction").textContent =
+    mode === "login"
+      ? "Login"
+      : "Sign Up";
+
+  $("authAction").dataset.mode = mode;
+
+  $("authSwitch").innerHTML =
+    mode === "login"
+      ?
+      'New here? <button class="mini-btn" onclick="setAuthMode(\'signup\')">Create account</button>'
+      :
+      'Already have an account? <button class="mini-btn" onclick="setAuthMode(\'login\')">Login</button>';
+
+}
+
+async function submitAuth(){
+
+  if(!auth){
+
+    showToast("Firebase is not available.");
+
+    return;
+  }
+
+  const email =
+    $("email").value.trim();
+
+  const password =
+    $("password").value;
+
+  const mode =
+    $("authAction").dataset.mode;
+
+  if(!email || !password){
+
+    showToast(
+      "Enter email and password."
+    );
+
+    return;
+  }
+
+  try{
+
+    if(mode === "login"){
+
+      await auth.signInWithEmailAndPassword(
+        email,
+        password
+      );
+
+    }else{
+
+      const result =
+        await auth.createUserWithEmailAndPassword(
+          email,
+          password
+        );
+
+      if(result.user){
+
+        await result.user.updateProfile({
+          displayName:"Bolo AI User"
+        });
+
+      }
+
+    }
+
+    closeModal("authModal");
+
+    showToast("Welcome to Bolo AI!");
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      String(error.message || error)
+        .replace("Firebase: ","")
+    );
+
+  }
+
+}
+
+async function googleLogin(){
+
+  if(!auth)return;
+
+  try{
+
+    const provider =
+      new firebase.auth.GoogleAuthProvider();
+
+    await auth.signInWithPopup(provider);
+
+    closeModal("authModal");
+
+    showToast(
+      "Google login successful"
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message || "Google login failed."
+    );
+
+  }
+
+}
+
+async function forgotPassword(){
+
+  const email =
+    $("email").value.trim();
+
+  if(!email){
+
+    showToast(
+      "Enter your email first."
+    );
+
+    return;
+  }
+
+  try{
+
+    await auth.sendPasswordResetEmail(email);
+
+    showToast(
+      "Password reset email sent."
+    );
+
+  }catch(error){
+
+    showToast(
+      error.message || "Could not send reset email."
+    );
+
+  }
+
+}
+
+async function logout(){
+
+  try{
+
+    if(auth){
+
+      await auth.signOut();
+
+    }
+
+    closeModal("settingsModal");
+    closeModal("profileModal");
+    closeModal("adminModal");
+
+    showToast("Logged out");
+
+  }catch(error){
+
+    showToast(
+      error.message || "Logout failed."
+    );
+
+  }
+
+}
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+function openProfile(){
+
+  if(!currentUser){
+
+    openLogin();
+
+    return;
+  }
+
+  updateProfileUI();
+
+  $("profileModal").classList.add("show");
+
+}
+
+/* =========================================================
+   SETTINGS
+========================================================= */
+
+function openSettings(){
+
+  if(!currentUser){
+
+    openLogin();
+
+    return;
+  }
+
+  $("settingsName").value =
+    currentUser.displayName || "";
+
+  $("settingsPhoto").value =
+    currentUser.photoURL || "";
+
+  $("settingsVoice").checked =
+    voiceReplyEnabled;
+
+  $("settingsTheme").value =
+    document.body.classList.contains("light")
+      ? "light"
+      : "dark";
+
+  $("settingsModal").classList.add("show");
+
+}
+
+async function saveSettings(){
+
+  if(!currentUser){
+
+    showToast("Please login first.");
+
+    return;
+  }
+
+  const name =
+    $("settingsName").value.trim();
+
+  const photo =
+    $("settingsPhoto").value.trim();
+
+  const theme =
+    $("settingsTheme").value;
+
+  voiceReplyEnabled =
+    $("settingsVoice").checked;
+
+  try{
+
+    await currentUser.updateProfile({
+
+      displayName:
+        name || "Bolo AI User",
+
+      photoURL:
+        photo ||
+        currentUser.photoURL ||
+        null
+
+    });
+
+    localStorage.setItem(
+      "boloVoiceReply",
+      voiceReplyEnabled
+        ? "true"
+        : "false"
+    );
+
+    localStorage.setItem(
+      "boloTheme",
+      theme
+    );
+
+    applyTheme(theme);
+
+    updateAuthUI();
+    updateProfileUI();
+
+    await trackUserActivity();
+
+    closeModal("settingsModal");
+
+    showToast(
+      "Settings saved successfully."
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Could not save settings."
+    );
+
+  }
+
+}
+
+/* =========================================================
+   THEME
+========================================================= */
+
+function applyTheme(theme){
+
+  document.body.classList.toggle(
+    "light",
+    theme === "light"
+  );
+
+  $("themeBtn").textContent =
+    theme === "light"
+      ? "☀️"
+      : "🌙";
+
+}
+
+function toggleTheme(){
+
+  const next =
+    document.body.classList.contains("light")
+      ? "dark"
+      : "light";
+
+  localStorage.setItem(
+    "boloTheme",
+    next
+  );
+
+  applyTheme(next);
+
+}
+
+/* =========================================================
+   FIREBASE TOKEN
+========================================================= */
+
+async function getFirebaseIdToken(){
+
+  if(!currentUser){
+
+    throw new Error(
+      "Please login first."
+    );
+
+  }
+
+  return await currentUser.getIdToken(true);
+
+}
+
+/* =========================================================
+   USER ACTIVITY
+========================================================= */
+
+async function trackUserActivity(){
+
+  if(!currentUser)return;
+
+  try{
+
+    const token =
+      await currentUser.getIdToken();
+
+    await fetch(
+      BACKEND_URL+"/api/user/activity",
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization":
+            "Bearer "+token
+        },
+        body:JSON.stringify({
+
+          name:
+            currentUser.displayName ||
+            "Bolo AI User",
+
+          email:
+            currentUser.email || "",
+
+          photoURL:
+            currentUser.photoURL || ""
+
+        })
+      }
+    );
+
+  }catch(error){
+
+    console.warn(
+      "Activity tracking:",
+      error
+    );
+
+  }
+
+}
+
+function startHeartbeat(){
+
+  stopHeartbeat();
+
+  if(!currentUser)return;
+
+  heartbeatTimer =
+    setInterval(async()=>{
+
+      try{
+
+        const token =
+          await currentUser.getIdToken();
+
+        await fetch(
+          BACKEND_URL+
+          "/api/user/heartbeat",
+          {
+            method:"POST",
+            headers:{
+              "Authorization":
+                "Bearer "+token
+            }
+          }
+        );
+
+      }catch(error){
+
+        console.warn(
+          "Heartbeat:",
+          error
+        );
+
+      }
+
+    },5*60*1000);
+
+}
+
+function stopHeartbeat(){
+
+  if(heartbeatTimer){
+
+    clearInterval(
+      heartbeatTimer
+    );
+
+    heartbeatTimer=null;
+  }
+
+}
+
+/* =========================================================
+   CHAT HISTORY
+========================================================= */
+
+function historyCollection(){
+
+  if(!db || !currentUser){
+
+    return null;
+  }
+
+  return db
+    .collection("users")
+    .doc(currentUser.uid)
+    .collection("chats");
+
+}
+
+async function createChatHistory(){
+
+  if(!currentUser || !db){
+
+    return null;
+  }
+
+  try{
+
+    const ref =
+      await historyCollection().add({
+
+        title:"New Chat",
+
+        createdAt:
+          firebase.firestore.FieldValue.serverTimestamp(),
+
+        updatedAt:
+          firebase.firestore.FieldValue.serverTimestamp()
+
+      });
+
+    currentChatId =
+      ref.id;
+
+    return ref.id;
+
+  }catch(error){
+
+    console.warn(
+      "Create chat:",
+      error
+    );
+
+    return null;
+  }
+
+}
+
+async function saveChatMessage(
+  role,
+  text,
+  image=null
+){
+
+  if(!currentUser || !db)return;
+
+  try{
+
+    if(!currentChatId){
+
+      await createChatHistory();
+
+    }
+
+    if(!currentChatId)return;
+
+    const data={
+
+      role:role,
+
+      text:String(text || ""),
+
+      hasPhoto:!!image,
+
+      createdAt:
+        firebase.firestore.FieldValue.serverTimestamp()
+
+    };
+
+    await historyCollection()
+      .doc(currentChatId)
+      .collection("messages")
+      .add(data);
+
+    await historyCollection()
+      .doc(currentChatId)
+      .set(
+        {
+          updatedAt:
+            firebase.firestore.FieldValue.serverTimestamp()
+        },
+        {merge:true}
+      );
+
+  }catch(error){
+
+    console.warn(
+      "Chat history:",
+      error
+    );
+
+  }
+
+}
+
+async function openHistory(){
+
+  if(!currentUser){
+
+    openLogin();
+
+    return;
+  }
+
+  $("historyModal").classList.add("show");
+
+  $("historyList").innerHTML =
+    "<p style='color:#999'>Loading history...</p>";
+
+  try{
+
+    const snap =
+      await historyCollection()
+        .orderBy(
+          "updatedAt",
+          "desc"
+        )
+        .limit(50)
+        .get();
+
+    if(snap.empty){
+
+      $("historyList").innerHTML =
+        "<p style='color:#999'>No chat history yet.</p>";
+
+      return;
+    }
+
+    $("historyList").innerHTML="";
+
+    snap.forEach(doc=>{
+
+      const data=doc.data();
+
+      const row =
+        document.createElement("div");
+
+      row.style.cssText=
+        "padding:13px;border:1px solid rgba(128,128,128,.15);border-radius:12px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;gap:8px";
+
+      const title =
+        document.createElement("strong");
+
+      title.textContent =
+        data.title || "Chat";
+
+      const open =
+        document.createElement("button");
+
+      open.className="btn";
+
+      open.textContent="Open";
+
+      open.onclick=()=>{
+        openHistoryConversation(doc.id);
+      };
+
+      const del =
+        document.createElement("button");
+
+      del.className="btn";
+
+      del.textContent="Delete";
+
+      del.onclick=()=>{
+        deleteChatHistory(doc.id);
+      };
+
+      const right =
+        document.createElement("div");
+
+      right.style.display="flex";
+      right.style.gap="6px";
+
+      right.append(open,del);
+
+      row.append(title,right);
+
+      $("historyList")
+        .appendChild(row);
+
+    });
+
+  }catch(error){
+
+    console.error(error);
+
+    $("historyList").innerHTML =
+      "<p style='color:#ef4444'>Could not load chat history.</p>";
+
+  }
+
+}
+
+async function openHistoryConversation(chatId){
+
+  if(!currentUser || !db)return;
+
+  try{
+
+    const snap =
+      await historyCollection()
+        .doc(chatId)
+        .collection("messages")
+        .orderBy("createdAt","asc")
+        .get();
+
+    $("messages").innerHTML="";
+
+    currentChatId=chatId;
+
+    snap.forEach(doc=>{
+
+      const data=doc.data();
+
+      addMessage(
+        data.text || "",
+        data.role || "assistant",
+        null,
+        false
+      );
+
+    });
+
+    closeModal("historyModal");
+
+    goTo("chat");
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      "Could not open this chat."
+    );
+
+  }
+
+}
+
+async function deleteChatHistory(chatId){
+
+  if(!currentUser || !db)return;
+
+  if(!confirm(
+    "Delete this chat history?"
+  ))return;
+
+  try{
+
+    const messages =
+      await historyCollection()
+        .doc(chatId)
+        .collection("messages")
+        .get();
+
+    const batch=db.batch();
+
+    messages.forEach(doc=>{
+      batch.delete(doc.ref);
+    });
+
+    batch.delete(
+      historyCollection().doc(chatId)
+    );
+
+    await batch.commit();
+
+    if(currentChatId===chatId){
+
+      currentChatId=null;
+
+      $("messages").innerHTML="";
+
+      addMessage(
+        "Hello! 👋 I am Bolo AI.\n\nAsk me anything, upload a photo, or use the microphone to talk.",
+        "assistant",
+        null,
+        false
+      );
+
+    }
+
+    openHistory();
+
+    showToast(
+      "Chat deleted."
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      "Could not delete chat."
+    );
+
+  }
+
+}
+
+/* =========================================================
+   CHAT UI
+========================================================= */
+
+function addMessage(
+  text,
+  who="assistant",
+  image=null,
+  saveHistory=true
+){
+
+  const wrap =
+    document.createElement("div");
+
+  wrap.className =
+    "msg "+who;
+
+  const bubble =
+    document.createElement("div");
+
+  bubble.className="bubble";
+
+  bubble.textContent =
+    String(text || "");
+
+  if(image){
+
+    const img =
+      document.createElement("img");
+
+    img.src=image;
+
+    img.alt="Uploaded photo";
+
+    bubble.appendChild(img);
+
+  }
+
+  if(
+    who==="assistant" &&
+    text
+  ){
+
+    const actions =
+      document.createElement("div");
+
+    actions.className =
+      "bubble-actions";
+
+    const copy =
+      document.createElement("button");
+
+    copy.className="mini-btn";
+
+    copy.textContent="Copy";
+
+    copy.onclick=()=>{
+
+      navigator.clipboard
+        ?.writeText(String(text));
+
+      showToast("Copied");
+
+    };
+
+    const speak =
+      document.createElement("button");
+
+    speak.className="mini-btn";
+
+    speak.textContent="🔊 Speak";
+
+    speak.onclick=()=>{
+      speakText(String(text));
+    };
+
+    actions.append(
+      copy,
+      speak
+    );
+
+    bubble.appendChild(actions);
+
+  }
+
+  wrap.appendChild(bubble);
+
+  $("messages")
+    .appendChild(wrap);
+
+  $("messages").scrollTop =
+    $("messages").scrollHeight;
+
+  if(saveHistory){
+
+    saveChatMessage(
+      who,
+      text,
+      image
+    );
+
+  }
+
+}
+
+function loadLocalChat(){
+
+  try{
+
+    const html =
+      localStorage.getItem(
+        "boloChat"
+      );
+
+    if(html){
+
+      $("messages").innerHTML =
+        html;
+
+    }
+
+  }catch(error){
+
+    console.warn(error);
+
+  }
+
+  if(
+    !$("messages").children.length
+  ){
+
+    addMessage(
+      "Hello! 👋 I am Bolo AI.\n\nAsk me anything, upload a photo, or use the microphone to talk.",
+      "assistant",
+      null,
+      false
+    );
+
+  }
+
+}
+
+function saveLocalChat(){
+
+  try{
+
+    localStorage.setItem(
+      "boloChat",
+      $("messages").innerHTML
+    );
+
+  }catch(error){
+
+    console.warn(error);
+
+  }
+
+}
+
+function clearChat(){
+
+  if(!confirm(
+    "Clear this chat?"
+  ))return;
+
+  currentChatId=null;
+
+  localStorage.removeItem(
+    "boloChat"
+  );
+
+  $("messages").innerHTML="";
+
+  addMessage(
+    "Hello! 👋 I am Bolo AI.\n\nAsk me anything, upload a photo, or use the microphone to talk.",
+    "assistant",
+    null,
+    false
+  );
+
+  showToast("Chat cleared.");
+
+}
+
+/* =========================================================
+   SEND CHAT
+========================================================= */
+
+function handleEnter(event){
+
+  if(
+    event.key==="Enter" &&
+    !event.shiftKey
+  ){
+
+    event.preventDefault();
+
+    sendChat();
+
+  }
+
+}
+
+async function trackAIMessage(){
+
+  if(!currentUser)return;
+
+  try{
+
+    const token =
+      await currentUser.getIdToken();
+
+    await fetch(
+      BACKEND_URL+
+      "/api/analytics/message",
+      {
+        method:"POST",
+        headers:{
+          "Authorization":
+            "Bearer "+token
+        }
+      }
+    );
+
+  }catch(error){
+
+    console.warn(
+      "Analytics:",
+      error
+    );
+
+  }
+
+}
+
+async function sendChat(){
+
+  const input =
+    $("input");
+
+  const text =
+    input.value.trim();
+
+  if(
+    !text &&
+    !selectedPhoto
+  ){
+
+    return;
+  }
+
+  const photo =
+    selectedPhoto;
+
+  addMessage(
+    text ||
+    "Please analyse this photo.",
+    "user",
+    photo,
+    true
+  );
+
+  saveLocalChat();
+
+  input.value="";
+
+  $("status").textContent =
+    "Bolo AI is thinking…";
+
+  $("send").disabled=true;
+
+  try{
+
+    const response =
+      await fetch(
+        BACKEND_URL+"/api/chat",
+        {
+          method:"POST",
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+          body:JSON.stringify({
+            message:
+              text ||
+              "Analyse this image.",
+            image:photo
+          })
+        }
+      );
+
+    const data =
+      await response.json();
+
+    if(!response.ok){
+
+      throw new Error(
+        data.error ||
+        "Request failed"
+      );
+
+    }
+
+    const reply =
+      data.reply ||
+      data.message ||
+      "I could not generate a reply.";
+
+    addMessage(
+      reply,
+      "assistant",
+      null,
+      true
+    );
+
+    await trackAIMessage();
+
+    saveLocalChat();
+
+    if(voiceReplyEnabled){
+
+      speakText(reply);
+
+    }
+
+  }catch(error){
+
+    console.error(error);
+
+    addMessage(
+      "Sorry, I could not connect to Bolo AI right now. Please try again.",
+      "assistant",
+      null,
+      true
+    );
+
+  }finally{
+
+    $("status").textContent="";
+
+    $("send").disabled=false;
+
+    removePhoto();
+
+  }
+
+}
+
+/* =========================================================
+   PHOTO
+========================================================= */
+
+function handlePhoto(event){
+
+  const file =
+    event.target.files?.[0];
+
+  if(!file)return;
+
+  if(
+    file.size >
+    10*1024*1024
+  ){
+
+    showToast(
+      "Please choose an image under 10 MB."
+    );
+
+    return;
+  }
+
+  const reader =
+    new FileReader();
 
   reader.onload=()=>{
 
-    selectedPhoto=reader.result;
+    selectedPhoto =
+      reader.result;
 
-    $("previewImg").src=selectedPhoto;
+    $("previewImg").src =
+      selectedPhoto;
 
-    $("preview").style.display="block";
+    $("preview").style.display =
+      "block";
 
-    toast("Photo ready");
+    showToast(
+      "Photo ready."
+    );
+
   };
 
-  reader.readAsDataURL(f);
+  reader.readAsDataURL(file);
+
 }
 
 function removePhoto(){
 
   selectedPhoto=null;
 
-  $("preview").style.display="none";
+  $("preview").style.display =
+    "none";
 
   $("previewImg").src="";
 
   $("file").value="";
+
 }
+
+/* =========================================================
+   VOICE
+========================================================= */
 
 function startVoice(){
 
-  const SR=
-    window.SpeechRecognition||
+  const SpeechRecognition =
+    window.SpeechRecognition ||
     window.webkitSpeechRecognition;
 
-  if(!SR){
+  if(!SpeechRecognition){
 
-    toast(
+    showToast(
       "Voice input is not supported in this browser."
     );
 
@@ -1554,383 +3351,717 @@ function startVoice(){
   if(recognition){
 
     recognition.stop();
+
     recognition=null;
 
     return;
   }
 
-  recognition=new SR();
+  recognition =
+    new SpeechRecognition();
 
   recognition.lang="en-IN";
+
   recognition.interimResults=true;
+
   recognition.continuous=false;
 
   recognition.onstart=()=>{
 
-    $("status").textContent="Listening…";
-    $("mic").textContent="⏹️";
+    $("status").textContent =
+      "Listening…";
+
+    $("mic").textContent =
+      "⏹️";
+
   };
 
-  recognition.onresult=e=>{
+  recognition.onresult=event=>{
 
-    let s="";
+    let text="";
 
-    for(const r of e.results){
-      s+=r[0].transcript;
+    for(
+      const result of event.results
+    ){
+
+      text +=
+        result[0].transcript;
+
     }
 
-    $("input").value=s;
+    $("input").value=text;
+
   };
 
   recognition.onerror=()=>{
 
-    toast(
+    showToast(
       "Microphone input could not be started."
     );
+
   };
 
   recognition.onend=()=>{
 
     $("status").textContent="";
+
     $("mic").textContent="🎙️";
+
     recognition=null;
+
   };
 
   recognition.start();
+
 }
 
 function speakText(text){
 
-  if(!text||!window.speechSynthesis)return;
-
-  window.speechSynthesis.cancel();
-
-  const u=new SpeechSynthesisUtterance(text);
-
-  u.lang=
-    /[\u0900-\u097F]/.test(text)
-      ?"hi-IN"
-      :"en-IN";
-
-  u.rate=.98;
-
-  window.speechSynthesis.speak(u);
-}
-
-function tool(name){
-
-  const prompts={
-    Writing:"Write professional content about: ",
-    "Song Lyrics":"Write original song lyrics about: ",
-    YouTube:"Create a complete YouTube package (title, hook, script outline, description and tags) about: ",
-    Translation:"Translate the following text and preserve its meaning: ",
-    Resume:"Create a professional resume. Details: ",
-    Thumbnail:"Give 5 high-click YouTube thumbnail concepts for: ",
-    Poster:"Create a professional poster concept and text for: ",
-    "Photo Analysis":"Analyse the uploaded photo in detail. If no photo is attached, ask me to upload one.",
-    Coding:"Help me build or debug this code: ",
-    Study:"Teach me this topic simply, then give examples and a short quiz: ",
-    Business:"Give practical business ideas for: ",
-    "Social Media":"Create a social media content plan for: "
-  };
-
-  $("input").value=
-    prompts[name]||
-    name+": ";
-
-  go("chat");
-
-  $("input").focus();
-
-  toast(name+" tool selected");
-}
-
-function quick(type){
-
-  const map={
-    YouTube:"Create a strong YouTube video package about ",
-    Lyrics:"Write original Hindi song lyrics about ",
-    Caption:"Write 10 engaging social media captions about ",
-    Image:"Help me create an image prompt for ",
-    Email:"Write a professional email about ",
-    Ideas:"Give me 20 creative ideas for ",
-    Study:"Explain this topic simply: ",
-    Code:"Help me write code for "
-  };
-
-  $("input").value=map[type]||"";
-
-  go("chat");
-
-  $("input").focus();
-}
-
-function useExamplePrompt(){
-
-  $("imagePrompt").value=
-    "A cinematic Indian city at night after rain, neon reflections, dramatic sky, ultra detailed, realistic photography";
-}
-
-async function generateImage(){
-
-  const prompt=$("imagePrompt").value.trim();
-
-  if(!prompt){
-
-    toast("Describe the image first.");
+  if(
+    !text ||
+    !window.speechSynthesis
+  ){
 
     return;
   }
 
-  const btn=$("genBtn");
+  window.speechSynthesis.cancel();
 
-  btn.disabled=true;
-  btn.textContent="⏳ Creating…";
+  const utterance =
+    new SpeechSynthesisUtterance(
+      text
+    );
 
-  $("genResult").innerHTML=
-    '<div class="loading">Creating your image…</div>';
+  utterance.lang =
+    /[\u0900-\u097F]/.test(text)
+      ? "hi-IN"
+      : "en-IN";
+
+  utterance.rate=.98;
+
+  window.speechSynthesis.speak(
+    utterance
+  );
+
+}
+
+/* =========================================================
+   TOOLS
+========================================================= */
+
+function tool(name){
+
+  const prompts={
+
+    Writing:
+      "Write professional content about: ",
+
+    "Song Lyrics":
+      "Write original Hindi song lyrics about: ",
+
+    YouTube:
+      "Create a complete YouTube package including title, hook, script outline, description and tags about: ",
+
+    Translation:
+      "Translate the following text and preserve its meaning: ",
+
+    Resume:
+      "Create a professional resume. Details: ",
+
+    Thumbnail:
+      "Give 5 high-click YouTube thumbnail concepts for: ",
+
+    Poster:
+      "Create a professional poster concept and text for: ",
+
+    "Photo Analysis":
+      "Analyse the uploaded photo in detail. ",
+
+    Coding:
+      "Help me build or debug this code: ",
+
+    Study:
+      "Teach me this topic simply, then give examples and a short quiz: ",
+
+    Business:
+      "Give practical business ideas for: ",
+
+    "Social Media":
+      "Create a social media content plan for: "
+
+  };
+
+  $("input").value =
+    prompts[name] ||
+    name+": ";
+
+  goTo("chat");
+
+  $("input").focus();
+
+}
+
+function quickPrompt(type){
+
+  const prompts={
+
+    YouTube:
+      "Create a strong YouTube video package about ",
+
+    Lyrics:
+      "Write original Hindi song lyrics about ",
+
+    Caption:
+      "Write 10 engaging social media captions about ",
+
+    Image:
+      "Help me create a professional image prompt for ",
+
+    Email:
+      "Write a professional email about ",
+
+    Ideas:
+      "Give me 20 creative ideas for ",
+
+    Study:
+      "Explain this topic simply: ",
+
+    Code:
+      "Help me write code for "
+
+  };
+
+  $("input").value =
+    prompts[type] || "";
+
+  goTo("chat");
+
+  $("input").focus();
+
+}
+
+/* =========================================================
+   IMAGE GENERATOR
+========================================================= */
+
+function exampleImagePrompt(){
+
+  $("imagePrompt").value =
+    "A cinematic Indian city at night after rain, neon reflections, dramatic sky, ultra detailed, realistic photography";
+
+}
+
+async function generateImage(){
+
+  const prompt =
+    $("imagePrompt")
+      .value
+      .trim();
+
+  if(!prompt){
+
+    showToast(
+      "Describe the image first."
+    );
+
+    return;
+  }
+
+  const button =
+    $("genBtn");
+
+  button.disabled=true;
+
+  button.textContent =
+    "⏳ Creating…";
+
+  $("genResult").innerHTML =
+    "<p style='color:#999'>Creating your image…</p>";
 
   try{
 
-    const r=await fetch(
-      BACKEND_URL+"/api/generate-image",
-      {
-        method:"POST",
-        headers:{
-          "Content-Type":"application/json"
-        },
-        body:JSON.stringify({prompt})
-      }
-    );
-
-    const data=await r.json();
-
-    if(!r.ok){
-      throw new Error(
-        data.error||
-        "Image generation failed"
+    const response =
+      await fetch(
+        BACKEND_URL+
+        "/api/generate-image",
+        {
+          method:"POST",
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+          body:JSON.stringify({
+            prompt
+          })
+        }
       );
+
+    const data =
+      await response.json();
+
+    if(!response.ok){
+
+      throw new Error(
+        data.error ||
+        "Image generation failed."
+      );
+
     }
 
-    const src=
-      data.image||
-      data.imageUrl||
+    const image =
+      data.image ||
+      data.imageUrl ||
       data.url;
 
-    if(!src){
-      throw new Error("No image returned");
+    if(!image){
+
+      throw new Error(
+        "No image returned."
+      );
+
     }
 
     $("genResult").innerHTML="";
 
-    const im=document.createElement("img");
+    const img =
+      document.createElement("img");
 
-    im.src=src;
-    im.alt="Generated by Bolo AI";
+    img.src=image;
 
-    $("genResult").appendChild(im);
+    img.alt=
+      "Generated by Bolo AI";
 
-    toast("Image created successfully");
+    $("genResult")
+      .appendChild(img);
 
-  }catch(e){
+    showToast(
+      "Image created successfully."
+    );
 
-    $("genResult").innerHTML=
-      "<div class='loading'>Image generation is unavailable right now. Please check your Render backend /api/generate-image endpoint.</div>";
+  }catch(error){
 
-    console.error(e);
+    console.error(error);
+
+    $("genResult").innerHTML =
+      "<p style='color:#ef4444'>Image generation is unavailable right now.</p>";
 
   }finally{
 
-    btn.disabled=false;
-    btn.textContent="✨ Generate Image";
-  }
-}
+    button.disabled=false;
 
-function openLogin(){
+    button.textContent =
+      "✨ Generate Image";
 
-  setAuthMode("login");
-
-  $("authModal").classList.add("show");
-}
-
-function openSignup(){
-
-  setAuthMode("signup");
-
-  $("authModal").classList.add("show");
-}
-
-function setAuthMode(mode){
-
-  $("authTitle").textContent=
-    mode==="login"
-      ?"Login"
-      :"Create Account";
-
-  $("authAction").textContent=
-    mode==="login"
-      ?"Login"
-      :"Sign Up";
-
-  $("authAction").dataset.mode=mode;
-
-  $("authSwitch").innerHTML=
-    mode==="login"
-      ?
-      'New here? <button class="mini" onclick="setAuthMode(\'signup\')">Create account</button>'
-      :
-      'Already have an account? <button class="mini" onclick="setAuthMode(\'login\')">Login</button>';
-}
-
-function closeModal(id){
-
-  $(id).classList.remove("show");
-}
-
-async function authAction(){
-
-  if(!auth){
-
-    return toast(
-      "Authentication is not available."
-    );
   }
 
-  const email=$("email").value.trim();
-  const pass=$("password").value;
-  const mode=$("authAction").dataset.mode;
-
-  if(!email||!pass){
-
-    return toast(
-      "Enter email and password."
-    );
-  }
-
-  try{
-
-    if(mode==="login"){
-
-      await auth.signInWithEmailAndPassword(
-        email,
-        pass
-      );
-
-    }else{
-
-      await auth.createUserWithEmailAndPassword(
-        email,
-        pass
-      );
-    }
-
-    closeModal("authModal");
-
-    toast("Welcome to Bolo AI!");
-
-  }catch(e){
-
-    toast(
-      e.message.replace("Firebase: ","")
-    );
-  }
 }
 
-async function googleLogin(){
+/* =========================================================
+   ADMIN DASHBOARD
+========================================================= */
 
-  try{
-
-    await auth.signInWithPopup(
-      new firebase.auth.GoogleAuthProvider()
-    );
-
-    closeModal("authModal");
-
-    toast("Google login successful");
-
-  }catch(e){
-
-    toast(e.message);
-  }
-}
-
-async function forgotPassword(){
-
-  const email=$("email").value.trim();
-
-  if(!email){
-
-    return toast(
-      "Enter your email first."
-    );
-  }
-
-  try{
-
-    await auth.sendPasswordResetEmail(email);
-
-    toast("Password reset email sent.");
-
-  }catch(e){
-
-    toast(e.message);
-  }
-}
-
-async function logout(){
-
-  try{
-
-    await auth.signOut();
-
-    closeModal("accountModal");
-
-    toast("Logged out");
-
-  }catch(e){
-
-    toast(e.message);
-  }
-}
-
-function updateAuthUI(){
-
-  const logged=!!currentUser;
-
-  $("loginBtn").style.display=
-    logged
-      ?"none"
-      :"";
-
-  $("signupBtn").style.display=
-    logged
-      ?"none"
-      :"";
-
-  $("accountBtn").style.display=
-    logged
-      ?""
-      :"none";
-
-  $("logoutBtn").style.display=
-    logged
-      ?""
-      :"none";
-}
-
-function openAccount(){
+async function openAdminDashboard(){
 
   if(!currentUser){
 
-    return openLogin();
+    openLogin();
+
+    return;
   }
 
-  $("accountInfo").textContent=
-    currentUser.email||
-    "Signed in";
+  if(!isAdmin()){
 
-  $("accountModal").classList.add("show");
+    showToast(
+      "Admin access required."
+    );
+
+    return;
+  }
+
+  updateProfileUI();
+
+  $("adminModal")
+    .classList.add("show");
+
+  await loadAdminDashboard();
+
 }
+
+async function loadAdminDashboard(){
+
+  if(!isAdmin()){
+
+    showToast(
+      "Admin access denied."
+    );
+
+    return;
+  }
+
+  try{
+
+    const token =
+      await getFirebaseIdToken();
+
+    const headers={
+      "Authorization":
+        "Bearer "+token
+    };
+
+    const statsResponse =
+      await fetch(
+        BACKEND_URL+
+        "/api/admin/stats",
+        {
+          headers
+        }
+      );
+
+    if(!statsResponse.ok){
+
+      throw new Error(
+        "Could not load admin statistics."
+      );
+
+    }
+
+    const stats =
+      await statsResponse.json();
+
+    $("statTotalUsers").textContent =
+      stats.totalUsers ?? 0;
+
+    $("statTodayUsers").textContent =
+      stats.todayUsers ?? 0;
+
+    $("statActiveUsers").textContent =
+      stats.activeUsers ?? 0;
+
+    $("statMessages").textContent =
+      stats.totalMessages ?? 0;
+
+    const usersResponse =
+      await fetch(
+        BACKEND_URL+
+        "/api/admin/users",
+        {
+          headers
+        }
+      );
+
+    if(!usersResponse.ok){
+
+      throw new Error(
+        "Could not load users."
+      );
+
+    }
+
+    const usersData =
+      await usersResponse.json();
+
+    renderUsers(
+      usersData.users ||
+      usersData ||
+      []
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    $("usersTableBody").innerHTML =
+      "<tr><td colspan='6' style='color:#ef4444'>"+escapeHtml(error.message)+"</td></tr>";
+
+    showToast(
+      error.message ||
+      "Admin dashboard failed."
+    );
+
+  }
+
+}
+
+function renderUsers(users){
+
+  const body =
+    $("usersTableBody");
+
+  body.innerHTML="";
+
+  if(!users.length){
+
+    body.innerHTML =
+      "<tr><td colspan='6'>No users found.</td></tr>";
+
+    return;
+  }
+
+  users.forEach(user=>{
+
+    const tr =
+      document.createElement("tr");
+
+    const photo =
+      user.photoURL ||
+      "/icon-192.png";
+
+    const name =
+      user.name ||
+      "Bolo AI User";
+
+    const email =
+      user.email ||
+      "";
+
+    const role =
+      user.role ||
+      "user";
+
+    const messages =
+      user.aiMessages ||
+      0;
+
+    const lastSeen =
+      formatDate(
+        user.lastSeenAt
+      );
+
+    tr.innerHTML=`
+
+      <td>
+        <div class="user-cell">
+          <img
+            src="${escapeAttr(photo)}"
+            onerror="this.src='/icon-192.png'"
+            alt=""
+          >
+          <span>${escapeHtml(name)}</span>
+        </div>
+      </td>
+
+      <td>
+        ${escapeHtml(email)}
+      </td>
+
+      <td>
+        ${escapeHtml(role)}
+      </td>
+
+      <td>
+        ${messages}
+      </td>
+
+      <td>
+        ${escapeHtml(lastSeen)}
+      </td>
+
+      <td>
+        ${
+          email.toLowerCase() ===
+          ADMIN_EMAIL.toLowerCase()
+          ? "<span style='color:#8b5cf6'>Admin</span>"
+          : `<button
+              class="delete-user"
+              onclick="deleteAdminUser('${escapeAttr(user.uid || "")}')"
+            >
+              Delete
+            </button>`
+        }
+      </td>
+
+    `;
+
+    body.appendChild(tr);
+
+  });
+
+}
+
+async function deleteAdminUser(uid){
+
+  if(!uid)return;
+
+  if(!isAdmin()){
+
+    showToast(
+      "Admin access required."
+    );
+
+    return;
+  }
+
+  if(!confirm(
+    "Are you sure you want to delete this user?"
+  )){
+
+    return;
+  }
+
+  try{
+
+    const token =
+      await getFirebaseIdToken();
+
+    const response =
+      await fetch(
+        BACKEND_URL+
+        "/api/admin/users/"+
+        encodeURIComponent(uid),
+        {
+          method:"DELETE",
+          headers:{
+            "Authorization":
+              "Bearer "+token
+          }
+        }
+      );
+
+    const data =
+      await response.json();
+
+    if(!response.ok){
+
+      throw new Error(
+        data.error ||
+        "Could not delete user."
+      );
+
+    }
+
+    showToast(
+      "User deleted."
+    );
+
+    await loadAdminDashboard();
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Could not delete user."
+    );
+
+  }
+
+}
+
+/* =========================================================
+   ADMIN HELPERS
+========================================================= */
+
+function formatDate(value){
+
+  if(!value)return "—";
+
+  try{
+
+    if(
+      typeof value === "object" &&
+      value.seconds
+    ){
+
+      return new Date(
+        value.seconds*1000
+      ).toLocaleString();
+
+    }
+
+    return new Date(value)
+      .toLocaleString();
+
+  }catch{
+
+    return "—";
+
+  }
+
+}
+
+function escapeHtml(value){
+
+  return String(value ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+function escapeAttr(value){
+
+  return escapeHtml(value);
+
+}
+
+/* =========================================================
+   EXPORT
+========================================================= */
+
+function exportChat(){
+
+  const messages =
+    [...$("messages")
+      .querySelectorAll(".msg")];
+
+  const text =
+    messages
+      .map(item=>{
+
+        const role =
+          item.classList.contains("user")
+            ? "You"
+            : "Bolo AI";
+
+        const bubble =
+          item.querySelector(".bubble");
+
+        return role+
+          ": "+
+          (bubble?.innerText || "");
+
+      })
+      .join("\n\n");
+
+  const blob =
+    new Blob(
+      [text],
+      {
+        type:"text/plain"
+      }
+    );
+
+  const url =
+    URL.createObjectURL(blob);
+
+  const a =
+    document.createElement("a");
+
+  a.href=url;
+
+  a.download=
+    "bolo-ai-chat.txt";
+
+  document.body.appendChild(a);
+
+  a.click();
+
+  a.remove();
+
+  URL.revokeObjectURL(url);
+
+  showToast(
+    "Chat exported."
+  );
+
+}
+
+/* =========================================================
+   PREMIUM
+========================================================= */
 
 function testPremium(){
 
@@ -1939,103 +4070,71 @@ function testPremium(){
     "true"
   );
 
-  toast(
-    "Premium test mode enabled — no payment was charged."
+  showToast(
+    "Premium test mode enabled — no payment charged."
   );
+
 }
 
-function toggleTheme(){
-
-  document.body.classList.toggle("light");
-
-  localStorage.setItem(
-    "boloTheme",
-    document.body.classList.contains("light")
-      ?"light"
-      :"dark"
-  );
-}
-
-function exportChat(){
-
-  const text=
-    [...$("messages").querySelectorAll(".msg")]
-      .map(x=>
-        (x.classList.contains("user")
-          ?"You: "
-          :"Bolo AI: ")
-        +
-        x.querySelector(".bubble").innerText
-      )
-      .join("\n\n");
-
-  const blob=
-    new Blob(
-      [text],
-      {type:"text/plain"}
-    );
-
-  const a=document.createElement("a");
-
-  a.href=
-    URL.createObjectURL(blob);
-
-  a.download="bolo-ai-chat.txt";
-
-  a.click();
-
-  URL.revokeObjectURL(a.href);
-
-  toast("Chat exported");
-}
+/* =========================================================
+   PWA
+========================================================= */
 
 window.addEventListener(
   "beforeinstallprompt",
-  e=>{
-    e.preventDefault();
+  event=>{
 
-    deferredPrompt=e;
+    event.preventDefault();
 
-    $("installBtn").style.display=
-      "inline-block";
+    deferredPrompt=event;
+
   }
 );
 
-async function installApp(){
+window.addEventListener(
+  "appinstalled",
+  ()=>{
 
-  if(!deferredPrompt){
+    deferredPrompt=null;
 
-    return toast(
-      "Install is not available yet."
-    );
   }
+);
 
-  deferredPrompt.prompt();
+/* =========================================================
+   STARTUP
+========================================================= */
 
-  await deferredPrompt.userChoice;
+const savedTheme =
+  localStorage.getItem(
+    "boloTheme"
+  ) || "dark";
 
-  deferredPrompt=null;
+applyTheme(savedTheme);
 
-  $("installBtn").style.display="none";
-}
+loadLocalChat();
 
 if(
-  localStorage.getItem("boloTheme")==="light"
+  "serviceWorker" in navigator
 ){
-
-  document.body.classList.add("light");
-}
-
-loadChat();
-
-if("serviceWorker" in navigator){
 
   window.addEventListener(
     "load",
-    ()=>navigator.serviceWorker
-      .register("/sw.js?v=20260914-4")
-      .catch(console.warn)
+    ()=>{
+
+      navigator.serviceWorker
+        .register(
+          "/sw.js?v=20260915-1"
+        )
+        .catch(error=>{
+          console.warn(
+            "Service worker:",
+            error
+          );
+        });
+
+    }
   );
+
 }
 
 </script>
