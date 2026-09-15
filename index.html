@@ -2596,6 +2596,146 @@ Logout
 </div>
 
 
+<!-- SETTINGS MODAL -->
+
+<div
+class="modal"
+id="settingsModal"
+>
+
+<div class="modal-box">
+
+<button
+class="modal-close"
+onclick="closeModal('settingsModal')"
+type="button"
+>
+×
+</button>
+
+
+<h2>
+⚙️ Settings
+</h2>
+
+
+<p
+style="color:#6b7280;font-size:13px;margin-top:5px"
+>
+Manage your Bolo AI preferences.
+</p>
+
+
+<div
+class="account-info"
+style="display:flex;align-items:center;gap:12px"
+>
+
+<img
+id="settingsProfilePhoto"
+src="/icon-192.png"
+alt="Profile"
+style="width:54px;height:54px;border-radius:50%;object-fit:cover;border:2px solid #e5e7eb"
+>
+
+<div style="min-width:0">
+
+<strong id="settingsProfileName">
+Bolo AI User
+</strong>
+
+<div
+id="settingsProfileEmail"
+style="color:#6b7280;font-size:13px;word-break:break-word"
+>
+-
+</div>
+
+</div>
+
+</div>
+
+
+<label
+style="display:block;margin-top:12px;font-size:13px;font-weight:800"
+>
+Display Name
+</label>
+
+
+<input
+class="auth-input"
+id="settingsName"
+type="text"
+placeholder="Your name"
+>
+
+
+<label
+style="display:block;margin-top:12px;font-size:13px;font-weight:800"
+>
+Profile Photo URL
+</label>
+
+
+<input
+class="auth-input"
+id="settingsPhoto"
+type="url"
+placeholder="https://..."
+>
+
+
+<label
+style="display:block;margin-top:12px;font-size:13px;font-weight:800"
+>
+Theme
+</label>
+
+
+<select
+class="auth-input"
+id="settingsTheme"
+>
+
+<option value="light">
+☀️ Light
+</option>
+
+<option value="dark">
+🌙 Dark
+</option>
+
+</select>
+
+
+<label
+style="display:flex;align-items:center;gap:8px;margin-top:14px;font-size:13px;font-weight:800"
+>
+
+<input
+type="checkbox"
+id="settingsVoice"
+>
+
+Enable Voice Replies
+
+</label>
+
+
+<button
+class="auth-main-btn"
+type="button"
+onclick="saveSettings()"
+>
+Save Settings
+</button>
+
+</div>
+
+</div>
+
+
 <!-- CHAT HISTORY MODAL -->
 
 <div
@@ -3382,6 +3522,10 @@ closeModal(
 );
 
 closeModal(
+"settingsModal"
+);
+
+closeModal(
 "historyModal"
 );
 
@@ -3496,11 +3640,182 @@ closeNavMenu();
 });
 
 
+/* =========================================================
+   SETTINGS
+========================================================= */
+
 function openSettings(){
 
+if(!currentUser){
+
 showToast(
-"Settings are coming soon."
+"Please login first to open Settings."
 );
+
+openAuth();
+
+return;
+
+}
+
+
+$("settingsName").value=
+currentUser.displayName||
+"";
+
+
+$("settingsPhoto").value=
+currentUser.photoURL||
+"";
+
+
+$("settingsTheme").value=
+savedTheme||
+"light";
+
+
+$("settingsVoice").checked=
+voiceReplyEnabled;
+
+
+$("settingsProfileName").textContent=
+currentUser.displayName||
+"Bolo AI User";
+
+
+$("settingsProfileEmail").textContent=
+currentUser.email||
+"";
+
+
+$("settingsProfilePhoto").src=
+currentUser.photoURL||
+"/icon-192.png";
+
+
+$("settingsModal")
+.classList
+.add("show");
+
+}
+
+
+async function saveSettings(){
+
+if(!currentUser){
+
+showToast(
+"Please login first."
+);
+
+return;
+
+}
+
+
+const name=
+$("settingsName")
+.value
+.trim()||
+"Bolo AI User";
+
+
+const photoURL=
+$("settingsPhoto")
+.value
+.trim()||
+currentUser.photoURL||
+"";
+
+
+try{
+
+
+await currentUser.updateProfile({
+
+displayName:name,
+
+photoURL:photoURL
+
+});
+
+
+savedTheme=
+$("settingsTheme").value==="dark"
+?
+"dark":
+"light";
+
+
+localStorage.setItem(
+"boloTheme",
+savedTheme
+);
+
+
+applyTheme();
+
+
+voiceReplyEnabled=
+$("settingsVoice").checked;
+
+
+localStorage.setItem(
+"boloVoiceReply",
+voiceReplyEnabled
+?
+"on":
+"off"
+);
+
+
+updateVoiceReplyUI();
+
+
+await trackUserActivity();
+
+
+updateAuthUI();
+
+
+$("settingsProfileName").textContent=
+name;
+
+
+$("settingsProfileEmail").textContent=
+currentUser.email||
+"";
+
+
+$("settingsProfilePhoto").src=
+photoURL||
+"/icon-192.png";
+
+
+closeModal(
+"settingsModal"
+);
+
+
+showToast(
+"Settings saved successfully."
+);
+
+
+}catch(error){
+
+console.error(
+"Settings save error:",
+error
+);
+
+
+showToast(
+error.message||
+"Could not save settings."
+);
+
+}
 
 }
 
